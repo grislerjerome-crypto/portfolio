@@ -235,7 +235,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .dots i.on{background:var(--grad);width:22px;border-radius:99px}
 .counter{font-family:var(--mono);color:var(--muted);font-size:.82rem}
 
-.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px}
 .step{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);padding:26px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
 .step:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--magenta) 40%,transparent)}
 .step .n{font-family:var(--mono);font-size:2.4rem;font-weight:700;-webkit-text-stroke:1px color-mix(in srgb,var(--lime) 35%,transparent);opacity:.6;position:absolute;top:8px;right:16px}
@@ -485,11 +484,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
   </section>
 
-  <section id="process" class="wrap">
-    <div class="reveal"><span class="eyebrow">HOW IT SHIPS</span><h2 class="title">Process</h2></div>
-    <div class="process-grid" id="process-grid"></div>
-  </section>
-
   <section id="testimonials" class="wrap">
     <div class="reveal" style="text-align:center"><span class="eyebrow">SIGNAL FROM CLIENTS</span><h2 class="title">What they say</h2></div>
     <div class="tcar">
@@ -620,13 +614,6 @@ const CONFIG = {
     { niche:"ecom", cat:"WooCommerce", title:"Review Recovery", trigger:"Order delivered", engine:"Auto review ask", outcome:"3.4× more reviews", tags:["Woo","Zendesk","Email"] },
     { niche:"logistics", cat:"Notion", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] },
     { niche:"logistics", cat:"Trello", title:"Supplier SOP", trigger:"New supplier", engine:"Onboard + docs", outcome:"Repeatable process", tags:["Trello","Slack","Sheets"] }
-  ],
-
-  process: [
-    { n:"01", title:"Teardown", desc:"We map the workflow and find the highest-leverage thing to hand off." },
-    { n:"02", title:"Architect", desc:"I design a clean, observable system before writing a line." },
-    { n:"03", title:"Build & Ship", desc:"I build, test and deploy into your live stack." },
-    { n:"04", title:"Harden & Scale", desc:"Monitoring, retries and iteration as you grow." }
   ],
 
   testimonials: [
