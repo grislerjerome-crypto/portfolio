@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Store Overview by Craftee Sites</title>
+<meta name="description" content="A live overview demo showing apparel brand owners their store's sales, orders, traffic and performance . Managed by Craftee Sites." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  body{padding:0}
+  .admin{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+  .admin__side{background:rgba(6,9,15,.92);border-right:1px solid var(--line);padding:1.4rem 1rem;position:sticky;top:0;height:100vh;overflow:auto}
+  .admin__logo{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:1.4rem}
+  .admin__logo span{color:var(--accent);text-shadow:var(--neon)}
+  .admin__nav{display:flex;flex-direction:column;gap:.3rem}
+  .admin__nav button{background:none;border:none;color:var(--ink-soft);text-align:left;padding:.7rem .8rem;border-radius:10px;
+    font-family:inherit;font-size:.92rem;cursor:pointer;transition:.15s}
+  .admin__nav button:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+  .admin__nav button.active{background:linear-gradient(135deg,rgba(0,229,255,.18),rgba(181,84,255,.18));color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .admin__main{padding:2rem}
+  .admin__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.6rem;flex-wrap:wrap;gap:1rem}
+  .admin__top h1{font-size:1.7rem}
+  .admin__panel{display:none}
+  .admin__panel.active{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.6rem}
+  .stat{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.1rem;backdrop-filter:blur(10px)}
+  .stat b{font-family:'Outfit',sans-serif;font-size:1.7rem;color:var(--accent);text-shadow:var(--neon);display:block}
+  .stat span{font-size:.78rem;color:var(--ink-soft)}
+  .panel-card{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.2rem;backdrop-filter:blur(10px)}
+  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:1.2rem}
+  table.adm{width:100%;border-collapse:collapse;font-size:.85rem}
+  table.adm th,table.adm td{padding:.6rem .5rem;text-align:left;border-bottom:1px solid var(--line)}
+  table.adm th{color:var(--ink-soft);font-weight:600}
+  .bars2{display:flex;align-items:flex-end;gap:.5rem;height:160px}
+  .bars2 i{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:4px 4px 0 0;opacity:.85}
+  .chip-row{display:flex;flex-wrap:wrap;gap:.4rem}
+  .chip-row span{font-size:.78rem;padding:.3rem .7rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04)}
+  .backbar{margin-bottom:1.2rem}
+  .overview-note{background:rgba(67,232,216,.06);border:1px solid var(--accent);border-radius:12px;padding:.8rem 1rem;
+    margin-bottom:1.4rem;font-size:.9rem;color:var(--ink-soft);box-shadow:var(--neon)}
+  .overview-note b{color:var(--accent)}
+  @media(max-width:900px){.admin{grid-template-columns:1fr}.admin__side{position:static;height:auto;flex-direction:row;display:flex;overflow:auto;gap:.3rem}
+    .admin__nav{flex-direction:row;flex-wrap:nowrap}.admin__logo{display:none}.stat-row,.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="bg-anim" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+<div class="admin">
+  <aside class="admin__side">
+    <div class="admin__logo">Craftee<span>Sites</span></div>
+    <nav class="admin__nav" id="admNav">
+      <button class="active" data-tab="dashboard">Dashboard</button>
+      <button data-tab="orders">Orders</button>
+      <button data-tab="products">Products</button>
+      <button data-tab="variants">Product Variants</button>
+      <button data-tab="inventory">Inventory</button>
+      <button data-tab="customers">Customers</button>
+      <button data-tab="discounts">Discounts</button>
+      <button data-tab="reviews">Reviews</button>
+      <button data-tab="returns">Returns</button>
+      <button data-tab="shipping">Shipping</button>
+      <button data-tab="analytics">Analytics</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+  </aside>
+
+  <main class="admin__main">
+    <a class="btn btn--ghost backbar" href="index.html">← Back to site</a>
+    <div class="admin__top"><h1 id="admTitle">Your Store Overview</h1><span style="color:var(--ink-soft)">Read-only view · managed by Craftee Sites</span></div>
+    <div class="overview-note">📊 This is a <b>live overview</b> of your store's performance. Content, products and settings are managed for you by Craftee Sites . Just send a message and we'll update anything. You don't need to touch a thing.</div>
+
+    <!-- DASHBOARD -->
+    <section class="admin__panel active" id="p-dashboard">
+      <div class="stat-row">
+        <div class="stat"><b>$4,280</b><span>Today's Revenue</span></div>
+        <div class="stat"><b>126</b><span>Orders</span></div>
+        <div class="stat"><b>1,842</b><span>Customers</span></div>
+        <div class="stat"><b>4.8%</b><span>Conversion Rate</span></div>
+      </div>
+      <div class="grid2">
+        <div class="panel-card"><h3 style="margin-bottom:.8rem">Revenue (last 7 days)</h3>
+          <div class="bars2"><i style="height:40%"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:78%"></i><i style="height:66%"></i><i style="height:92%"></i><i style="height:74%"></i></div>
+        </div>
+        <div class="panel-card"><h3 style="margin-bottom:.8rem">Recent orders</h3>
+          <table class="adm"><tr><th>#</th><th>Customer</th><th>Product</th><th>Status</th></tr>
+          <tr><td>#10482</td><td>Sarah M.</td><td>Oversized Hoodie</td><td><span class="tag tag--ship">Shipped</span></td></tr>
+          <tr><td>#10483</td><td>James L.</td><td>Denim Jacket</td><td><span class="tag tag--proc">Processing</span></td></tr>
+          <tr><td>#10484</td><td>Mia R.</td><td>Red Cap</td><td><span class="tag tag--done">Delivered</span></td></tr></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section class="admin__panel" id="p-orders">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>Order #</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th></tr>
+          <tr><td>#10482</td><td>Sarah M.</td><td>Oversized Hoodie</td><td>$89</td><td><span class="tag tag--ship">Shipped</span></td></tr>
+          <tr><td>#10483</td><td>James L.</td><td>Denim Jacket</td><td>$140</td><td><span class="tag tag--proc">Processing</span></td></tr>
+          <tr><td>#10484</td><td>Mia R.</td><td>Red Cap</td><td>$32</td><td><span class="tag tag--done">Delivered</span></td></tr>
+          <tr><td>#10485</td><td>Liam K.</td><td>Wide Trousers</td><td>$74</td><td><span class="tag tag--proc">Processing</span></td></tr>
+          <tr><td>#10486</td><td>Aisha B.</td><td>Linen Shirt</td><td>$68</td><td><span class="tag tag--ship">Shipped</span></td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="admin__panel" id="p-products">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>Product</th><th>SKU</th><th>Price</th><th>Category</th></tr>
+          <tr><td>Boxy Hoodie</td><td>BX-HD-001</td><td>$88</td><td>Tops</td></tr>
+          <tr><td>Denim Jacket</td><td>DN-JK-014</td><td>$140</td><td>Outerwear</td></tr>
+          <tr><td>Red Cap</td><td>RD-CP-022</td><td>$32</td><td>Caps</td></tr>
+          <tr><td>Wide Trousers</td><td>WD-TR-009</td><td>$74</td><td>Bottoms</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- VARIANTS -->
+    <section class="admin__panel" id="p-variants">
+      <div class="panel-card"><h3 style="margin-bottom:.8rem">Boxy Hoodie variants</h3>
+        <div class="chip-row">
+          <span>Black / S</span><span>Black / M</span><span>Black / L</span>
+          <span>Grey / S</span><span>Grey / M</span><span>Grey / L</span>
+          <span>Sand / M</span><span>Sand / L</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVENTORY -->
+    <section class="admin__panel" id="p-inventory">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>Product</th><th>Size</th><th>Color</th><th>Stock</th></tr>
+          <tr><td>Boxy Hoodie</td><td>M</td><td>Black</td><td>24</td></tr>
+          <tr><td>Boxy Hoodie</td><td>L</td><td>Grey</td><td style="color:#ff6b6b">3 (low)</td></tr>
+          <tr><td>Red Cap</td><td>One size</td><td>Red</td><td>58</td></tr>
+          <tr><td>Denim Jacket</td><td>M</td><td>Blue</td><td style="color:#ff6b6b">0 (out)</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- CUSTOMERS -->
+    <section class="admin__panel" id="p-customers">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>Name</th><th>Orders</th><th>Spent</th><th>Status</th></tr>
+          <tr><td>Sarah M.</td><td>7</td><td>$612</td><td>Active</td></tr>
+          <tr><td>James L.</td><td>3</td><td>$420</td><td>Active</td></tr>
+          <tr><td>Mia R.</td><td>11</td><td>$980</td><td>VIP</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- DISCOUNTS -->
+    <section class="admin__panel" id="p-discounts">
+      <div class="panel-card"><h3 style="margin-bottom:.8rem">Active coupons</h3>
+        <div class="chip-row">
+          <span>WELCOME10: 10% off</span><span>FREESHIP: free shipping</span>
+          <span>SS26: 15% off</span><span>BUNDLE2: buy 2 save $20</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="admin__panel" id="p-reviews">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>Customer</th><th>Product</th><th>Rating</th><th>Review</th></tr>
+          <tr><td>Sarah M.</td><td>Boxy Hoodie</td><td>★★★★★</td><td>Perfect fit, soft fabric.</td></tr>
+          <tr><td>Mia R.</td><td>Red Cap</td><td>★★★★★</td><td>Exactly like the photos.</td></tr>
+          <tr><td>James L.</td><td>Denim Jacket</td><td>★★★★☆</td><td>Runs slightly large.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- RETURNS -->
+    <section class="admin__panel" id="p-returns">
+      <div class="panel-card">
+        <table class="adm">
+          <tr><th>RMA</th><th>Order</th><th>Reason</th><th>Status</th></tr>
+          <tr><td>RMA-21</td><td>#10477</td><td>Wrong size</td><td>Refunded</td></tr>
+          <tr><td>RMA-22</td><td>#10480</td><td>Defect</td><td>Processing</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- SHIPPING -->
+    <section class="admin__panel" id="p-shipping">
+      <div class="panel-card"><h3 style="margin-bottom:.8rem">Shipping zones & rates</h3>
+        <div class="chip-row">
+          <span>Metro: $4.99 (2-day)</span><span>Domestic: $7.99 (4-day)</span>
+          <span>International: $19 (10-day)</span><span>Free over $150</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section class="admin__panel" id="p-analytics">
+      <div class="stat-row">
+        <div class="stat"><b>$38.2k</b><span>Revenue (30d)</span></div>
+        <div class="stat"><b>412</b><span>Orders</span></div>
+        <div class="stat"><b>$93</b><span>Avg order value</span></div>
+        <div class="stat"><b>+18%</b><span>Customer growth</span></div>
+      </div>
+      <div class="grid2">
+        <div class="panel-card"><h3 style="margin-bottom:.8rem">Sales by product</h3>
+          <table class="adm"><tr><th>Product</th><th>Sold</th></tr>
+          <tr><td>Boxy Hoodie</td><td>142</td></tr><tr><td>Red Cap</td><td>98</td></tr>
+          <tr><td>Denim Jacket</td><td>64</td></tr><tr><td>Wide Trousers</td><td>51</td></tr></table>
+        </div>
+        <div class="panel-card"><h3 style="margin-bottom:.8rem">Conversion funnel</h3>
+          <div class="bars2"><i style="height:100%"></i><i style="height:72%"></i><i style="height:48%"></i><i style="height:30%"></i><i style="height:18%"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="admin__panel" id="p-settings">
+      <div class="panel-card"><p style="color:var(--ink-soft)">Store setup, payments, domain and team access are handled by Craftee Sites. This is a live demo of the overview you'll receive. Need a change? Just message us and we'll take care of it. ✉️</p></div>
+    </section>
+  </main>
+</div>
+
+<script>
+  const nav = document.getElementById('admNav');
+  const title = document.getElementById('admTitle');
+  const labels = {dashboard:'Dashboard',orders:'Orders',products:'Products',variants:'Product Variants',
+    inventory:'Inventory',customers:'Customers',discounts:'Discounts',reviews:'Reviews',returns:'Returns',
+    shipping:'Shipping',analytics:'Analytics',settings:'Settings'};
+  nav.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    nav.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const t = b.dataset.tab;
+    document.querySelectorAll('.admin__panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('p-' + t).classList.add('active');
+    title.textContent = labels[t];
+  });
+</script>
+</body>
+</html>

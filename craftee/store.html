@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demo Store by Craftee Sites</title>
+<meta name="description" content="An interactive demo apparel store with homepage, shop, categories, collections, search, wishlist, cart, checkout and order tracking." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  body{padding:0}
+  .store-top{padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:rgba(6,9,15,.85);
+    display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:40;backdrop-filter:blur(14px)}
+  .store-top .brand{font-size:1.2rem}
+  .store-cart{font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#04121a;padding:.5rem 1rem;border-radius:999px;font-size:.85rem;box-shadow:var(--neon)}
+  .store-hero{background:linear-gradient(135deg,#0a1622,#1a1230);padding:3rem 1.5rem;text-align:center;border-bottom:1px solid var(--line)}
+  .store-hero h1{font-size:clamp(2rem,5vw,3rem);margin-bottom:.6rem;text-shadow:var(--neon)}
+  .store-hero p{max-width:560px;margin:0 auto;color:var(--ink-soft)}
+  .store-shell{max-width:var(--maxw);margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:210px 1fr;gap:2rem}
+  .store-nav{display:flex;flex-direction:column;gap:.3rem;position:sticky;top:84px;height:fit-content}
+  .store-nav a{padding:.7rem 1rem;border-radius:10px;color:var(--ink-soft);font-weight:500;font-size:.92rem;text-decoration:none;transition:.15s}
+  .store-nav a:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+  .store-nav a.active{background:linear-gradient(135deg,rgba(0,229,255,.18),rgba(181,84,255,.18));color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .store-main{min-width:0}
+  .view{display:none}
+  .view.active{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* HOME */
+  .home-banner{background:linear-gradient(135deg,rgba(0,229,255,.2),rgba(181,84,255,.2));border:1px solid var(--accent);
+    border-radius:16px;padding:2.5rem;text-align:center;box-shadow:var(--neon);margin-bottom:2rem}
+  .home-banner h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:.6rem}
+  .home-banner p{color:var(--ink-soft);margin-bottom:1rem}
+  .home-sec{margin-bottom:2.2rem}
+  .home-sec h3{font-size:1.3rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+  .home-sec h3 a{font-size:.85rem;color:var(--accent);text-decoration:none}
+  .store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .store-prod{background:var(--glass);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative;backdrop-filter:blur(10px);transition:.2s;cursor:pointer}
+  .store-prod:hover{border-color:var(--accent);box-shadow:var(--neon)}
+  .store-prod__img{height:230px;background-size:cover;background-position:center}
+  .store-prod__save{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.08);border:1px solid var(--line);
+    width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;z-index:2;color:var(--ink)}
+  .store-prod__save.saved{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;box-shadow:var(--neon)}
+  .store-prod__body{padding:1rem}
+  .store-prod__name{font-family:'Outfit',sans-serif;font-size:1.1rem}
+  .store-prod__price{color:var(--accent);font-weight:600;margin:.2rem 0 .6rem;text-shadow:var(--neon)}
+  .store-prod__price s{color:var(--ink-soft);font-size:.85rem}
+  .store-prod__btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border:none;padding:.6rem;border-radius:10px;font-weight:600;cursor:pointer;font-family:inherit}
+  .promo{background:rgba(194,145,90,.12);border:1px solid var(--gold);border-radius:14px;padding:1.4rem;text-align:center;margin-bottom:2rem}
+  .promo b{color:var(--gold)}
+  .news{display:flex;gap:.6rem;max-width:420px;margin-top:.6rem}
+  .news input{flex:1;padding:.7rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);font-family:inherit}
+  .news .btn{padding:.7rem 1.2rem}
+
+  /* filters */
+  .shop-tools{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.5rem}
+  .shop-tools select,.shop-tools input{padding:.6rem;border-radius:10px;background:#0d1420;color:#eaf6ff;border:1px solid var(--line);font-family:inherit}
+  .shop-tools input{flex:1;min-width:180px}
+  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .chip{padding:.4rem .9rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:var(--ink-soft);cursor:pointer;font-size:.85rem}
+  .chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;font-weight:600}
+
+  /* categories / collections tiles */
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .tile{height:150px;border-radius:14px;border:1px solid var(--line);display:flex;align-items:flex-end;padding:1rem;
+    background-size:cover;background-position:center;cursor:pointer;position:relative;overflow:hidden;transition:.2s}
+  .tile:hover{border-color:var(--accent);box-shadow:var(--neon)}
+  .tile span{background:rgba(6,9,15,.7);padding:.4rem .8rem;border-radius:8px;font-weight:600;backdrop-filter:blur(4px)}
+
+  /* search */
+  .search-box{display:flex;gap:.6rem;margin-bottom:1.5rem}
+  .search-box input{flex:1;padding:.8rem 1rem;border-radius:12px;background:#0d1420;color:#eaf6ff;border:1px solid var(--line);font-family:inherit;font-size:1rem}
+
+  /* pdp */
+  .pdp{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+  .pdp__img{height:460px;background-size:cover;background-position:center;border-radius:16px;border:1px solid var(--line)}
+  .pdp__name{font-size:2rem;margin-bottom:.3rem}
+  .pdp__price{color:var(--accent);font-size:1.5rem;font-weight:700;text-shadow:var(--neon);margin-bottom:1rem}
+  .pdp__price s{color:var(--ink-soft);font-size:1rem;margin-left:.5rem}
+  .pdp__opt{margin:1rem 0}
+  .pdp__opt b{display:block;font-size:.85rem;color:var(--ink-soft);margin-bottom:.5rem}
+  .pdp__chips{display:flex;gap:.5rem;flex-wrap:wrap}
+  .pdp__chips button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);padding:.5rem .9rem;border-radius:10px;cursor:pointer;font-family:inherit;transition:.15s}
+  .pdp__chips button.sel{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;box-shadow:var(--neon)}
+  .pdp__row{display:flex;gap:1rem;align-items:center;margin:1.2rem 0}
+  .pdp__qty{display:flex;align-items:center;gap:.5rem}
+  .pdp__qty button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;font-size:1.1rem}
+  .pdp__meta{font-size:.88rem;color:var(--ink-soft);line-height:1.6;margin-top:1rem}
+  .pdp__back{margin-bottom:1rem;color:var(--ink-soft);cursor:pointer}
+
+  /* wishlist / cart lines */
+  .wish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .cart-line{display:grid;grid-template-columns:60px 1fr auto auto;gap:1rem;align-items:center;padding:.8rem 0;border-bottom:1px solid var(--line)}
+  .cart-line img{width:60px;height:60px;border-radius:10px;object-fit:cover}
+
+  /* checkout */
+  .co-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .co-field{margin-bottom:1rem}
+  .co-field label{display:block;font-size:.85rem;color:var(--ink-soft);margin-bottom:.3rem}
+  .co-field input,.co-field select{width:100%;padding:.6rem;border-radius:10px;background:#0d1420;color:#eaf6ff;border:1px solid var(--line);font-family:inherit}
+  .co-summary{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.4rem;backdrop-filter:blur(10px)}
+  .co-done{max-width:560px;margin:0 auto;text-align:center;padding:3rem 0}
+  .co-done .big{font-size:3rem}
+
+  /* order tracking */
+  .track-box{max-width:520px}
+  .track-input{display:flex;gap:.6rem;margin:1rem 0}
+  .track-input input{flex:1;padding:.7rem 1rem;border-radius:10px;background:#0d1420;color:#eaf6ff;border:1px solid var(--line);font-family:inherit}
+  .track-steps{list-style:none;display:grid;gap:.4rem;margin-top:1rem}
+  .track-steps li{padding:.6rem .9rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:.9rem;color:var(--ink-soft)}
+  .track-steps li.done{color:var(--accent);border-color:var(--accent)}
+  .track-steps li.current{color:var(--ink);border-color:var(--accent);background:rgba(0,229,255,.08);box-shadow:var(--neon)}
+
+  .back-link{display:block;text-align:center;padding:1.5rem;color:var(--ink-soft)}
+  .back-link:hover{color:var(--accent)}
+  @media(max-width:900px){.store-shell{grid-template-columns:1fr}.store-nav{flex-direction:row;overflow:auto;position:static;gap:.2rem}
+    .store-nav a{white-space:nowrap}.store-grid,.tiles,.wish-grid{grid-template-columns:repeat(2,1fr)}
+    .pdp,.co-grid{grid-template-columns:1fr}.pdp__img{height:300px}}
+  @media(max-width:560px){.store-grid,.tiles,.wish-grid{grid-template-columns:1fr}}
+
+  /* plan toggle + premium-only visibility */
+  .plan-toggle{display:flex;gap:.5rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
+  .plan-toggle button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink-soft);
+    padding:.5rem 1rem;border-radius:999px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.15s}
+  .plan-toggle button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;box-shadow:var(--neon)}
+  .plan-toggle__hint{font-size:.8rem;color:var(--ink-soft);width:100%;margin-top:.2rem}
+  .locked{position:relative;opacity:.45;filter:grayscale(.5)}
+  .locked::after{content:"Premium";position:absolute;top:10px;left:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#04121a;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:6px;box-shadow:var(--neon)}
+  .premium-only{display:none}
+  body.plan-premium .premium-only{display:block}
+  body.plan-premium .plan-toggle__hint{color:var(--accent)}
+
+  /* features strip (what the plan includes) */
+  .feat-strip{display:flex;flex-wrap:wrap;gap:.6rem}
+  .feat-strip span{font-size:.85rem;padding:.45rem .9rem;border-radius:999px;border:1px solid var(--line);
+    background:rgba(255,255,255,.04);color:var(--ink-soft)}
+  .feat-strip span.on{color:var(--accent);border-color:var(--accent);box-shadow:var(--neon)}
+  .feat-strip span.off{opacity:.4;text-decoration:line-through}
+  /* bundle builder */
+  .bundle{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.2rem;backdrop-filter:blur(10px)}
+  .bundle__items{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+  .bundle__items button{padding:.45rem .8rem;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;font-family:inherit;font-size:.85rem;transition:.15s}
+  .bundle__items button.sel{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;box-shadow:var(--neon)}
+  .bundle__out{font-weight:600;color:var(--accent);text-shadow:var(--neon);min-height:1.4rem}
+  /* analytics panel */
+  .analytics{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.2rem;backdrop-filter:blur(10px)}
+  .analytics__row{display:flex;gap:1rem;flex-wrap:wrap}
+  .analytics__kpi{flex:1;min-width:120px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.8rem}
+  .analytics__kpi b{display:block;font-family:'Outfit',sans-serif;font-size:1.5rem;color:var(--accent);text-shadow:var(--neon)}
+  .analytics__kpi span{font-size:.75rem;color:var(--ink-soft)}
+  .analytics__bars{display:flex;align-items:flex-end;gap:.5rem;height:120px;margin-top:1rem}
+  .analytics__bars i{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:4px 4px 0 0;opacity:.85;transition:height .4s}
+
+  /* hero limit note */
+  .store-hero__limit{font-size:.9rem;color:var(--ink-soft);background:rgba(67,232,216,.08);border:1px solid var(--accent);
+    border-radius:12px;padding:.7rem 1rem;display:inline-block;margin-top:.4rem;box-shadow:var(--neon)}
+  .store-hero__limit b{color:var(--accent)}
+  /* per-view limit note */
+  .view-limit{font-size:.85rem;color:var(--ink-soft);background:rgba(67,232,216,.06);border:1px solid var(--line);
+    border-radius:10px;padding:.5rem .8rem;margin-bottom:1rem}
+  .view-limit b{color:var(--accent)}
+  /* AI agent */
+  .aiagent{background:var(--glass);border:1px solid var(--accent);border-radius:14px;padding:1.2rem;backdrop-filter:blur(10px);box-shadow:var(--neon)}
+  .aiagent__head{display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem;font-size:.95rem}
+  .aiagent__dot{width:10px;height:10px;border-radius:50%;background:#37e36b;box-shadow:0 0 8px #37e36b;animation:pulse 1.6s infinite}
+  .aiagent__status{margin-left:auto;font-size:.7rem;color:#37e36b;background:rgba(55,227,107,.12);padding:.15rem .55rem;border-radius:999px}
+  .aiagent__chat{display:flex;flex-direction:column;gap:.5rem;max-height:240px;overflow:auto;margin-bottom:.7rem}
+  .ai-msg{max-width:85%;padding:.6rem .9rem;border-radius:12px;font-size:.88rem;line-height:1.35}
+  .ai-msg--bot{background:rgba(67,232,216,.12);border:1px solid var(--accent);color:var(--ink);align-self:flex-start;border-bottom-left-radius:3px}
+  .ai-msg--user{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;align-self:flex-end;border-bottom-right-radius:3px}
+  .ai-msg--typing{font-style:italic;opacity:.7}
+  .aiagent__quick{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+  .aiagent__quick button{font-size:.78rem;padding:.35rem .7rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink-soft);cursor:pointer;font-family:inherit}
+  .aiagent__quick button:hover{color:var(--accent);border-color:var(--accent)}
+  .aiagent__form{display:flex;gap:.5rem}
+  .aiagent__form input{flex:1;padding:.65rem;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink);font-family:inherit}
+  /* premium feature list */
+  .prem-feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:0}
+  .prem-feats li{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;font-size:.9rem}
+  @media(max-width:560px){.prem-feats{grid-template-columns:1fr}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+</style>
+</head>
+<body>
+
+<div class="bg-anim" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+<div class="store-top">
+  <a class="brand" href="index.html" id="storeBrandTop">Demo<span>Store</span></a>
+  <div class="store-cart" id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</div>
+</div>
+
+<header class="store-hero">
+  <p class="eyebrow" style="color:var(--accent)">⚡ Live demo · built by Craftee Sites</p>
+  <h1 id="storeBrand">Demo Store</h1>
+  <p>This is a working example of the store your apparel brand would get. Browse, search, save, and check out . Then switch plans below to see the Starter vs Premium difference.</p>
+  <p class="store-hero__limit">📦 Demo shows a limited sample catalog . Your live store holds <b>up to 50 products on Starter</b> (unlimited on Premium), across shops, categories &amp; collections.</p>
+  <div class="plan-toggle" id="planToggle">
+    <button type="button" class="active" data-plan="starter">Starter ($499)</button>
+    <button type="button" data-plan="premium">Premium ($799)</button>
+    <span class="plan-toggle__hint" id="planHint">Showing Starter features</span>
+  </div>
+</header>
+
+<div class="store-shell">
+  <aside class="store-nav" id="storeNav">
+    <a href="#home" data-view="home" class="active">🏠 Homepage</a>
+    <a href="#shop" data-view="shop">🛍️ Shop</a>
+    <a href="#categories" data-view="categories">🗂️ Categories</a>
+    <a href="#collections" data-view="collections">✨ Collections</a>
+    <a href="#search" data-view="search">🔎 Search</a>
+    <a href="#wishlist" data-view="wishlist">❤️ Wishlist</a>
+    <a href="#cart" data-view="cart">🛒 Cart</a>
+    <a href="#checkout" data-view="checkout">💳 Checkout</a>
+    <a href="#track" data-view="track">📦 Order Tracking</a>
+  </aside>
+
+  <main class="store-main">
+
+    <!-- HOME -->
+    <section class="view active" id="v-home">
+      <div class="home-banner">
+        <h2>New Drop SS26</h2>
+        <p>Light layers, boxy fits, and caps built for the street.</p>
+        <a class="btn btn--primary" href="#shop" data-view="shop">Shop the drop</a>
+      </div>
+      <div class="home-sec"><h3>Featured Collection <a href="#collections" data-view="collections">View all →</a></h3>
+        <div class="store-grid" id="homeFeatured"></div></div>
+      <div class="home-sec"><h3>New Arrivals <a href="#shop" data-view="shop">Shop →</a></h3>
+        <div class="store-grid" id="homeNew"></div></div>
+      <div class="home-sec"><h3>Best Sellers <a href="#shop" data-view="shop">Shop →</a></h3>
+        <div class="store-grid" id="homeBest"></div></div>
+      <div class="promo">🎁 <b>Free shipping</b> on orders over $150 . Use code <b>FREESHIP</b> at checkout.</div>
+      <div class="home-sec premium-only"><h3>Premium perks</h3>
+        <div class="promo" style="border-color:var(--accent);box-shadow:var(--neon)">🚀 <b>Bundle &amp; Save</b>. Build multi-item bundles and seasonal promos your Starter store can't. Plus customer segmentation, automated flows, and advanced analytics in your dashboard.</div>
+      </div>
+      <div class="home-sec"><h3>This plan includes</h3>
+        <div class="feat-strip" id="featStrip"></div>
+      </div>
+      <div class="home-sec premium-only"><h3>Bundle Builder <span style="font-size:.8rem;color:var(--ink-soft)">Premium</span></h3>
+        <div class="bundle" id="bundleBuilder">
+          <p style="color:var(--ink-soft);font-size:.9rem">Pick 2 to 3 items to build a bundle and see your customer discount.</p>
+          <div class="bundle__items" id="bundleItems"></div>
+          <div class="bundle__out" id="bundleOut">Select items above ↑</div>
+        </div>
+      </div>
+      <div class="home-sec premium-only"><h3>Store Analytics <span style="font-size:.8rem;color:var(--ink-soft)">Premium</span></h3>
+        <div class="analytics" id="analyticsPanel"></div>
+      </div>
+      <div class="home-sec premium-only"><h3>AI Live Agent <span style="font-size:.8rem;color:var(--accent)">Premium</span></h3>
+        <div class="aiagent" id="aiAgent">
+          <div class="aiagent__head">
+            <span class="aiagent__dot"></span>
+            <b>Craftee AI Concierge</b><span class="aiagent__status" id="aiStatus">online</span>
+          </div>
+          <div class="aiagent__chat" id="aiChat">
+            <div class="ai-msg ai-msg--bot">Hi! I'm your AI store agent. Ask me about sizing, shipping, or restocks . I reply instantly, 24/7. 👋</div>
+          </div>
+          <div class="aiagent__quick">
+            <button data-q="What's your return policy?">Returns?</button>
+            <button data-q="Do you restock the Denim Jacket?">Restock?</button>
+            <button data-q="Help me pick a gift under $60">Gift idea</button>
+          </div>
+          <form class="aiagent__form" id="aiForm"><input id="aiInput" placeholder="Ask the AI agent…" /><button class="btn btn--primary" type="submit">Send</button></form>
+        </div>
+      </div>
+      <div class="home-sec premium-only"><h3>Everything Premium unlocks <span style="font-size:.8rem;color:var(--ink-soft)">Premium</span></h3>
+        <ul class="prem-feats" id="premFeats">
+          <li>🔧 Advanced product &amp; variant management</li>
+          <li>📊 Inventory management + low stock alerts</li>
+          <li>👥 Customer accounts &amp; segmentation</li>
+          <li>🏷️ Discounts, bundles &amp; seasonal promos</li>
+          <li>⭐ Reviews with customer photos</li>
+          <li>📈 Advanced analytics + marketing integrations</li>
+          <li>🎨 Custom design &amp; advanced integrations</li>
+          <li>⚙️ Custom features &amp; automation</li>
+          <li>🚑 Priority support</li>
+          <li>🤖 AI live agents</li>
+        </ul>
+      </div>
+      <div class="home-sec"><h3>Join the list</h3>
+        <p style="color:var(--ink-soft)">Get early access to drops and 10% off your first order.</p>
+        <form class="news" id="newsForm"><input placeholder="you@email.com" /><button class="btn btn--primary" type="submit">Subscribe</button></form>
+        <p id="newsMsg" style="color:var(--accent);margin-top:.6rem;display:none">Thanks! Check your inbox for 10% off. 🎉</p>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section class="view" id="v-shop">
+      <p class="view-limit">📦 Demo catalog . Your live store supports <b>up to 50 products on Starter</b> (unlimited on Premium). Switch plans above to see Starter vs Premium.</p>
+      <div class="shop-tools">
+        <input id="shopSearch" placeholder="Search products…" />
+        <select id="shopSort"><option value="featured">Sort: Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+        <select id="shopSize"><option value="">Size: All</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>One size</option></select>
+        <select id="shopColor"><option value="">Color: All</option><option>White</option><option>Black</option><option>Grey</option><option>Blue</option><option>Red</option><option>Camel</option><option>Sand</option><option>Olive</option><option>Stone</option><option>Navy</option></select>
+      </div>
+      <div class="chips" id="shopCats"></div>
+      <div class="store-grid" id="storeGrid"></div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="view" id="v-categories">
+      <h2 style="margin-bottom:.4rem">Categories</h2>
+      <p class="view-limit">📦 Demo shows a few categories . Your live store supports <b>up to 50 products on Starter</b> (unlimited on Premium), across shops, categories &amp; collections.</p>
+      <div class="tiles" id="catTiles"></div>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <section class="view" id="v-collections">
+      <h2 style="margin-bottom:.4rem">Collections</h2>
+      <p class="view-limit">📦 Demo shows sample collections . Your live store supports <b>up to 50 products on Starter</b> (unlimited on Premium), across shops, categories &amp; collections.</p>
+      <div class="tiles" id="colTiles"></div>
+    </section>
+
+    <!-- SEARCH -->
+    <section class="view" id="v-search">
+      <h2 style="margin-bottom:1.2rem">Search</h2>
+      <div class="search-box"><input id="searchInput" placeholder="Search the whole store…" /><button class="btn btn--primary" id="searchBtn">Search</button></div>
+      <div class="store-grid" id="searchResults"></div>
+    </section>
+
+    <!-- WISHLIST -->
+    <section class="view" id="v-wishlist">
+      <h2 style="margin-bottom:1.2rem">Your Wishlist <span id="wishCount" style="color:var(--accent)"></span></h2>
+      <div class="wish-grid" id="wishGrid"></div>
+      <p id="wishEmpty" style="color:var(--ink-soft)">No saved items yet . Tap the ♡ on any product.</p>
+    </section>
+
+    <!-- PRODUCT DETAIL (hosted here so nav stays visible) -->
+    <section class="view" id="v-product">
+      <div class="pdp">
+        <div class="pdp__img" id="pdpImg"></div>
+        <div>
+          <div class="pdp__back" id="pdpBack">← Back</div>
+          <h1 class="pdp__name" id="pdpName"></h1>
+          <div class="pdp__price" id="pdpPrice"></div>
+          <div class="pdp__opt"><b>Size</b><div class="pdp__chips" id="pdpSizes"></div></div>
+          <div class="pdp__opt"><b>Color</b><div class="pdp__chips" id="pdpColors"></div></div>
+          <div class="pdp__row">
+            <div class="pdp__qty"><button id="qMinus">−</button><span id="qVal">1</span><button id="qPlus">+</button></div>
+            <button class="btn btn--primary" id="addCart">Add to Cart</button>
+            <button class="btn btn--ghost" id="buyNow">Buy Now</button>
+          </div>
+          <div class="pdp__meta" id="pdpMeta"></div>
+          <div class="pdp__opt" style="margin-top:1.5rem"><b>Related products</b><div class="pdp__chips" id="pdpRelated"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <section class="view" id="v-cart">
+      <h2 style="margin-bottom:1.2rem">Your Cart</h2>
+      <div id="cartLines"></div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+        <a href="#home" data-view="home" style="color:var(--ink-soft)">← Continue shopping</a>
+        <button class="btn btn--primary" data-view="checkout">Proceed to Checkout</button>
+      </div>
+    </section>
+
+    <!-- CHECKOUT -->
+    <section class="view" id="v-checkout">
+      <a class="pdp__back" data-view="cart">← Back to cart</a>
+      <h2 style="margin-bottom:1.2rem">Checkout</h2>
+      <div class="co-grid">
+        <div>
+          <div class="co-field"><label>Full name</label><input id="coName" placeholder="Emily Carter" /></div>
+          <div class="co-field"><label>Email</label><input id="coEmail" placeholder="emily.carter@email.com" /></div>
+          <div class="co-field"><label>Shipping address</label><input id="coAddr" placeholder="742 Evergreen Terrace, Springfield, IL 62704" /></div>
+          <div class="co-field"><label>Shipping method</label>
+            <select id="coShip"><option>Standard: $4.99 (4 days)</option><option>Express: $12 (1 day)</option><option>Free over $150</option></select></div>
+          <div class="co-field"><label>Payment</label>
+            <select id="coPay"><option>Card</option><option>GCash</option><option>Bank transfer</option><option>COD</option></select></div>
+          <button class="btn btn--primary" id="placeOrder">Place Order</button>
+        </div>
+        <div class="co-summary" id="coSummary"></div>
+      </div>
+    </section>
+
+    <!-- ORDER CONFIRMATION -->
+    <section class="view" id="v-done">
+      <div class="co-done">
+        <div class="big">✅</div>
+        <h2>Order confirmed!</h2>
+        <p id="doneText" style="color:var(--ink-soft);margin:.8rem 0 1.5rem"></p>
+        <p style="margin-bottom:1.5rem">Order #<b id="doneNum"></b> . Track it anytime from <a href="#track" data-view="track" style="color:var(--accent)">Order Tracking</a>.</p>
+        <a class="btn btn--primary" href="index.html">Back to Craftee Sites</a>
+      </div>
+    </section>
+
+    <!-- ORDER TRACKING -->
+    <section class="view" id="v-track">
+      <h2 style="margin-bottom:.4rem">Order Tracking</h2>
+      <p style="color:var(--ink-soft)">Enter your order number to see its status.</p>
+      <div class="track-box">
+        <div class="track-input"><input id="trackInput" placeholder="e.g. NL-10482" /><button class="btn btn--primary" id="trackBtn">Track</button></div>
+        <div id="trackResult"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<a class="back-link" href="index.html">← Back to Craftee Sites</a>
+
+<script src="store.js"></script>
+</body>
+</html>
