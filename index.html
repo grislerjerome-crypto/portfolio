@@ -157,6 +157,8 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .svc-block ul{list-style:none;display:flex;flex-direction:column;gap:5px}
 .svc-block li{font-size:.86rem;color:var(--muted);padding-left:16px;position:relative;line-height:1.35}
 .svc-block li::before{content:"▸";position:absolute;left:0;color:var(--sc1)}
+.svc-how{background:color-mix(in srgb,var(--sc1) 9%,transparent);border:1px solid color-mix(in srgb,var(--sc1) 22%,transparent);border-radius:12px;padding:13px 15px;margin-top:4px}
+.svc-how p{font-size:.84rem;color:var(--muted);line-height:1.5;margin:0}
 .svc-tools{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 16px}
 .svc-tools span{font-family:var(--mono);font-size:.68rem;color:var(--sc1);border:1px solid color-mix(in srgb,var(--sc1) 30%,transparent);border-radius:99px;padding:3px 9px}
 .svc-enter{font-family:var(--mono);font-size:.8rem;font-weight:600;width:100%;padding:11px;border-radius:10px;cursor:pointer;border:1px solid color-mix(in srgb,var(--sc1) 45%,transparent);background:transparent;color:var(--txt);transition:background .2s,color .2s}
@@ -578,6 +580,7 @@ const CONFIG = {
       do:["Product listing & optimization","Order processing & fulfillment checks","Customer support & returns","Review requests & inventory tracking"],
       help:["Store runs daily without you","Better ratings, fewer errors","Clear SOPs your team can follow"],
       support:["Daily ops coverage","Monthly performance report","Tool & SOP setup (Shopify / Woo)"],
+      how:"I run your store like a department, not a favor. Each morning I work the queue — new orders checked for payment and fraud, listings tuned for search, low-stock flagged before it costs a sale, and reviews requested the moment a package lands. Support tickets get triaged with clear RMA and refund rules so customers hear back fast and your ratings climb. You get a monthly performance readout and tidy SOPs your own team can follow if you ever scale.",
       tools:["Shopify","WooCommerce","Zendesk","Canva","Google Sheets","Oberlo"]
     },
     {
@@ -587,6 +590,7 @@ const CONFIG = {
       do:["Order tracking & exception handling","Supplier & freight coordination","Inventory & document management","Customer shipment updates"],
       help:["Fewer delays and mis-ships","Clear comms with suppliers & buyers","One tidy source of truth for records"],
       support:["Daily tracking & status updates","Weekly performance report","Live dashboard upkeep"],
+      how:"I sit between your suppliers, carriers and customers so nothing falls through. Daily I track every shipment, flag exceptions the moment a delay pops, and open the carrier claim before the buyer even asks. Supplier and freight coordination runs on a steady cadence; invoices, bills of lading and POs get filed and linked in one tidy source of truth. Buyers get proactive status updates, your team gets a live dashboard, and you get a weekly performance read on cost and on-time rate.",
       tools:["Excel/Sheets","Trello","Notion","AfterShip","FedEx/UPS portals","Slack"]
     }
   ],
@@ -602,18 +606,53 @@ const CONFIG = {
 
   projectsLead: "Each engagement, drawn as the workflow it actually is.",
   projects: [
-    { niche:"automation", cat:"GoHighLevel", title:"Lead Qualifier", trigger:"New lead form", engine:"AI scores + routes", outcome:"Hot lead → rep", tags:["GHL","OpenAI","Webhook"] },
-    { niche:"automation", cat:"n8n", title:"Document Assistant", trigger:"Doc uploaded", engine:"Gemini extracts data", outcome:"Structured row saved", tags:["n8n","Gemini","Sheets"] },
-    { niche:"automation", cat:"Zapier", title:"Ops Alerts", trigger:"Error logged", engine:"Zap enriches", outcome:"Slack alert + link", tags:["Zapier","Slack","Monitor"] },
-    { niche:"automation", cat:"Make.com", title:"Outreach Engine", trigger:"New prospect", engine:"Sequences + throttles", outcome:"Replies → CRM", tags:["Make","GHL","Email"] },
-    { niche:"automation", cat:"GoHighLevel", title:"No-Show Killer", trigger:"Appt booked", engine:"AI SMS reminder", outcome:"1-click reschedule", tags:["GHL","Twilio","AI"] },
-    { niche:"automation", cat:"n8n", title:"Ticket Triage", trigger:"Inbound ticket", engine:"LLM classifies", outcome:"Assigned + prioritized", tags:["n8n","OpenAI","Helpdesk"] },
+    /* ===== AUTOMATION — ~80% curated from GHL / Zapier / Make / n8n samples (shuffled, not in original order) ===== */
+    { niche:"automation", cat:"GoHighLevel", title:"New Lead → Send Application", trigger:"Lead hits New Lead stage", engine:"GHL texts + emails app link", outcome:"Instant app, 24/7", tags:["GHL","SMS","Email"] },
+    { niche:"automation", cat:"n8n", title:"AI Sales Agent", trigger:"Leads in sheet", engine:"Gemini 1st/2nd/3rd-touch sequences", outcome:"No dropped follow-ups", tags:["n8n","Gemini","Sheets","Gmail"] },
+    { niche:"automation", cat:"Zapier", title:"Sales Alert Autopilot", trigger:"Lead webhook", engine:"Apollo enrich + priority Paths", outcome:"Hot lead → Slack + AI email", tags:["Zapier","Apollo","Slack","Gmail"] },
+    { niche:"automation", cat:"Make", title:"Gmail AI Integration", trigger:"New Gmail", engine:"Gemini parses + Drive + Sheets", outcome:"Auto-reply, filed & logged", tags:["Make","Gmail","Gemini","Sheets"] },
+    { niche:"automation", cat:"GoHighLevel", title:"No-Show Killer", trigger:"Appointment booked", engine:"AI SMS reminder + reschedule", outcome:"1-click reschedule", tags:["GHL","Twilio","AI"] },
+    { niche:"automation", cat:"n8n", title:"AI Customer Support", trigger:"Inbound email", engine:"Gemini classifies + drafts reply", outcome:"Instant answer, no review", tags:["n8n","Gemini","Gmail"] },
+    { niche:"automation", cat:"Zapier", title:"Client & Task Management", trigger:"New client signs up", engine:"Zapier Paths route + assign", outcome:"Record + tasks + Slack", tags:["Zapier","Airtable","Slack"] },
+    { niche:"automation", cat:"Make", title:"Automated Facebook Posting", trigger:"Content in Sheets", engine:"Make publishes to Page", outcome:"Self-posting calendar", tags:["Make","Facebook","Sheets","Slack"] },
+    { niche:"automation", cat:"n8n", title:"RAG Pipeline & Chatbot", trigger:"Drive upload", engine:"OpenAI embeddings → Pinecone", outcome:"Sourced answers, self-index", tags:["n8n","OpenAI","Pinecone","Drive"] },
+    { niche:"automation", cat:"GoHighLevel", title:"Credit Application Suite", trigger:"Application intake", engine:"GHL lifecycle workflows", outcome:"Intake→approve→decline on rails", tags:["GHL"] },
+    { niche:"automation", cat:"Zapier", title:"Email Attachment Pipeline", trigger:"New Gmail attachment", engine:"Filter → Drive → Slack", outcome:"Filed & announced", tags:["Zapier","Gmail","Drive","Slack"] },
+    { niche:"automation", cat:"Make", title:"Xero Transaction Sync", trigger:"Asana task done", engine:"Make router → Xero export", outcome:"Xero ⇄ Sheets ⇄ Asana", tags:["Make","Xero","Asana","Sheets"] },
+    { niche:"automation", cat:"n8n", title:"AI Lead Scraper & Qualifier", trigger:"Apify dataset", engine:"Dedupe → ZeroBounce → Claude scores", outcome:"Validated lead list", tags:["n8n","Apify","ZeroBounce","Claude"] },
+    { niche:"automation", cat:"GoHighLevel", title:"Dental Booking Funnel", trigger:"Landing visit", engine:"GHL page + calendar modal", outcome:"Booked appointments", tags:["GHL","HTML/CSS/JS","Responsive"] },
+    { niche:"automation", cat:"Zapier", title:"Daily Task Automation", trigger:"Zapier schedule", engine:"Pull Asana tasks", outcome:"Plan emailed each AM", tags:["Zapier","Asana","Gmail"] },
+    { niche:"automation", cat:"Make", title:"Multi-Message Slack Router", trigger:"New Sheets row", engine:"Make router fans out", outcome:"Right channels, in order", tags:["Make","Sheets","Slack"] },
+    { niche:"automation", cat:"n8n", title:"Invoice Follow-Up System", trigger:"Daily schedule", engine:"Tier by days overdue", outcome:"Escalating Gmail reminders", tags:["n8n","Sheets","Gmail"] },
+    { niche:"automation", cat:"GoHighLevel", title:"Application Submitted Handler", trigger:"Form submitted", engine:"GHL updates + advances stage", outcome:"Contact texted + team alerted", tags:["GHL","SMS"] },
+    { niche:"automation", cat:"Zapier", title:"Spreadsheet Event Scheduler", trigger:"Sheet row added", engine:"Create Calendar event", outcome:"Calendar builds itself", tags:["Zapier","Sheets","Calendar","Slack"] },
+    { niche:"automation", cat:"n8n", title:"Automated Email Outreach", trigger:"Hourly Sheets pull", engine:"AI personalize + Outlook send", outcome:"Volume outreach on autopilot", tags:["n8n","OpenAI","Outlook","Sheets"] },
+    { niche:"automation", cat:"Make", title:"Social Media Update Automation", trigger:"New Sheets row", engine:"Slack msg + FB post", outcome:"Publishes & self-reports", tags:["Make","Sheets","Slack","Facebook"] },
+    { niche:"automation", cat:"n8n", title:"Lead Temperature Router", trigger:"Form submission", engine:"Switch scores Cold/Warm/Hot", outcome:"Routed to right sheet", tags:["n8n","Sheets"] },
+    { niche:"automation", cat:"GoHighLevel", title:"Cash Offer Landing + Intake", trigger:"Seller form (3-step)", engine:"GHL webhook + cost breakdown", outcome:"Qualified seller lead", tags:["GHL","HTML/CSS/JS","Responsive"] },
+    { niche:"automation", cat:"n8n", title:"Faceless AI Video Pipeline", trigger:"Schedule", engine:"Script → render → Blotato", outcome:"Posts to 8+ platforms", tags:["n8n","OpenAI","Blotato"] },
+    { niche:"automation", cat:"Zapier", title:"Client Tracker", trigger:"Jotform submit", engine:"Create in Trainerize + Drive + Sheets", outcome:"Full client record + welcome", tags:["Zapier","Jotform","Trainerize","Gmail"] },
+    { niche:"automation", cat:"n8n", title:"AI Credit & Funding Advisor", trigger:"Credit report PDF", engine:"Redact + score + roadmap", outcome:"Personalized plan, no review", tags:["Make","OpenAI","Softr","Webhooks"] },
+
+    /* ===== WEB ===== */
     { niche:"web", cat:"WordPress", title:"Agency Site Rebuild", trigger:"Brief + assets", engine:"Rebuild + SEO", outcome:"Live, 2× faster", tags:["WordPress","Cloudflare","GSAP"] },
     { niche:"web", cat:"Webflow", title:"Landing Sprint", trigger:"Campaign launch", engine:"Build + A/B test", outcome:"+34% conversions", tags:["Webflow","Figma","Analytics"] },
-    { niche:"ecom", cat:"Shopify", title:"Store Setup", trigger:"New store", engine:"Theme + listings", outcome:"Ready to sell", tags:["Shopify","Canva","Sheets"] },
-    { niche:"ecom", cat:"WooCommerce", title:"Review Recovery", trigger:"Order delivered", engine:"Auto review ask", outcome:"3.4× more reviews", tags:["Woo","Zendesk","Email"] },
-    { niche:"logistics", cat:"Notion", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] },
-    { niche:"logistics", cat:"Trello", title:"Supplier SOP", trigger:"New supplier", engine:"Onboard + docs", outcome:"Repeatable process", tags:["Trello","Slack","Sheets"] }
+
+    /* ===== E-COMMERCE VA — generated from the niche playbook ===== */
+    { niche:"ecom", cat:"Shopify", title:"Store Setup & Theme", trigger:"New store", engine:"Theme + listings + payments", outcome:"Ready to sell", tags:["Shopify","Canva","Sheets"] },
+    { niche:"ecom", cat:"Shopify", title:"Listing Optimization", trigger:"Product in catalog", engine:"SEO titles + variant cleanup", outcome:"Higher CTR & fewer returns", tags:["Shopify","Keywords","Canva"] },
+    { niche:"ecom", cat:"WooCommerce", title:"Order Processing Checks", trigger:"Order placed", engine:"Verify payment + fraud flag", outcome:"Clean fulfillment queue", tags:["Woo","Sheets","Stripe"] },
+    { niche:"ecom", cat:"Zendesk", title:"Support & Returns", trigger:"Ticket opened", engine:"Triage + RMA + refund rules", outcome:"Faster resolutions", tags:["Zendesk","Email","SOP"] },
+    { niche:"ecom", cat:"WooCommerce", title:"Review Recovery", trigger:"Order delivered", engine:"Auto review ask + incentive", outcome:"3.4× more reviews", tags:["Woo","Zendesk","Email"] },
+    { niche:"ecom", cat:"Shopify", title:"Inventory Tracking", trigger:"Stock below threshold", engine:"Alert + PO draft + reconcile", outcome:"No stockouts", tags:["Shopify","Sheets","Oberlo"] },
+
+    /* ===== LOGISTICS / SUPPLY CHAIN VA — generated from the niche playbook ===== */
+    { niche:"logistics", cat:"AfterShip", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] },
+    { niche:"logistics", cat:"FedEx/UPS", title:"Exception Handling", trigger:"Delay / exception alert", engine:"Trace + carrier claim", outcome:"Fewer mis-ships", tags:["FedEx/UPS","Sheets","Email"] },
+    { niche:"logistics", cat:"Trello", title:"Supplier Coordination", trigger:"New PO / supplier", engine:"Onboard + comms cadence", outcome:"Aligned suppliers", tags:["Trello","Slack","Sheets"] },
+    { niche:"logistics", cat:"Notion", title:"Document Management", trigger:"Invoice / BOL received", engine:"File + index + link to PO", outcome:"One source of truth", tags:["Notion","Sheets","Drive"] },
+    { niche:"logistics", cat:"Slack", title:"Customer Shipment Updates", trigger:"Status change", engine:"Proactive buyer notify", outcome:"Fewer 'where is it' tickets", tags:["Slack","Email","AfterShip"] },
+    { niche:"logistics", cat:"Sheets", title:"Freight Reconciliation", trigger:"Weekly cutoff", engine:"Match carrier vs PO costs", outcome:"Clean accruals", tags:["Sheets","Trello","Slack"] }
   ],
 
   testimonials: [
@@ -694,6 +733,7 @@ function buildServices(){
       <div class="svc-block"><span class="svc-l">What I do</span><ul>${s.do.map(x=>`<li>${x}</li>`).join('')}</ul></div>
       <div class="svc-block"><span class="svc-l">How I help</span><ul>${s.help.map(x=>`<li>${x}</li>`).join('')}</ul></div>
       <div class="svc-block"><span class="svc-l">Ongoing support</span><ul>${s.support.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      ${s.how?`<div class="svc-block svc-how"><span class="svc-l">How I work</span><p>${s.how}</p></div>`:''}
       <div class="svc-tools">${s.tools.map(t=>`<span>${t}</span>`).join('')}</div>
       <button class="svc-enter" data-mode="${s.id}">Enter ${s.name} mode →</button>
     </div>`).join('');
