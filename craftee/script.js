@@ -1,4 +1,4 @@
-/* Craftee Sites . Agency home page interactions */
+/* Apparel Web Studio . Agency home page interactions */
 (function () {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -72,7 +72,7 @@
       const d = new FormData(form);
       const subject = `New store project . ${d.get('brand') || d.get('name')}`;
       const body =
-`Hi Craftee Sites,
+`Hi Apparel Web Studio,
 
 Name: ${d.get('name')}
 Email: ${d.get('email')}
@@ -89,5 +89,59 @@ Please send my free store mockup!`;
       window.location.href = `mailto:hello@crafteesites.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       if (sent) sent.hidden = false;
     });
+  }
+  /* ===== HERO FEATURES (upsell + quote) ===== */
+  const upAdd = $('#upAdd'), upTotal = $('#upTotal');
+  if (upAdd && upTotal) {
+    upAdd.addEventListener('change', () => {
+      upTotal.textContent = upAdd.checked ? '$152' : '$120';
+      upTotal.parentElement.animate(
+        [{ transform:'scale(1.12)', filter:'brightness(1.3)' }, { transform:'scale(1)', filter:'brightness(1)' }],
+        { duration: 260, easing:'ease-out' });
+    });
+  }
+  const quoteForm = $('#quoteForm'), quoteOk = $('#quoteOk');
+  if (quoteForm && quoteOk) {
+    quoteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const first = ($('#qFirst').value || '').trim();
+      const last = ($('#qLast').value || '').trim();
+      const email = ($('#qEmail').value || '').trim();
+      if (!first || !last || !email) { quoteForm.animate(
+        [{ transform:'translateX(-4px)' }, { transform:'translateX(4px)' }, { transform:'translateX(0)' }],
+        { duration: 200 }); return; }
+      const who = (first + ' ' + last).trim();
+      quoteOk.textContent = `✓ Sent, ${who}! We'll email your quote to ${email} within 1 business day.`;
+      quoteOk.style.display = 'block';
+      quoteForm.reset();
+    });
+  }
+  /* size recommender (demo) */
+  const sizeBtn = $('#sizeBtn'), sizeOut = $('#sizeOut');
+  if (sizeBtn && sizeOut) {
+    sizeBtn.addEventListener('click', () => {
+      const sizes = ['S','M','L','XL'];
+      const pick = sizes[Math.floor(Math.random()*sizes.length)];
+      sizeOut.textContent = `💡 Based on typical fit, we suggest size ${pick}. Right-size guidance cuts returns & refunds — protects your margin.`;
+    });
+  }
+  /* restock alert */
+  const rsAdd = $('#rsAdd'), rsOk = $('#rsOk');
+  if (rsAdd && rsOk) {
+    rsAdd.addEventListener('change', () => {
+      rsOk.style.display = rsAdd.checked ? 'block' : 'none';
+    });
+  }
+  /* drop countdown */
+  const dropCount = $('#dropCount');
+  if (dropCount) {
+    let t = 2*3600; // 2h demo
+    setInterval(() => {
+      t = t > 0 ? t-1 : 2*3600;
+      const h = String(Math.floor(t/3600)).padStart(2,'0');
+      const m = String(Math.floor((t%3600)/60)).padStart(2,'0');
+      const s = String(t%60).padStart(2,'0');
+      dropCount.textContent = `${h}:${m}:${s}`;
+    }, 1000);
   }
 })();

@@ -1,5 +1,5 @@
 /* =========================================================
-   CRAFTEE SITES — FUTURISTIC DARK / NEON THEME
+   APPAREL WEB STUDIO — FUTURISTIC DARK / NEON THEME
    Two near-alike fonts (Outfit headings + Inter body),
    glassmorphism, neon cyan/violet, animated grid + orbs.
    ========================================================= */
@@ -44,17 +44,32 @@ img{max-width:100%;display:block}
 /* ===== ANIMATED BACKGROUND (grid + neon orbs) ===== */
 .bg-anim{position:fixed;inset:0;z-index:-2;overflow:hidden;
   background:
-    radial-gradient(1200px 700px at 78% -10%, rgba(0,229,255,.12), transparent 60%),
-    radial-gradient(900px 600px at 0% 110%, rgba(181,84,255,.12), transparent 55%),
+    radial-gradient(1200px 700px at 78% -10%, rgba(0,229,255,.10), transparent 60%),
+    radial-gradient(900px 600px at 0% 110%, rgba(181,84,255,.10), transparent 55%),
     linear-gradient(160deg,#06090f 0%,#0a0f18 55%,#070b12 100%)}
-.bg-anim::before{content:"";position:absolute;inset:0;opacity:.5;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-  background-size:46px 46px;
-  -webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 80%);
-          mask-image:radial-gradient(circle at 50% 30%,#000,transparent 80%)}
-.bg-anim span{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;
+/* drifting 3D mesh-gradient blobs in apparel palette (cyan / violet / leather tan / gold) */
+.bg-anim::before{content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(38% 38% at 18% 22%, rgba(0,229,255,.42), transparent 60%),
+    radial-gradient(34% 34% at 82% 30%, rgba(181,84,255,.40), transparent 60%),
+    radial-gradient(40% 40% at 30% 82%, rgba(122,74,43,.38), transparent 62%),
+    radial-gradient(32% 32% at 74% 78%, rgba(255,210,122,.30), transparent 60%),
+    radial-gradient(46% 46% at 52% 52%, rgba(0,229,255,.18), transparent 65%);
+  filter:blur(40px) saturate(1.1);
+  animation:meshDrift 26s ease-in-out infinite alternate;
+  will-change:transform,background-position}
+@keyframes meshDrift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  25%{transform:translate3d(3%,-2%,0) scale(1.06) rotate(.4deg)}
+  50%{transform:translate3d(-2%,3%,0) scale(1.1) rotate(-.3deg)}
+  75%{transform:translate3d(2%,-3%,0) scale(1.04) rotate(.3deg)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+/* procedural fabric / leather grain texture overlay */
+.bg-anim::after{content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px}
+.bg-anim span{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;
   animation:floaty 20s ease-in-out infinite}
 .bg-anim span:nth-child(1){width:420px;height:420px;left:-80px;top:6%;background:radial-gradient(circle,rgba(0,229,255,.6),transparent 70%);animation-delay:0s}
 .bg-anim span:nth-child(2){width:360px;height:360px;right:-60px;top:24%;background:radial-gradient(circle,rgba(181,84,255,.55),transparent 70%);animation-delay:-5s}
@@ -62,6 +77,42 @@ img{max-width:100%;display:block}
 .bg-anim span:nth-child(4){width:300px;height:300px;right:12%;bottom:8%;background:radial-gradient(circle,rgba(0,229,255,.45),transparent 70%);animation-delay:-14s}
 .bg-anim span:nth-child(5){width:240px;height:240px;left:48%;top:44%;background:radial-gradient(circle,rgba(181,84,255,.4),transparent 70%);animation-delay:-7s}
 @keyframes floaty{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.1)}66%{transform:translate(-40px,30px) scale(.94)}}
+/* slow premium sheen sweep */
+.sheen{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.04) 48%,transparent 66%);
+  background-size:300% 300%;animation:sheen 14s linear infinite;mix-blend-mode:screen}
+@keyframes sheen{0%{background-position:120% 0}100%{background-position:-120% 0}}
+
+/* floating product imagery — real apparel photos blended into the background */
+.float-wear{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.float-wear span{position:absolute;opacity:.10;border-radius:18px;
+  background-size:cover;background-position:center;
+  filter:blur(3px) saturate(.9);mix-blend-mode:screen;
+  box-shadow:0 0 40px rgba(0,229,255,.08);
+  animation:wearDrift 46s linear infinite;will-change:transform}
+@keyframes wearDrift{
+  0%{transform:translateY(112vh) rotate(-10deg) scale(.9)}
+  50%{transform:translateY(46vh) rotate(6deg) scale(1.04)}
+  100%{transform:translateY(-22vh) rotate(-8deg) scale(.92)}
+}
+/* continuous premium glow ring (conic, slow spin) for ambient continuum motion */
+.bg-glow{position:fixed;inset:-30%;z-index:-2;pointer-events:none;opacity:.5;
+  background:conic-gradient(from 0deg,
+    rgba(0,229,255,.20), rgba(181,84,255,.16), rgba(122,74,43,.14),
+    rgba(255,210,122,.12), rgba(0,229,255,.20));
+  filter:blur(90px);animation:glowSpin 60s linear infinite;will-change:transform}
+@keyframes glowSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+/* faint promotional ticker */
+.ticker{position:fixed;left:0;right:0;bottom:0;z-index:1;pointer-events:none;overflow:hidden;
+  background:linear-gradient(90deg,rgba(10,15,24,.0),rgba(10,15,24,.55),rgba(10,15,24,.0));
+  border-top:1px solid var(--line);backdrop-filter:blur(4px)}
+.ticker__track{display:inline-flex;gap:3rem;white-space:nowrap;padding:.55rem 0;
+  animation:ticker 28s linear infinite;color:var(--ink-soft);font-size:.82rem;letter-spacing:.04em}
+.ticker__track b{color:var(--accent);text-shadow:var(--neon);font-weight:700}
+.ticker__track span{display:inline-flex;align-items:center;gap:.6rem}
+.ticker__track span::before{content:"✦";color:var(--gold)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* fade-up reveal on scroll */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
@@ -470,6 +521,52 @@ select option{color:#eaf6ff}
 .mock__price{font-size:.78rem;color:var(--accent);padding:.1rem .5rem .5rem;text-shadow:var(--neon)}
 .mock__cart{margin-top:.8rem;background:rgba(0,229,255,.1);border:1px solid var(--accent);
   border-radius:10px;padding:.6rem;text-align:left;font-size:.82rem;box-shadow:var(--neon)}
+
+/* hero interactive apparel features */
+.hero__features{margin-top:1.6rem;display:flex;flex-direction:column;gap:.9rem;
+  max-width:760px;margin-left:auto;margin-right:auto}
+.hfeat-row{display:grid;gap:.9rem}
+.hfeat-row--top{grid-template-columns:1fr 1fr}
+.hfeat-row--bottom{grid-template-columns:repeat(3,1fr)}
+.hfeat{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;
+  text-align:left;backdrop-filter:blur(12px);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hfeat--upsell{border-color:rgba(0,229,255,.35)}
+.hfeat--quote{border-color:rgba(181,84,255,.35)}
+.hfeat--size{border-color:rgba(255,210,122,.3)}
+.hfeat--restock{border-color:rgba(55,227,107,.3)}
+.hfeat--drop{border-color:rgba(255,120,120,.3)}
+.hfeat__tag{display:inline-block;margin-left:.4rem;font-size:.62rem;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--accent);background:rgba(0,229,255,.1);
+  border:1px solid var(--accent);border-radius:999px;padding:.12rem .5rem;vertical-align:middle}
+.hfeat__note{margin-top:.7rem;font-size:.74rem;color:var(--ink-soft);line-height:1.35;
+  border-left:2px solid var(--accent);padding-left:.55rem}
+.hfeat__mini{padding:.4rem .7rem;border-radius:9px;border:1px solid var(--accent);background:transparent;
+  color:var(--accent);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.hfeat__mini:hover{background:rgba(0,229,255,.12)}
+.hfeat__count{font-family:'Outfit',sans-serif;font-weight:700;color:var(--gold);font-size:1rem;
+  text-shadow:0 0 8px rgba(255,210,122,.4);letter-spacing:.02em}
+.hfeat__hd{font-family:'Outfit',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.7rem}
+.hfeat__row{display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.4rem;border-radius:10px;
+  border:1px solid transparent;transition:.15s}
+.hfeat__row:hover{border-color:var(--line);background:rgba(255,255,255,.03)}
+.hfeat__row input{width:18px;height:18px;accent-color:var(--accent);flex:none}
+.hfeat__thumb{width:40px;height:40px;border-radius:8px;background-size:cover;background-position:center;flex:none;
+  border:1px solid var(--line)}
+.hfeat__meta{display:flex;flex-direction:column;line-height:1.2;flex:1}
+.hfeat__meta b{font-size:.85rem;color:var(--ink)}
+.hfeat__meta i{font-style:normal;font-size:.72rem;color:var(--ink-soft)}
+.hfeat__price{font-size:.85rem;color:var(--accent);font-weight:600}
+.hfeat__total{margin-top:.7rem;font-size:.82rem;color:var(--ink-soft)}
+.hfeat__total b{color:var(--accent);text-shadow:var(--neon);font-size:.95rem}
+.hfeat__form{display:flex;flex-direction:column;gap:.5rem}
+.hfeat__row2{display:flex;gap:.5rem}
+.hfeat__row2 input{flex:1;min-width:0}
+.hfeat__form input{flex:1;padding:.55rem .7rem;border-radius:9px;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);color:var(--ink);font-family:inherit;font-size:.82rem}
+.hfeat__form input::placeholder{color:var(--ink-soft)}
+.hfeat__form .btn{padding:.55rem .9rem;font-size:.82rem;width:100%}
+.hfeat__ok{margin-top:.6rem;font-size:.8rem;color:var(--accent);text-shadow:var(--neon)}
+@media(max-width:560px){.hero__features{grid-template-columns:1fr}.hfeat-row--top,.hfeat-row--bottom{grid-template-columns:1fr}}
 .hero__trust{margin-top:2rem;font-size:.92rem;color:var(--ink-soft)}
 
 /* trust bar */

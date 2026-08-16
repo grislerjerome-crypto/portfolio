@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Demo Store by Craftee Sites</title>
+<title>Demo Store by Apparel Web Studio</title>
 <meta name="description" content="An interactive demo apparel store with homepage, shop, categories, collections, search, wishlist, cart, checkout and order tracking." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -127,6 +127,17 @@
     padding:.5rem 1rem;border-radius:999px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:.15s}
   .plan-toggle button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;border-color:transparent;box-shadow:var(--neon)}
   .plan-toggle__hint{font-size:.8rem;color:var(--ink-soft);width:100%;margin-top:.2rem}
+  /* get-your-own-dashboard CTA */
+  .dash-cta{display:flex;align-items:center;gap:.8rem;margin-top:1.4rem;text-decoration:none;
+    background:linear-gradient(135deg,rgba(0,229,255,.12),rgba(181,84,255,.12));
+    border:1px solid var(--accent);border-radius:14px;padding:.9rem 1.1rem;
+    box-shadow:var(--neon);transition:.2s;max-width:560px;margin-left:auto;margin-right:auto}
+  .dash-cta:hover{transform:translateY(-2px);box-shadow:0 0 26px rgba(0,229,255,.45)}
+  .dash-cta__ic{font-size:1.5rem;flex:none}
+  .dash-cta__txt{display:flex;flex-direction:column;line-height:1.25;text-align:left;flex:1}
+  .dash-cta__txt b{color:var(--ink);font-family:'Outfit',sans-serif;font-size:1rem}
+  .dash-cta__txt i{font-style:normal;font-size:.78rem;color:var(--ink-soft)}
+  .dash-cta__go{color:var(--accent);font-weight:700;font-size:.9rem;white-space:nowrap;text-shadow:var(--neon)}
   .locked{position:relative;opacity:.45;filter:grayscale(.5)}
   .locked::after{content:"Premium";position:absolute;top:10px;left:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
     color:#04121a;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:6px;box-shadow:var(--neon)}
@@ -188,6 +199,9 @@
 <body>
 
 <div class="bg-anim" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="bg-glow"></div>
+<div class="sheen"></div>
+<div class="float-wear" aria-hidden="true"><span style="left:6%;width:150px;height:180px;background-image:url('assets/hoodie_grey.jpg');animation-delay:-3s"></span><span style="left:24%;width:170px;height:150px;background-image:url('assets/jacket_denim.jpg');animation-delay:-19s"></span><span style="left:44%;width:120px;height:120px;background-image:url('assets/cap_red.jpg');animation-delay:-30s"></span><span style="left:62%;width:160px;height:200px;background-image:url('assets/coat_wool.jpg');animation-delay:-11s"></span><span style="left:80%;width:130px;height:130px;background-image:url('assets/tee_white.jpg');animation-delay:-24s"></span><span style="left:90%;width:140px;height:170px;background-image:url('assets/trousers_wide.jpg');animation-delay:-36s"></span><span style="left:14%;width:110px;height:110px;background-image:url('assets/scarf.jpg');animation-delay:-42s"></span><span style="left:36%;width:150px;height:160px;background-image:url('assets/sweater.jpg');animation-delay:-15s"></span><span style="left:56%;width:160px;height:150px;background-image:url('assets/bomber.jpg');animation-delay:-27s"></span><span style="left:72%;width:120px;height:150px;background-image:url('assets/flannel.jpg');animation-delay:-8s"></span></div>
 
 <div class="store-top">
   <a class="brand" href="index.html" id="storeBrandTop">Demo<span>Store</span></a>
@@ -195,7 +209,7 @@
 </div>
 
 <header class="store-hero">
-  <p class="eyebrow" style="color:var(--accent)">⚡ Live demo · built by Craftee Sites</p>
+  <p class="eyebrow" style="color:var(--accent)">⚡ Live demo · built by Apparel Web Studio</p>
   <h1 id="storeBrand">Demo Store</h1>
   <p>This is a working example of the store your apparel brand would get. Browse, search, save, and check out . Then switch plans below to see the Starter vs Premium difference.</p>
   <p class="store-hero__limit">📦 Demo shows a limited sample catalog . Your live store holds <b>up to 50 products on Starter</b> (unlimited on Premium), across shops, categories &amp; collections.</p>
@@ -204,6 +218,11 @@
     <button type="button" data-plan="premium">Premium ($799)</button>
     <span class="plan-toggle__hint" id="planHint">Showing Starter features</span>
   </div>
+  <a class="dash-cta" href="admin.html">
+    <span class="dash-cta__ic">📊</span>
+    <span class="dash-cta__txt"><b>Get your own dashboard</b><i>See the sample admin — manage products, orders &amp; customers</i></span>
+    <span class="dash-cta__go">Open demo →</span>
+  </a>
 </header>
 
 <div class="store-shell">
@@ -255,7 +274,7 @@
         <div class="aiagent" id="aiAgent">
           <div class="aiagent__head">
             <span class="aiagent__dot"></span>
-            <b>Craftee AI Concierge</b><span class="aiagent__status" id="aiStatus">online</span>
+            <b>Studio AI Concierge</b><span class="aiagent__status" id="aiStatus">online</span>
           </div>
           <div class="aiagent__chat" id="aiChat">
             <div class="ai-msg ai-msg--bot">Hi! I'm your AI store agent. Ask me about sizing, shipping, or restocks . I reply instantly, 24/7. 👋</div>
@@ -387,7 +406,7 @@
         <h2>Order confirmed!</h2>
         <p id="doneText" style="color:var(--ink-soft);margin:.8rem 0 1.5rem"></p>
         <p style="margin-bottom:1.5rem">Order #<b id="doneNum"></b> . Track it anytime from <a href="#track" data-view="track" style="color:var(--accent)">Order Tracking</a>.</p>
-        <a class="btn btn--primary" href="index.html">Back to Craftee Sites</a>
+        <a class="btn btn--primary" href="index.html">Back to Apparel Web Studio</a>
       </div>
     </section>
 
@@ -404,8 +423,9 @@
   </main>
 </div>
 
-<a class="back-link" href="index.html">← Back to Craftee Sites</a>
+<a class="back-link" href="index.html">← Back to Apparel Web Studio</a>
 
 <script src="store.js"></script>
+<div class="ticker" aria-hidden="true"><div class="ticker__track"><span><b>NEW DROP</b> SS26 Capsule just landed</span><span><b>SALE</b> Up to 30% off outerwear</span><span>Free shipping over $150 — code <b>FREESHIP</b></span><span><b>NEW DROP</b> Knit Edit collection live</span><span><b>SALE</b> Last sizes on denim</span><span>Bundle &amp; save on Premium stores</span><span><b>NEW DROP</b> SS26 Capsule just landed</span><span><b>SALE</b> Up to 30% off outerwear</span><span>Free shipping over $150 — code <b>FREESHIP</b></span><span><b>NEW DROP</b> Knit Edit collection live</span><span><b>SALE</b> Last sizes on denim</span><span>Bundle &amp; save on Premium stores</span></div></div>
 </body>
 </html>

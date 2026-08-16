@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Craftee Sites: Ecommerce Websites for Apparel & Clothing Brands</title>
+<title>Apparel Web Studio: Ecommerce Websites for Apparel & Clothing Brands</title>
 <meta name="description" content="We build complete ecommerce systems for apparel, fashion, streetwear and clothing brands . Storefront, catalog, cart, checkout, payments, inventory, orders, customers, marketing and analytics in one system." />
 <meta name="keywords" content="apparel website design, clothing ecommerce website, fashion website development, clothing store website, ecommerce website for clothing brands, apparel website development, online clothing store development" />
-<meta property="og:title" content="Craftee Sites . Ecommerce Websites for Apparel Brands" />
+<meta property="og:title" content="Apparel Web Studio . Ecommerce Websites for Apparel Brands" />
 <meta property="og:description" content="We build complete ecommerce systems for apparel brands. Storefront + catalog + cart + checkout + payments + inventory + analytics." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="assets/biz_urban.jpg" />
@@ -21,11 +21,14 @@
 <div class="bg-anim" aria-hidden="true">
   <span></span><span></span><span></span><span></span><span></span>
 </div>
+<div class="bg-glow"></div>
+<div class="sheen"></div>
+<div class="float-wear" aria-hidden="true"><span style="left:6%;width:150px;height:180px;background-image:url('assets/hoodie_grey.jpg');animation-delay:-3s"></span><span style="left:24%;width:170px;height:150px;background-image:url('assets/jacket_denim.jpg');animation-delay:-19s"></span><span style="left:44%;width:120px;height:120px;background-image:url('assets/cap_red.jpg');animation-delay:-30s"></span><span style="left:62%;width:160px;height:200px;background-image:url('assets/coat_wool.jpg');animation-delay:-11s"></span><span style="left:80%;width:130px;height:130px;background-image:url('assets/tee_white.jpg');animation-delay:-24s"></span><span style="left:90%;width:140px;height:170px;background-image:url('assets/trousers_wide.jpg');animation-delay:-36s"></span><span style="left:14%;width:110px;height:110px;background-image:url('assets/scarf.jpg');animation-delay:-42s"></span><span style="left:36%;width:150px;height:160px;background-image:url('assets/sweater.jpg');animation-delay:-15s"></span><span style="left:56%;width:160px;height:150px;background-image:url('assets/bomber.jpg');animation-delay:-27s"></span><span style="left:72%;width:120px;height:150px;background-image:url('assets/flannel.jpg');animation-delay:-8s"></span></div>
 
 <!-- ===== NAV ===== -->
 <header class="nav" id="nav">
   <div class="nav__inner">
-    <a class="brand" href="#top">Craftee<span>Sites</span></a>
+    <a class="brand" href="#top">Apparel<span>Web Studio</span></a>
     <button class="nav__toggle" id="navToggle" aria-label="Menu">☰</button>
     <nav class="nav__links" id="navLinks">
       <a href="#top">Home</a>
@@ -75,6 +78,72 @@
           <div class="mock__cart">🛒 Cart · 2 items · $120</div>
         </div>
       </div>
+    </div>
+
+    <!-- interactive apparel features -->
+    <div class="hero__features" aria-hidden="false">
+
+      <!-- TOP ROW: 1 left, 1 right -->
+      <div class="hfeat-row hfeat-row--top">
+        <!-- 1. pre-checkout upsell -->
+        <div class="hfeat hfeat--upsell">
+          <div class="hfeat__hd">⚡ Complete the look <span class="hfeat__tag">Pre-checkout upsell</span></div>
+          <label class="hfeat__row"><input type="checkbox" id="upAdd" />
+            <span class="hfeat__thumb" style="background-image:url('assets/cap_red.jpg')"></span>
+            <span class="hfeat__meta"><b>Matching Cap</b><i>Add to cart for a complete fit</i></span>
+            <span class="hfeat__price">+$32</span></label>
+          <div class="hfeat__total">Cart total: <b id="upTotal">$120</b></div>
+          <div class="hfeat__note">💡 Adds a relevant add-on before checkout — a proven way to lift order value &amp; revenue.</div>
+        </div>
+
+        <!-- 2. request a quote -->
+        <div class="hfeat hfeat--quote">
+          <div class="hfeat__hd">📝 Request a quote <span class="hfeat__tag">Wholesale capture</span></div>
+          <form class="hfeat__form" id="quoteForm">
+            <div class="hfeat__row2">
+              <input id="qFirst" placeholder="First name" />
+              <input id="qLast" placeholder="Last name" />
+            </div>
+            <input id="qEmail" placeholder="Email address" type="email" />
+            <button class="btn btn--primary" type="submit">Get a quote</button>
+          </form>
+          <div class="hfeat__ok" id="quoteOk" style="display:none"></div>
+          <div class="hfeat__note">💡 Captures high-value wholesale &amp; custom orders you'd otherwise lose to DMs.</div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: 3 in one row -->
+      <div class="hfeat-row hfeat-row--bottom">
+        <!-- 3. size recommender -->
+        <div class="hfeat hfeat--size">
+          <div class="hfeat__hd">📏 Size recommender <span class="hfeat__tag">Fewer returns</span></div>
+          <div class="hfeat__row">
+            <span class="hfeat__meta"><b>Height &amp; weight?</b><i>We'll suggest your size</i></span>
+            <button class="hfeat__mini" id="sizeBtn">Suggest my size</button>
+          </div>
+          <div class="hfeat__note" id="sizeOut">💡 Right-size guidance cuts returns &amp; refunds — protects your margin.</div>
+        </div>
+
+        <!-- 4. restock alert -->
+        <div class="hfeat hfeat--restock">
+          <div class="hfeat__hd">🔔 Restock alert <span class="hfeat__tag">Recover lost sales</span></div>
+          <label class="hfeat__row"><input type="checkbox" id="rsAdd" />
+            <span class="hfeat__meta"><b>Denim Jacket sold out</b><i>Notify me when it's back</i></span></label>
+          <div class="hfeat__ok" id="rsOk" style="display:none">🔔 You're on the list — we'll email you at restock.</div>
+          <div class="hfeat__note">💡 Turns sold-out items into future sales instead of bounces.</div>
+        </div>
+
+        <!-- 5. drop countdown -->
+        <div class="hfeat hfeat--drop">
+          <div class="hfeat__hd">⏳ Drop countdown <span class="hfeat__tag">Urgency &amp; hype</span></div>
+          <div class="hfeat__row">
+            <span class="hfeat__meta"><b>SS26 Capsule drops in</b><i>Builds anticipation pre-launch</i></span>
+            <span class="hfeat__count" id="dropCount">02:00:00</span>
+          </div>
+          <div class="hfeat__note">💡 Countdown timers create urgency that drives launch-day spikes.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -191,7 +260,7 @@
   <div class="section__head">
     <p class="eyebrow">Business control</p>
     <h2>Your Entire Business. One Overview.</h2>
-    <p class="section__sub">Not just a storefront . You get a complete management system run by Craftee Sites. Explore your live store overview.</p>
+    <p class="section__sub">Not just a storefront . You get a complete management system run by Apparel Web Studio. Explore your live store overview.</p>
   </div>
   <a class="admin__card reveal" href="admin.html">
     <div class="admin__stats">
@@ -284,7 +353,7 @@
     <article class="feat"><div class="feat__ico">🧺</div><h3>Product Catalog Setup</h3><p>Products, categories, variants, sizes, colors, inventory.</p></article>
     <article class="feat"><div class="feat__ico">💳</div><h3>Payment Integration</h3><p>Configure secure payment methods.</p></article>
     <article class="feat"><div class="feat__ico">🚚</div><h3>Shipping Integration</h3><p>Configure shipping methods and tracking.</p></article>
-    <article class="feat"><div class="feat__ico">🖥️</div><h3>Store Overview</h3><p>See your sales, orders and traffic at a glance . Craftee Sites handles the rest.</p></article>
+    <article class="feat"><div class="feat__ico">🖥️</div><h3>Store Overview</h3><p>See your sales, orders and traffic at a glance . Apparel Web Studio handles the rest.</p></article>
     <article class="feat"><div class="feat__ico">📱</div><h3>Mobile Optimization</h3><p>Make the store look and perform beautifully on mobile.</p></article>
     <article class="feat"><div class="feat__ico">🔍</div><h3>SEO Setup</h3><p>Optimize important pages for search engines.</p></article>
     <article class="feat"><div class="feat__ico">📊</div><h3>Analytics</h3><p>Connect website analytics and conversion tracking.</p></article>
@@ -357,7 +426,7 @@
     </div>
   </div>
   <p class="price__foot">Both plans include care + automations at <b>$19.99/mo</b> . No surprise upsells.</p>
-  <p class="price__care">The <b>$19.99/mo care plan</b> means Craftee Sites manages everything for you: hosting &amp; SSL, updates &amp; backups, security, and all content changes (products, prices, photos, banners). You get a live overview to watch your store . You never have to edit anything yourself.</p>
+  <p class="price__care">The <b>$19.99/mo care plan</b> means Apparel Web Studio manages everything for you: hosting &amp; SSL, updates &amp; backups, security, and all content changes (products, prices, photos, banners). You get a live overview to watch your store . You never have to edit anything yourself.</p>
 
   <div class="price__sample">
     <h3>What the Starter package looks like</h3>
@@ -370,7 +439,7 @@
       <div><b>🔎 Search & ❤️ Wishlist</b><span>Store-wide search and a saved-items list that persists in the browser.</span></div>
       <div><b>🛒 Cart & 💳 Checkout</b><span>Edit cart, enter shipping & payment, place order, get a confirmation.</span></div>
       <div><b>📦 Order Tracking</b><span>Customers track status: Placed → Processing → Shipped → Delivered.</span></div>
-      <div><b>🖥️ Store Overview</b><span>Orders, products, inventory, customers, discounts, reviews, shipping, analytics — all managed by Craftee Sites.</span></div>
+      <div><b>🖥️ Store Overview</b><span>Orders, products, inventory, customers, discounts, reviews, shipping, analytics — all managed by Apparel Web Studio.</span></div>
     </div>
     <a href="store.html" class="btn btn--primary">Open the demo store →</a>
   </div>
@@ -385,7 +454,7 @@
   <div class="testi">
     <figure class="testi__card">
       <div class="testi__top"><img class="testi__logo" src="assets/logo_craftee.png" alt="Craftee Staff" /><div><b>Jean Lyka Francisco</b><span>Craftee Staff</span><em>CEO</em></div><span class="testi__stars">★★★★★</span></div>
-      <blockquote>“Craftee Sites gave us great website designs, powerful features, and automations that make running my company effortless. Our day-to-day just flows now.”</blockquote>
+      <blockquote>“Apparel Web Studio gave us great website designs, powerful features, and automations that make running my company effortless. Our day-to-day just flows now.”</blockquote>
     </figure>
     <figure class="testi__card">
       <div class="testi__top"><img class="testi__logo" src="assets/logo_holloway.jpg" alt="Holloway & Vance" /><div><b>Margaret Holloway</b><span>Holloway &amp; Vance</span><em>Founder &amp; Creative Director</em></div><span class="testi__stars">★★★★★</span></div>
@@ -407,7 +476,7 @@
   <div class="faq">
     <details class="faq__item"><summary>How long does it take to build my website?</summary><p>Preview page within 1 to 3 days. For a complete, fully functioning store, launch takes up to 2 weeks, depending on catalog size and custom features.</p></details>
     <details class="faq__item"><summary>Can you upload my products for me?</summary><p>Yes . Product setup, photos, variants, sizes and colors are part of every package.</p></details>
-    <details class="faq__item"><summary>Can I manage the products myself?</summary><p>Not needed . Craftee Sites manages your catalog for you as part of the monthly care plan. Just send what you want changed and we'll update it. You also get a live overview to watch your store's performance.</p></details>
+    <details class="faq__item"><summary>Can I manage the products myself?</summary><p>Not needed . Apparel Web Studio manages your catalog for you as part of the monthly care plan. Just send what you want changed and we'll update it. You also get a live overview to watch your store's performance.</p></details>
     <details class="faq__item"><summary>Can customers pay directly through my website?</summary><p>Yes. Your customers can securely make payments directly on your website at checkout using credit or debit card, Visa, and more.</p></details>
     <details class="faq__item"><summary>Can I manage inventory?</summary><p>We manage stock, sizes, colors, low stock and out of stock for you as part of care. And you can see it anytime in your live store overview.</p></details>
     <details class="faq__item"><summary>Can I offer discount codes?</summary><p>Yes . Coupon codes, percentage/fixed discounts, free shipping and bundles.</p></details>
@@ -426,7 +495,7 @@
     <p class="eyebrow">About</p>
     <h2>We build complete ecommerce systems for apparel brands.</h2>
   </div>
-  <p class="about__text">Craftee Sites isn't a web-design agency that happens to take clothing clients. Apparel <em>is</em> what we do. You're not buying a basic website . You're getting a storefront, product catalog, cart, checkout, payments, inventory, orders, customers, marketing and analytics, all working together as one system.</p>
+  <p class="about__text">Apparel Web Studio isn't a web-design agency that happens to take clothing clients. Apparel <em>is</em> what we do. You're not buying a basic website . You're getting a storefront, product catalog, cart, checkout, payments, inventory, orders, customers, marketing and analytics, all working together as one system.</p>
 </section>
 
 <!-- ===== FINAL CTA ===== -->
@@ -481,8 +550,8 @@
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="footer__inner">
-    <span class="brand">Craftee<span>Sites</span></span>
-    <p>Complete ecommerce systems for apparel & clothing brands. A Craftee Sites studio.</p>
+    <span class="brand">Apparel<span>Web Studio</span></span>
+    <p>Complete ecommerce systems for apparel & clothing brands. Apparel Web Studio.</p>
     <p class="footer__small">Demo portfolio . Features and dashboards shown are interactive and real.</p>
   </div>
 </footer>
