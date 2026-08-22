@@ -438,20 +438,21 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <div class="reveal">
         <span class="eyebrow">CALCULATE YOUR UPSIDE</span>
         <h2 class="title">What could I free up for you?</h2>
-        <p class="lead">Drag the sliders. Works for any mode — hours a VA saves, manual work an automation removes, time a slow site costs you.</p>
+        <p class="lead">Drag the sliders. I work at ~$8/hr, so handing busywork to me saves you the difference between your rate and $8 across every hour I cover.</p>
       </div>
       <div class="roi-grid">
         <div class="roi-controls reveal">
-          <div class="ctrl"><label>Hours lost to manual work / week <b id="v-hours">20h</b></label><input type="range" id="r-hours" min="1" max="60" value="20"></div>
-          <div class="ctrl"><label>Your effective hourly cost <b id="v-rate">$45</b></label><input type="range" id="r-rate" min="10" max="250" value="45"></div>
-          <div class="ctrl"><label>Share we can take off your plate <b id="v-cov">70%</b></label><input type="range" id="r-cov" min="10" max="95" value="70"></div>
-          <div class="ctrl"><label>Weeks worked / year <b id="v-weeks">50</b></label><input type="range" id="r-weeks" min="10" max="52" value="50"></div>
+          <div class="ctrl"><label>Hours of busywork / week <b id="v-hours">20h</b></label><input type="range" id="r-hours" min="1" max="60" value="20"></div>
+          <div class="ctrl"><label>What your time is worth / hr <b id="v-rate">$45</b></label><input type="range" id="r-rate" min="10" max="250" value="45"></div>
+          <div class="ctrl"><label>My rate (avg $8/hr) <b id="v-myrate">$8</b></label><input type="range" id="r-myrate" min="8" max="15" value="8"></div>
+          <div class="ctrl"><label>Share I take off your plate <b id="v-cov">70%</b></label><input type="range" id="r-cov" min="10" max="95" value="70"></div>
+          <div class="ctrl"><label>Weeks / year <b id="v-weeks">50</b></label><input type="range" id="r-weeks" min="10" max="52" value="50"></div>
         </div>
         <div class="roi-out reveal d1">
-          <div class="roi-cap">Estimated annual value unlocked</div>
+          <div class="roi-cap">Your savings by hiring me / year</div>
           <div class="roi-big" id="roi-money">$0</div>
+          <div class="roi-row"><span class="k">You'd pay me / year</span><span class="v" id="roi-pay">$0</span></div>
           <div class="roi-row"><span class="k">Hours returned / year</span><span class="v" id="roi-hours">0h</span></div>
-          <div class="roi-row"><span class="k">That's about</span><span class="v" id="roi-days">0 days</span></div>
           <div class="roi-row"><span class="k">Equivalent to</span><span class="v" id="roi-ft">0.0 FTE</span></div>
         </div>
       </div>
@@ -798,17 +799,24 @@ function buildExperience(){
 /* ---- ROI calculator ---- */
 function fmt(n){return n.toLocaleString('en-US');}
 function setupROI(){
-  const h=$("#r-hours"),r=$("#r-rate"),c=$("#r-cov"),w=$("#r-weeks");
+  const h=$("#r-hours"),r=$("#r-rate"),mr=$("#r-myrate"),c=$("#r-cov"),w=$("#r-weeks");
   function calc(){
-    const hours=+h.value,rate=+r.value,cov=+c.value/100,weeks=+w.value;
-    const savedH=hours*weeks*cov, money=savedH*rate, days=savedH/8, ft=days/230;
-    $("#v-hours").textContent=hours+"h";$("#v-rate").textContent="$"+rate;$("#v-cov").textContent=Math.round(cov*100)+"%";$("#v-weeks").textContent=weeks;
-    animateNum($("#roi-money"),money,"$");
+    const hours=+h.value, rate=+r.value, myRate=+mr.value, cov=+c.value/100, weeks=+w.value;
+    const savedH=hours*weeks*cov;                 // hours I cover / year
+    const pay=savedH*myRate;                        // what you'd pay me
+    const saving=savedH*(rate-myRate);              // client value saved (net of my cost)
+    const days=savedH/8, ft=days/230;
+    $("#v-hours").textContent=hours+"h";
+    $("#v-rate").textContent="$"+rate;
+    $("#v-myrate").textContent="$"+myRate;
+    $("#v-cov").textContent=Math.round(cov*100)+"%";
+    $("#v-weeks").textContent=weeks;
+    animateNum($("#roi-money"), saving, "$");
+    $("#roi-pay").textContent="$"+fmt(Math.round(pay));
     $("#roi-hours").textContent=fmt(Math.round(savedH))+"h";
-    $("#roi-days").textContent=fmt(Math.round(days))+" days";
     $("#roi-ft").textContent=ft.toFixed(1)+" FTE";
   }
-  [h,r,c,w].forEach(el=>el.addEventListener('input',calc)); calc();
+  [h,r,mr,c,w].forEach(el=>el.addEventListener('input',calc)); calc();
 }
 function animateNum(el,target,prefix){
   const dur=500,start=performance.now(),from=parseFloat((el.dataset.v||"0"));
