@@ -83,7 +83,7 @@ img{max-width:100%;display:block}
   background-size:300% 300%;animation:sheen 14s linear infinite;mix-blend-mode:screen}
 @keyframes sheen{0%{background-position:120% 0}100%{background-position:-120% 0}}
 
-/* floating product imagery — real apparel photos blended into the background */
+/* floating product imagery — product imagery blended into the background */
 .float-wear{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .float-wear span{position:absolute;opacity:.10;border-radius:18px;
   background-size:cover;background-position:center;
@@ -522,7 +522,7 @@ select option{color:#eaf6ff}
 .mock__cart{margin-top:.8rem;background:rgba(0,229,255,.1);border:1px solid var(--accent);
   border-radius:10px;padding:.6rem;text-align:left;font-size:.82rem;box-shadow:var(--neon)}
 
-/* hero interactive apparel features */
+/* hero interactive features */
 .hero__features{margin-top:1.6rem;display:flex;flex-direction:column;gap:.9rem;
   max-width:760px;margin-left:auto;margin-right:auto}
 .hfeat-row{display:grid;gap:.9rem}

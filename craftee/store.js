@@ -1,4 +1,4 @@
-/* Apparel Web Studio . Demo store: full customer store SPA (home/shop/cats/collections/search/wishlist/product/cart/checkout/track) */
+/* Craftee Sites . Demo store: full customer store SPA (home/shop/cats/collections/search/wishlist/product/cart/checkout/track) */
 (function () {
   // tier:'starter' = available on BOTH plans; others are Premium-only (greyed in Starter)
   const PRODUCTS = [

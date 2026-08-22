@@ -1,4 +1,4 @@
-/* Apparel Web Studio . Agency home page interactions */
+/* Craftee Sites . Agency home page interactions */
 (function () {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -72,7 +72,7 @@
       const d = new FormData(form);
       const subject = `New store project . ${d.get('brand') || d.get('name')}`;
       const body =
-`Hi Apparel Web Studio,
+`Hi Craftee Sites,
 
 Name: ${d.get('name')}
 Email: ${d.get('email')}
