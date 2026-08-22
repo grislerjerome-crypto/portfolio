@@ -39,7 +39,7 @@ a{color:inherit;text-decoration:none}
 ::selection{background:rgba(184,255,60,.3);color:#06080f}
 [data-theme="light"] ::selection{background:rgba(214,31,134,.25)}
 
-#bg-canvas{position:fixed;inset:0;z-index:0;opacity:.4;pointer-events:none}
+#bg-canvas{position:fixed;inset:0;z-index:1;opacity:.7;pointer-events:none}
 .grid-bg{position:fixed;inset:-40% 0;z-index:0;pointer-events:none;opacity:.18;
   background-image:linear-gradient(var(--edge) 1px,transparent 1px),linear-gradient(90deg,var(--edge) 1px,transparent 1px);
   background-size:48px 48px;transform:perspective(420px) rotateX(58deg);transform-origin:50% 0;
@@ -54,7 +54,7 @@ a{color:inherit;text-decoration:none}
 .orb.b{width:300px;height:300px;background:var(--magenta);bottom:8%;right:-60px;animation-delay:-6s}
 .orb.c{width:240px;height:240px;background:#3b82f6;top:48%;left:52%;animation-delay:-11s}
 @keyframes float{0%,100%{transform:translate(0,0)}33%{transform:translate(40px,-30px)}66%{transform:translate(-30px,25px)}}
-.scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.3;background:repeating-linear-gradient(0deg,var(--scan) 0 1px,transparent 1px 3px)}
+.scanlines{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.3;background:repeating-linear-gradient(0deg,var(--scan) 0 1px,transparent 1px 3px)}
 main,.nav,.footer,.palette-wrap{position:relative;z-index:2}
 
 #boot{position:fixed;inset:0;z-index:9999;background:var(--boot-bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px;transition:opacity .6s,visibility .6s}
