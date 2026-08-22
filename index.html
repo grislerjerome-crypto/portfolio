@@ -97,6 +97,13 @@ main,.nav,.footer,.palette-wrap{position:relative;z-index:2}
 @media(max-width:980px){.nav ul{display:none}.hud .clock{display:none}}
 @media(max-width:620px){.cmd-btn span{display:none}.menu-btn{display:block}.hud .stat.mode .mlabel{display:none}}
 
+/* mobile dropdown menu */
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;padding:10px 16px 16px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--panel-border);z-index:49}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--mono);font-size:.95rem;color:var(--muted);padding:12px 10px;border-radius:9px;transition:color .2s,background .2s}
+.mobile-menu a:hover{color:var(--txt);background:rgba(255,255,255,.04)}
+@media(min-width:621px){.mobile-menu{display:none!important}}
+
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
 section{padding:94px 0;position:relative}
 .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.3em;color:var(--lime);text-transform:uppercase;margin-bottom:14px;display:inline-block}
@@ -325,7 +332,16 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <button class="cmd-btn" id="cmd-open"><span>⌘ Command</span><kbd>⌘K</kbd></button>
       <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☀</button>
     </div>
-    <button class="menu-btn" onclick="document.querySelector('#services').scrollIntoView()">☰</button>
+    <button class="menu-btn" id="menu-open" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#capabilities">How I work</a>
+    <a href="#roi">ROI</a>
+    <a href="#projects">Work</a>
+    <a href="#craftee">Web Dev</a>
+    <a href="#experience">About</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -602,53 +618,11 @@ const CONFIG = {
 
   projectsLead: "Each engagement, drawn as the workflow it actually is.",
   projects: [
-    /* ===== AUTOMATION — ~80% curated from GHL / Zapier / Make / n8n samples (shuffled, not in original order) ===== */
+    /* EDIT ME: replace these 4 placeholders with your real builds (one per niche keeps the filter demo working). */
     { niche:"automation", cat:"GoHighLevel", title:"New Lead → Send Application", trigger:"Lead hits New Lead stage", engine:"GHL texts + emails app link", outcome:"Instant app, 24/7", tags:["GHL","SMS","Email"] },
-    { niche:"automation", cat:"n8n", title:"AI Sales Agent", trigger:"Leads in sheet", engine:"Gemini 1st/2nd/3rd-touch sequences", outcome:"No dropped follow-ups", tags:["n8n","Gemini","Sheets","Gmail"] },
-    { niche:"automation", cat:"Zapier", title:"Sales Alert Autopilot", trigger:"Lead webhook", engine:"Apollo enrich + priority Paths", outcome:"Hot lead → Slack + AI email", tags:["Zapier","Apollo","Slack","Gmail"] },
-    { niche:"automation", cat:"Make", title:"Gmail AI Integration", trigger:"New Gmail", engine:"Gemini parses + Drive + Sheets", outcome:"Auto-reply, filed & logged", tags:["Make","Gmail","Gemini","Sheets"] },
-    { niche:"automation", cat:"GoHighLevel", title:"No-Show Killer", trigger:"Appointment booked", engine:"AI SMS reminder + reschedule", outcome:"1-click reschedule", tags:["GHL","Twilio","AI"] },
-    { niche:"automation", cat:"n8n", title:"AI Customer Support", trigger:"Inbound email", engine:"Gemini classifies + drafts reply", outcome:"Instant answer, no review", tags:["n8n","Gemini","Gmail"] },
-    { niche:"automation", cat:"Zapier", title:"Client & Task Management", trigger:"New client signs up", engine:"Zapier Paths route + assign", outcome:"Record + tasks + Slack", tags:["Zapier","Airtable","Slack"] },
-    { niche:"automation", cat:"Make", title:"Automated Facebook Posting", trigger:"Content in Sheets", engine:"Make publishes to Page", outcome:"Self-posting calendar", tags:["Make","Facebook","Sheets","Slack"] },
-    { niche:"automation", cat:"n8n", title:"RAG Pipeline & Chatbot", trigger:"Drive upload", engine:"OpenAI embeddings → Pinecone", outcome:"Sourced answers, self-index", tags:["n8n","OpenAI","Pinecone","Drive"] },
-    { niche:"automation", cat:"GoHighLevel", title:"Credit Application Suite", trigger:"Application intake", engine:"GHL lifecycle workflows", outcome:"Intake→approve→decline on rails", tags:["GHL"] },
-    { niche:"automation", cat:"Zapier", title:"Email Attachment Pipeline", trigger:"New Gmail attachment", engine:"Filter → Drive → Slack", outcome:"Filed & announced", tags:["Zapier","Gmail","Drive","Slack"] },
-    { niche:"automation", cat:"Make", title:"Xero Transaction Sync", trigger:"Asana task done", engine:"Make router → Xero export", outcome:"Xero ⇄ Sheets ⇄ Asana", tags:["Make","Xero","Asana","Sheets"] },
-    { niche:"automation", cat:"n8n", title:"AI Lead Scraper & Qualifier", trigger:"Apify dataset", engine:"Dedupe → ZeroBounce → Claude scores", outcome:"Validated lead list", tags:["n8n","Apify","ZeroBounce","Claude"] },
-    { niche:"automation", cat:"GoHighLevel", title:"Dental Booking Funnel", trigger:"Landing visit", engine:"GHL page + calendar modal", outcome:"Booked appointments", tags:["GHL","HTML/CSS/JS","Responsive"] },
-    { niche:"automation", cat:"Zapier", title:"Daily Task Automation", trigger:"Zapier schedule", engine:"Pull Asana tasks", outcome:"Plan emailed each AM", tags:["Zapier","Asana","Gmail"] },
-    { niche:"automation", cat:"Make", title:"Multi-Message Slack Router", trigger:"New Sheets row", engine:"Make router fans out", outcome:"Right channels, in order", tags:["Make","Sheets","Slack"] },
-    { niche:"automation", cat:"n8n", title:"Invoice Follow-Up System", trigger:"Daily schedule", engine:"Tier by days overdue", outcome:"Escalating Gmail reminders", tags:["n8n","Sheets","Gmail"] },
-    { niche:"automation", cat:"GoHighLevel", title:"Application Submitted Handler", trigger:"Form submitted", engine:"GHL updates + advances stage", outcome:"Contact texted + team alerted", tags:["GHL","SMS"] },
-    { niche:"automation", cat:"Zapier", title:"Spreadsheet Event Scheduler", trigger:"Sheet row added", engine:"Create Calendar event", outcome:"Calendar builds itself", tags:["Zapier","Sheets","Calendar","Slack"] },
-    { niche:"automation", cat:"n8n", title:"Automated Email Outreach", trigger:"Hourly Sheets pull", engine:"AI personalize + Outlook send", outcome:"Volume outreach on autopilot", tags:["n8n","OpenAI","Outlook","Sheets"] },
-    { niche:"automation", cat:"Make", title:"Social Media Update Automation", trigger:"New Sheets row", engine:"Slack msg + FB post", outcome:"Publishes & self-reports", tags:["Make","Sheets","Slack","Facebook"] },
-    { niche:"automation", cat:"n8n", title:"Lead Temperature Router", trigger:"Form submission", engine:"Switch scores Cold/Warm/Hot", outcome:"Routed to right sheet", tags:["n8n","Sheets"] },
-    { niche:"automation", cat:"GoHighLevel", title:"Cash Offer Landing + Intake", trigger:"Seller form (3-step)", engine:"GHL webhook + cost breakdown", outcome:"Qualified seller lead", tags:["GHL","HTML/CSS/JS","Responsive"] },
-    { niche:"automation", cat:"n8n", title:"Faceless AI Video Pipeline", trigger:"Schedule", engine:"Script → render → Blotato", outcome:"Posts to 8+ platforms", tags:["n8n","OpenAI","Blotato"] },
-    { niche:"automation", cat:"Zapier", title:"Client Tracker", trigger:"Jotform submit", engine:"Create in Trainerize + Drive + Sheets", outcome:"Full client record + welcome", tags:["Zapier","Jotform","Trainerize","Gmail"] },
-    { niche:"automation", cat:"n8n", title:"AI Credit & Funding Advisor", trigger:"Credit report PDF", engine:"Redact + score + roadmap", outcome:"Personalized plan, no review", tags:["Make","OpenAI","Softr","Webhooks"] },
-
-    /* ===== WEB ===== */
     { niche:"web", cat:"WordPress", title:"Agency Site Rebuild", trigger:"Brief + assets", engine:"Rebuild + SEO", outcome:"Live, 2× faster", tags:["WordPress","Cloudflare","GSAP"] },
-    { niche:"web", cat:"Webflow", title:"Landing Sprint", trigger:"Campaign launch", engine:"Build + A/B test", outcome:"+34% conversions", tags:["Webflow","Figma","Analytics"] },
-
-    /* ===== E-COMMERCE VA — generated from the niche playbook ===== */
     { niche:"ecom", cat:"Shopify", title:"Store Setup & Theme", trigger:"New store", engine:"Theme + listings + payments", outcome:"Ready to sell", tags:["Shopify","Canva","Sheets"] },
-    { niche:"ecom", cat:"Shopify", title:"Listing Optimization", trigger:"Product in catalog", engine:"SEO titles + variant cleanup", outcome:"Higher CTR & fewer returns", tags:["Shopify","Keywords","Canva"] },
-    { niche:"ecom", cat:"WooCommerce", title:"Order Processing Checks", trigger:"Order placed", engine:"Verify payment + fraud flag", outcome:"Clean fulfillment queue", tags:["Woo","Sheets","Stripe"] },
-    { niche:"ecom", cat:"Zendesk", title:"Support & Returns", trigger:"Ticket opened", engine:"Triage + RMA + refund rules", outcome:"Faster resolutions", tags:["Zendesk","Email","SOP"] },
-    { niche:"ecom", cat:"WooCommerce", title:"Review Recovery", trigger:"Order delivered", engine:"Auto review ask + incentive", outcome:"3.4× more reviews", tags:["Woo","Zendesk","Email"] },
-    { niche:"ecom", cat:"Shopify", title:"Inventory Tracking", trigger:"Stock below threshold", engine:"Alert + PO draft + reconcile", outcome:"No stockouts", tags:["Shopify","Sheets","Oberlo"] },
-
-    /* ===== LOGISTICS / SUPPLY CHAIN VA — generated from the niche playbook ===== */
-    { niche:"logistics", cat:"AfterShip", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] },
-    { niche:"logistics", cat:"FedEx/UPS", title:"Exception Handling", trigger:"Delay / exception alert", engine:"Trace + carrier claim", outcome:"Fewer mis-ships", tags:["FedEx/UPS","Sheets","Email"] },
-    { niche:"logistics", cat:"Trello", title:"Supplier Coordination", trigger:"New PO / supplier", engine:"Onboard + comms cadence", outcome:"Aligned suppliers", tags:["Trello","Slack","Sheets"] },
-    { niche:"logistics", cat:"Notion", title:"Document Management", trigger:"Invoice / BOL received", engine:"File + index + link to PO", outcome:"One source of truth", tags:["Notion","Sheets","Drive"] },
-    { niche:"logistics", cat:"Slack", title:"Customer Shipment Updates", trigger:"Status change", engine:"Proactive buyer notify", outcome:"Fewer 'where is it' tickets", tags:["Slack","Email","AfterShip"] },
-    { niche:"logistics", cat:"Sheets", title:"Freight Reconciliation", trigger:"Weekly cutoff", engine:"Match carrier vs PO costs", outcome:"Clean accruals", tags:["Sheets","Trello","Slack"] }
+    { niche:"logistics", cat:"AfterShip", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] }
   ],
 
   testimonials: [
@@ -985,6 +959,12 @@ function setupCursor(){
 function setupMagnetic(){$$(".magnetic").forEach(el=>{el.addEventListener("mousemove",e=>{const r=el.getBoundingClientRect();const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;el.style.transform=`translate(${x*.25}px,${y*.35}px)`;});el.addEventListener("mouseleave",()=>el.style.transform="");});}
 function setupTilt(){$$(".tilt").forEach(el=>{el.addEventListener("mousemove",e=>{const r=el.getBoundingClientRect();const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;el.style.transform=`perspective(800px) rotateY(${x/20}deg) rotateX(${-y/20}deg) translateY(-5px)`;});el.addEventListener("mouseleave",()=>el.style.transform="");});}
 function setupRipple(){$$(".btn").forEach(b=>b.addEventListener("click",e=>{const r=b.getBoundingClientRect();const s=document.createElement("span");s.className="ripple";s.style.left=(e.clientX-r.left)+"px";s.style.top=(e.clientY-r.top)+"px";b.appendChild(s);requestAnimationFrame(()=>{s.style.width=s.style.height="320px";});setTimeout(()=>s.remove(),600);}));}
+function setupMenu(){
+  const btn=$("#menu-open"),menu=$("#mobile-menu");
+  if(!btn||!menu)return;
+  btn.onclick=()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",open?"true":"false");btn.textContent=open?"✕":"☰";};
+  $$("#mobile-menu a").forEach(a=>a.onclick=()=>{menu.classList.remove("open");btn.setAttribute("aria-expanded","false");btn.textContent="☰";});
+}
 function setupScroll(){const p=$("#progress"),top=$("#toTop");addEventListener("scroll",()=>{const h=document.documentElement;p.style.width=((h.scrollTop)/(h.scrollHeight-h.clientHeight)*100)+"%";top.classList.toggle("show",h.scrollTop>500);},{passive:true});top.onclick=()=>scrollTo({top:0,behavior:"smooth"});}
 function setupClock(){const el=$("#clock");function t(){const d=new Date();el.textContent=[d.getHours(),d.getMinutes(),d.getSeconds()].map(n=>String(n).padStart(2,'0')).join(':');}t();setInterval(t,1000);}
 function setupReveal(){const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});},{threshold:.16});$$(".reveal").forEach(el=>io.observe(el));}
@@ -993,7 +973,7 @@ function setupReveal(){const io=new IntersectionObserver(es=>{es.forEach(en=>{if
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();renderFilters();renderProjects();renderTestimonials();buildExperience();
-  setupTheme();setupROI();setupPalette();setupCanvas();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupScroll();setupClock();
+  setupTheme();setupROI();setupPalette();setupCanvas();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
