@@ -903,13 +903,14 @@ function setupCanvas(){
   const isMobile=()=>window.innerWidth<768;
   let w=0,h=0,DPR=1,t=0,parts=[],pointer={x:-1e3,y:-1e3};
   let held=false, ejectT=0;
-  const pal=["240,248,255","214,232,255","255,250,235","200,224,255","180,210,255"]; // cyan/sky/teal/lime/magenta
+  const pal=["240,248,255","214,232,255","255,250,235","200,224,255","180,210,255"]; // galactic whites
+  const planetCols=["255,90,70","255,150,50","255,210,90","120,200,255","170,120,255","184,255,60","34,211,238","255,61,166","245,245,255"]; // planet/star colors
   const neb=[{x:.15,y:.25,r:.55,c:"14,165,233",s:.00012,ph:0},{x:.82,y:.2,r:.5,c:"255,61,166",s:.00016,ph:2},
              {x:.5,y:.75,r:.6,c:"34,211,238",s:.0001,ph:4},{x:.3,y:.6,r:.4,c:"184,255,60",s:.00014,ph:1}];
-  function resize(){DPR=Math.min(devicePixelRatio||1,2);w=c.width=Math.floor(innerWidth*DPR);h=c.height=Math.floor(innerHeight*DPR);c.style.width=innerWidth+"px";c.style.height=innerHeight+"px";ctx.setTransform(DPR,0,0,DPR,0,0);initParts();}
+  function resize(){DPR=Math.min(devicePixelRatio||1,2);w=c.width=Math.floor(innerWidth*DPR);h=c.height=Math.floor(innerHeight*DPR);c.style.width=innerWidth+"px";c.style.height=innerHeight+"px";ctx.setTransform(DPR,0,0,DPR,0,0);initParts();initZod();}
   function initParts(){
-    const count=Math.floor(innerWidth*innerHeight/4200);
-    const max=isMobile()?90:340;
+    const count=Math.floor(innerWidth*innerHeight/2400);
+    const max=isMobile()?130:560;
     parts=Array.from({length:Math.min(count,max)},()=>{
       const depth=Math.random();                 // 0 far .. 1 near (parallax)
       const bright=Math.random()<.06;
@@ -919,9 +920,43 @@ function setupCanvas(){
         vx:(Math.random()-.5)*(0.2+depth*0.5),vy:(Math.random()-.5)*(0.2+depth*0.5),
         size:base,baseSize:base,opacity:op,baseOpacity:op,depth,
         phase:Math.random()*Math.PI*2,
-        bright,color:bright?(Math.random()<.5?"255,255,255":pal[3]):(Math.random()<.55?"255,255,255":pal[(Math.random()*5)|0]),
-        flare:Math.random()<.03};
+        bright,color:(Math.random()<.12?planetCols[(Math.random()*planetCols.length)|0]:(bright?(Math.random()<.5?"255,255,255":pal[3]):(Math.random()<.55?"255,255,255":pal[(Math.random()*5)|0]))),
+        flare:Math.random()<.05};
     });
+  }
+
+  const ZOD=[];
+  function initZod(){
+    ZOD.length=0;
+    const n=isMobile()?4:9;
+    for(let k=0;k<n;k++){
+      const verts=4+(Math.random()*3|0);
+      const sc=Math.min(innerWidth,innerHeight)*(0.05+Math.random()*0.06);
+      const pts=[];
+      for(let i=0;i<verts;i++){pts.push({dx:(Math.random()*2-1)*sc,dy:(Math.random()*2-1)*sc,ph:Math.random()*6.28,r:1.6+Math.random()*1.4,col:planetCols[(Math.random()*planetCols.length)|0],tw:0.6+Math.random()*0.4});}
+      const edges=[];
+      for(let i=0;i<verts-1;i++)edges.push([i,i+1]);
+      if(verts>4&&Math.random()<.6)edges.push([0,verts-1]);
+      if(verts>5&&Math.random()<.5)edges.push([1,verts-2]);
+      ZOD.push({cx:Math.random()*innerWidth,cy:Math.random()*innerHeight,vx:(Math.random()-.5)*0.07,vy:(Math.random()-.5)*0.07,rot:Math.random()*6.28,rotV:(Math.random()-.5)*0.0007,pts,edges});
+    }
+  }
+  function drawZod(){
+    ctx.save();ctx.globalCompositeOperation="lighter";
+    for(const z of ZOD){
+      z.cx+=z.vx;z.cy+=z.vy;z.rot+=z.rotV;
+      if(z.cx<-220)z.cx=innerWidth+220;if(z.cx>innerWidth+220)z.cx=-220;
+      if(z.cy<-220)z.cy=innerHeight+220;if(z.cy>innerHeight+220)z.cy=-220;
+      const cos=Math.cos(z.rot),sin=Math.sin(z.rot);
+      const wp=z.pts.map(p=>({x:z.cx+p.dx*cos-p.dy*sin,y:z.cy+p.dx*sin+p.dy*cos,col:p.col,r:p.r,ph:p.ph,tw:p.tw}));
+      for(const e of z.edges){const A=wp[e[0]],B=wp[e[1]];const tw=0.5+0.5*Math.sin(t*0.02+A.ph);
+        ctx.strokeStyle="rgba("+A.col+","+(0.22*tw)+")";ctx.lineWidth=0.8;
+        ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();}
+      for(const p of wp){const tw=0.55+0.45*Math.sin(t*0.03+p.ph);
+        ctx.shadowBlur=10;ctx.shadowColor="rgba("+p.col+",0.9)";
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle="rgba("+p.col+","+(tw*p.tw)+")";ctx.fill();ctx.shadowBlur=0;}
+    }
+    ctx.restore();
   }
   function drawNebula(){
     ctx.globalCompositeOperation="lighter";
@@ -1014,6 +1049,7 @@ function setupCanvas(){
       }
       ctx.shadowBlur=0;
     }
+    drawZod();
     if(pointer.x>0){const pg=ctx.createRadialGradient(pointer.x,pointer.y,0,pointer.x,pointer.y,90);pg.addColorStop(0,"rgba(34,211,238,0.07)");pg.addColorStop(1,"rgba(34,211,238,0)");ctx.fillStyle=pg;ctx.fillRect(pointer.x-90,pointer.y-90,180,180);}
     requestAnimationFrame(frame);
   }
@@ -1027,7 +1063,7 @@ function setupCanvas(){
   addEventListener("resize",resize);
   resize();
   if(reduced){
-    ctx.clearRect(0,0,innerWidth,innerHeight);drawNebula();
+    ctx.clearRect(0,0,innerWidth,innerHeight);drawNebula();drawZod();
     for(const p of parts){ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,7);ctx.fillStyle=`rgba(${p.color},${p.opacity})`;ctx.fill();}
     return;
   }
