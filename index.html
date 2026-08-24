@@ -972,7 +972,7 @@ function setupHub3D(){
   const reduced=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ctx=c.getContext("2d");
   let w=0,h=0,DPR=1;
-  let t=0;
+  let t=0, ringT=0, partT=0;
   let ay=0.6, ax=0.5;
   let autoSpin=0.0042;
   let velAy=0, velAx=0;
@@ -993,6 +993,8 @@ function setupHub3D(){
     {label:"[E-COM]",sub:"STORE OPS VA",col:"#ff8a3d",mode:"ecom"},
     {label:"[LOGISTICS]",sub:"SUPPLY CHAIN VA",col:"#a78bfa",mode:"logistics"}
   ];
+  const SPARK=["#b8ff3c","#38bdf8","#ff8a3d","#a78bfa","#5b8cff","#ff5db4"];
+  let rings=[], parts=[];
   function rotX(p,a){const c=Math.cos(a),s=Math.sin(a);return [p[0],p[1]*c-p[2]*s,p[1]*s+p[2]*c];}
   function rotY(p,a){const c=Math.cos(a),s=Math.sin(a);return [p[0]*c+p[2]*s,p[1],-p[0]*s+p[2]*c];}
   function proj(p,cx,cy,sc,f){const persp=f/(f-p[2]);return [cx+p[0]*sc*persp,cy+p[1]*sc*persp,persp];}
@@ -1009,9 +1011,38 @@ function setupHub3D(){
     t+=0.016;
     if(!dragging){ ay+=autoSpin+velAy; ax+=velAx; velAy*=0.94; velAx*=0.94; }
     ax=Math.max(-1.2,Math.min(1.2,ax));
-    const cx=w/2, cy=h/2, sc=Math.min(w,h)*0.22, f=4.6, R=2.5;
+    const cx=w/2, cy=h/2+8, sc=Math.min(w,h)*0.20, f=4.6, R=2.5;
     const RV=baseV.map(function(v){let p=rotX(v,ax);p=rotY(p,ay);return p;});
     ctx.clearRect(0,0,w,h);
+    const cc=proj([0,0,0],cx,cy,sc,f);
+    const bx=cx-sc*1.75, by=cy+sc*1.05, ex=cx+sc*1.75, ey=cy-sc*1.15;
+    const W=ex-bx, H=by-ey;
+    const tpts=[[bx,by],[bx+0.28*W,by-0.22*H],[bx+0.52*W,by-0.40*H],[bx+0.74*W,by-0.62*H],[ex,ey]];
+    ctx.save();
+    ctx.beginPath();ctx.moveTo(tpts[0][0],tpts[0][1]);
+    for(let i=1;i<tpts.length;i++)ctx.lineTo(tpts[i][0],tpts[i][1]);
+    const tg=ctx.createLinearGradient(bx,by,ex,ey);
+    tg.addColorStop(0,"rgba(184,255,60,0.05)");tg.addColorStop(1,"rgba(184,255,60,0.35)");
+    ctx.strokeStyle=tg;ctx.lineWidth=2;ctx.shadowBlur=10;ctx.shadowColor="rgba(184,255,60,0.6)";ctx.stroke();
+    ctx.lineTo(ex,by);ctx.closePath();
+    const fg=ctx.createLinearGradient(bx,by,ex,ey);fg.addColorStop(0,"rgba(184,255,60,0)");fg.addColorStop(1,"rgba(184,255,60,0.10)");
+    ctx.fillStyle=fg;ctx.fill();ctx.shadowBlur=0;
+    const lp=(Math.sin(t*0.7)*0.5+0.5);
+    const tipx=bx+W*lp, tipy=by-H*lp;
+    ctx.beginPath();ctx.arc(tipx,tipy,3.2,0,7);ctx.fillStyle="#d8ff8c";ctx.shadowBlur=12;ctx.shadowColor="#b8ff3c";ctx.fill();ctx.shadowBlur=0;
+    ctx.restore();
+    ringT+=0.016; if(ringT>1.4){ringT=0;rings.push({r:8,a:0.45});}
+    rings=rings.filter(function(r){return r.r<sc*2.1 && r.a>0.012;});
+    rings.forEach(function(r){ r.r+=2.4; r.a*=0.972;
+      ctx.beginPath();ctx.ellipse(cc[0],cc[1],r.r,r.r*0.92,0,0,7);
+      ctx.strokeStyle="rgba(184,255,60,"+r.a.toFixed(3)+")";ctx.lineWidth=1.4;ctx.stroke();
+    });
+    partT+=0.016; if(partT>0.10){partT=0; if(parts.length<46)parts.push({x:cx+(Math.random()-0.5)*sc*0.5,y:cy+(Math.random()-0.5)*sc*0.3,vy:-(0.5+Math.random()*0.7),vx:(Math.random()-0.5)*0.35,life:1,col:SPARK[(Math.random()*SPARK.length)|0]});}
+    parts=parts.filter(function(p){return p.life>0.02 && p.y>-30;});
+    parts.forEach(function(p){ p.y+=p.vy; p.x+=p.vx; p.life*=0.987;
+      ctx.beginPath();ctx.arc(p.x,p.y,2.2*p.life+0.6,0,7);
+      ctx.fillStyle=p.col;ctx.globalAlpha=Math.max(0,p.life)*0.9;ctx.shadowBlur=8;ctx.shadowColor=p.col;ctx.fill();ctx.shadowBlur=0;ctx.globalAlpha=1;
+    });
     const faces3d=F.map(function(fc){return fc.map(function(idx){return RV[idx];});});
     faces3d.sort(function(a,b){return (a[0][2]+a[1][2]+a[2][2])/3 - (b[0][2]+b[1][2]+b[2][2])/3;});
     faces3d.forEach(function(tri){
@@ -1044,12 +1075,11 @@ function setupHub3D(){
     order.forEach(function(k){
       const p=nodes[k];
       const N=proj(p,cx,cy,sc,f);
-      const C=proj([0,0,0],cx,cy,sc,f);
       const lum=Math.max(0,N[2]);
       const hot=(k===hovK);
       ctx.lineWidth= hot?2.6:1.8;
       ctx.strokeStyle="rgba(255,255,255,"+(0.10+lum*0.22).toFixed(3)+")";
-      ctx.beginPath();ctx.moveTo(C[0],C[1]);ctx.lineTo(N[0],N[1]);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(cc[0],cc[1]);ctx.lineTo(N[0],N[1]);ctx.stroke();
       for(let q=0;q<2;q++){
         const u=(Math.sin(t*1.6 + k*1.3 + q*Math.PI)*0.5+0.5);
         const pp=[p[0]*u,p[1]*u,p[2]*u];
@@ -1073,7 +1103,6 @@ function setupHub3D(){
       ctx.fillStyle="rgba(200,210,230,0.75)";
       ctx.fillText(SER[k].sub,lx,ly+10);
     });
-    const cc=proj([0,0,0],cx,cy,sc,f);
     const g=ctx.createRadialGradient(cc[0],cc[1],2,cc[0],cc[1],sc*1.0);
     g.addColorStop(0,"rgba(184,255,60,0.22)");
     g.addColorStop(0.5,"rgba(255,61,166,0.12)");
@@ -1084,6 +1113,11 @@ function setupHub3D(){
     ctx.font="700 16px "+fontF();
     ctx.fillText("YOUR",cc[0],cc[1]-3);
     ctx.fillText("BUSINESS",cc[0],cc[1]+14);
+    ctx.shadowBlur=0;
+    ctx.font="700 9px "+fontM();
+    ctx.fillStyle="rgba(184,255,60,0.9)";
+    ctx.shadowBlur=8;ctx.shadowColor="rgba(184,255,60,0.7)";
+    ctx.fillText("UP GROWING",cc[0],cc[1]+30);
     ctx.shadowBlur=0;
     if(!reduced)requestAnimationFrame(frame);
   }
