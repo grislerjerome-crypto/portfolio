@@ -1015,22 +1015,6 @@ function setupHub3D(){
     const RV=baseV.map(function(v){let p=rotX(v,ax);p=rotY(p,ay);return p;});
     ctx.clearRect(0,0,w,h);
     const cc=proj([0,0,0],cx,cy,sc,f);
-    const bx=cx-sc*1.75, by=cy+sc*1.05, ex=cx+sc*1.75, ey=cy-sc*1.15;
-    const W=ex-bx, H=by-ey;
-    const tpts=[[bx,by],[bx+0.28*W,by-0.22*H],[bx+0.52*W,by-0.40*H],[bx+0.74*W,by-0.62*H],[ex,ey]];
-    ctx.save();
-    ctx.beginPath();ctx.moveTo(tpts[0][0],tpts[0][1]);
-    for(let i=1;i<tpts.length;i++)ctx.lineTo(tpts[i][0],tpts[i][1]);
-    const tg=ctx.createLinearGradient(bx,by,ex,ey);
-    tg.addColorStop(0,"rgba(184,255,60,0.05)");tg.addColorStop(1,"rgba(184,255,60,0.35)");
-    ctx.strokeStyle=tg;ctx.lineWidth=2;ctx.shadowBlur=10;ctx.shadowColor="rgba(184,255,60,0.6)";ctx.stroke();
-    ctx.lineTo(ex,by);ctx.closePath();
-    const fg=ctx.createLinearGradient(bx,by,ex,ey);fg.addColorStop(0,"rgba(184,255,60,0)");fg.addColorStop(1,"rgba(184,255,60,0.10)");
-    ctx.fillStyle=fg;ctx.fill();ctx.shadowBlur=0;
-    const lp=(Math.sin(t*0.7)*0.5+0.5);
-    const tipx=bx+W*lp, tipy=by-H*lp;
-    ctx.beginPath();ctx.arc(tipx,tipy,3.2,0,7);ctx.fillStyle="#d8ff8c";ctx.shadowBlur=12;ctx.shadowColor="#b8ff3c";ctx.fill();ctx.shadowBlur=0;
-    ctx.restore();
     ringT+=0.016; if(ringT>1.4){ringT=0;rings.push({r:8,a:0.45});}
     rings=rings.filter(function(r){return r.r<sc*2.1 && r.a>0.012;});
     rings.forEach(function(r){ r.r+=2.4; r.a*=0.972;
