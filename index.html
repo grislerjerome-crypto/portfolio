@@ -129,18 +129,6 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);transform:translate(-50%,-50%);pointer-events:none;animation:rip .6s ease-out forwards}
 @keyframes rip{to{width:320px;height:320px;opacity:0}}
 
-.graph-card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);padding:10px;box-shadow:var(--glow);position:relative;overflow:hidden}
-.graph-card .tag{position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;color:var(--muted);z-index:2}
-.graph-card svg{width:100%;height:auto;display:block}
-.hub-core{fill:rgba(255,255,255,.05);stroke:url(#hubgrad);stroke-width:2}
-.hub-title{fill:var(--txt);font-family:var(--font);font-weight:700;font-size:15px}
-.hub-sub{fill:var(--muted);font-family:var(--mono);font-size:8px;letter-spacing:.1em}
-.node-box{fill:rgba(255,255,255,.04);stroke-width:1.4}
-.node-title{fill:var(--txt);font-family:var(--font);font-weight:600;font-size:11px}
-.node-sub{fill:var(--muted);font-family:var(--mono);font-size:7.5px;letter-spacing:.04em}
-.edge{fill:none;stroke:var(--edge);stroke-width:1.4;stroke-dasharray:4 5}
-.pkt{filter:drop-shadow(0 0 5px currentColor)}
-
 .marquee{overflow:hidden;position:relative;padding:26px 0;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marquee .track{display:flex;gap:16px;width:max-content;animation:scrollx 30s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
@@ -218,28 +206,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .roi-row .k{color:var(--muted);font-size:.9rem}
 .roi-row .v{font-family:var(--mono);font-weight:700;font-size:1.05rem}
 
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
-.filters button{font-family:var(--mono);font-size:.8rem;color:var(--muted);cursor:pointer;background:rgba(255,255,255,.03);border:1px solid var(--panel-border);padding:9px 16px;border-radius:99px;transition:all .2s}
-.filters button.active{color:#06080f;background:var(--grad);border-color:transparent;font-weight:700}
-.carousel{position:relative}
-.projects-track{display:flex;gap:20px;overflow:hidden}
-.proj{flex:0 0 calc(50% - 10px);min-width:0;background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);padding:24px;transition:transform .25s,border-color .25s,box-shadow .25s;transform-style:preserve-3d}
-@media(max-width:760px){.proj{flex:0 0 100%}}
-.proj:hover{border-color:color-mix(in srgb,var(--lime) 40%,transparent);transform:translateY(-5px);box-shadow:var(--glow)}
-.proj h3{font-size:1.14rem;margin-bottom:18px}
-.wf{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:6px;margin-bottom:16px}
-.wf .wn{background:rgba(255,255,255,.04);border:1px solid var(--panel-border);border-radius:12px;padding:12px 10px;text-align:center;min-height:84px;display:flex;flex-direction:column;justify-content:center;gap:4px}
-.wf .wn .lab{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--lime)}
-.wf .wn .lab.m{color:var(--magenta)}
-.wf .wn .txt{font-size:.78rem;color:var(--txt);line-height:1.3}
-.wf .arrow{color:var(--muted);font-size:1.1rem}
-.proj .ptags{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
-.proj .ptags span{font-family:var(--mono);font-size:.68rem;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 25%,transparent);border-radius:99px;padding:3px 9px}
-.car-nav{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:22px}
-.car-nav button{width:42px;height:42px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid var(--panel-border);color:var(--txt);font-size:1.1rem;transition:all .2s}
-.car-nav button:hover{background:var(--grad);color:#06080f;border-color:transparent}
-.dots{display:flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
-.dots i.on{background:var(--grad);width:22px;border-radius:99px}
 .counter{font-family:var(--mono);color:var(--muted);font-size:.82rem}
 
 .step{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);padding:26px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
@@ -334,7 +300,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <li><a href="#services">Services</a></li>
       <li><a href="#capabilities">How I work</a></li>
       <li><a href="#roi">ROI</a></li>
-      <li><a href="#projects">Work</a></li>
       <li><a href="#craftee">Web Dev</a></li>
       <li><a href="#experience">About</a></li>
     </ul>
@@ -350,7 +315,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     <a href="#services">Services</a>
     <a href="#capabilities">How I work</a>
     <a href="#roi">ROI</a>
-    <a href="#projects">Work</a>
     <a href="#craftee">Web Dev</a>
     <a href="#experience">About</a>
     <a href="#contact">Contact</a>
@@ -373,51 +337,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
         <div class="chips" id="chips"></div>
       </div>
       <div class="hero-right reveal d2">
-        <div class="graph-card">
-
-          <svg viewBox="0 0 460 320" role="img" aria-label="Four service lines branching from your business">
-            <defs>
-              <linearGradient id="hubgrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="var(--lime)"/><stop offset="1" stop-color="var(--magenta)"/>
-              </linearGradient>
-            </defs>
-            <!-- edges -->
-            <path class="edge" d="M230,160 L230,74"/>
-            <path class="edge" d="M230,160 L392,160"/>
-            <path class="edge" d="M230,160 L230,246"/>
-            <path class="edge" d="M230,160 L68,160"/>
-            <!-- packets -->
-            <circle class="pkt" r="3.4" style="color:#b8ff3c"><animateMotion dur="2.4s" repeatCount="indefinite" path="M230,160 L230,74"/><animateMotion dur="2.4s" repeatCount="indefinite" path="M230,74 L230,160" begin="1.2s"/></circle>
-            <circle class="pkt" r="3.4" style="color:#38bdf8"><animateMotion dur="2.7s" repeatCount="indefinite" path="M230,160 L392,160"/><animateMotion dur="2.7s" repeatCount="indefinite" path="M392,160 L230,160" begin="1.35s"/></circle>
-            <circle class="pkt" r="3.4" style="color:#ff8a3d"><animateMotion dur="2.5s" repeatCount="indefinite" path="M230,160 L230,246"/><animateMotion dur="2.5s" repeatCount="indefinite" path="M230,246 L230,160" begin="1.25s"/></circle>
-            <circle class="pkt" r="3.4" style="color:#a78bfa"><animateMotion dur="2.9s" repeatCount="indefinite" path="M230,160 L68,160"/><animateMotion dur="2.9s" repeatCount="indefinite" path="M68,160 L230,160" begin="1.45s"/></circle>
-            <!-- core -->
-            <circle class="hub-core" cx="230" cy="160" r="40"/>
-            <text class="hub-title" x="230" y="157" text-anchor="middle">YOUR</text>
-            <text class="hub-title" x="230" y="173" text-anchor="middle">BUSINESS</text>
-            <!-- service nodes -->
-            <g>
-              <rect class="node-box" x="178" y="40" width="104" height="34" rx="10" style="stroke:#b8ff3c"/>
-              <text class="node-title" x="230" y="55" text-anchor="middle">⚡ Automation</text>
-              <text class="node-sub" x="230" y="68" text-anchor="middle">AI WORKFLOWS</text>
-            </g>
-            <g>
-              <rect class="node-box" x="340" y="142" width="110" height="34" rx="10" style="stroke:#38bdf8"/>
-              <text class="node-title" x="395" y="157" text-anchor="middle">🌐 Web Dev</text>
-              <text class="node-sub" x="395" y="170" text-anchor="middle">SITES & LANDING</text>
-            </g>
-            <g>
-              <rect class="node-box" x="178" y="244" width="104" height="34" rx="10" style="stroke:#ff8a3d"/>
-              <text class="node-title" x="230" y="259" text-anchor="middle">🛒 E-commerce</text>
-              <text class="node-sub" x="230" y="272" text-anchor="middle">STORE OPS VA</text>
-            </g>
-            <g>
-              <rect class="node-box" x="10" y="142" width="116" height="34" rx="10" style="stroke:#a78bfa"/>
-              <text class="node-title" x="68" y="157" text-anchor="middle">📦 Logistics</text>
-              <text class="node-sub" x="68" y="170" text-anchor="middle">SUPPLY CHAIN VA</text>
-            </g>
-          </svg>
-        </div>
       </div>
     </div>
   </section>
@@ -472,23 +391,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
   </section>
 
-  <section id="projects">
-    <div class="wrap">
-      <div class="reveal">
-        <span class="eyebrow">SELECTED WORK</span>
-        <h2 class="title">Builds, as workflows</h2>
-        <p class="lead" id="proj-lead">Each engagement, drawn as the workflow it actually is.</p>
-      </div>
-      <div class="filters" id="filters"></div>
-      <div class="carousel"><div class="projects-track" id="projects-track"></div></div>
-      <div class="car-nav">
-        <span class="counter" id="proj-counter"></span>
-        <div class="dots" id="proj-dots"></div>
-        <button id="proj-prev" aria-label="Previous">‹</button>
-        <button id="proj-next" aria-label="Next">›</button>
-      </div>
-    </div>
-  </section>
+  
 
   <section id="craftee" class="wrap">
     <div class="reveal">
@@ -547,7 +450,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <p style="color:var(--muted);font-size:.9rem" id="footer-tag">Systems & operations — building the engine that runs while you sleep.</p>
       <p style="color:var(--muted);font-size:.85rem;margin-top:14px">Available worldwide · Remote</p>
     </div>
-    <div class="col"><h4>NAV</h4><a href="#services">Services</a><a href="#capabilities">How I work</a><a href="#roi">ROI</a><a href="#projects">Work</a><a href="#experience">About</a></div>
     <div class="col"><h4>CONNECT</h4><a id="foot-email" href="mailto:grislerjerome@gmail.com">Email</a><a id="foot-facebook" href="https://www.facebook.com/jeromegrslr" target="_blank" rel="noopener">Facebook</a><a id="foot-linkedin" href="https://www.linkedin.com/in/jerome-grisler-7041ab3a7/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
   <div class="bottom wrap" id="footer-bottom">© <span id="year"></span> Jerome Grisler. Built as a live console.</div>
@@ -630,14 +532,6 @@ const CONFIG = {
     { n:"06", title:"Handoff", desc:"You get a diagram, a runbook and a human off-switch.", tags:["Runbooks","Loom","Docs"] }
   ],
 
-  projectsLead: "Each engagement, drawn as the workflow it actually is.",
-  projects: [
-    /* EDIT ME: replace these 4 placeholders with your real builds (one per niche keeps the filter demo working). */
-    { niche:"automation", cat:"GoHighLevel", title:"New Lead → Send Application", trigger:"Lead hits New Lead stage", engine:"GHL texts + emails app link", outcome:"Instant app, 24/7", tags:["GHL","SMS","Email"] },
-    { niche:"web", cat:"WordPress", title:"Agency Site Rebuild", trigger:"Brief + assets", engine:"Rebuild + SEO", outcome:"Live, 2× faster", tags:["WordPress","Cloudflare","GSAP"] },
-    { niche:"ecom", cat:"Shopify", title:"Store Setup & Theme", trigger:"New store", engine:"Theme + listings + payments", outcome:"Ready to sell", tags:["Shopify","Canva","Sheets"] },
-    { niche:"logistics", cat:"AfterShip", title:"Shipment Dashboard", trigger:"Order placed", engine:"Track + flag delays", outcome:"Live status board", tags:["Notion","AfterShip","Sheets"] }
-  ],
 
   testimonials: [
     { quote:"We got our evenings back. The automations just run — and when one hiccups, we hear about it before the client does.", name:"Sarah Lin", role:"COO, Fintech", av:"SL" },
@@ -691,7 +585,6 @@ function applyStatic(){
   $("#cta-btn").textContent=CONFIG.cta.btn;$("#cta-btn").href=CONFIG.cta.link;
   $("#cta-email").textContent="Or email me";$("#cta-email").href="mailto:"+CONFIG.cta.email;
   $("#footer-tag").textContent=CONFIG.role+" — building the engine that runs while you sleep.";
-  $("#proj-lead").textContent=CONFIG.projectsLead;
   $$(".brand").forEach(b=>b.innerHTML=CONFIG.name.replace(/(.+)\s(\S+)$/,'$1<b>$2</b>'));
   $("#year").textContent=new Date().getFullYear();
   $("#foot-linkedin").href=CONFIG.social.linkedin;
@@ -701,7 +594,7 @@ function applyStatic(){
   $("#boot-status").textContent="AI AUTOMATIONS, "+CONFIG.role.toUpperCase()+"...";
   $("#chips").innerHTML=CONFIG.chips.map((c,i)=>`<span class="chip-cmd" data-i="${i}">${c}</span>`).join('');
   $("#chips").querySelectorAll('.chip-cmd').forEach(el=>el.onclick=()=>{
-    [()=>$('#services').scrollIntoView(),()=>$('#roi').scrollIntoView(),()=>$('#projects').scrollIntoView(),()=>location.href='mailto:'+CONFIG.cta.email][+el.dataset.i]();
+    [()=>$('#services').scrollIntoView(),()=>$('#roi').scrollIntoView(),()=>$('#craftee').scrollIntoView(),()=>location.href='mailto:'+CONFIG.cta.email][+el.dataset.i]();
   });
 }
 
@@ -720,7 +613,7 @@ function buildServices(){
       <div class="svc-tools">${s.tools.map(t=>`<span>${t}</span>`).join('')}</div>
       <button class="svc-enter" data-mode="${s.id}">Enter ${s.name} mode →</button>
     </div>`).join('');
-  $$("#svc-grid .svc, #svc-grid .svc-enter").forEach(el=>el.onclick=(e)=>{e.stopPropagation();setMode(el.dataset.mode);document.querySelector('#projects').scrollIntoView({behavior:'smooth'});});
+  $$("#svc-grid .svc, #svc-grid .svc-enter").forEach(el=>el.onclick=(e)=>{e.stopPropagation();setMode(el.dataset.mode);document.querySelector('#craftee').scrollIntoView({behavior:'smooth'});});
 }
 function setMode(id){
   const root=document.documentElement;
@@ -730,7 +623,6 @@ function setMode(id){
     $("#mode-name").textContent="OVERVIEW";
     $("#mode-banner").classList.remove('show');
     $$("#svc-grid .svc").forEach(c=>c.classList.remove('active'));
-    projState.filter="All";renderFilters();renderProjects();
     return;
   }
   const s=CONFIG.services.find(x=>x.id===id);if(!s)return;
@@ -740,7 +632,7 @@ function setMode(id){
   $("#mb-name").textContent=s.name;
   $("#mode-banner").classList.add('show');
   $$("#svc-grid .svc").forEach(c=>c.classList.toggle('active',c.dataset.mode===id));
-  projState.filter=s.id;renderFilters();renderProjects();
+  /* projects section removed */
 }
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
@@ -750,46 +642,9 @@ function buildCaps(){ $("#cap-grid").innerHTML=CONFIG.capabilities.map((c,i)=>`<
 
 /* ---- marquee (all tools) ---- */
 function buildMarquee(){
-  const all=[...new Set(CONFIG.projects.flatMap(p=>p.tags).concat(CONFIG.tools))];
+  const all=[...new Set(CONFIG.tools)];
   const row=all.map(chip).join(''); $("#marquee").innerHTML=row+row;
 }
-
-/* ---- projects (workflow cards, filter by niche) ---- */
-let projState={filter:"All",idx:0};
-function renderFilters(){
-  const cats=["All",...CONFIG.services.map(s=>s.id)];
-  const label=id=>id==="All"?"All work":CONFIG.services.find(s=>s.id===id).name;
-  const counts=id=>id==="All"?CONFIG.projects.length:CONFIG.projects.filter(p=>p.niche===id).length;
-  $("#filters").innerHTML=cats.map(c=>{
-    const n=counts(c); const act=(c===projState.filter)?'active':'';
-    return `<button class="${act}" data-cat="${c}">${label(c)} (${n})</button>`;
-  }).join('');
-  $$("#filters button").forEach(b=>b.onclick=()=>{projState.filter=b.dataset.cat;projState.idx=0;renderFilters();renderProjects();});
-}
-function filteredProjects(){return projState.filter==="All"?CONFIG.projects:CONFIG.projects.filter(p=>p.niche===projState.filter);}
-function perView(){return window.innerWidth<=760?1:2;}
-function renderProjects(){
-  const list=filteredProjects(),per=perView();
-  $("#projects-track").innerHTML=list.map(p=>`
-    <div class="proj tilt">
-      <h3>${p.title} <span style="font-family:var(--mono);font-size:.7rem;color:var(--muted)">· ${p.cat}</span></h3>
-      <div class="wf">
-        <div class="wn"><span class="lab">TRIGGER</span><span class="txt">${p.trigger}</span></div>
-        <span class="arrow">→</span>
-        <div class="wn"><span class="lab m">ENGINE</span><span class="txt">${p.engine}</span></div>
-        <span class="arrow">→</span>
-        <div class="wn"><span class="lab">OUTCOME</span><span class="txt">${p.outcome}</span></div>
-      </div>
-      <div class="ptags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-    </div>`).join('');
-  const maxIdx=Math.max(0,list.length-per);projState.idx=Math.min(projState.idx,maxIdx);
-  $("#projects-track").style.transform=`translateX(-${projState.idx*(100/per)}%)`;
-  $("#proj-counter").textContent=`${projState.idx+1} / ${maxIdx+1}`;
-  $("#proj-dots").innerHTML=Array.from({length:maxIdx+1},(_,i)=>`<i class="${i===projState.idx?'on':''}" data-i="${i}"></i>`).join('');
-  $$("#proj-dots i").forEach(d=>d.onclick=()=>{projState.idx=+d.dataset.i;renderProjects();});
-}
-$("#proj-prev").onclick=()=>{projState.idx=Math.max(0,projState.idx-1);renderProjects();};
-$("#proj-next").onclick=()=>{const max=Math.max(0,filteredProjects().length-perView());projState.idx=Math.min(max,projState.idx+1);renderProjects();};
 
 /* ---- testimonials ---- */
 let tIdx=0;
@@ -844,7 +699,7 @@ function setupPalette(){
     {ic:"◈",label:"Services",go:"#services"},
     {ic:"⚙",label:"How I work",go:"#capabilities"},
     {ic:"$",label:"ROI Calculator",go:"#roi"},
-    {ic:"▦",label:"Work",go:"#projects"},
+    {ic:"▦",label:"Work",go:"#craftee"},
     {ic:"▶",label:"About",go:"#experience"},
     {ic:"✉",label:"Contact",go:"#contact"},
     {ic:"◐",label:"Toggle light / dark",act:toggleTheme},
@@ -1193,12 +1048,12 @@ function setupGlitch(){$$(".title, .hero h1").forEach(el=>{
 
 function boot(){
   applyStatic();
-  buildServices();buildCaps();buildMarquee();renderFilters();renderProjects();renderTestimonials();buildExperience();
+  buildServices();buildCaps();buildMarquee();renderTestimonials();buildExperience();
   setupTheme();setupROI();setupPalette();setupCanvas();setupHero3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
-addEventListener("resize",()=>{if($("#projects-track"))renderProjects();});
+addEventListener("resize",()=>{});
 </script>
 </body>
 </html>
