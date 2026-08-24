@@ -272,14 +272,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 /* ===== futuristic upgrades (3D core, parallax, glitch, holo) ===== */
 .hero{position:relative}
 .hero-grid{position:relative;z-index:1;transform-style:preserve-3d;will-change:transform}
-.hero3d-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.6;pointer-events:none}
 .orb{animation:float 17s ease-in-out infinite, morph 14s ease-in-out infinite}
 @keyframes morph{0%,100%{border-radius:42% 58% 63% 37% / 41% 44% 56% 59%}50%{border-radius:58% 42% 37% 63% / 57% 56% 44% 43%}}
 .svc::after,.proj::after,.cap::after,.step::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.14) 48%,rgba(184,255,60,.12) 52%,transparent 70%);background-size:260% 260%;background-position:130% 0;opacity:0;transition:opacity .4s;pointer-events:none}
 .svc:hover::after,.proj:hover::after,.cap:hover::after,.step:hover::after{opacity:1;animation:sheen 1.1s ease forwards}
 @keyframes sheen{from{background-position:130% 0}to{background-position:-50% 0}}
 .glitch{position:relative}
-@media(prefers-reduced-motion:reduce){.orb{animation:none}.hero3d-bg{display:none}}
+@media(prefers-reduced-motion:reduce){.orb{animation:none}}
 </style>
 </head>
 <body>
@@ -334,7 +333,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 <main>
   <section class="hero wrap" id="home">
-    <canvas class="hero3d-bg" id="hero3d"></canvas>
     <div class="hero-grid">
       <div class="hero-left reveal">
         <span class="status-pill"><span class="dot"></span><span id="status-text">OPERATIONAL · ACCEPTING NEW WORK</span></span>
@@ -1017,61 +1015,6 @@ function setupClock(){const el=$("#clock");function t(){const d=new Date();el.te
 function setupReveal(){const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});},{threshold:.16});$$(".reveal").forEach(el=>io.observe(el));}
 
 /* ---- boot ---- */
-/* ===== futuristic: 3D engine core (canvas, no libs) ===== */
-function setupHero3D(){
-  const c=$("#hero3d"); if(!c) return;
-  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduced){c.style.display="none";return;}
-  const ctx=c.getContext("2d");
-  let w=0,h=0,DPR=1, raf=0,t=0,mx=0,my=0;
-  const NODES=[
-    {label:"AUTOMATION",col:"#b8ff3c"},
-    {label:"WEB DEV",col:"#38bdf8"},
-    {label:"E-COM",col:"#ff8a3d"},
-    {label:"LOGISTICS",col:"#a78bfa"},
-    {label:"SYSTEMS",col:"#ff3da6"},
-    {label:"OPS",col:"#3b82f6"}
-  ];
-  // icosahedron-ish vertices (12) for the wireframe shell
-  const PHI=(1+Math.sqrt(5))/2;
-  let V=[[-1,PHI,0],[1,PHI,0],[-1,-PHI,0],[1,-PHI,0],[0,-1,PHI],[0,1,PHI],[0,-1,-PHI],[0,1,-PHI],[PHI,0,-1],[PHI,0,1],[-PHI,0,-1],[-PHI,0,1]].map(v=>v.map(x=>x/2.2));
-  const E=[];
-  for(let i=0;i<V.length;i++)for(let j=i+1;j<V.length;j++){const d=Math.hypot(V[i][0]-V[j][0],V[i][1]-V[j][1],V[i][2]-V[j][2]);if(d<1.15)E.push([i,j]);}
-  function resize(){DPR=Math.min(devicePixelRatio||1,2);const r=c.getBoundingClientRect();w=r.width;h=r.height;c.width=w*DPR;c.height=h*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
-  function rot(p,a,b){let[y,z]=[[p[1]*Math.cos(a)-p[2]*Math.sin(a),p[1]*Math.sin(a)+p[2]*Math.cos(a)]];let[x,z2]=[[p[0]*Math.cos(b)+z*Math.sin(b),-p[0]*Math.sin(b)+z*Math.cos(b)]];return[x,y,z2];}
-  function proj(p,ox,oy,scale){const persp=3.4/(3.4+p[2]);return[ox+p[0]*scale*persp,oy+p[1]*scale*persp,persp];}
-  function frame(){
-    t+=0.012; const ox=w*0.5,oy=h*0.5,scale=Math.min(w,h)*0.26;
-    const ax=t*0.6+my*0.5, ay=t*0.4+mx*0.5;
-    const R=V.map(v=>rot(v,ax,ay));
-    ctx.clearRect(0,0,w,h);
-    // edges
-    ctx.lineWidth=1;
-    E.forEach(([i,j])=>{
-      const a=proj(R[i],ox,oy,scale),b=proj(R[j],ox,oy,scale);
-      const lum=(a[2]+b[2])/2;
-      ctx.strokeStyle=`rgba(184,255,60,${(0.10+lum*0.28).toFixed(3)})`;
-      ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
-    });
-    // vertices
-    R.forEach(p=>{const s=proj(p,ox,oy,scale);ctx.beginPath();ctx.arc(s[0],s[1],1.6+s[2]*1.4,0,7);ctx.fillStyle=`rgba(255,255,255,${(0.3+s[2]*0.5).toFixed(3)})`;ctx.fill();});
-    // orbiting service nodes
-    NODES.forEach((n,k)=>{
-      const ang=t*0.9+k*(Math.PI*2/NODES.length);
-      const rr=scale*1.55;
-      const pos=[Math.cos(ang)*rr,Math.sin(ang)*rr*0.62, Math.sin(ang*0.7)*0.4];
-      const pr=proj([pos[0]+R[0][0]*0,pos[1],pos[2]],ox,oy,scale);
-      const px=ox+pos[0], py=oy+pos[1]/1.0; // simple elliptical orbit (no z-rot needed)
-      ctx.beginPath();ctx.arc(px,py,3.2,0,7);ctx.fillStyle=n.col;ctx.shadowBlur=12;ctx.shadowColor=n.col;ctx.fill();ctx.shadowBlur=0;
-      ctx.font="600 9px JetBrains Mono, monospace";ctx.fillStyle=n.col;ctx.globalAlpha=0.85;
-      ctx.fillText(n.label,px+7,py+3);ctx.globalAlpha=1;
-    });
-    raf=requestAnimationFrame(frame);
-  }
-  addEventListener("resize",resize);
-  addEventListener("mousemove",e=>{const r=c.getBoundingClientRect();mx=((e.clientX-r.left)/r.width-0.5)*0.8;my=((e.clientY-r.top)/r.height-0.5)*0.8;});
-  resize();frame();
-}
 /* ===== futuristic: hero parallax tilt ===== */
 function setupParallax(){
   const grid=$(".hero-grid"); if(!grid) return;
@@ -1104,7 +1047,7 @@ function setupGlitch(){$$(".title, .hero h1").forEach(el=>{
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();renderTestimonials();buildExperience();
-  setupTheme();setupROI();setupPalette();setupCanvas();setupHero3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupPalette();setupCanvas();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
