@@ -1,0 +1,226 @@
+/* =========================================================
+   CRAFTEE STAFF — SECTION STYLES
+   Paste AFTER global.css (also global in GHL).
+   ========================================================= */
+
+/* ---------------- HEADER / NAV ---------------- */
+.site-header{position:fixed;inset:0 0 auto;z-index:100;transition:background .25s ease,border .25s ease,backdrop-filter .25s ease}
+.site-header.scrolled{background:rgba(10,10,26,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:78px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+.brand-mark{width:42px;height:42px;border:1px solid var(--line-strong);display:grid;place-items:center;
+  font-family:var(--font-head);font-size:13px;color:var(--cyan);box-shadow:inset 0 0 18px rgba(0,229,255,.12),0 0 18px rgba(0,229,255,.14)}
+.brand-word{display:grid;line-height:.9}
+.brand-word strong{font-family:var(--font-head);font-size:22px;letter-spacing:.08em}
+.brand-word small{font-family:var(--font-head);font-size:11px;letter-spacing:.52em;color:var(--white)}
+.striped-e{color:transparent;background:linear-gradient(to bottom,var(--magenta) 0 22%,transparent 22% 39%,var(--cyan) 39% 61%,transparent 61% 78%,var(--magenta) 78% 100%);-webkit-background-clip:text;background-clip:text}
+.nav-links{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-links a{font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#dce1ff;font-size:15px}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{margin-left:4px}
+.menu-toggle{display:none;margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--white);padding:8px;width:48px;height:42px;border-radius:2px}
+.menu-toggle span{display:block;height:2px;background:var(--cyan);margin:5px 0}
+.mobile-panel{display:none}
+
+/* ---------------- HERO ---------------- */
+.hero{min-height:100vh;display:grid;align-items:center;padding-top:130px}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:46px;align-items:center}
+.hero-lede{font-size:clamp(1.12rem,2vw,1.38rem);max-width:720px;margin-top:22px;color:#d8dcf2}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.signal-strip{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.signal-strip span{border:1px solid var(--line);background:rgba(0,229,255,.035);padding:8px 10px;color:var(--cyan);
+  font-size:13px;text-transform:uppercase;letter-spacing:.13em}
+
+/* Hero 3D talent-network frame */
+.holo-frame{position:relative;min-height:600px;border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(204,0,255,.05) 48%,rgba(255,255,255,.025));
+  box-shadow:var(--glow-cyan),var(--glow-mag);overflow:hidden}
+.holo-frame:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.08);pointer-events:none}
+#talent-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hud{position:absolute;left:24px;right:24px;display:flex;justify-content:space-between;gap:20px;z-index:3;
+  border:1px solid rgba(0,229,255,.24);background:rgba(10,10,26,.72);padding:11px 14px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.14em;font-size:13px;backdrop-filter:blur(6px)}
+.hud strong{color:var(--lime)}
+.hud span{color:var(--cyan)}
+.hud-top{top:28px}
+.hud-mid{top:84px;left:auto;width:60%}
+.hud-bottom{bottom:28px}
+
+/* ---------------- TRUST METRICS ---------------- */
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.metric-card{padding:26px}
+.metric-card span{display:block;font-family:var(--font-head);font-size:clamp(2.2rem,5vw,4.4rem);color:var(--white);
+  text-shadow:0 0 28px rgba(0,229,255,.3)}
+.metric-card p{font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);margin-top:6px}
+
+/* ---------------- BUSINESS PROBLEM ---------------- */
+.problem-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+.problem-list{display:grid;gap:12px}
+.problem-list li{list-style:none;border:1px solid var(--line);padding:16px 18px;background:rgba(255,255,255,.025);
+  color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.problem-list li:before{content:"//";color:var(--cyan);margin-right:10px}
+.media-placeholder{position:relative;min-height:360px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:radial-gradient(circle at 50% 45%,rgba(0,229,255,.18),transparent 35%),linear-gradient(135deg,rgba(204,0,255,.1),rgba(0,229,255,.045));
+  overflow:hidden;display:grid;place-items:center;text-align:center}
+.media-placeholder:before{content:"";position:absolute;inset:24px;border:1px solid rgba(255,255,255,.08)}
+.media-placeholder strong{font-family:var(--font-head);font-size:clamp(1.25rem,2.2vw,2rem);text-transform:uppercase;max-width:360px;z-index:1}
+.media-placeholder span{display:block;color:var(--cyan);font-family:var(--font-body);letter-spacing:.16em;font-size:13px;margin-top:10px}
+
+/* ---------------- SERVICES CONSOLE ---------------- */
+.service-console{display:grid;grid-template-columns:310px 1fr;border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:rgba(10,10,26,.72);min-height:470px;overflow:hidden}
+.service-tabs{border-right:1px solid var(--line);padding:16px;display:grid;align-content:start;gap:10px}
+.service-tabs button{text-align:left;background:rgba(255,255,255,.02);color:var(--muted);border:1px solid rgba(255,255,255,.08);
+  padding:14px;border-radius:2px;cursor:pointer;text-transform:uppercase;font-weight:700;letter-spacing:.06em;transition:.2s}
+.service-tabs button.active,.service-tabs button:focus-visible{color:var(--bg);background:var(--cyan);outline:0}
+.service-display{display:grid;grid-template-columns:.9fr 1fr;gap:28px;align-items:center;padding:28px}
+.service-visual{height:330px;position:relative;border:1px solid var(--line);border-radius:var(--radius);display:grid;place-items:center;
+  background:radial-gradient(circle,rgba(0,229,255,.12),transparent 58%)}
+.service-visual span{font-family:var(--font-head);font-size:42px;color:var(--white);z-index:1;text-shadow:0 0 28px rgba(204,0,255,.52);transition:opacity .2s}
+.service-copy{max-width:520px}
+.service-copy h3{margin:10px 0 16px}
+.service-copy .fade{transition:opacity .2s}
+.service-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.service-list span{border:1px solid rgba(0,229,255,.2);padding:6px 9px;color:#dfe7ff;background:rgba(0,229,255,.025);
+  font-size:14px;text-transform:uppercase;font-weight:700;letter-spacing:.05em}
+
+/* ---------------- TALENT DEV STEPS ---------------- */
+.dev-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.dev-step{padding:24px}
+.dev-step h3,.case-card h3,.team-card h3,.insight-card h3{margin-bottom:12px}
+.dev-step span{display:inline-block;color:var(--cyan);font-family:var(--font-head);font-size:13px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:18px}
+
+/* ---------------- PURPOSE ---------------- */
+.purpose-card{padding:46px;background:var(--grad-soft);background-color:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.purpose-columns{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px}
+.purpose-columns strong{color:var(--white)}
+.purpose-quote{margin-top:30px;border-top:1px solid var(--line);padding-top:22px;font-family:var(--font-head);
+  font-size:clamp(1.2rem,2.5vw,2rem);color:var(--white);text-transform:uppercase}
+
+/* ---------------- HOW IT WORKS TIMELINE ---------------- */
+.timeline{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.timeline:before{content:"";position:absolute;left:7%;right:7%;top:34px;height:1px;
+  background:var(--grad);box-shadow:var(--glow-cyan)}
+.timeline-step{position:relative;padding:0 10px 10px}
+.timeline-step span{position:relative;z-index:1;width:68px;height:68px;border:1px solid var(--line-strong);background:var(--bg);
+  display:grid;place-items:center;font-family:var(--font-head);color:var(--lime);margin-bottom:22px;box-shadow:var(--glow-cyan);transition:transform .2s}
+.timeline-step:hover span{transform:scale(1.08)}
+.timeline-step h3{font-size:1.25rem;margin-bottom:8px}
+
+/* ---------------- HIRING MODELS ---------------- */
+.model-grid,.risk-grid,.calculator-grid,.faq-grid,.impact-feature{grid-template-columns:1fr 1fr}
+.model-grid{display:grid;gap:18px}
+.model-card{min-height:390px;display:flex;flex-direction:column;padding:28px}
+.featured-model{border-color:var(--mag-line)}
+.card-top{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+.card-top em{font-style:normal;color:var(--muted);font-size:15px}
+.model-card h3{margin-bottom:16px}
+.model-card p{margin-bottom:auto}
+.model-card .btn{margin-top:28px;align-self:flex-start}
+.model-card ul,.risk-card ul{margin:18px 0 0;padding:0;display:grid;gap:8px}
+.model-card li,.risk-card li{list-style:none;color:var(--muted)}
+.model-card li:before,.risk-card li:before{content:">";color:var(--cyan);margin-right:8px}
+
+/* ---------------- CLIENT IMPACT ---------------- */
+.case-grid,.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case-card,.insight-card{padding:24px}
+.case-card p+p{margin-top:10px}
+.case-card b{color:var(--white)}
+
+/* ---------------- CAPACITY CALCULATOR ---------------- */
+.calc-panel{display:grid;gap:16px;max-width:760px;margin-inline:auto}
+.calc-panel label{display:grid;gap:7px;color:var(--cyan);text-transform:uppercase;font-weight:700;letter-spacing:.06em}
+.calc-panel input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--white);padding:12px 14px;border-radius:2px;outline:0}
+.calc-panel input:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(207,255,4,.12)}
+.calc-results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.calc-results div{border:1px solid var(--line);padding:15px;background:rgba(0,229,255,.035);border-radius:var(--radius)}
+.calc-results span{font-family:var(--font-head);display:block;font-size:clamp(1.2rem,2vw,1.75rem);color:var(--white)}
+.calc-results small{color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.disclaimer{font-size:15px;color:var(--soft)}
+.calculator-grid{display:grid;gap:18px;align-items:center}
+
+/* ---------------- RISK REVERSAL ---------------- */
+.risk-grid{display:grid;gap:18px}
+.risk-card{padding:26px}
+.risk-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.risk-stat{border:1px solid var(--line);padding:18px;background:rgba(255,255,255,.025);border-radius:var(--radius)}
+.risk-stat strong{display:block;font-family:var(--font-head);color:var(--white);font-size:1.5rem}
+
+/* ---------------- ABOUT PREVIEW ---------------- */
+.split-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px}
+.sticky-label{position:sticky;top:120px;align-self:start}
+.copy-stack{display:grid;gap:24px;font-size:1.18rem}
+
+/* ---------------- INSIGHTS ---------------- */
+.blog-category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.category-card{border:1px solid var(--line);background:var(--panel);padding:22px;position:relative;overflow:hidden;border-radius:var(--radius)}
+.category-card:after{content:"";position:absolute;inset:auto 0 0;height:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.category-card:hover:after{transform:scaleX(1)}
+.category-card h3{font-size:1rem;margin-bottom:10px;color:var(--white)}
+
+/* ---------------- FAQ ---------------- */
+.accordion{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.accordion button{width:100%;background:rgba(255,255,255,.025);color:var(--white);border:0;border-bottom:1px solid var(--line);
+  text-align:left;padding:18px 20px;cursor:pointer;text-transform:uppercase;font-weight:700;letter-spacing:.06em}
+.accordion button:after{content:"+";float:right;color:var(--cyan);font-family:var(--font-head)}
+.accordion button[aria-expanded="true"]:after{content:"\2212"}
+.accordion div{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.accordion div p{overflow:hidden;padding:0 20px;color:var(--muted)}
+.accordion button[aria-expanded="true"]+div{grid-template-rows:1fr}
+.accordion button[aria-expanded="true"]+div p{padding:18px 20px}
+
+/* ---------------- FINAL CTA ---------------- */
+.final-card{text-align:center;border:1px solid var(--line-strong);padding:60px 28px;border-radius:var(--radius);
+  background:radial-gradient(circle at 50% 0%,rgba(0,229,255,.18),transparent 42%),linear-gradient(120deg,rgba(204,0,255,.12),rgba(10,10,26,.9))}
+.final-card p:not(.eyebrow){max-width:720px;margin:18px auto 0}
+.final-card .cta-row{justify-content:center}
+
+/* ---------------- FOOTER ---------------- */
+.footer{padding:54px 0;border-top:1px solid var(--line);background:rgba(5,6,18,.6)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:34px}
+.footer h3{font-size:1rem;margin-bottom:12px;color:var(--cyan)}
+.footer a:not(.brand){display:block;color:var(--muted);margin:7px 0}
+.footer a:not(.brand):hover{color:var(--cyan)}
+.footer-brand{margin-bottom:18px}
+.footer-note{margin-top:24px;color:var(--cyan);font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+
+/* ---------------- LOGO RAIL ---------------- */
+.logo-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px}
+.logo-slot{border:1px dashed rgba(0,229,255,.28);min-height:74px;display:grid;place-items:center;color:rgba(255,255,255,.48);
+  font-family:var(--font-head);font-size:12px;letter-spacing:.18em;background:rgba(0,229,255,.025);border-radius:var(--radius)}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:980px){
+  .nav-links,.nav-cta{display:none}
+  .menu-toggle{display:block}
+  .mobile-panel{position:fixed;inset:78px 16px auto;display:grid;gap:10px;padding:18px;border:1px solid var(--line);
+    background:rgba(10,10,26,.96);backdrop-filter:blur(18px);transform:translateY(-16px);opacity:0;pointer-events:none;transition:.25s ease;border-radius:var(--radius)}
+  .mobile-panel.open{transform:none;opacity:1;pointer-events:auto}
+  .mobile-panel a{padding:14px;border:1px solid rgba(255,255,255,.08);text-transform:uppercase;font-weight:700;letter-spacing:.08em}
+  .mobile-panel span{color:var(--cyan);margin-right:10px}
+
+  .hero-grid,.split-grid,.service-display,.model-grid,.risk-grid,.calculator-grid,.faq-grid,
+  .problem-grid,.purpose-columns,.impact-feature,.footer-grid{grid-template-columns:1fr}
+  .hero{padding-top:110px}
+  .holo-frame{min-height:510px}
+  .service-console{grid-template-columns:1fr}
+  .service-tabs{border-right:0;border-bottom:1px solid var(--line)}
+  .dev-steps,.metric-grid,.case-grid,.insight-grid,.blog-category-grid{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:1fr}
+  .timeline:before{left:34px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .timeline-step{display:grid;grid-template-columns:84px 1fr}
+  .timeline-step p,.timeline-step h3{grid-column:2}
+  .sticky-label{position:static}
+  .calc-results,.risk-stat-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .brand-word strong{font-size:18px}
+  .brand-mark{width:38px;height:38px}
+  .hero-lede{font-size:1.08rem}
+  .holo-frame{min-height:430px}
+  .metric-grid,.dev-steps,.case-grid,.insight-grid,.blog-category-grid{grid-template-columns:1fr}
+  .service-visual{height:250px}
+  .final-card{padding:42px 18px}
+}

@@ -1,0 +1,208 @@
+/* =========================================================
+   CRAFTEE STAFF — GLOBAL DESIGN SYSTEM
+   Paste ONCE in GoHighLevel (Site Settings > Custom CSS/JS)
+   Every section snippet inherits these tokens.
+   ========================================================= */
+:root{
+  /* ---- Brand palette (per handover spec) ---- */
+  --bg:#0A0A1A;
+  --bg-2:#070713;
+  --cyan:#00E5FF;
+  --magenta:#CC00FF;
+  --white:#FFFFFF;
+  --lime:#CFFF04;            /* CTA-only — never decorative */
+  --muted:#B7BCD8;
+  --soft:#717799;
+
+  /* ---- Surfaces ---- */
+  --panel:rgba(12,15,36,.72);
+  --panel-strong:rgba(14,19,48,.92);
+  --line:rgba(0,229,255,.22);
+  --line-strong:rgba(0,229,255,.55);
+  --mag-line:rgba(204,0,255,.32);
+
+  /* ---- The ONE gradient language (consistency) ---- */
+  --grad:linear-gradient(120deg,var(--cyan),var(--magenta));
+  --grad-soft:linear-gradient(120deg,rgba(0,229,255,.16),rgba(204,0,255,.12));
+  --glow-cyan:0 0 42px rgba(0,229,255,.22);
+  --glow-mag:0 0 48px rgba(204,0,255,.18);
+
+  --font-head:'Orbitron',system-ui,sans-serif;
+  --font-body:'Rajdhani',system-ui,sans-serif;
+  --shell:min(1160px,calc(100% - 40px));
+  --radius:4px;              /* premium cyberpunk: square-ish, not SaaS-rounded */
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;font-family:var(--font-body);font-size:19px;line-height:1.55;color:var(--white);
+  background:
+    radial-gradient(circle at 18% -5%,rgba(0,229,255,.16),transparent 32rem),
+    radial-gradient(circle at 84% 14%,rgba(204,0,255,.16),transparent 36rem),
+    var(--bg);
+  overflow-x:hidden}
+
+/* Animated grid floor — global, subtle */
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-4;
+  background:
+    linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);
+  background-size:46px 46px;
+  mask-image:linear-gradient(to bottom,black,rgba(0,0,0,.7),transparent 92%);
+  -webkit-mask-image:linear-gradient(to bottom,black,rgba(0,0,0,.7),transparent 92%);
+  animation:gridDrift 26s linear infinite}
+
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+.shell{width:var(--shell);margin-inline:auto}
+img{max-width:100%;display:block}
+
+/* Skip link (a11y) */
+.skip-link{position:absolute;left:12px;top:-70px;background:var(--lime);color:var(--bg);padding:10px 14px;z-index:1000;border-radius:2px}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{font-family:var(--font-head);text-transform:uppercase;line-height:1.04;letter-spacing:.015em;margin:0}
+h1{font-size:clamp(3rem,7vw,5.85rem);max-width:960px;text-shadow:0 0 34px rgba(0,229,255,.16)}
+h2{font-size:clamp(2rem,4.8vw,3.65rem)}
+h3{font-size:clamp(1.18rem,2.1vw,1.65rem)}
+p{color:var(--muted);margin:0}
+.eyebrow{display:inline-block;margin:0 0 14px;color:var(--cyan);font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;font-size:14px;text-shadow:0 0 22px rgba(0,229,255,.42)}
+.eyebrow:before{content:"// ";opacity:.7}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Buttons (lime = action ONLY) ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:14px 22px;
+  border:1px solid transparent;text-transform:uppercase;font-weight:700;letter-spacing:.08em;font-size:16px;
+  border-radius:2px;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background .22s ease}
+.btn span{transition:transform .22s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover span{transform:translateX(4px)}
+.btn-primary{background:var(--lime);color:var(--bg);box-shadow:0 0 30px rgba(207,255,4,.22)}
+.btn-primary:hover{box-shadow:0 0 46px rgba(207,255,4,.4)}
+.btn-secondary{border-color:var(--line-strong);background:rgba(0,229,255,.04);color:var(--white)}
+.btn-secondary:hover{border-color:var(--cyan);box-shadow:var(--glow-cyan)}
+.text-link{color:var(--cyan);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.text-link:hover{text-shadow:0 0 20px rgba(0,229,255,.65)}
+
+/* ---------- Layout helpers ---------- */
+.section{position:relative;padding:112px 0;scroll-margin-top:90px}
+.section-head{max-width:840px;margin-bottom:44px}
+.section-head p:not(.eyebrow){margin-top:16px;font-size:1.08rem}
+
+/* Gradient divider — one consistent divider everywhere */
+.divider{height:1px;border:0;margin:0;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--magenta),transparent);
+  box-shadow:0 0 18px rgba(0,229,255,.3);opacity:.7}
+
+/* ---------- Cards (shared edge-glow on hover) ---------- */
+.panel{position:relative;border:1px solid var(--line);background:var(--grad-soft);
+  background-color:var(--panel);padding:24px;overflow:hidden;border-radius:var(--radius)}
+.panel:before{content:"";position:absolute;inset:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(0,229,255,.16),transparent 42%);
+  opacity:0;transition:opacity .25s ease;pointer-events:none}
+.panel:hover:before{opacity:1}
+
+/* ---------- Starfield canvas (global bg layer) ---------- */
+#starfield{position:fixed;inset:0;z-index:-5;width:100%;height:100%;pointer-events:none}
+
+/* ---------- Section build-label (GHL context only, remove if undesired) ---------- */
+.section-code-label{position:absolute;top:18px;right:18px;color:rgba(0,229,255,.4);
+  font-family:var(--font-head);font-size:11px;letter-spacing:.14em;pointer-events:none}
+
+/* ---------- Reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Keyframes ---------- */
+@keyframes gridDrift{to{background-position:46px 46px}}
+@keyframes floaty{50%{transform:translate3d(4vw,-3vh,0) scale(1.06)}}
+@keyframes scan{to{transform:translateY(360%)}}
+@keyframes corePulse{50%{transform:scale(1.04);box-shadow:0 0 95px rgba(0,229,255,.34),inset 0 0 46px rgba(204,0,255,.18)}}
+@keyframes pulseRing{0%{transform:scale(.75);opacity:.85}100%{transform:scale(1.45);opacity:0}}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:980px){
+  .section{padding:84px 0}
+  h1{font-size:clamp(2.4rem,8vw,3.4rem)}
+}
+@media (max-width:560px){
+  body{font-size:18px}
+  .section{padding:66px 0}
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+/* =========================================================
+   FUTURISTIC LAYER — scroll progress, cursor glow,
+   staggered reveals, gradient borders, 3D tilt, parallax
+   ========================================================= */
+
+/* Scroll progress bar */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;
+  background:var(--grad);box-shadow:0 0 14px rgba(0,229,255,.6);transition:width .08s linear}
+
+/* Cursor glow (desktop only) */
+#cursor-glow{position:fixed;width:520px;height:520px;left:0;top:0;margin:-260px 0 0 -260px;
+  border-radius:50%;pointer-events:none;z-index:1;mix-blend-mode:screen;opacity:0;
+  background:radial-gradient(circle,rgba(0,229,255,.10),transparent 62%);
+  transition:opacity .4s ease}
+@media (hover:hover) and (pointer:fine){#cursor-glow{opacity:1}}
+
+/* Staggered reveal — children fade/slide in sequence */
+.reveal-stagger{opacity:0;transform:translateY(30px);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal-stagger.in{opacity:1;transform:none}
+.reveal-stagger.in > *{opacity:0;transform:translateY(26px);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.05s}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.13s}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.21s}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.29s}
+.reveal-stagger.in > *:nth-child(5){transition-delay:.37s}
+.reveal-stagger.in > *:nth-child(6){transition-delay:.45s}
+.reveal-stagger.in > *:nth-child(7){transition-delay:.53s}
+.reveal-stagger.in > *:nth-child(8){transition-delay:.61s}
+.reveal-stagger.in > *{opacity:1;transform:none}
+
+/* Gradient border wrapper (premium framed panels) */
+.grad-border{position:relative;border-radius:var(--radius);padding:1px;
+  background:var(--grad);background-size:200% 200%;animation:gradShift 8s linear infinite}
+.grad-border > *{border-radius:calc(var(--radius) - 1px);background:var(--bg-2)}
+@keyframes gradShift{to{background-position:200% 0}}
+.grad-border:hover{filter:drop-shadow(0 0 18px rgba(0,229,255,.35))}
+
+/* 3D tilt hook (cards) */
+.tilt{transform-style:preserve-3d;transition:transform .15s ease;will-change:transform}
+.tilt .tilt-inner{transform:translateZ(30px)}
+
+/* Parallax hook */
+[data-parallax]{will-change:transform}
+
+/* Hero scroll-fade (the hero visual drifts up + dims as you scroll) */
+.hero-visual{transition:opacity .2s linear,transform .2s linear}
+
+/* Holographic sheen sweep on featured cards */
+.holo-sheen{position:relative;overflow:hidden}
+.holo-sheen:after{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.10),transparent);
+  transform:skewX(-18deg);animation:sheen 6s ease-in-out infinite}
+@keyframes sheen{0%,72%{left:-60%}85%,100%{left:130%}}
+
+/* Timeline draw-in line (JS adds .drawn) */
+.timeline:before{transition:opacity .1s}
+.timeline.drawn:before{box-shadow:0 0 22px rgba(0,229,255,.55)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    scroll-behavior:auto!important;transition-duration:.001ms!important}
+  .reveal,.reveal-stagger{opacity:1!important;transform:none!important}
+  .reveal-stagger.in > *{opacity:1!important;transform:none!important}
+  #starfield,#cursor-glow{display:none}
+  .holo-sheen:after{display:none}
+}
