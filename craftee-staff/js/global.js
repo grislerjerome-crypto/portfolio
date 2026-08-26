@@ -49,6 +49,45 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
+  /* ---------- Section in-view rails ---------- */
+  function initSectionRails() {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+    if (!sections.length || !('IntersectionObserver' in window)) { sections.forEach(function(s){s.classList.add('in-view');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold:.18 });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  /* ---------- Magnetic/shimmer CTAs (Godly/21st style, subtle) ---------- */
+  function initMagneticButtons() {
+    if (reduce || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    document.querySelectorAll('.btn').forEach(function(btn){
+      btn.addEventListener('pointermove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - .5;
+        var y = (e.clientY - r.top) / r.height - .5;
+        btn.style.transform = 'translate(' + (x*8).toFixed(1) + 'px,' + (y*5-2).toFixed(1) + 'px)';
+      });
+      btn.addEventListener('pointerleave', function(){ btn.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Smooth anchor scroll with builder-safe offset ---------- */
+  function initAnchors() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        var y = target.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top:y, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+  }
+
   /* ---------- Metric count-up ---------- */
   function initCounters() {
     var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
@@ -409,10 +448,10 @@
   }
 
   function boot() {
-    initHeader(); initMenu(); initReveal(); initRevealStagger(); initCounters();
+    initHeader(); initMenu(); initReveal(); initRevealStagger(); initSectionRails(); initCounters();
     initSpotlight(); initServices(); initCalculator(); initAccordion();
     initStarfield(); initTalentNetwork(); initScrollProgress(); initCursorGlow();
-    initParallax(); initTilt(); initTimeline();
+    initParallax(); initTilt(); initMagneticButtons(); initAnchors(); initTimeline();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
