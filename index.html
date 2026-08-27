@@ -293,6 +293,18 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .palette .item.active,.palette .item:hover{background:color-mix(in srgb,var(--lime) 10%,transparent);color:var(--txt)}
 .palette .hint{padding:10px 16px;font-family:var(--mono);font-size:.7rem;color:var(--muted);border-top:1px solid var(--panel-border)}
 
+/* ---- Ava chat widget ---- */
+.ava-launch{position:fixed;right:22px;bottom:84px;z-index:90;width:62px;height:62px;border-radius:22px;border:1px solid color-mix(in srgb,var(--lime) 42%,transparent);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--lime) 24%,#111827),color-mix(in srgb,var(--magenta) 24%,#111827));box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 34px color-mix(in srgb,var(--lime) 22%,transparent);color:var(--txt);cursor:pointer;display:grid;place-items:center;overflow:hidden;transition:transform .25s,border-color .25s}
+.ava-launch:hover{transform:translateY(-4px) scale(1.03);border-color:var(--lime)}
+.ava-launch span{font-family:var(--mono);font-weight:900;letter-spacing:.05em}.ava-launch i{position:absolute;inset:9px;border:1px solid rgba(255,255,255,.18);border-radius:18px;animation:avaMiniOrbit 5s linear infinite}.ava-launch b{position:absolute;right:8px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.ava-chat{position:fixed;right:22px;bottom:156px;z-index:91;width:min(392px,calc(100vw - 28px));max-height:min(680px,calc(100svh - 128px));display:none;grid-template-rows:auto 1fr auto;background:rgba(7,10,16,.86);border:1px solid var(--panel-border);border-radius:22px;box-shadow:0 32px 90px rgba(0,0,0,.48),0 0 55px color-mix(in srgb,var(--magenta) 16%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden}
+.ava-chat.open{display:grid}.ava-chat::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 190px at 10% 0%,color-mix(in srgb,var(--lime) 10%,transparent),transparent 65%),radial-gradient(360px 190px at 100% 0%,color-mix(in srgb,var(--magenta) 14%,transparent),transparent 68%);pointer-events:none}.ava-chat>*{position:relative;z-index:1}
+.ava-head{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--panel-border)}.ava-face{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;font-family:var(--mono);font-weight:900;background:var(--grad);color:#06080f;box-shadow:var(--glow)}.ava-head h3{font-size:1rem;margin:0}.ava-head p{font-size:.78rem;color:var(--muted);margin:2px 0 0}.ava-close{margin-left:auto;width:34px;height:34px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer}
+.ava-messages{padding:16px;overflow:auto;display:flex;flex-direction:column;gap:12px}.ava-msg{max-width:88%;padding:11px 13px;border-radius:15px;font-size:.92rem;line-height:1.45}.ava-msg.bot{align-self:flex-start;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:var(--txt)}.ava-msg.user{align-self:flex-end;background:color-mix(in srgb,var(--lime) 18%,transparent);border:1px solid color-mix(in srgb,var(--lime) 28%,transparent)}
+.ava-suggest{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 14px}.ava-chip{border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--muted);border-radius:99px;padding:7px 10px;font-family:var(--mono);font-size:.68rem;cursor:pointer;transition:color .2s,border-color .2s,transform .2s}.ava-chip:hover{color:var(--txt);border-color:color-mix(in srgb,var(--lime) 42%,transparent);transform:translateY(-1px)}
+.ava-form{display:flex;gap:8px;padding:14px 16px 16px;border-top:1px solid var(--panel-border)}.ava-form input{flex:1;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);border-radius:12px;padding:12px 12px;outline:none}.ava-form button{border:0;border-radius:12px;padding:0 15px;background:var(--grad);color:#06080f;font-family:var(--mono);font-weight:800;cursor:pointer}
+@keyframes avaMiniOrbit{to{rotate:360deg}}@media(max-width:620px){.ava-launch{right:16px;bottom:76px}.ava-chat{right:14px;bottom:146px}}
+
 .reveal{opacity:0;transform:translateY(34px) scale(.985);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
 .reveal.show{opacity:1;transform:none}
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
@@ -549,6 +561,21 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 <button id="toTop" aria-label="Back to top">↑</button>
 
+<button class="ava-launch" id="ava-launch" type="button" aria-label="Open Ava chat" aria-expanded="false"><span>AVA</span><i></i><b></b></button>
+<div class="ava-chat" id="ava-chat" aria-live="polite">
+  <div class="ava-head">
+    <div class="ava-face">A</div>
+    <div><h3>Ava</h3><p>Ask about Rome, his services, process, and pricing.</p></div>
+    <button class="ava-close" id="ava-close" type="button" aria-label="Close Ava chat">×</button>
+  </div>
+  <div class="ava-messages" id="ava-messages"></div>
+  <div class="ava-suggest" id="ava-suggest"></div>
+  <form class="ava-form" id="ava-form">
+    <input id="ava-input" autocomplete="off" placeholder="Ask Ava about Rome..." />
+    <button type="submit">Send</button>
+  </form>
+</div>
+
 <div class="palette-wrap" id="palette">
   <div class="palette">
     <input id="palette-input" placeholder="Jump to… (try 'automation', 'web', 'roi')" autocomplete="off" />
@@ -789,6 +816,34 @@ function setupROI(){
 function animateNum(el,target,prefix){
   const dur=500,start=performance.now(),from=parseFloat((el.dataset.v||"0"));
   (function tick(now){const p=Math.min(1,(now-start)/dur),e=1-Math.pow(1-p,3);const v=from+(target-from)*e;el.textContent=prefix+fmt(Math.round(v));if(p<1)requestAnimationFrame(tick);else el.dataset.v=target;})(performance.now());
+}
+
+/* ---- Ava static portfolio agent ---- */
+const AVA_KB = [
+  {keys:["who","about","jerome","rome"],q:"Who is Rome?",a:"Rome is Jerome Grisler, a remote professional based in Angeles City, Pampanga, Philippines. He helps businesses reduce repetitive work, improve workflows, build stronger websites, and create systems that support long term growth."},
+  {keys:["service","offer","do","help"],q:"What services does Rome offer?",a:"Rome focuses on four service areas: AI automation, website development, ecommerce and operations support, and logistics or supply chain workflow support. He can also help with related work like customer service operations, marketing tasks, lead generation, CRM workflows, and ongoing business support."},
+  {keys:["automation","automate","repetitive","task"],q:"Can Rome build automations?",a:"Yes. Rome can build automations that reduce repetitive tasks, improve follow up, organize data, update CRMs, route leads, handle inquiries, and make daily business processes smoother."},
+  {keys:["website","site","web","funnel","gohighlevel","ghl"],q:"Can Rome build websites?",a:"Yes. Rome builds clean, functional, conversion focused websites, landing pages, portfolio pages, service pages, GoHighLevel pages, funnels, and simple store style pages. The goal is not only a good looking website, but one that communicates clearly and supports business growth."},
+  {keys:["ecommerce","ecom","customer service","operations","lead gen","marketing"],q:"Can Rome help with ecommerce and operations?",a:"Yes. Rome can support ecommerce and operations related work such as customer service operations, order or store support, admin workflows, product or content updates, marketing task support, lead generation, and CRM or pipeline assistance."},
+  {keys:["logistics","supply","shipment","inventory"],q:"Can Rome help with logistics?",a:"Yes. Rome can help with logistics and supply chain related workflows, including tracking, coordination, reporting, inventory organization, supplier follow up, and process documentation."},
+  {keys:["process","start","call","work style","how work"],q:"How does working with Rome start?",a:"Rome starts by understanding the business deeply. The beginning can feel careful because he wants to see the full picture first, including tools, workflows, pain points, repetitive tasks, weak spots, and goals. Once the direction is clear, the work becomes sharper, smoother, and more valuable."},
+  {keys:["price","pricing","rate","cost","charge","quote"],q:"How much does Rome charge?",a:"Rome's general rate is $8 to $15 per hour, depending on the business need, scope, and complexity. Some work can also be project based. This is only a general pricing guide, the final quote comes from Rome after he understands the work."},
+  {keys:["confidential","privacy","nda","non solicitation","private"],q:"Does Rome keep business information private?",a:"Yes. Rome treats business information carefully and can work under a confidentiality or non solicitation agreement when required. I can discuss his professional work, but I do not share personal or private information."},
+  {keys:["contact","email","book","appointment","cta"],q:"How do I contact Rome?",a:"You can contact Rome through the email and social links on this portfolio. Once the booking link is added, you can also use the booking CTA. If you reach out, share your business details, pain points, current tools, repetitive tasks, timeline, and the result you want."},
+  {keys:["proof","portfolio","example","work","projects"],q:"Can I see Rome's work?",a:"Yes. This portfolio is the best place to start. Rome will continue updating his proof of work and examples, but you can already explore his services, Craftee Sites work, and the systems he is building."},
+  {keys:["result","growth","benefit","outcome"],q:"What results can Rome help with?",a:"Rome's work is designed to reduce manual work, improve systems, lower unnecessary operational cost, support clearer execution, and create more room for long term business growth. Exact results depend on the business, scope, and consistency of execution."}
+];
+function setupAvaChat(){
+  const box=$("#ava-chat"),launch=$("#ava-launch"),close=$("#ava-close"),form=$("#ava-form"),input=$("#ava-input"),messages=$("#ava-messages"),suggest=$("#ava-suggest");
+  if(!box||!launch||!form||!input||!messages||!suggest)return;
+  function add(who,text){const d=document.createElement("div");d.className="ava-msg "+who;d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
+  function open(){box.classList.add("open");launch.setAttribute("aria-expanded","true");if(!messages.dataset.ready){add("bot","Hi, I'm Ava. I can answer questions about Rome's professional work, services, pricing, process, and how to contact him. I do not share personal or private information.");messages.dataset.ready="1";}setTimeout(()=>input.focus(),80);}
+  function shut(){box.classList.remove("open");launch.setAttribute("aria-expanded","false");}
+  function answer(q){const t=q.toLowerCase();let best=null,score=0;AVA_KB.forEach(item=>{let s=0;item.keys.forEach(k=>{if(t.includes(k))s++;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. I can answer questions about Rome's professional work, services, pricing, process, and portfolio. For exact scope or a custom quote, contact Rome through the email, social links, or booking CTA once it is added.";}
+  suggest.innerHTML=AVA_KB.slice(0,6).map(x=>`<button type="button" class="ava-chip">${x.q}</button>`).join("");
+  suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=btn.textContent;add("user",q);setTimeout(()=>add("bot",answer(q)),180);});
+  launch.onclick=()=>box.classList.contains("open")?shut():open(); close.onclick=shut;
+  form.onsubmit=e=>{e.preventDefault();const q=input.value.trim();if(!q)return;input.value="";add("user",q);setTimeout(()=>add("bot",answer(q)),180);};
 }
 
 /* ---- command palette ---- */
@@ -1295,7 +1350,7 @@ function setupGlitch(){$$(".title").forEach(el=>{
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();renderTestimonials();buildExperience();
-  setupTheme();setupROI();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupAvaChat();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
