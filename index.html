@@ -190,6 +190,27 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .cap .tags{display:flex;flex-wrap:wrap;gap:8px}
 .cap .tags span{font-family:var(--mono);font-size:.7rem;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 25%,transparent);border-radius:99px;padding:3px 9px}
 
+/* ---- Ava AI Agent section ---- */
+.ava-section{position:relative}
+.ava-section::before{content:"";position:absolute;inset:20px 0 auto 0;height:420px;z-index:-1;pointer-events:none;background:radial-gradient(520px 260px at 72% 42%,color-mix(in srgb,var(--magenta) 18%,transparent),transparent 65%),radial-gradient(460px 260px at 18% 24%,color-mix(in srgb,var(--lime) 10%,transparent),transparent 68%);filter:blur(4px)}
+.ava-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center}
+@media(max-width:900px){.ava-grid{grid-template-columns:1fr}}
+.ava-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.ava-card{min-height:420px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--panel-border);border-radius:var(--radius);position:relative;overflow:hidden;box-shadow:var(--shadow),0 0 60px color-mix(in srgb,var(--magenta) 14%,transparent);isolation:isolate}
+.ava-card::before{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,color-mix(in srgb,var(--lime) 28%,transparent),transparent 30%,color-mix(in srgb,var(--magenta) 22%,transparent) 70%,transparent);opacity:.7;pointer-events:none}
+.ava-card::after{content:"";position:absolute;inset:16px;border:1px solid rgba(255,255,255,.08);border-radius:calc(var(--radius) - 5px);pointer-events:none;z-index:3}
+.ava-orb{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;perspective:800px;z-index:1}
+.ava-orb span{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.82),color-mix(in srgb,var(--lime) 35%,transparent) 18%,color-mix(in srgb,var(--magenta) 28%,transparent) 55%,rgba(6,8,15,.08) 72%);box-shadow:0 0 75px color-mix(in srgb,var(--lime) 32%,transparent),inset 0 0 34px rgba(255,255,255,.18);animation:avaPulse 4.8s ease-in-out infinite}
+.ava-orb i,.ava-orb b{position:absolute;width:330px;height:120px;border:1px solid color-mix(in srgb,var(--lime) 36%,transparent);border-radius:50%;box-shadow:0 0 24px color-mix(in srgb,var(--lime) 12%,transparent);animation:avaOrbit 9s linear infinite}
+.ava-orb b{width:250px;height:360px;border-color:color-mix(in srgb,var(--magenta) 34%,transparent);animation-duration:13s;animation-direction:reverse}
+@keyframes avaPulse{50%{transform:scale(1.06);filter:saturate(1.18)}}
+@keyframes avaOrbit{to{rotate:360deg}}
+.ava-panel{position:absolute;left:22px;right:22px;bottom:22px;z-index:4;background:rgba(6,8,15,.64);border:1px solid var(--panel-border);border-radius:14px;padding:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.ava-status{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--lime);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ava-status span{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:blink 1.4s infinite}
+.ava-panel h3{font-size:1.25rem;margin-bottom:8px}.ava-panel p{color:var(--muted);font-size:.92rem;max-width:540px}.ava-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.ava-stack em{font-style:normal;font-family:var(--mono);font-size:.68rem;color:var(--txt);border:1px solid color-mix(in srgb,var(--lime) 24%,transparent);border-radius:99px;padding:4px 9px;background:rgba(255,255,255,.03)}
+@media(max-width:560px){.ava-card{min-height:380px}.ava-actions .btn{width:100%}.ava-orb span{width:132px;height:132px}.ava-orb i{width:250px;height:96px}.ava-orb b{width:190px;height:280px}}
+
 /* ---- Craftee Sites showcase (blends with console theme) ---- */
 #craftee .lead{max-width:680px;color:var(--muted);margin-bottom:26px}
 .craftee-show{display:grid;grid-template-columns:1fr;gap:18px}
@@ -331,6 +352,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     <ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#capabilities">How I work</a></li>
+      <li><a href="#ava">Ava</a></li>
       <li><a href="#roi">ROI</a></li>
       <li><a href="#craftee">Web Dev</a></li>
       <li><a href="#experience">About</a></li>
@@ -346,6 +368,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   <div class="mobile-menu" id="mobile-menu">
     <a href="#services">Services</a>
     <a href="#capabilities">How I work</a>
+    <a href="#ava">Ava</a>
     <a href="#roi">ROI</a>
     <a href="#craftee">Web Dev</a>
     <a href="#experience">About</a>
@@ -405,6 +428,33 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <p class="lead">Same disciplined approach whether it's an automation, a website, a store or a supply chain.</p>
     </div>
     <div class="cap-grid" id="cap-grid"></div>
+  </section>
+
+  <section id="ava" class="wrap ava-section">
+    <div class="ava-grid">
+      <div class="reveal">
+        <span class="eyebrow">AI AGENT · AVA</span>
+        <h2 class="title">Meet Ava — the AI agent I build with.</h2>
+        <p class="lead">Ava is my always-on agent layer for research, planning, automation, website builds and operational follow-through — the digital teammate that helps me move faster without losing the human judgment behind the work.</p>
+        <div class="ava-actions">
+          <button class="btn primary magnetic" onclick="smartScroll('#contact')">Ask about Ava</button>
+          <button class="btn magnetic" onclick="smartScroll('#services')">See what we can automate</button>
+        </div>
+      </div>
+      <div class="ava-card reveal d2 tilt" aria-label="Ava AI agent system card">
+        <div class="ava-orb" aria-hidden="true">
+          <span></span><i></i><b></b>
+        </div>
+        <div class="ava-panel">
+          <div class="ava-status"><span></span> AVA ONLINE</div>
+          <h3>Human-led. Agent-assisted.</h3>
+          <p>Built to help capture tasks, reason through next steps, generate assets, monitor details and turn ideas into shipped systems.</p>
+          <div class="ava-stack">
+            <em>Research</em><em>Planning</em><em>Automation</em><em>Web Builds</em>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="roi" id="roi">
@@ -748,6 +798,7 @@ function setupPalette(){
     {ic:"↳",label:"Home",go:"#home"},
     {ic:"◈",label:"Services",go:"#services"},
     {ic:"⚙",label:"How I work",go:"#capabilities"},
+    {ic:"AI",label:"Ava — AI Agent",go:"#ava"},
     {ic:"$",label:"ROI Calculator",go:"#roi"},
     {ic:"▦",label:"Work",go:"#craftee"},
     {ic:"▶",label:"About",go:"#experience"},
