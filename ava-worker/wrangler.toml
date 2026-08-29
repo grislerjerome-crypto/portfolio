@@ -1,0 +1,9 @@
+name = "ava-chat-worker"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Free brain: Cloudflare Workers AI (no API key, no billing).
+# The AI binding is added below — wrangler deploy picks it up automatically.
+# Model used: @cf/meta/llama-3.1-8b-instruct
+[ai]
+binding = "AI"
