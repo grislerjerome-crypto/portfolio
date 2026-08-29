@@ -297,10 +297,10 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .ava-launch{position:fixed;right:22px;bottom:84px;z-index:90;width:62px;height:62px;border-radius:22px;border:1px solid color-mix(in srgb,var(--lime) 42%,transparent);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--lime) 24%,#111827),color-mix(in srgb,var(--magenta) 24%,#111827));box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 34px color-mix(in srgb,var(--lime) 22%,transparent);color:var(--txt);cursor:pointer;display:grid;place-items:center;overflow:hidden;transition:transform .25s,border-color .25s}
 .ava-launch:hover{transform:translateY(-4px) scale(1.03);border-color:var(--lime)}
 .ava-launch span{font-family:var(--mono);font-weight:900;letter-spacing:.05em}.ava-launch i{position:absolute;inset:9px;border:1px solid rgba(255,255,255,.18);border-radius:18px;animation:avaMiniOrbit 5s linear infinite}.ava-launch b{position:absolute;right:8px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
-.ava-chat{position:fixed;right:22px;bottom:156px;z-index:91;width:min(392px,calc(100vw - 28px));max-height:min(680px,calc(100svh - 128px));display:none;grid-template-rows:auto 1fr auto;background:rgba(7,10,16,.86);border:1px solid var(--panel-border);border-radius:22px;box-shadow:0 32px 90px rgba(0,0,0,.48),0 0 55px color-mix(in srgb,var(--magenta) 16%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden}
-.ava-chat.open{display:grid}.ava-chat::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 190px at 10% 0%,color-mix(in srgb,var(--lime) 10%,transparent),transparent 65%),radial-gradient(360px 190px at 100% 0%,color-mix(in srgb,var(--magenta) 14%,transparent),transparent 68%);pointer-events:none}.ava-chat>*{position:relative;z-index:1}
+.ava-chat{position:fixed;right:22px;bottom:156px;z-index:91;width:min(392px,calc(100vw - 28px));max-height:min(680px,calc(100svh - 128px));display:none;flex-direction:column;background:rgba(7,10,16,.86);border:1px solid var(--panel-border);border-radius:22px;box-shadow:0 32px 90px rgba(0,0,0,.48),0 0 55px color-mix(in srgb,var(--magenta) 16%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden}
+.ava-chat.open{display:flex}.ava-chat::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 190px at 10% 0%,color-mix(in srgb,var(--lime) 10%,transparent),transparent 65%),radial-gradient(360px 190px at 100% 0%,color-mix(in srgb,var(--magenta) 14%,transparent),transparent 68%);pointer-events:none}.ava-chat>*{position:relative;z-index:1}
 .ava-head{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--panel-border)}.ava-face{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;font-family:var(--mono);font-weight:900;background:var(--grad);color:#06080f;box-shadow:var(--glow)}.ava-head h3{font-size:1rem;margin:0}.ava-head p{font-size:.78rem;color:var(--muted);margin:2px 0 0}.ava-close{margin-left:auto;width:34px;height:34px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer}
-.ava-messages{padding:16px;overflow:auto;display:flex;flex-direction:column;gap:12px}.ava-msg{max-width:88%;padding:11px 13px;border-radius:15px;font-size:.92rem;line-height:1.45}.ava-msg.bot{align-self:flex-start;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:var(--txt)}.ava-msg.user{align-self:flex-end;background:color-mix(in srgb,var(--lime) 18%,transparent);border:1px solid color-mix(in srgb,var(--lime) 28%,transparent)}
+.ava-messages{padding:16px;overflow:auto;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:12px}.ava-msg{max-width:88%;padding:11px 13px;border-radius:15px;font-size:.92rem;line-height:1.45}.ava-msg.bot{align-self:flex-start;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.08);color:var(--txt)}.ava-msg.user{align-self:flex-end;background:color-mix(in srgb,var(--lime) 18%,transparent);border:1px solid color-mix(in srgb,var(--lime) 28%,transparent)}
 .ava-suggest{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 14px}.ava-chip{border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--muted);border-radius:99px;padding:7px 10px;font-family:var(--mono);font-size:.68rem;cursor:pointer;transition:color .2s,border-color .2s,transform .2s}.ava-chip:hover{color:var(--txt);border-color:color-mix(in srgb,var(--lime) 42%,transparent);transform:translateY(-1px)}
 .ava-form{display:flex;gap:8px;padding:14px 16px 16px;border-top:1px solid var(--panel-border)}.ava-form input{flex:1;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);border-radius:12px;padding:12px 12px;outline:none}.ava-form button{border:0;border-radius:12px;padding:0 15px;background:var(--grad);color:#06080f;font-family:var(--mono);font-weight:800;cursor:pointer}
 @keyframes avaMiniOrbit{to{rotate:360deg}}@media(max-width:620px){.ava-launch{right:16px;bottom:76px}.ava-chat{right:14px;bottom:146px}}
@@ -842,6 +842,14 @@ function setupAvaChat(){
   // Live Ava: calls a Cloudflare Worker that proxies OpenAI with the knowledge base as the system prompt.
   // Until the worker URL/key is set, or if the fetch fails, it falls back to the static AVA_KB so the widget never breaks.
   const AVA_ENDPOINT = "https://ava-chat-worker.ava-chat-rome-grisler.workers.dev/api/ava"; // free Cloudflare Workers AI brain (no key)
+  const AVA_QUESTIONS = [
+    "Who is Rome?",
+    "What services does Rome offer?",
+    "Can Rome build automations?",
+    "Can Rome build websites?",
+    "Can Rome help with ecommerce and operations?",
+    "Can Rome help with logistics?"
+  ];
   const avaHist = [];
   function fallbackAnswer(q){const t=q.toLowerCase();let best=null,score=0;AVA_KB.forEach(item=>{let s=0;item.keys.forEach(k=>{if(t.includes(k))s++;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. I can answer questions about Rome's professional work, services, pricing, process, and portfolio. For exact scope or a custom quote, contact Rome through the email, social links, or booking CTA once it is added.";}
   async function askAva(q){
@@ -856,12 +864,15 @@ function setupAvaChat(){
   }
   function send(q){
     const q2=q.trim(); if(!q2)return;
+    if(suggest)suggest.style.display="none";
     add("user",q2);
     const wait=document.createElement("div"); wait.className="ava-msg bot"; wait.textContent="…"; messages.appendChild(wait); messages.scrollTop=messages.scrollHeight;
     askAva(q2).then(r=>{wait.textContent=r;}).catch(()=>{wait.textContent=fallbackAnswer(q2);});
   }
-  suggest.innerHTML=AVA_KB.slice(0,6).map(x=>`<button type="button" class="ava-chip">${x.q}</button>`).join("");
-  suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=btn.textContent;input.value="";send(q);});
+  if(suggest){
+    suggest.innerHTML=AVA_QUESTIONS.map(x=>`<button type="button" class="ava-chip">${x}</button>`).join("");
+    suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=btn.textContent;input.value="";send(q);});
+  }
   launch.onclick=()=>box.classList.contains("open")?shut():open(); close.onclick=shut;
   form.onsubmit=e=>{e.preventDefault();const q=input.value;input.value="";send(q);};
 }
