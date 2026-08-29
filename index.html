@@ -554,6 +554,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <p style="color:var(--muted);font-size:.9rem" id="footer-tag">Systems and operations, building the engine that runs while you sleep.</p>
       <p style="color:var(--muted);font-size:.85rem;margin-top:14px">Available worldwide · Remote</p>
     </div>
+    <div class="col"><h4>SERVICES</h4><a href="#services" data-footer-mode="automation">AI Automation</a><a href="#services" data-footer-mode="web">Website Development</a><a href="#services" data-footer-mode="ecom">E-commerce VA</a><a href="#services" data-footer-mode="logistics">Logistics &amp; Supply Chain VA</a></div>
+    <div class="col"><h4>PROJECTS</h4><a href="https://grislerjerome-crypto.github.io/portfolio/craftee/index.html" target="_blank" rel="noopener">Craftee Sites</a><a href="https://grislerjerome-crypto.github.io/portfolio/craftee/funnel.html" target="_blank" rel="noopener">Growth Command Funnel</a></div>
     <div class="col"><h4>CONNECT</h4><a id="foot-email" href="mailto:grislerjerome@gmail.com">Email</a><a id="foot-facebook" href="https://www.facebook.com/jeromegrslr" target="_blank" rel="noopener">Facebook</a><a id="foot-linkedin" href="https://www.linkedin.com/in/jerome-grisler-7041ab3a7/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
   <div class="bottom wrap" id="footer-bottom">© <span id="year"></span> Jerome Grisler. Built as a live console.</div>
@@ -763,6 +765,15 @@ function setMode(id){
 }
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
+function setupFooterLinks(){
+  $$('a[data-footer-mode]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault();
+    const mode=a.dataset.footerMode;
+    setMode(mode);
+    const card=document.querySelector('.svc[data-mode="'+mode+'"]');
+    smartScroll(card||'#services');
+  }));
+}
 
 /* ---- capabilities ---- */
 function buildCaps(){ $("#cap-grid").innerHTML=CONFIG.capabilities.map((c,i)=>`<div class="cap reveal tilt d${(i%4)+1}"><div class="num">${c.n}</div><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join(''); }
@@ -1381,7 +1392,7 @@ function setupGlitch(){$$(".title").forEach(el=>{
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();renderTestimonials();buildExperience();
-  setupTheme();setupROI();setupAvaChat();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupAvaChat();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
