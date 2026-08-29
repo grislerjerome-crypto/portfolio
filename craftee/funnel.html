@@ -3,84 +3,163 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Customer Journey: Turn Social Media Traffic Into Customers</title>
-<meta name="description" content="A visual sample of the customer journey from Instagram/TikTok/Facebook through to a repeat purchase on a Craftee Sites online store." />
+<title>Growth Command Funnel | Rome Grisler</title>
+<meta name="description" content="A high converting growth systems funnel showing how Rome helps businesses capture leads, automate repetitive tasks, reduce workload, improve operations, and save money." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <style>
-  body{padding:0}
-  .f-top{padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:rgba(6,9,15,.85);position:sticky;top:0;z-index:40;backdrop-filter:blur(14px)}
-  .f-hero{text-align:center;padding:3.5rem 1.5rem 1rem}
-  .f-hero h1{font-size:clamp(2rem,5vw,3rem);text-shadow:var(--neon)}
-  .f-hero p{max-width:620px;margin:.8rem auto 0;color:var(--ink-soft)}
-  .f-wrap{max-width:760px;margin:0 auto;padding:2rem 1.5rem 4rem}
-  .f-step{display:flex;gap:1.2rem;position:relative;padding:1.4rem 0}
-  .f-step:not(:last-child)::after{content:"";position:absolute;left:23px;top:54px;bottom:-6px;width:2px;
-    background:linear-gradient(var(--accent),var(--accent-2));opacity:.5}
-  .f-dot{flex:none;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-size:1.3rem;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04121a;box-shadow:var(--neon);z-index:2}
-  .f-card{flex:1;background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.4rem;backdrop-filter:blur(10px);transition:.2s}
-  .f-card:hover{border-color:var(--accent);box-shadow:var(--neon);transform:translateX(4px)}
-  .f-card h3{font-size:1.15rem;margin-bottom:.3rem}
-  .f-card p{color:var(--ink-soft);font-size:.92rem}
-  .f-card small{color:var(--accent);display:block;margin-top:.5rem;font-weight:600}
-  .f-end{text-align:center;margin-top:2rem}
-  .f-end .f-dot{margin:0 auto 1rem;width:60px;height:60px;font-size:1.8rem}
-  .f-cta{text-align:center;margin-top:2.5rem}
-  .f-note{max-width:560px;margin:1.5rem auto 0;background:rgba(0,229,255,.06);border:1px solid var(--accent);border-radius:12px;padding:1.1rem;font-size:.9rem;color:var(--ink-soft)}
-  .back-link{display:block;text-align:center;padding:1.5rem;color:var(--ink-soft)}
-  .back-link:hover{color:var(--accent)}
-  @media(prefers-reduced-motion:reduce){.f-card{transition:none}}
+:root{
+  --bg:#0a0b0f;--bg2:#0e1016;--panel:rgba(255,255,255,.045);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.1);
+  --txt:#eef1f5;--muted:#8a93a6;--lime:#b8ff3c;--magenta:#ff3da6;--cyan:#38bdf8;--orange:#fb923c;
+  --grad:linear-gradient(120deg,var(--lime),var(--magenta));--grad2:linear-gradient(120deg,var(--cyan),var(--magenta));
+  --glow:0 0 0 1px rgba(184,255,60,.22),0 0 38px rgba(255,61,166,.18);--maxw:1180px;--radius:18px;
+  --font:"Space Grotesk",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}::selection{background:rgba(184,255,60,.28)}
+.grid{position:fixed;inset:-30% 0;z-index:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(184,255,60,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(184,255,60,.18) 1px,transparent 1px);background-size:52px 52px;transform:perspective(430px) rotateX(58deg);transform-origin:50% 0;animation:gridMove 13s linear infinite;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 72%)}@keyframes gridMove{to{background-position:0 52px}}
+.orb{position:fixed;border-radius:50%;filter:blur(74px);opacity:.42;z-index:0;pointer-events:none;animation:float 17s ease-in-out infinite}.orb.a{width:360px;height:360px;background:var(--lime);top:-100px;left:-80px}.orb.b{width:330px;height:330px;background:var(--magenta);right:-70px;top:26%;animation-delay:-7s}.orb.c{width:270px;height:270px;background:var(--cyan);left:45%;bottom:-90px;animation-delay:-12s}@keyframes float{0%,100%{transform:translate(0,0)}33%{transform:translate(34px,-28px)}66%{transform:translate(-28px,24px)}}
+.scan{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.25;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px)}
+.wrap,.nav,main,footer{position:relative;z-index:2}.wrap{width:min(var(--maxw),calc(100% - 36px));margin:0 auto}.nav{position:sticky;top:0;z-index:50;background:rgba(10,11,15,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}.brand{font-family:var(--mono);font-weight:800;letter-spacing:.12em}.brand b{background:var(--grad);background-clip:text;-webkit-background-clip:text;color:transparent}.navlinks{display:flex;gap:18px;align-items:center}.navlinks a{font-size:.86rem;color:var(--muted);transition:.2s}.navlinks a:hover{color:var(--txt)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:13px 20px;font-family:var(--mono);font-size:.86rem;font-weight:800;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--txt);cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:rgba(184,255,60,.42)}.btn.primary{background:var(--grad);color:#06080f;border:0;box-shadow:var(--glow)}.btn.cyan{background:var(--grad2);color:#06080f;border:0;box-shadow:0 0 35px rgba(56,189,248,.18)}
+.hero{padding:82px 0 44px}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:42px;align-items:center}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.12em;margin-bottom:18px}.pill i{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blink 1.4s infinite}@keyframes blink{50%{opacity:.28}}.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.28em;color:var(--lime);text-transform:uppercase;margin-bottom:13px}.hero h1{font-size:clamp(2.25rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.035em;margin-bottom:18px}.grad{background:var(--grad);background-clip:text;-webkit-background-clip:text;color:transparent}.hero .sub{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:650px;margin-bottom:24px}.hero .sub strong{color:var(--txt)}.hero-actions{display:flex;gap:14px;flex-wrap:wrap}.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}.proof div{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:13px}.proof b{display:block;font-family:var(--mono);font-size:1.35rem;color:var(--lime)}.proof span{font-size:.78rem;color:var(--muted)}
+.console{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:24px;box-shadow:var(--glow);overflow:hidden;position:relative}.bar{display:flex;gap:8px;padding:13px 15px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.035)}.bar i{width:10px;height:10px;border-radius:50%;background:var(--muted)}.bar i:nth-child(1){background:var(--magenta)}.bar i:nth-child(2){background:var(--orange)}.bar i:nth-child(3){background:var(--lime)}.screen{padding:22px}.flow{display:grid;gap:12px}.node{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);position:relative;overflow:hidden}.node:before{content:"";position:absolute;inset:0;background:radial-gradient(240px 80px at 0 0,rgba(184,255,60,.09),transparent 68%);opacity:.9}.ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:rgba(184,255,60,.14);border:1px solid rgba(184,255,60,.34);position:relative}.node h3{font-size:.98rem;position:relative}.node p{font-size:.78rem;color:var(--muted);position:relative}.tag{font-family:var(--mono);font-size:.64rem;color:var(--lime);border:1px solid rgba(184,255,60,.25);padding:4px 7px;border-radius:999px;position:relative}.meter{margin-top:16px;border:1px solid var(--line);border-radius:18px;padding:16px;background:rgba(255,255,255,.035)}.meter .row{display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem;margin-bottom:9px}.track{height:9px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.fill{height:100%;width:78%;background:var(--grad);box-shadow:0 0 22px rgba(184,255,60,.25);animation:pulseFill 3s ease-in-out infinite}@keyframes pulseFill{50%{width:90%}}
+section{padding:70px 0}.section-head{max-width:720px;margin-bottom:28px}.section-head.center{text-align:center;margin:0 auto 34px}.section-head h2{font-size:clamp(1.75rem,4vw,3rem);line-height:1.08;margin-bottom:12px}.section-head p{color:var(--muted)}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.25s;position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:radial-gradient(260px 130px at 0 0,rgba(255,61,166,.08),transparent 66%);pointer-events:none}.card:hover{transform:translateY(-6px);border-color:rgba(184,255,60,.42);box-shadow:var(--glow)}.card .num{font-family:var(--mono);font-size:1.65rem;font-weight:900;background:var(--grad);background-clip:text;-webkit-background-clip:text;color:transparent;margin-bottom:10px}.card h3{font-size:1.12rem;margin-bottom:8px}.card p,.card li{color:var(--muted);font-size:.92rem}.card ul{list-style:none;display:grid;gap:8px;margin-top:12px}.card li{padding-left:18px;position:relative}.card li:before{content:"▸";position:absolute;left:0;color:var(--lime)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}.calc,.intake{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 18px 60px rgba(0,0,0,.25)}.ctrl{margin:17px 0}.ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-bottom:8px}.ctrl b{color:var(--txt)}input[type=range]{width:100%;accent-color:var(--lime)}.result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.result div{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:16px;padding:14px}.result span{display:block;color:var(--muted);font-size:.78rem}.result b{display:block;font-family:var(--mono);font-size:1.24rem;color:var(--lime);margin-top:4px}.bigsave{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1;font-family:var(--mono);font-weight:900;background:var(--grad);background-clip:text;-webkit-background-clip:text;color:transparent;margin:6px 0 8px}.mini{font-size:.86rem;color:var(--muted)}
+.timeline{position:relative;display:grid;gap:14px}.step{display:grid;grid-template-columns:64px 1fr;gap:14px}.step .dot{width:52px;height:52px;border-radius:18px;background:var(--grad);color:#06080f;font-family:var(--mono);font-weight:900;display:grid;place-items:center;box-shadow:var(--glow)}.step .body{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:18px}.step p{color:var(--muted);font-size:.92rem;margin-top:5px}.ops{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}.checklist{display:grid;gap:10px}.check{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.035);display:flex;gap:12px}.check i{color:var(--lime);font-style:normal}.quote{border:1px solid rgba(184,255,60,.26);background:linear-gradient(140deg,rgba(184,255,60,.08),rgba(255,61,166,.06));border-radius:24px;padding:28px}.quote blockquote{font-size:1.18rem;line-height:1.55}.quote small{display:block;color:var(--muted);margin-top:14px}.funnels{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.funnel-card{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:18px;padding:18px}.funnel-card b{font-family:var(--mono);color:var(--lime);font-size:.78rem}.funnel-card h3{font-size:1rem;margin:8px 0}.funnel-card p{font-size:.85rem;color:var(--muted)}
+form{display:grid;gap:12px}input,select,textarea{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.045);border-radius:13px;color:var(--txt);padding:12px;outline:none}textarea{min-height:110px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(184,255,60,.55);box-shadow:0 0 0 3px rgba(184,255,60,.08)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.notice{display:none;border:1px solid rgba(184,255,60,.32);background:rgba(184,255,60,.08);border-radius:14px;padding:12px;color:var(--txt);font-size:.88rem}.notice.show{display:block}.footer{padding:42px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}.footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.reveal{opacity:0;transform:translateY(24px);transition:.7s ease}.reveal.show{opacity:1;transform:none}
+@media(max-width:900px){.hero-grid,.split,.ops{grid-template-columns:1fr}.grid3,.funnels{grid-template-columns:1fr 1fr}.proof{grid-template-columns:1fr}.navlinks{display:none}.hero{padding-top:58px}}@media(max-width:620px){.grid3,.funnels,.result,.form-grid{grid-template-columns:1fr}.step{grid-template-columns:48px 1fr}.step .dot{width:44px;height:44px;border-radius:14px}.btn{width:100%}.hero-actions{width:100%}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-
-<div class="bg-anim" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-<div class="bg-glow"></div>
-<div class="sheen"></div>
-<div class="float-wear" aria-hidden="true"><span style="left:6%;width:150px;height:180px;background-image:url('assets/hoodie_grey.jpg');animation-delay:-3s"></span><span style="left:24%;width:170px;height:150px;background-image:url('assets/jacket_denim.jpg');animation-delay:-19s"></span><span style="left:44%;width:120px;height:120px;background-image:url('assets/cap_red.jpg');animation-delay:-30s"></span><span style="left:62%;width:160px;height:200px;background-image:url('assets/coat_wool.jpg');animation-delay:-11s"></span><span style="left:80%;width:130px;height:130px;background-image:url('assets/tee_white.jpg');animation-delay:-24s"></span><span style="left:90%;width:140px;height:170px;background-image:url('assets/trousers_wide.jpg');animation-delay:-36s"></span><span style="left:14%;width:110px;height:110px;background-image:url('assets/scarf.jpg');animation-delay:-42s"></span><span style="left:36%;width:150px;height:160px;background-image:url('assets/sweater.jpg');animation-delay:-15s"></span><span style="left:56%;width:160px;height:150px;background-image:url('assets/bomber.jpg');animation-delay:-27s"></span><span style="left:72%;width:120px;height:150px;background-image:url('assets/flannel.jpg');animation-delay:-8s"></span></div>
-
-<div class="f-top">
-  <span class="brand">Craftee<span>Sites</span> <span style="color:var(--ink-soft);font-weight:400;font-size:.9rem">/ The Customer Journey</span></span>
-</div>
-
-<header class="f-hero">
-  <p class="eyebrow" style="color:var(--accent)">Sample · customer journey</p>
-  <h1>Turn Social Media Traffic Into Customers</h1>
-  <p>This is the exact path a shopper takes . From discovering your brand on a feed to becoming a repeat buyer. Every step happens inside the store we build for you.</p>
-</header>
-
-<div class="f-wrap">
-  <div class="f-step"><div class="f-dot">📱</div><div class="f-card"><h3>Instagram / TikTok / Facebook</h3><p>A follower sees your Reel, post, or ad. This is where attention starts.</p><small>Traffic source → your store</small></div></div>
-  <div class="f-step"><div class="f-dot">🌐</div><div class="f-card"><h3>Website</h3><p>They tap the link and land on a fast, mobile-first storefront built around your brand.</p><small>Zero load lag, thumb-friendly nav</small></div></div>
-  <div class="f-step"><div class="f-dot">👕</div><div class="f-card"><h3>Product Page</h3><p>Large photos, size & color selectors, fit guide, and reviews answer every question before checkout.</p><small>Reduces "is this my size?" DMs</small></div></div>
-  <div class="f-step"><div class="f-dot">🛒</div><div class="f-card"><h3>Add to Cart</h3><p>One tap adds the item. The cart persists, with a sticky add-to-cart on mobile.</p><small>+ abandoned-cart recovery email</small></div></div>
-  <div class="f-step"><div class="f-dot">💳</div><div class="f-card"><h3>Checkout</h3><p>Customer info, shipping, and payment in one smooth flow . Card, Apple Pay, Google Pay, or US bank transfer.</p><small>Automated confirmation email</small></div></div>
-  <div class="f-step"><div class="f-dot">✅</div><div class="f-card"><h3>Payment</h3><p>Secure payment captured. Order drops into your dashboard, ready to fulfill.</p><small>Order + customer saved automatically</small></div></div>
-  <div class="f-step"><div class="f-dot">📦</div><div class="f-card"><h3>Order Confirmation & Shipping</h3><p>Customer gets tracking by email; you update status from the dashboard.</p><small>Status: Processing → Shipped → Delivered</small></div></div>
-  <div class="f-step"><div class="f-dot">🔁</div><div class="f-card"><h3>Repeat Customer</h3><p>They get a discount on their next order, see new arrivals, and buy again . No more DM juggling.</p><small>Lifetime value grows in your CRM</small></div></div>
-
-  <div class="f-end"><div class="f-dot">🚀</div><h2>The loop compounds.</h2><p style="color:var(--ink-soft)">Every order feeds your analytics, email list, and retargeting . Turning one follower into a long-term customer.</p></div>
-
-  <div class="f-note">The interactive version lives inside your demo store: browse <a href="store.html" style="color:var(--accent)">store.html</a>, add to cart, check out, and track the order . Then watch it appear in the <a href="admin.html" style="color:var(--accent)">admin dashboard</a>.</div>
-
-  <div class="f-cta">
-    <a class="btn btn--primary" href="index.html#contact">Build My Store</a>
-    <a class="btn btn--ghost" href="store.html">Try the live store</a>
+<div class="grid"></div><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div><div class="scan"></div>
+<nav class="nav"><div class="wrap"><a class="brand" href="../index.html">ROME<b>GRISLER</b></a><div class="navlinks"><a href="#capture">Capture</a><a href="#automate">Automate</a><a href="#savings">Savings</a><a href="#contact" class="btn primary" style="padding:9px 14px">Get a teardown</a></div></div></nav>
+<main>
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div class="reveal">
+      <span class="pill"><i></i> GROWTH COMMAND FUNNEL</span>
+      <div class="eyebrow">Lead capture. Automation. Operations. Profit protection.</div>
+      <h1>Turn scattered work into a <span class="grad">growth operating system.</span></h1>
+      <p class="sub">I help businesses capture more leads, remove repetitive tasks, clean up operations, and save real money by moving workload from expensive owner time to structured systems and reliable execution.</p>
+      <div class="hero-actions"><a class="btn primary" href="#contact">Book a free systems teardown</a><a class="btn" href="#savings">Calculate your savings</a></div>
+      <div class="proof" aria-label="Business outcomes">
+        <div><b>24/7</b><span>lead capture and follow up paths</span></div>
+        <div><b>50%+</b><span>manual workload targeted for reduction</span></div>
+        <div><b>$8 to $15</b><span>general hourly range depending on scope</span></div>
+      </div>
+    </div>
+    <div class="console reveal">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="screen">
+        <div class="flow">
+          <div class="node"><div class="ico">🎯</div><div><h3>Lead captured</h3><p>Forms, messages, calls, bookings, inquiries</p></div><span class="tag">INPUT</span></div>
+          <div class="node"><div class="ico">🧠</div><div><h3>Qualified and routed</h3><p>Right service, right priority, right next step</p></div><span class="tag">AI</span></div>
+          <div class="node"><div class="ico">⚡</div><div><h3>Repetitive work automated</h3><p>Follow ups, CRM updates, reminders, reports</p></div><span class="tag">SYSTEM</span></div>
+          <div class="node"><div class="ico">📈</div><div><h3>Operations get lighter</h3><p>You get time back and fewer dropped tasks</p></div><span class="tag">GROWTH</span></div>
+        </div>
+        <div class="meter"><div class="row"><span>Manual workload removed</span><b>target 70%</b></div><div class="track"><div class="fill"></div></div></div>
+      </div>
+    </div>
   </div>
-</div>
-
-<a class="back-link" href="index.html">← Back to Craftee Sites</a>
-
+</header>
+<section class="wrap" id="capture">
+  <div class="section-head center reveal"><div class="eyebrow">THE PROBLEM</div><h2>Business growth leaks when leads, tasks, and operations live in too many places.</h2><p>Most owners do not need more random tools. They need a simple flow that captures opportunities, moves them forward, and keeps daily work under control.</p></div>
+  <div class="grid3">
+    <div class="card reveal"><div class="num">01</div><h3>Leads get missed</h3><p>Website forms, Facebook messages, email inquiries, and DMs sit in different places, so hot prospects cool down before anyone replies.</p></div>
+    <div class="card reveal"><div class="num">02</div><h3>Manual work keeps multiplying</h3><p>Copying data, sending reminders, checking spreadsheets, and updating CRMs quietly eats hours every week.</p></div>
+    <div class="card reveal"><div class="num">03</div><h3>Operations stay in the owner's head</h3><p>Without clear systems, every handoff needs your attention. That makes scaling feel expensive, stressful, and slow.</p></div>
+  </div>
+</section>
+<section class="wrap" id="automate">
+  <div class="section-head reveal"><div class="eyebrow">HOW I WORK</div><h2>I build the operating layer your business should already have.</h2><p>My approach is practical. Understand the business first, then capture leads, automate repetitive tasks, document the flow, and support daily operations where needed.</p></div>
+  <div class="timeline">
+    <div class="step reveal"><div class="dot">1</div><div class="body"><h3>Map the business flow</h3><p>I look at how leads arrive, where work gets stuck, which tasks repeat, and what currently depends on you.</p></div></div>
+    <div class="step reveal"><div class="dot">2</div><div class="body"><h3>Capture and organize every lead</h3><p>Forms, funnels, CRM fields, booking links, and notifications are connected so each opportunity has a next step.</p></div></div>
+    <div class="step reveal"><div class="dot">3</div><div class="body"><h3>Automate the repetitive work</h3><p>Follow ups, reminders, data entry, status updates, reporting, and handoffs become repeatable instead of manual.</p></div></div>
+    <div class="step reveal"><div class="dot">4</div><div class="body"><h3>Support operations with steady execution</h3><p>If the business needs ongoing help, I can assist with ecommerce, customer service operations, lead generation, admin workflows, logistics, and reporting.</p></div></div>
+    <div class="step reveal"><div class="dot">5</div><div class="body"><h3>Improve the system over time</h3><p>Once the basics are stable, we tighten the workflow, reduce friction, and keep improving the parts that create growth.</p></div></div>
+  </div>
+</section>
+<section class="wrap" id="savings">
+  <div class="split">
+    <div class="calc reveal">
+      <div class="eyebrow">SAVINGS CALCULATOR</div>
+      <h2>See why hiring me can save huge money.</h2>
+      <p class="mini">Estimate how much owner or team time can be moved into systems and support. This is a guide, not a guaranteed result.</p>
+      <div class="ctrl"><label>Hours lost to repetitive work per week <b id="vh">20h</b></label><input id="hours" type="range" min="5" max="80" value="20"></div>
+      <div class="ctrl"><label>Your effective hourly cost <b id="vr">$45</b></label><input id="rate" type="range" min="15" max="250" value="45"></div>
+      <div class="ctrl"><label>Share I can take off your plate <b id="vc">70%</b></label><input id="cover" type="range" min="20" max="90" value="70"></div>
+      <div class="ctrl"><label>Estimated Rome rate <b id="va">$12</b></label><input id="avaRate" type="range" min="8" max="15" value="12"></div>
+    </div>
+    <div class="calc reveal">
+      <div class="eyebrow">ANNUAL VALUE UNLOCKED</div>
+      <div class="bigsave" id="savings">$0</div>
+      <p class="mini">Potential yearly savings after comparing your time cost against the estimated cost of supported hours.</p>
+      <div class="result">
+        <div><span>Hours returned yearly</span><b id="savedHours">0h</b></div>
+        <div><span>You would pay Rome yearly</span><b id="romeCost">$0</b></div>
+        <div><span>Owner time value</span><b id="ownerValue">$0</b></div>
+        <div><span>Workload removed</span><b id="removed">0%</b></div>
+      </div>
+      <a class="btn primary" href="#contact" style="margin-top:18px;width:100%">I want this for my business</a>
+    </div>
+  </div>
+</section>
+<section class="wrap">
+  <div class="ops">
+    <div class="reveal">
+      <div class="section-head"><div class="eyebrow">WHAT I CAN HELP WITH</div><h2>Not just automation. The work around the automation too.</h2><p>I can help with both the system and the business execution around it, so the workflow does not only look good. It actually runs.</p></div>
+      <div class="checklist">
+        <div class="check"><i>✓</i><div><b>Lead capture and follow up</b><p class="mini">Forms, booking paths, CRM updates, text or email follow ups, pipeline movement.</p></div></div>
+        <div class="check"><i>✓</i><div><b>Automation for repetitive tasks</b><p class="mini">Data entry, notifications, reminders, reports, document handling, task creation.</p></div></div>
+        <div class="check"><i>✓</i><div><b>Operations support</b><p class="mini">Customer service operations, ecommerce admin, product updates, lead generation, logistics coordination.</p></div></div>
+        <div class="check"><i>✓</i><div><b>Websites and funnels</b><p class="mini">Landing pages, service pages, GoHighLevel pages, portfolio pages, store style pages.</p></div></div>
+      </div>
+    </div>
+    <div class="quote reveal"><blockquote>“The goal is simple: remove the busywork that drains your time, then replace it with a cleaner system that captures leads, supports customers, and gives the owner more room to grow.”</blockquote><small>Rome Grisler, Systems and Operations</small></div>
+  </div>
+</section>
+<section class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow">THE FUNNEL I CAN BUILD</div><h2>A simple growth path from visitor to booked conversation.</h2><p>This is the kind of funnel this page itself is showing. It filters interest, educates the visitor, proves the value, and makes the next step easy.</p></div>
+  <div class="funnels">
+    <div class="funnel-card reveal"><b>STEP 01</b><h3>Attention</h3><p>Clear promise that speaks to the owner's pain, lost leads, workload, and operating cost.</p></div>
+    <div class="funnel-card reveal"><b>STEP 02</b><h3>Diagnosis</h3><p>The page explains where the business is leaking time and why the current process feels heavy.</p></div>
+    <div class="funnel-card reveal"><b>STEP 03</b><h3>Value proof</h3><p>Calculator and workflow visuals make the savings and operational upside easy to understand.</p></div>
+    <div class="funnel-card reveal"><b>STEP 04</b><h3>Lead capture</h3><p>The visitor sends enough detail for a useful first conversation, not just a vague message.</p></div>
+  </div>
+</section>
+<section class="wrap" id="contact">
+  <div class="split">
+    <div class="reveal">
+      <div class="eyebrow">START HERE</div><h2>Book a free systems teardown.</h2><p class="sub" style="color:var(--muted);margin:12px 0 18px">Send a few details and I will look for the first three places where your business can capture more leads, automate repetitive work, or reduce workload.</p>
+      <ul class="checklist">
+        <li class="check"><i>✓</i><span>Best for business owners with too many manual tasks.</span></li>
+        <li class="check"><i>✓</i><span>Useful if leads are slipping through DMs, email, forms, or spreadsheets.</span></li>
+        <li class="check"><i>✓</i><span>Practical if you need systems plus ongoing operations support.</span></li>
+      </ul>
+    </div>
+    <div class="intake reveal">
+      <form id="leadForm">
+        <div class="form-grid"><input name="name" placeholder="Your name" required><input name="business" placeholder="Business name"></div>
+        <input type="email" name="email" placeholder="Email address" required>
+        <select name="need"><option value="Lead capture and follow up">Lead capture and follow up</option><option value="Automation for repetitive tasks">Automation for repetitive tasks</option><option value="Operations support">Operations support</option><option value="Website or funnel">Website or funnel</option><option value="Not sure yet">Not sure yet</option></select>
+        <textarea name="message" placeholder="What is taking too much time in your business right now?"></textarea>
+        <button class="btn primary" type="submit">Send details to Rome</button>
+        <div class="notice" id="notice">Your email app is opening with the details prepared. If it does not open, email Rome at grislerjerome@gmail.com.</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="wrap"><span>© <span id="year"></span> Jerome Grisler. Built as a live growth funnel.</span><span><a href="../index.html">Back to portfolio</a> · <a href="mailto:grislerjerome@gmail.com">grislerjerome@gmail.com</a></span></div></footer>
 <script>
-  // reveal-on-scroll for the steps
-  const steps = document.querySelectorAll('.f-step');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='none'; io.unobserve(e.target);} }),{threshold:.2});
-    steps.forEach(s=>{ s.style.opacity=0; s.style.transform='translateY(16px)'; s.style.transition='.5s'; io.observe(s); });
-  }
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function money(n){return "$"+Math.round(n).toLocaleString("en-US");}
+function calc(){const h=+$("#hours").value,r=+$("#rate").value,c=+$("#cover").value/100,a=+$("#avaRate").value;const hours=h*52*c, owner=hours*r, rome=hours*a, save=Math.max(0,owner-rome);$("#vh").textContent=h+"h";$("#vr").textContent="$"+r;$("#vc").textContent=Math.round(c*100)+"%";$("#va").textContent="$"+a;$("#savings").textContent=money(save);$("#savedHours").textContent=Math.round(hours).toLocaleString("en-US")+"h";$("#romeCost").textContent=money(rome);$("#ownerValue").textContent=money(owner);$("#removed").textContent=Math.round(c*100)+"%";}
+["hours","rate","cover","avaRate"].forEach(id=>$("#"+id).addEventListener("input",calc));calc();$("#year").textContent=new Date().getFullYear();
+const reveal=$$(".reveal");if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("show");io.unobserve(e.target)}}),{threshold:.14});reveal.forEach(el=>io.observe(el));}else reveal.forEach(el=>el.classList.add("show"));
+$("#leadForm").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.currentTarget);const subject="Growth systems teardown request";const body=`Name: ${f.get("name")||""}\nBusiness: ${f.get("business")||""}\nEmail: ${f.get("email")||""}\nNeed: ${f.get("need")||""}\n\nWhat is taking too much time:\n${f.get("message")||""}`;$("#notice").classList.add("show");location.href=`mailto:grislerjerome@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;});
 </script>
 </body>
 </html>
