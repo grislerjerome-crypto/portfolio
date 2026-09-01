@@ -435,9 +435,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
   <section id="capabilities" class="wrap">
     <div class="reveal">
-      <span class="eyebrow">HOW I OPERATE (ALL MODES)</span>
-      <h2 class="title">The operating system I bring</h2>
-      <p class="lead">Same disciplined approach whether it's an automation, a website, a store or a supply chain.</p>
+      <span class="eyebrow" id="cap-eyebrow">HOW I OPERATE (ALL MODES)</span>
+      <h2 class="title" id="cap-title">The operating system I bring</h2>
+      <p class="lead" id="cap-lead">Same disciplined approach whether it's an automation, a website, a store or a supply chain.</p>
     </div>
     <div class="cap-grid" id="cap-grid"></div>
   </section>
@@ -554,7 +554,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <p style="color:var(--muted);font-size:.9rem" id="footer-tag">Systems and operations, building the engine that runs while you sleep.</p>
       <p style="color:var(--muted);font-size:.85rem;margin-top:14px">Available worldwide · Remote</p>
     </div>
-    <div class="col"><h4>SERVICES</h4><a href="#services" data-footer-mode="automation">AI Automation</a><a href="#services" data-footer-mode="web">Website Development</a><a href="#services" data-footer-mode="ecom">E-commerce VA</a><a href="#services" data-footer-mode="logistics">Logistics &amp; Supply Chain VA</a></div>
+    <div class="col"><h4>SERVICES</h4><a href="#services" data-footer-mode="automation" onclick="setMode('automation');smartScroll(document.querySelector('.svc[data-mode=&quot;automation&quot;]')||'#services');return false">AI Automation</a><a href="#services" data-footer-mode="web" onclick="setMode('web');smartScroll(document.querySelector('.svc[data-mode=&quot;web&quot;]')||'#services');return false">Website Development</a><a href="#services" data-footer-mode="ecom" onclick="setMode('ecom');smartScroll(document.querySelector('.svc[data-mode=&quot;ecom&quot;]')||'#services');return false">E-commerce VA</a><a href="#services" data-footer-mode="logistics" onclick="setMode('logistics');smartScroll(document.querySelector('.svc[data-mode=&quot;logistics&quot;]')||'#services');return false">Logistics &amp; Supply Chain VA</a></div>
     <div class="col"><h4>PROJECTS</h4><a href="https://grislerjerome-crypto.github.io/portfolio/craftee/index.html" target="_blank" rel="noopener">Craftee Sites</a><a href="https://grislerjerome-crypto.github.io/portfolio/craftee/funnel.html" target="_blank" rel="noopener">Growth Command Funnel</a></div>
     <div class="col"><h4>CONNECT</h4><a id="foot-email" href="mailto:grislerjerome@gmail.com">Email</a><a id="foot-facebook" href="https://www.facebook.com/jeromegrslr" target="_blank" rel="noopener">Facebook</a><a id="foot-linkedin" href="https://www.linkedin.com/in/jerome-grisler-7041ab3a7/" target="_blank" rel="noopener">LinkedIn</a></div>
   </div>
@@ -644,14 +644,73 @@ const CONFIG = {
     }
   ],
 
-  capabilities: [
-    { n:"01", title:"Capture", desc:"Catch events from forms, inboxes, orders and APIs the moment they happen.", tags:["Webhooks","Forms","Order feeds","Email parse"] },
-    { n:"02", title:"Decide", desc:"People or AI agents classify and decide with guardrails, not guesswork.", tags:["OpenAI","Gemini","Rules","Classification"] },
-    { n:"03", title:"Record", desc:"Keep CRM, sheets, sites and docs perfectly in sync, automatically.", tags:["GoHighLevel","Airtable","WordPress","Notion"] },
-    { n:"04", title:"Act", desc:"Send the right message on the right channel at the right time.", tags:["Email","SMS","Slack","Voice"] },
-    { n:"05", title:"Monitor", desc:"Alerts and self-healing so a broken step never goes unnoticed.", tags:["Error catch","Retries","Dashboards"] },
-    { n:"06", title:"Handoff", desc:"You get a diagram, a runbook and a human off-switch.", tags:["Runbooks","Loom","Docs"] }
-  ],
+  operatingSystems: {
+    overview: {
+      eyebrow:"HOW I OPERATE (ALL MODES)",
+      title:"The operating system I bring",
+      lead:"Same disciplined approach, rebuilt for the selected niche. Pick a service mode and this interface changes to match how I work there.",
+      steps:[
+        { n:"01", title:"Capture", desc:"Catch events from forms, inboxes, orders and APIs the moment they happen.", tags:["Webhooks","Forms","Order feeds","Email parse"] },
+        { n:"02", title:"Decide", desc:"People or AI agents classify and decide with guardrails, not guesswork.", tags:["OpenAI","Gemini","Rules","Classification"] },
+        { n:"03", title:"Record", desc:"Keep CRM, sheets, sites and docs perfectly in sync, automatically.", tags:["GoHighLevel","Airtable","WordPress","Notion"] },
+        { n:"04", title:"Act", desc:"Send the right message on the right channel at the right time.", tags:["Email","SMS","Slack","Voice"] },
+        { n:"05", title:"Monitor", desc:"Alerts and self-healing so a broken step never goes unnoticed.", tags:["Error catch","Retries","Dashboards"] },
+        { n:"06", title:"Handoff", desc:"You get a diagram, a runbook and a human off-switch.", tags:["Runbooks","Loom","Docs"] }
+      ]
+    },
+    automation: {
+      eyebrow:"HOW I OPERATE · AI AUTOMATION",
+      title:"The automation operating system I bring",
+      lead:"Capture, Decide, Record, Act, Monitor, Handoff — the workflow that turns repetitive business work into reliable automated execution.",
+      steps:[
+        { n:"01", title:"Capture", desc:"Pull leads, orders, messages, documents, and trigger events into one clean flow.", tags:["Forms","Webhooks","Inbox","CRM"] },
+        { n:"02", title:"Decide", desc:"Use rules and AI judgment to classify, prioritize, score, route, or flag the next move.", tags:["AI rules","Scoring","Routing","Guardrails"] },
+        { n:"03", title:"Record", desc:"Write the right data back into the CRM, sheet, database, task board, or client record.", tags:["CRM","Sheets","Airtable","Notion"] },
+        { n:"04", title:"Act", desc:"Send follow-ups, create tasks, update statuses, notify the team, or trigger the next system.", tags:["Email","Slack","SMS","Tasks"] },
+        { n:"05", title:"Monitor", desc:"Track failures, retries, bottlenecks, and outcomes so automation stays production-ready.", tags:["Alerts","Retries","Logs","Dashboards"] },
+        { n:"06", title:"Handoff", desc:"Document the flow, show the override path, and give your team a human control point.", tags:["Runbook","Diagram","Loom","Off-switch"] }
+      ]
+    },
+    web: {
+      eyebrow:"HOW I OPERATE · WEBSITE DEVELOPMENT",
+      title:"The web build system I bring",
+      lead:"Position, Structure, Design, Build, Optimize, Launch — how I turn a website from a nice-looking page into a fast lead-generating asset.",
+      steps:[
+        { n:"01", title:"Position", desc:"Clarify the offer, audience, promise, and main conversion path before touching the layout.", tags:["Offer","Audience","CTA","Messaging"] },
+        { n:"02", title:"Structure", desc:"Map the sections, navigation, user flow, and mobile hierarchy so visitors know exactly what to do.", tags:["Wireframe","UX flow","Sitemap","Mobile"] },
+        { n:"03", title:"Design", desc:"Build the visual system: colors, spacing, motion, cards, proof, and brand moments that feel premium.", tags:["UI system","Responsive","Motion","Brand"] },
+        { n:"04", title:"Build", desc:"Code or assemble the site cleanly with fast-loading HTML/CSS/JS, CMS, GHL, WordPress, or storefront tools.", tags:["HTML/CSS/JS","GHL","WordPress","Shopify"] },
+        { n:"05", title:"Optimize", desc:"Tune performance, SEO basics, accessibility, forms, tracking, and conversion friction.", tags:["Speed","SEO","Forms","Analytics"] },
+        { n:"06", title:"Launch", desc:"Publish, test links and devices, connect domains, and leave a simple update path for future changes.", tags:["Deploy","QA","Domain","Handoff"] }
+      ]
+    },
+    ecom: {
+      eyebrow:"HOW I OPERATE · E-COMMERCE VA",
+      title:"The store operations system I bring",
+      lead:"List, Verify, Process, Support, Report, Improve — the daily rhythm that keeps an online store organized, responsive, and easier to scale.",
+      steps:[
+        { n:"01", title:"List", desc:"Create and clean up products, collections, images, descriptions, tags, variants, and pricing details.", tags:["Products","Catalog","Variants","Content"] },
+        { n:"02", title:"Verify", desc:"Check inventory, payment details, shipping rules, discounts, and order information before mistakes reach customers.", tags:["Inventory","Checkout","Shipping","QA"] },
+        { n:"03", title:"Process", desc:"Move orders through fulfillment, update statuses, coordinate details, and keep records clean.", tags:["Orders","Fulfillment","Tracking","Records"] },
+        { n:"04", title:"Support", desc:"Handle customer questions, returns, reviews, updates, and common store admin requests with clear SOPs.", tags:["CX","Returns","Reviews","SOPs"] },
+        { n:"05", title:"Report", desc:"Summarize sales, issues, stock risks, support volume, and recurring problems so owners can decide faster.", tags:["Sales","Issues","Stock","Reports"] },
+        { n:"06", title:"Improve", desc:"Tighten listings, automations, templates, FAQs, and workflows based on what happens every week.", tags:["Optimization","Templates","FAQ","Automation"] }
+      ]
+    },
+    logistics: {
+      eyebrow:"HOW I OPERATE · SUPPLY CHAIN / LOGISTICS VA",
+      title:"The logistics control system I bring",
+      lead:"Track, Confirm, Coordinate, Update, Escalate, Reconcile — how I keep shipments, suppliers, documents, and customers moving with fewer surprises.",
+      steps:[
+        { n:"01", title:"Track", desc:"Monitor orders, shipments, inventory movements, carrier updates, and exceptions from the right sources.", tags:["Orders","Shipments","Inventory","Carriers"] },
+        { n:"02", title:"Confirm", desc:"Verify quantities, addresses, ETAs, documents, supplier updates, and fulfillment details before they create delays.", tags:["ETA","Docs","Quantity","Address"] },
+        { n:"03", title:"Coordinate", desc:"Keep suppliers, freight partners, warehouses, customer support, and internal teams aligned on next steps.", tags:["Suppliers","Freight","Warehouse","Team"] },
+        { n:"04", title:"Update", desc:"Maintain dashboards, sheets, trackers, CRMs, customer messages, and internal status notes.", tags:["Dashboard","Sheets","CRM","Status"] },
+        { n:"05", title:"Escalate", desc:"Flag delays, stockouts, missing docs, damaged goods, or urgent exceptions before they become bigger problems.", tags:["Delays","Stockouts","Exceptions","Alerts"] },
+        { n:"06", title:"Reconcile", desc:"Close the loop with proof of delivery, records, reports, invoice checks, and lessons for the next shipment.", tags:["POD","Invoices","Records","Report"] }
+      ]
+    }
+  },
 
 
   testimonials: [
@@ -742,7 +801,7 @@ function buildServices(){
       <div class="svc-tools">${s.tools.map(t=>`<span>${t}</span>`).join('')}</div>
       <button class="svc-enter" data-mode="${s.id}">Enter ${s.name} mode →</button>
     </div>`).join('');
-  $$("#svc-grid .svc, #svc-grid .svc-enter").forEach(el=>el.onclick=(e)=>{e.stopPropagation();setMode(el.dataset.mode);smartScroll('#craftee');});
+  $$("#svc-grid .svc, #svc-grid .svc-enter").forEach(el=>el.onclick=(e)=>{e.stopPropagation();setMode(el.dataset.mode);smartScroll('#capabilities');});
 }
 function setMode(id){
   const root=document.documentElement;
@@ -752,6 +811,7 @@ function setMode(id){
     $("#mode-name").textContent="OVERVIEW";
     $("#mode-banner").classList.remove('show');
     $$("#svc-grid .svc").forEach(c=>c.classList.remove('active'));
+    renderOperatingSystem(null);
     return;
   }
   const s=CONFIG.services.find(x=>x.id===id);if(!s)return;
@@ -761,6 +821,7 @@ function setMode(id){
   $("#mb-name").textContent=s.name;
   $("#mode-banner").classList.add('show');
   $$("#svc-grid .svc").forEach(c=>c.classList.toggle('active',c.dataset.mode===id));
+  renderOperatingSystem(id);
   /* projects section removed */
 }
 $("#mode-ind").onclick=()=>setMode(null);
@@ -775,8 +836,17 @@ function setupFooterLinks(){
   }));
 }
 
-/* ---- capabilities ---- */
-function buildCaps(){ $("#cap-grid").innerHTML=CONFIG.capabilities.map((c,i)=>`<div class="cap reveal tilt d${(i%4)+1}"><div class="num">${c.n}</div><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join(''); }
+/* ---- operating system / mode-changing interface ---- */
+function buildCaps(){ renderOperatingSystem(currentMode); }
+function renderOperatingSystem(id){
+  const os=(CONFIG.operatingSystems && CONFIG.operatingSystems[id]) || CONFIG.operatingSystems.overview;
+  const svc=id?CONFIG.services.find(x=>x.id===id):null;
+  if($("#cap-eyebrow")) $("#cap-eyebrow").textContent=os.eyebrow;
+  if($("#cap-title")) $("#cap-title").textContent=os.title;
+  if($("#cap-lead")) $("#cap-lead").textContent=os.lead;
+  $("#cap-grid").innerHTML=os.steps.map((c,i)=>`<div class="cap reveal tilt d${(i%4)+1}" data-operating-mode="${id||'overview'}" style="--cap1:${svc?svc.c1:'var(--lime)'};--cap2:${svc?svc.c2:'var(--magenta)'}"><div class="num">${c.n}</div><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join('');
+  setupTilt();
+}
 
 /* ---- marquee (all tools) ---- */
 function buildMarquee(){
