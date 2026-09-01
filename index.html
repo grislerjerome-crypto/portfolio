@@ -181,17 +181,18 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .mode-banner button{margin-left:auto;font-family:var(--mono);font-size:.74rem;background:none;border:1px solid var(--panel-border);color:var(--muted);border-radius:8px;padding:6px 12px;cursor:pointer}
 .mode-banner button:hover{border-color:color-mix(in srgb,var(--lime) 45%,transparent);color:var(--txt)}
 
-.cap-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px;max-width:980px;position:relative;z-index:4;isolation:isolate;background:linear-gradient(180deg,rgba(6,8,15,.36),rgba(6,8,15,.08));border-radius:22px;padding:4px}
-.cap{background:linear-gradient(135deg,color-mix(in srgb,var(--cap1,var(--lime)) 13%,rgba(8,12,20,.92)),rgba(8,10,18,.86));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 38%,var(--panel-border));border-radius:18px;padding:18px 20px;transition:transform .25s,border-color .25s,box-shadow .25s;transform-style:preserve-3d;box-shadow:0 14px 42px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.035);display:grid;grid-template-columns:74px 1fr;gap:18px;align-items:start;position:relative;overflow:hidden;opacity:1!important;visibility:visible!important;transform:none}
-.cap::before{content:"";position:absolute;inset:0;background:radial-gradient(280px 120px at 0 0,color-mix(in srgb,var(--cap2,var(--magenta)) 12%,transparent),transparent 68%);pointer-events:none}.cap>*{position:relative}
-.cap:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--cap1,var(--lime)) 48%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--cap1,var(--lime)) 28%,transparent),0 0 34px color-mix(in srgb,var(--cap2,var(--magenta)) 18%,transparent)}
-.cap .num{font-family:var(--mono);font-size:1.45rem;font-weight:800;background:linear-gradient(120deg,var(--cap1,var(--lime)),var(--cap2,var(--magenta)));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0;line-height:1;border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 32%,transparent);border-radius:14px;min-height:54px;display:grid;place-items:center;background-color:rgba(255,255,255,.035)}
-.cap .cap-body{min-width:0}
-.cap h3{font-size:1.08rem;margin-bottom:6px}
-.cap p{color:var(--muted);font-size:.9rem;margin-bottom:12px;max-width:760px}
-.cap .tags{display:flex;flex-wrap:wrap;gap:8px}
-.cap .tags span{font-family:var(--mono);font-size:.7rem;color:var(--cap1,var(--lime));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 28%,transparent);border-radius:99px;padding:3px 9px;background:rgba(255,255,255,.025)}
-@media(max-width:620px){.cap{grid-template-columns:1fr}.cap .num{width:58px;min-height:46px}}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;position:relative;z-index:4;isolation:isolate}
+.cap{background:linear-gradient(135deg,color-mix(in srgb,var(--cap1,var(--lime)) 13%,rgba(8,12,20,.92)),rgba(8,10,18,.86));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 38%,var(--panel-border));border-radius:16px;padding:14px 16px;transition:transform .25s,border-color .25s,box-shadow .25s;transform-style:preserve-3d;box-shadow:0 10px 30px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.035);display:grid;gap:4px;position:relative;overflow:hidden;opacity:1!important;visibility:visible!important;transform:none}
+.cap::before{content:"";position:absolute;inset:0;background:radial-gradient(200px 90px at 0 0,color-mix(in srgb,var(--cap2,var(--magenta)) 12%,transparent),transparent 68%);pointer-events:none}.cap>*{position:relative}
+.cap:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--cap1,var(--lime)) 48%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--cap1,var(--lime)) 28%,transparent),0 0 24px color-mix(in srgb,var(--cap2,var(--magenta)) 18%,transparent)}
+.cap .num{font-family:var(--mono);font-size:1.1rem;font-weight:800;background:linear-gradient(120deg,var(--cap1,var(--lime)),var(--cap2,var(--magenta)));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:2px;width:42px;height:30px;display:grid;place-items:center;border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 32%,transparent);border-radius:10px;background-color:rgba(255,255,255,.035)}
+.cap-body{min-width:0}
+.cap h3{font-size:.95rem;margin-bottom:2px;margin-top:4px}
+.cap p{color:var(--muted);font-size:.78rem;margin-bottom:0;max-width:none;line-height:1.3}
+.cap .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.cap .tags span{font-family:var(--mono);font-size:.62rem;color:var(--cap1,var(--lime));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 28%,transparent);border-radius:99px;padding:2px 7px;background:rgba(255,255,255,.025)}
+@media(max-width:860px){.cap-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.cap-grid{grid-template-columns:1fr}}
 
 /* ---- Ava AI Agent section ---- */
 .ava-section{position:relative}
@@ -653,66 +654,66 @@ const CONFIG = {
       title:"The operating system I bring",
       lead:"Same disciplined approach, rebuilt for the selected niche. Pick a service mode and this interface changes to match how I work there.",
       steps:[
-        { n:"01", title:"Capture", desc:"Catch events from forms, inboxes, orders and APIs the moment they happen.", tags:["Webhooks","Forms","Order feeds","Email parse"] },
-        { n:"02", title:"Decide", desc:"People or AI agents classify and decide with guardrails, not guesswork.", tags:["OpenAI","Gemini","Rules","Classification"] },
-        { n:"03", title:"Record", desc:"Keep CRM, sheets, sites and docs perfectly in sync, automatically.", tags:["GoHighLevel","Airtable","WordPress","Notion"] },
-        { n:"04", title:"Act", desc:"Send the right message on the right channel at the right time.", tags:["Email","SMS","Slack","Voice"] },
-        { n:"05", title:"Monitor", desc:"Alerts and self-healing so a broken step never goes unnoticed.", tags:["Error catch","Retries","Dashboards"] },
-        { n:"06", title:"Handoff", desc:"You get a diagram, a runbook and a human off-switch.", tags:["Runbooks","Loom","Docs"] }
+        { n:"01", title:"Capture", desc:"Catch events from forms, inboxes, orders and APIs.", tags:["Webhooks","Forms","Order feeds","Email parse"] },
+                { n:"02", title:"Decide", desc:"Classify and route with AI or rules.", tags:["OpenAI","Gemini","Rules","Classification"] },
+                { n:"03", title:"Record", desc:"Keep CRM, sheets, and docs in sync.", tags:["GoHighLevel","Airtable","WordPress","Notion"] },
+                { n:"04", title:"Act", desc:"Send messages, create tasks, update statuses.", tags:["Email","SMS","Slack","Voice"] },
+                { n:"05", title:"Monitor", desc:"Alerts and retries for every step.", tags:["Error catch","Retries","Dashboards"] },
+                { n:"06", title:"Handoff", desc:"Diagram, runbook, and human override.", tags:["Runbooks","Loom","Docs"] }
       ]
     },
     automation: {
-      eyebrow:"HOW I OPERATE · AI AUTOMATION",
-      title:"The automation operating system I bring",
-      lead:"Capture, Decide, Record, Act, Monitor, Handoff — the workflow that turns repetitive business work into reliable automated execution.",
-      steps:[
-        { n:"01", title:"Capture", desc:"Pull leads, orders, messages, documents, and trigger events into one clean flow.", tags:["Forms","Webhooks","Inbox","CRM"] },
-        { n:"02", title:"Decide", desc:"Use rules and AI judgment to classify, prioritize, score, route, or flag the next move.", tags:["AI rules","Scoring","Routing","Guardrails"] },
-        { n:"03", title:"Record", desc:"Write the right data back into the CRM, sheet, database, task board, or client record.", tags:["CRM","Sheets","Airtable","Notion"] },
-        { n:"04", title:"Act", desc:"Send follow-ups, create tasks, update statuses, notify the team, or trigger the next system.", tags:["Email","Slack","SMS","Tasks"] },
-        { n:"05", title:"Monitor", desc:"Track failures, retries, bottlenecks, and outcomes so automation stays production-ready.", tags:["Alerts","Retries","Logs","Dashboards"] },
-        { n:"06", title:"Handoff", desc:"Document the flow, show the override path, and give your team a human control point.", tags:["Runbook","Diagram","Loom","Off-switch"] }
-      ]
-    },
-    web: {
-      eyebrow:"HOW I OPERATE · WEBSITE DEVELOPMENT",
-      title:"The web build system I bring",
-      lead:"Position, Structure, Design, Build, Optimize, Launch — how I turn a website from a nice-looking page into a fast lead-generating asset.",
-      steps:[
-        { n:"01", title:"Position", desc:"Clarify the offer, audience, promise, and main conversion path before touching the layout.", tags:["Offer","Audience","CTA","Messaging"] },
-        { n:"02", title:"Structure", desc:"Map the sections, navigation, user flow, and mobile hierarchy so visitors know exactly what to do.", tags:["Wireframe","UX flow","Sitemap","Mobile"] },
-        { n:"03", title:"Design", desc:"Build the visual system: colors, spacing, motion, cards, proof, and brand moments that feel premium.", tags:["UI system","Responsive","Motion","Brand"] },
-        { n:"04", title:"Build", desc:"Code or assemble the site cleanly with fast-loading HTML/CSS/JS, CMS, GHL, WordPress, or storefront tools.", tags:["HTML/CSS/JS","GHL","WordPress","Shopify"] },
-        { n:"05", title:"Optimize", desc:"Tune performance, SEO basics, accessibility, forms, tracking, and conversion friction.", tags:["Speed","SEO","Forms","Analytics"] },
-        { n:"06", title:"Launch", desc:"Publish, test links and devices, connect domains, and leave a simple update path for future changes.", tags:["Deploy","QA","Domain","Handoff"] }
-      ]
-    },
-    ecom: {
-      eyebrow:"HOW I OPERATE · E-COMMERCE VA",
-      title:"The store operations system I bring",
-      lead:"List, Verify, Process, Support, Report, Improve — the daily rhythm that keeps an online store organized, responsive, and easier to scale.",
-      steps:[
-        { n:"01", title:"List", desc:"Create and clean up products, collections, images, descriptions, tags, variants, and pricing details.", tags:["Products","Catalog","Variants","Content"] },
-        { n:"02", title:"Verify", desc:"Check inventory, payment details, shipping rules, discounts, and order information before mistakes reach customers.", tags:["Inventory","Checkout","Shipping","QA"] },
-        { n:"03", title:"Process", desc:"Move orders through fulfillment, update statuses, coordinate details, and keep records clean.", tags:["Orders","Fulfillment","Tracking","Records"] },
-        { n:"04", title:"Support", desc:"Handle customer questions, returns, reviews, updates, and common store admin requests with clear SOPs.", tags:["CX","Returns","Reviews","SOPs"] },
-        { n:"05", title:"Report", desc:"Summarize sales, issues, stock risks, support volume, and recurring problems so owners can decide faster.", tags:["Sales","Issues","Stock","Reports"] },
-        { n:"06", title:"Improve", desc:"Tighten listings, automations, templates, FAQs, and workflows based on what happens every week.", tags:["Optimization","Templates","FAQ","Automation"] }
-      ]
-    },
-    logistics: {
-      eyebrow:"HOW I OPERATE · SUPPLY CHAIN / LOGISTICS VA",
-      title:"The logistics control system I bring",
-      lead:"Track, Confirm, Coordinate, Update, Escalate, Reconcile — how I keep shipments, suppliers, documents, and customers moving with fewer surprises.",
-      steps:[
-        { n:"01", title:"Track", desc:"Monitor orders, shipments, inventory movements, carrier updates, and exceptions from the right sources.", tags:["Orders","Shipments","Inventory","Carriers"] },
-        { n:"02", title:"Confirm", desc:"Verify quantities, addresses, ETAs, documents, supplier updates, and fulfillment details before they create delays.", tags:["ETA","Docs","Quantity","Address"] },
-        { n:"03", title:"Coordinate", desc:"Keep suppliers, freight partners, warehouses, customer support, and internal teams aligned on next steps.", tags:["Suppliers","Freight","Warehouse","Team"] },
-        { n:"04", title:"Update", desc:"Maintain dashboards, sheets, trackers, CRMs, customer messages, and internal status notes.", tags:["Dashboard","Sheets","CRM","Status"] },
-        { n:"05", title:"Escalate", desc:"Flag delays, stockouts, missing docs, damaged goods, or urgent exceptions before they become bigger problems.", tags:["Delays","Stockouts","Exceptions","Alerts"] },
-        { n:"06", title:"Reconcile", desc:"Close the loop with proof of delivery, records, reports, invoice checks, and lessons for the next shipment.", tags:["POD","Invoices","Records","Report"] }
-      ]
-    }
+          eyebrow:"HOW I OPERATE · AI AUTOMATION",
+          title:"The automation operating system I bring",
+          lead:"Capture, Decide, Record, Act, Monitor, Handoff — the workflow that turns repetitive business work into reliable automated execution.",
+          steps:[
+            { n:"01", title:"Capture", desc:"Pull leads, orders, messages, and trigger events.", tags:["Forms","Webhooks","Inbox","CRM"] },
+            { n:"02", title:"Decide", desc:"Route and prioritize with AI or rules.", tags:["AI rules","Scoring","Routing","Guardrails"] },
+            { n:"03", title:"Record", desc:"Write data back to CRM, sheets, or boards.", tags:["CRM","Sheets","Airtable","Notion"] },
+            { n:"04", title:"Act", desc:"Send follow-ups, create tasks, notify teams.", tags:["Email","Slack","SMS","Tasks"] },
+            { n:"05", title:"Monitor", desc:"Track failures, retries, and bottlenecks.", tags:["Alerts","Retries","Logs","Dashboards"] },
+            { n:"06", title:"Handoff", desc:"Runbook, diagram, and human override.", tags:["Runbook","Diagram","Loom","Off-switch"] }
+          ]
+        },
+        web: {
+          eyebrow:"HOW I OPERATE · WEBSITE DEVELOPMENT",
+          title:"The web build system I bring",
+          lead:"Position, Structure, Design, Build, Optimize, Launch — how I turn a website from a nice-looking page into a fast lead-generating asset.",
+          steps:[
+            { n:"01", title:"Position", desc:"Clarify offer, audience, and conversion path.", tags:["Offer","Audience","CTA","Messaging"] },
+            { n:"02", title:"Structure", desc:"Map sections, nav, and mobile flow.", tags:["Wireframe","UX flow","Sitemap","Mobile"] },
+            { n:"03", title:"Design", desc:"Build UI system, colors, spacing, motion.", tags:["UI system","Responsive","Motion","Brand"] },
+            { n:"04", title:"Build", desc:"Code with HTML/CSS/JS, CMS, or storefront.", tags:["HTML/CSS/JS","GHL","WordPress","Shopify"] },
+            { n:"05", title:"Optimize", desc:"Tune speed, SEO, forms, and conversion.", tags:["Speed","SEO","Forms","Analytics"] },
+            { n:"06", title:"Launch", desc:"Deploy, QA, connect domain, handoff keys.", tags:["Deploy","QA","Domain","Handoff"] }
+          ]
+        },
+        ecom: {
+          eyebrow:"HOW I OPERATE · E-COMMERCE VA",
+          title:"The store operations system I bring",
+          lead:"List, Verify, Process, Support, Report, Improve — the daily rhythm that keeps an online store organized, responsive, and easier to scale.",
+          steps:[
+            { n:"01", title:"List", desc:"Create products, collections, variants, content.", tags:["Products","Catalog","Variants","Content"] },
+            { n:"02", title:"Verify", desc:"Check inventory, pricing, shipping, discounts.", tags:["Inventory","Checkout","Shipping","QA"] },
+            { n:"03", title:"Process", desc:"Fulfill orders, update status, track records.", tags:["Orders","Fulfillment","Tracking","Records"] },
+            { n:"04", title:"Support", desc:"Handle CX, returns, reviews, and admin.", tags:["CX","Returns","Reviews","SOPs"] },
+            { n:"05", title:"Report", desc:"Summarize sales, issues, stock, and trends.", tags:["Sales","Issues","Stock","Reports"] },
+            { n:"06", title:"Improve", desc:"Tighten listings, automations, and FAQs.", tags:["Optimization","Templates","FAQ","Automation"] }
+          ]
+        },
+        logistics: {
+          eyebrow:"HOW I OPERATE · SUPPLY CHAIN / LOGISTICS VA",
+          title:"The logistics control system I bring",
+          lead:"Track, Confirm, Coordinate, Update, Escalate, Reconcile — how I keep shipments, suppliers, documents, and customers moving with fewer surprises.",
+          steps:[
+            { n:"01", title:"Track", desc:"Monitor orders, shipments, and carrier updates.", tags:["Orders","Shipments","Inventory","Carriers"] },
+            { n:"02", title:"Confirm", desc:"Verify ETAs, docs, quantities, addresses.", tags:["ETA","Docs","Quantity","Address"] },
+            { n:"03", title:"Coordinate", desc:"Align suppliers, freight, and warehouse.", tags:["Suppliers","Freight","Warehouse","Team"] },
+            { n:"04", title:"Update", desc:"Maintain dashboards, trackers, and CRMs.", tags:["Dashboard","Sheets","CRM","Status"] },
+            { n:"05", title:"Escalate", desc:"Flag delays, stockouts, and exceptions.", tags:["Delays","Stockouts","Exceptions","Alerts"] },
+            { n:"06", title:"Reconcile", desc:"Close with POD, invoices, and reports.", tags:["POD","Invoices","Records","Report"] }
+          ]
+        }
   },
 
 
@@ -847,7 +848,7 @@ function renderOperatingSystem(id){
   if($("#cap-eyebrow")) $("#cap-eyebrow").textContent=os.eyebrow;
   if($("#cap-title")) $("#cap-title").textContent=os.title;
   if($("#cap-lead")) $("#cap-lead").textContent=os.lead;
-  $("#cap-grid").innerHTML=os.steps.map((c,i)=>`<div class="cap tilt d${(i%4)+1}" data-operating-mode="${id||'overview'}" style="--cap1:${svc?svc.c1:'var(--lime)'};--cap2:${svc?svc.c2:'var(--magenta)'}"><div class="num">${c.n}</div><div class="cap-body"><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div></div>`).join('');
+  $("#cap-grid").innerHTML=os.steps.map((c,i)=>`<div class="cap tilt d${(i%4)+1}" data-operating-mode="${id||'overview'}" style="--cap1:${svc?svc.c1:'var(--lime)'};--cap2:${svc?svc.c2:'var(--magenta)'}"><div class="num">${c.n}</div><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join('');
   setupTilt();
 }
 
