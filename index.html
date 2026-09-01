@@ -181,8 +181,8 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .mode-banner button{margin-left:auto;font-family:var(--mono);font-size:.74rem;background:none;border:1px solid var(--panel-border);color:var(--muted);border-radius:8px;padding:6px 12px;cursor:pointer}
 .mode-banner button:hover{border-color:color-mix(in srgb,var(--lime) 45%,transparent);color:var(--txt)}
 
-.cap-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px;max-width:980px}
-.cap{background:linear-gradient(135deg,color-mix(in srgb,var(--cap1,var(--lime)) 8%,transparent),rgba(255,255,255,.035));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 24%,var(--panel-border));border-radius:18px;padding:18px 20px;transition:transform .25s,border-color .25s,box-shadow .25s;transform-style:preserve-3d;box-shadow:0 14px 42px rgba(0,0,0,.14);display:grid;grid-template-columns:74px 1fr;gap:18px;align-items:start;position:relative;overflow:hidden}
+.cap-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px;max-width:980px;position:relative;z-index:4;isolation:isolate;background:linear-gradient(180deg,rgba(6,8,15,.36),rgba(6,8,15,.08));border-radius:22px;padding:4px}
+.cap{background:linear-gradient(135deg,color-mix(in srgb,var(--cap1,var(--lime)) 13%,rgba(8,12,20,.92)),rgba(8,10,18,.86));border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 38%,var(--panel-border));border-radius:18px;padding:18px 20px;transition:transform .25s,border-color .25s,box-shadow .25s;transform-style:preserve-3d;box-shadow:0 14px 42px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.035);display:grid;grid-template-columns:74px 1fr;gap:18px;align-items:start;position:relative;overflow:hidden;opacity:1!important;visibility:visible!important;transform:none}
 .cap::before{content:"";position:absolute;inset:0;background:radial-gradient(280px 120px at 0 0,color-mix(in srgb,var(--cap2,var(--magenta)) 12%,transparent),transparent 68%);pointer-events:none}.cap>*{position:relative}
 .cap:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--cap1,var(--lime)) 48%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--cap1,var(--lime)) 28%,transparent),0 0 34px color-mix(in srgb,var(--cap2,var(--magenta)) 18%,transparent)}
 .cap .num{font-family:var(--mono);font-size:1.45rem;font-weight:800;background:linear-gradient(120deg,var(--cap1,var(--lime)),var(--cap2,var(--magenta)));-webkit-background-clip:text;background-clip:text;color:transparent;margin:0;line-height:1;border:1px solid color-mix(in srgb,var(--cap1,var(--lime)) 32%,transparent);border-radius:14px;min-height:54px;display:grid;place-items:center;background-color:rgba(255,255,255,.035)}
@@ -847,7 +847,7 @@ function renderOperatingSystem(id){
   if($("#cap-eyebrow")) $("#cap-eyebrow").textContent=os.eyebrow;
   if($("#cap-title")) $("#cap-title").textContent=os.title;
   if($("#cap-lead")) $("#cap-lead").textContent=os.lead;
-  $("#cap-grid").innerHTML=os.steps.map((c,i)=>`<div class="cap reveal tilt d${(i%4)+1}" data-operating-mode="${id||'overview'}" style="--cap1:${svc?svc.c1:'var(--lime)'};--cap2:${svc?svc.c2:'var(--magenta)'}"><div class="num">${c.n}</div><div class="cap-body"><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div></div>`).join('');
+  $("#cap-grid").innerHTML=os.steps.map((c,i)=>`<div class="cap tilt d${(i%4)+1}" data-operating-mode="${id||'overview'}" style="--cap1:${svc?svc.c1:'var(--lime)'};--cap2:${svc?svc.c2:'var(--magenta)'}"><div class="num">${c.n}</div><div class="cap-body"><h3>${c.title}</h3><p>${c.desc}</p><div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join('')}</div></div></div>`).join('');
   setupTilt();
 }
 
