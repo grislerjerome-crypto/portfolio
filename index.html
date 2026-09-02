@@ -275,6 +275,34 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 @media(max-width:600px){.exp-item{flex-direction:column;gap:6px}.exp-item .yr{min-width:0}}
 .tools{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 
+/* ---- Projects Carousel ---- */
+.carousel-wrap{position:relative;overflow:visible}
+.carousel{position:relative;width:100%;margin-top:20px}
+.proj-track{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:20px;width:100%;overflow:visible}
+@media(max-width:920px){.proj-track{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr)}}
+@media(max-width:620px){.proj-track{grid-template-columns:1fr;grid-template-rows:repeat(4,1fr)}}
+.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);padding:0;overflow:hidden;box-shadow:var(--shadow),var(--glow);position:relative;z-index:2;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;height:230px;opacity:1;transform:scale(1);transition:opacity .4s ease,transform .4s ease,box-shadow .3s}
+.proj-card.show{opacity:1;transform:scale(1);box-shadow:0 24px 80px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.035)}
+.proj-card.active{box-shadow:0 0 0 2px var(--lime),0 0 24px color-mix(in srgb,var(--lime) 30%,transparent)}
+.proj-card.hide{opacity:0;pointer-events:none}
+.proj-card.prev{transform:translateX(-110%)}
+.proj-card.next{transform:translateX(110%)}
+.proj-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(10,11,15,.8);color:var(--txt);font-size:1.5rem;cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.proj-nav:hover{background:var(--grad);color:#06080b;border-color:transparent;transform:translateY(-50%) scale(1.08)}
+.proj-prev{left:-60px}
+.proj-next{right:-60px}
+@media(max-width:920px){.proj-prev{left:-50px}.proj-next{right:-50px}}
+@media(max-width:620px){.proj-nav{width:38px;height:38px}.proj-prev{left:6px}.proj-next{right:6px}}
+.proj-img{height:80px;background:linear-gradient(135deg,color-mix(in srgb,var(--magenta) 12%,transparent 40%),color-mix(in srgb,var(--lime) 12%,transparent 40%));display:grid;place-items:center;font-size:2rem;overflow:hidden;position:relative}
+.proj-img img{width:100%;height:100%;object-fit:cover}
+.proj-content{padding:14px 16px;display:flex;flex-direction:column;flex:1;min-height:0}
+.proj-content h3{font-size:1.05rem;margin:0 0 2px}
+.proj-meta{font-size:.65rem;color:var(--muted);font-family:var(--mono);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.proj-body{color:var(--muted);font-size:.78rem;line-height:1.3;margin:0 0 8px;flex:1;min-height:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.proj-body strong{color:color-mix(in srgb,var(--lime) 70%,#fff)}
+.proj-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.proj-tags span{font-family:var(--mono);font-size:.58rem;color:color-mix(in srgb,var(--lime) 80%,#fff);background:rgba(255,255,255,.04);border:1px solid color-mix(in srgb,var(--lime) 24%,transparent);border-radius:99px;padding:2px 7px}
+
 .cta-band{text-align:center;background:radial-gradient(500px 300px at 50% 0%,color-mix(in srgb,var(--magenta) 12%,transparent),transparent 60%);border-top:1px solid var(--panel-border);border-bottom:1px solid var(--panel-border)}
 .cta-band h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:16px}
 .footer{padding:52px 0;border-top:1px solid var(--panel-border)}
@@ -371,7 +399,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <li><a href="#ava">Ava</a></li>
       <li><a href="#roi">ROI</a></li>
       <li><a href="#craftee">Web Dev</a></li>
-      <li><a href="#experience">About</a></li>
+      <li><a href="#projects">Projects</a></li>
     </ul>
     <div class="hud">
       <div class="stat clock"><span class="led"></span><span id="clock">--:--:--</span></div>
@@ -387,7 +415,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     <a href="#ava">Ava</a>
     <a href="#roi">ROI</a>
     <a href="#craftee">Web Dev</a>
-    <a href="#experience">About</a>
+    <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -533,10 +561,15 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
   </section>
 
-  <section id="experience" class="wrap">
-    <div class="reveal"><span class="eyebrow">BACKGROUND</span><h2 class="title">About me</h2></div>
-    <div id="exp-list"></div>
-    <div class="reveal" style="margin-top:30px"><p class="eyebrow" style="margin-bottom:8px">STACK ACROSS ALL MODES</p><div class="tools" id="tools"></div></div>
+  <!-- ABOUT ME SECTION REMOVED -->
+
+  <section id="projects" class="wrap">
+    <div class="reveal"><span class="eyebrow">CASE STUDIES</span><h2 class="title">Projects</h2><p class="lead" style="margin-top:10px">Work across automation, websites, and operations. Use the arrows to flip through case studies.</p></div>
+    <div class="carousel-wrap"><div class="carousel" id="proj-carousel">
+      <button class="proj-nav prev" id="proj-prev" aria-label="Previous project">‹</button>
+      <div class="proj-track" id="proj-track"></div>
+      <button class="proj-nav next" id="proj-next" aria-label="Next project">›</button>
+    </div></div>
   </section>
 
   <section class="cta-band" id="contact">
@@ -554,7 +587,10 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 <footer class="footer">
   <div class="wrap">
     <div class="col" style="max-width:300px">
-      <div class="brand" style="margin-bottom:12px">YOUR<b style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">NAME</b></div>
+      <div class="brand" style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <img src="rome.jpg" alt="Jerome Grisler" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid color-mix(in srgb,var(--lime) 60%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--lime) 20%,transparent);" />
+        YOUR<b style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">NAME</b>
+      </div>
       <p style="color:var(--muted);font-size:.9rem" id="footer-tag">Systems and operations, building the engine that runs while you sleep.</p>
       <p style="color:var(--muted);font-size:.85rem;margin-top:14px">Available worldwide · Remote</p>
     </div>
@@ -730,6 +766,45 @@ const CONFIG = {
 
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
+  projects: [
+    {
+      mode:"automation",
+      title:"Lead Qualification Pipeline",
+      tools:["GoHighLevel","Zapier","n8n","Make.com"],
+      img:"⚡",
+      problem:"A B2B service was losing 60% of leads because nothing followed up within 5 minutes.",
+      solution:"Wired GHL + n8n + Zapier to capture, qualify, and route every lead instantly, with SMS fallback.",
+      result:"Lead response time dropped from 3+ hours to under 30 seconds. Close rate up 34% month over month."
+    },
+    {
+      mode:"web",
+      title:"Local Business Web Dev",
+      tools:["WordPress","Webflow","Shopify"],
+      img:"🌐",
+      problem:"Outdated site, zero conversions, no mobile presence.",
+      solution:"Rebuilt as a fast, conversion-focused site with local SEO, booking, and SMS capture.",
+      result:"Organic traffic up 230%, bookings doubled in 6 weeks."
+    },
+    {
+      mode:"ecom",
+      title:"DTC Store Operations",
+      tools:["Shopify","WooCommerce","Zapier"],
+      img:"🛒",
+      problem:"Manual order processing, inventory mismatches, customer delays.",
+      solution:"Automated order sync, inventory updates, and post-purchase SMS notifications.",
+      result:"Order processing time cut from 45 to 3 minutes. Zero stockout errors."
+    },
+    {
+      mode:"logistics",
+      title:"3PL Shipment Tracking",
+      tools:["Airtable","Notion","Twilio","Slack","Trello"],
+      img:"🚚",
+      problem:"Shipments were getting lost in spreadsheets, clients chasing status daily.",
+      solution:"Built a tracking dashboard syncing carriers + sending proactive updates to Slack.",
+      result:"Client support tickets down 80%, on-time delivery rate up 28%."
+    }
+  ],
+
   cta: { h2:"Let's take the busywork off your plate.", sub:"Book a free 15 minute teardown. I'll point at the first three things worth handing off in your business.", btn:"Book a free teardown", link:"#contact", email:"grislerjerome@gmail.com" },
   social: { linkedin:"https://www.linkedin.com/in/jerome-grisler-7041ab3a7/", email:"grislerjerome@gmail.com", facebook:"https://www.facebook.com/jeromegrslr" }
 };
@@ -826,10 +901,41 @@ function setMode(id){
   $("#mode-banner").classList.add('show');
   $$("#svc-grid .svc").forEach(c=>c.classList.toggle('active',c.dataset.mode===id));
   renderOperatingSystem(id);
-  /* projects section removed */
+  if(currentProjMode){ filterProjects(id); }
 }
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
+
+  /* ---- Projects Carousel ---- */
+  var projIdx=0, projCards=[];
+  function buildProjects(){
+    var track=$("#proj-track"); if(!track)return;
+    var html=CONFIG.projects.map(function(p,i){
+      return '<div class="proj-card" data-proj-mode="'+p.mode+'">'
+        +'<div class="proj-img">'+p.img+'</div>'
+        +'<div class="proj-content">'
+        +'<div class="proj-meta">'+p.mode.toUpperCase()+'</div>'
+        +'<h3>'+p.title+'</h3>'
+        +'<p class="proj-body"><b>Problem:</b> '+p.problem+'</p>'
+        +'<p class="proj-body"><b>Solution:</b> '+p.solution+'</p>'
+        +'<p class="proj-body"><b>Result:</b> '+p.result+'</p>'
+        +'<div class="proj-tags">'+p.tools.map(function(t){return '<span>'+t+'</span>';}).join('')+'</div>'
+        +'</div></div>';
+    }).join('');
+    track.innerHTML=html;
+    projCards=[...$$("#proj-track .proj-card")];
+    projCards.forEach(function(c){c.classList.add("show");});
+    projIdx=0;
+    var prev=$("#proj-prev"), next=$("#proj-next");
+    if(prev) prev.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx-1+projCards.length)%projCards.length; cycleProject(); };
+    if(next) next.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx+1)%projCards.length; cycleProject(); };
+  }
+  function cycleProject(){
+    if(!projCards||projCards.length===0) return;
+    projCards.forEach(function(c,i){
+      c.classList.toggle("active",i===projIdx);
+    });
+  }
 function setupFooterLinks(){
   $$('a[data-footer-mode]').forEach(a=>a.addEventListener('click',e=>{
     e.preventDefault();
@@ -972,7 +1078,7 @@ function setupPalette(){
     {ic:"AI",label:"Ava, AI Agent",go:"#ava"},
     {ic:"$",label:"ROI Calculator",go:"#roi"},
     {ic:"▦",label:"Work",go:"#craftee"},
-    {ic:"▶",label:"About",go:"#experience"},
+    {ic:"◈",label:"Projects",go:"#projects"},
     {ic:"✉",label:"Contact",go:"#contact"},
     {ic:"◐",label:"Toggle light / dark",act:toggleTheme},
     {ic:"⎘",label:"Copy email",act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)}
@@ -1465,7 +1571,7 @@ function setupGlitch(){$$(".title").forEach(el=>{
 
 function boot(){
   applyStatic();
-  buildServices();buildCaps();buildMarquee();renderTestimonials();buildExperience();
+  buildServices();buildCaps();buildMarquee();renderTestimonials();buildProjects();
   setupTheme();setupROI();setupAvaChat();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
