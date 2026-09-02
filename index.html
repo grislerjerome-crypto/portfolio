@@ -276,14 +276,12 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .tools{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 
 /* ---- Projects Carousel ---- */
-.carousel-wrap{position:relative;overflow:visible}
+.carousel-wrap{position:relative;overflow:hidden;width:100%}
 .carousel{position:relative;width:100%;margin-top:20px}
-.proj-track{display:grid;grid-template-columns:1fr;gap:24px;width:100%;overflow:visible}
-@media(max-width:920px){.proj-track{gap:18px}}
-.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:relative;z-index:2;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .4s ease,transform .4s ease,box-shadow .3s ease;opacity:1;transform:scale(1)}
+.proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative}
+.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:relative;z-index:2;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .45s ease,transform .45s ease,box-shadow .3s ease;opacity:1;transform:scale(1)}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
-@media(max-width:920px){.proj-card{grid-template-columns:1fr}}
-.proj-card.hide{opacity:0;pointer-events:none}
+.proj-card.hide{opacity:0;pointer-events:none;position:absolute;inset:0}
 .proj-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(10,11,15,.8);color:var(--txt);font-size:1.5rem;cursor:pointer;display:grid;place-items:center;transition:all .2s}
 .proj-nav:hover{background:var(--grad);color:#06080b;border-color:transparent;transform:translateY(-50%) scale(1.08)}
 .proj-prev{left:-60px}
@@ -910,35 +908,40 @@ function setMode(id){
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
 
-  /* ---- Projects Carousel ---- */
-  var projIdx=0, projCards=[];
-  function buildProjects(){
-    var track=$("#proj-track"); if(!track)return;
-    var html=CONFIG.projects.map(function(p,i){
-      return '<div class="proj-card">'
-        +'<div class="proj-img"><img src="'+p.img+'" alt="'+p.title+' workflow"><div class="img-overlay"></div></div>'
-        +'<div class="proj-content">'
-        +'<h3>'+p.title+'<a class="proj-ext" href="#" aria-label="External link">↗</a></h3>'
-        +'<p class="proj-desc">'+p.desc+'</p>'
-        +'<div class="proj-problem"><b>Problem:</b> <span class="proj-body">'+p.problem+'</span></div>'
-        +'<div class="proj-solution"><b>Solution:</b> <span class="proj-body">'+p.solution+'</span></div>'
-        +'<div class="proj-result"><b>Result:</b> <span class="proj-body">'+p.result+'</span></div>'
-        +'<div class="proj-tags">'+p.tools.map(function(t){return '<span>'+t+'</span>';}).join('')+'</div>'
-        +'</div></div>';
+  function buildProjects() {
+    var track = $("#proj-track"); if (!track) return;
+    var html = CONFIG.projects.map(function(p, i) {
+      return '<div class="proj-card' + (i === 0 ? ' active' : ' hide') + '" data-proj="' + i + '">'
+        + '<div class="proj-img"><img src="' + p.img + '" alt="' + p.title + ' workflow"><div class="img-overlay"></div></div>'
+        + '<div class="proj-content">'
+        + '<h3>' + p.title + '<a class="proj-ext" href="#" aria-label="External link">↗</a></h3>'
+        + '<p class="proj-desc">' + p.desc + '</p>'
+        + '<div class="proj-problem"><b>Problem:</b> <span class="proj-body">' + p.problem + '</span></div>'
+        + '<div class="proj-solution"><b>Solution:</b> <span class="proj-body">' + p.solution + '</span></div>'
+        + '<div class="proj-result"><b>Result:</b> <span class="proj-body">' + p.result + '</span></div>'
+        + '<div class="proj-tags">' + p.tools.map(function(t) { return '<span>' + t + '</span>'; }).join('') + '</div>'
+        + '</div></div>';
     }).join('');
-    track.innerHTML=html;
-    projCards=[...$$("#proj-track .proj-card")];
-    projCards.forEach(function(c){c.classList.add("show");});
-    projIdx=0;
-    var prev=$("#proj-prev"), next=$("#proj-next");
-    if(prev) prev.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx-1+projCards.length)%projCards.length; cycleProject(); };
-    if(next) next.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx+1)%projCards.length; cycleProject(); };
+    track.innerHTML = html;
+    projCards = [...$$("#proj-track .proj-card")];
+    projIdx = 0;
+    var prev = $("#proj-prev"), next = $("#proj-next");
+    if (prev) prev.onclick = function () { if (projCards.length <= 1) return; projIdx = (projIdx - 1 + projCards.length) % projCards.length; cycleProject(); };
+    if (next) next.onclick = function () { if (projCards.length <= 1) return; projIdx = (projIdx + 1) % projCards.length; cycleProject(); };
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      projCards.forEach(function (c) { c.style.transition = 'none'; });
+    }
   }
-  function cycleProject(){
-    if(!projCards||projCards.length===0) return;
-    projCards.forEach(function(c,i){
-      c.classList.toggle("active",i===projIdx);
+  function cycleProject() {
+    if (!projCards || projCards.length === 0) return;
+    projCards.forEach(function (c, i) {
+      c.classList.toggle('active', i === projIdx);
+      c.classList.toggle('hide', i !== projIdx);
     });
+    if (typeof window.scrollTo === 'function') {
+      var cur = projCards[projIdx];
+      if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
   }
 function setupFooterLinks(){
   $$('a[data-footer-mode]').forEach(a=>a.addEventListener('click',e=>{
