@@ -924,7 +924,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     var container = $("#proj-filters"); if (!container) return;
     var toolCounts = {};
     CONFIG.projects.forEach(function(p) { p.tools.forEach(function(t) { toolCounts[t]=(toolCounts[t]||0)+1; }); });
-    var filters = [{label:"All",key:"all"}].concat(Object.keys(toolCounts).sort().map(function(t){return {label:t,key:t};}));
+    var filters = [{label:"All",key:"all"}].concat(["GHL","Zapier","Make.com","n8n"].map(function(t){return {label:t,key:t};}));
     var html = '<div class="proj-filters">';
     html += '<button class="proj-filter-btn active" data-filter="all">All <span class="count">('+CONFIG.projects.length+')</span></button>';
     filters.slice(1).forEach(function(f) {
