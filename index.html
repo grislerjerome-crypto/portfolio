@@ -282,14 +282,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:relative;z-index:2;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .45s ease,transform .45s ease,box-shadow .3s ease;opacity:1;transform:scale(1)}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
 .proj-card.hide{opacity:0;pointer-events:none;position:absolute;inset:0}
-.proj-nav{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:5;width:42px;height:42px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);font-size:1.1rem;cursor:pointer;display:grid;place-items:center;transition:all .2s}
-.proj-nav:hover{background:var(--grad);color:#06080f;border-color:transparent}
-.proj-nav.prev{left:calc(50% - 32px)}
-.proj-nav.next{right:calc(50% - 32px)}
-.proj-prev{left:calc(50% - 32px)}
-.proj-next{right:calc(50% - 32px)}
-@media(max-width:920px){.proj-prev{left:calc(50% - 28px)}.proj-next{right:calc(50% - 28px)}}
-@media(max-width:620px){.proj-nav{width:38px;height:38px}.proj-prev{left:calc(50% - 26px)}.proj-next{right:calc(50% - 26px)}}
+.proj-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.proj-nav button{width:42px;height:42px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid var(--panel-border);color:var(--txt);font-size:1.1rem;transition:all .2s}
+.proj-nav button:hover{background:var(--grad);color:#06080f;border-color:transparent}
 .proj-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:20px}
 .proj-filter-btn{font-family:var(--mono);font-size:.68rem;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--panel-border);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .2s}
 .proj-filter-btn:hover{color:var(--txt);border-color:color-mix(in srgb,var(--lime) 42%,transparent)}
@@ -577,10 +572,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     <div class="reveal" style="text-align:center"><span class="eyebrow">CASE STUDIES</span><h2 class="title" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:14px">Projects</h2><p class="lead" style="margin:0 auto 22px;max-width:720px">AI automation case studies across GoHighLevel, n8n, Zapier, Make.com, and more. Use the arrows to flip through projects.</p></div>
     <div class="proj-filters reveal" id="proj-filters"></div>
     <div class="carousel-wrap"><div class="carousel" id="proj-carousel">
-      <button class="proj-nav prev" id="proj-prev" aria-label="Previous project">‹</button>
       <div class="proj-track" id="proj-track"></div>
-      <button class="proj-nav next" id="proj-next" aria-label="Next project">›</button>
     </div></div>
+    <div class="proj-nav reveal" id="proj-nav">
+      <button id="proj-prev" aria-label="Previous project">‹</button>
+      <div class="tdots" id="proj-dots"></div>
+      <button id="proj-next" aria-label="Next project">›</button>
+    </div>
   </section>
 
   <section class="cta-band" id="contact">
@@ -977,6 +975,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     track.innerHTML=html;
     projCards=[...$$("#proj-track .proj-card")];
     projIdx=0;
+    buildDots();
     buildFilters();
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx-1+projCards.length)%projCards.length; cycleProject(); };
@@ -985,16 +984,32 @@ $("#mb-reset").onclick=()=>setMode(null);
       projCards.forEach(function(c){c.style.transition='none';});
     }
   }
-  function cycleProject(){
-    if(!projCards||projCards.length===0) return;
-    projCards.forEach(function(c,i){
-      c.classList.toggle('active',i===projIdx);
-      c.classList.toggle('hide',i!==projIdx);
+  function cycleProject() {
+    if (!projCards || projCards.length === 0) return;
+    projCards.forEach(function (c, i) {
+      c.classList.toggle('active', i === projIdx);
+      c.classList.toggle('hide', i !== projIdx);
     });
-    if(typeof window.scrollTo==='function'){
-      var cur=projCards[projIdx];
-      if(cur) cur.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    updateDots();
+    if (typeof window.scrollTo === 'function') {
+      var cur = projCards[projIdx];
+      if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
+  }
+  function buildDots() {
+    var dots = $("#proj-dots"); if (!dots) return;
+    dots.innerHTML = projCards.map(function (_, i) {
+      return '<i class="' + (i === 0 ? 'on' : '') + '" data-i="' + i + '"></i>';
+    }).join('');
+    $$('#proj-dots i').forEach(function (d) {
+      d.onclick = function () {
+        var idx = +d.dataset.i;
+        if (idx !== projIdx) { projIdx = idx; cycleProject(); }
+      };
+    });
+  }
+  function updateDots() {
+    $$('#proj-dots i').forEach(function (d, i) { d.classList.toggle('on', i === projIdx); });
   }
 function setupFooterLinks(){
   $$('a[data-footer-mode]').forEach(a=>a.addEventListener('click',e=>{
