@@ -284,10 +284,16 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-card.hide{opacity:0;pointer-events:none;position:absolute;inset:0}
 .proj-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(10,11,15,.8);color:var(--txt);font-size:1.5rem;cursor:pointer;display:grid;place-items:center;transition:all .2s}
 .proj-nav:hover{background:var(--grad);color:#06080b;border-color:transparent;transform:translateY(-50%) scale(1.08)}
-.proj-prev{left:-60px}
-.proj-next{right:-60px}
-@media(max-width:920px){.proj-prev{left:-50px}.proj-next{right:-50px}}
-@media(max-width:620px){.proj-nav{width:38px;height:38px}.proj-prev{left:6px}.proj-next{right:6px}}
+.proj-prev{left:10px}
+.proj-next{right:10px}
+@media(max-width:920px){.proj-prev{left:6px}.proj-next{right:6px}}
+@media(max-width:620px){.proj-nav{width:38px;height:38px}.proj-prev{left:4px}.proj-next{right:4px}}
+.proj-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:20px}
+.proj-filter-btn{font-family:var(--mono);font-size:.68rem;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--panel-border);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .2s}
+.proj-filter-btn:hover{color:var(--txt);border-color:color-mix(in srgb,var(--lime) 42%,transparent)}
+.proj-filter-btn.active{color:var(--txt);background:rgba(255,255,255,.08);border-color:color-mix(in srgb,var(--lime) 42%,transparent)}
+.proj-filter-btn .count{opacity:.6;margin-left:3px}
+.proj-filter-btn.active .count{opacity:1}
 .proj-img{position:relative;overflow:hidden;min-height:300px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center}
 .proj-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:opacity .4s,transform .4s}
 .proj-card:hover .proj-img img{opacity:1;transform:scale(1.03)}
@@ -567,6 +573,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
   <section id="projects" class="wrap">
     <div class="reveal" style="text-align:center"><span class="eyebrow">CASE STUDIES</span><h2 class="title" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:14px">Projects</h2><p class="lead" style="margin:0 auto 22px;max-width:720px">AI automation case studies across GoHighLevel, n8n, Zapier, Make.com, and more. Use the arrows to flip through projects.</p></div>
+    <div class="proj-filters reveal" id="proj-filters"></div>
     <div class="carousel-wrap"><div class="carousel" id="proj-carousel">
       <button class="proj-nav prev" id="proj-prev" aria-label="Previous project">‹</button>
       <div class="proj-track" id="proj-track"></div>
@@ -908,39 +915,83 @@ function setMode(id){
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
 
-  function buildProjects() {
-    var track = $("#proj-track"); if (!track) return;
-    var html = CONFIG.projects.map(function(p, i) {
-      return '<div class="proj-card' + (i === 0 ? ' active' : ' hide') + '" data-proj="' + i + '">'
-        + '<div class="proj-img"><img src="' + p.img + '" alt="' + p.title + ' workflow"><div class="img-overlay"></div></div>'
-        + '<div class="proj-content">'
-        + '<h3>' + p.title + '<a class="proj-ext" href="#" aria-label="External link">↗</a></h3>'
-        + '<p class="proj-desc">' + p.desc + '</p>'
-        + '<div class="proj-problem"><b>Problem:</b> <span class="proj-body">' + p.problem + '</span></div>'
-        + '<div class="proj-solution"><b>Solution:</b> <span class="proj-body">' + p.solution + '</span></div>'
-        + '<div class="proj-result"><b>Result:</b> <span class="proj-body">' + p.result + '</span></div>'
-        + '<div class="proj-tags">' + p.tools.map(function(t) { return '<span>' + t + '</span>'; }).join('') + '</div>'
-        + '</div></div>';
-    }).join('');
-    track.innerHTML = html;
-    projCards = [...$$("#proj-track .proj-card")];
+  /* ---- Projects Carousel ---- */
+  var projIdx=0, projCards=[];
+  var projToolCounts = {};
+  CONFIG.projects.forEach(function(p){ p.tools.forEach(function(t){ projToolCounts[t]=(projToolCounts[t]||0)+1; }); });
+
+  function buildFilters() {
+    var container = $("#proj-filters"); if (!container) return;
+    var toolCounts = {};
+    CONFIG.projects.forEach(function(p) { p.tools.forEach(function(t) { toolCounts[t]=(toolCounts[t]||0)+1; }); });
+    var filters = [{label:"All",key:"all"}].concat(Object.keys(toolCounts).sort().map(function(t){return {label:t,key:t};}));
+    var html = '<div class="proj-filters">';
+    html += '<button class="proj-filter-btn active" data-filter="all">All <span class="count">('+CONFIG.projects.length+')</span></button>';
+    filters.slice(1).forEach(function(f) {
+      html += '<button class="proj-filter-btn" data-filter="'+f.key+'">'+f.label+' <span class="count">('+(toolCounts[f.key]||0)+')</span></button>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+    $$('.proj-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        $$('.proj-filter-btn').forEach(function(b){b.classList.remove('active')});
+        btn.classList.add('active');
+        filterProjects(btn.dataset.filter);
+      });
+    });
+  }
+
+  function filterProjects(filterKey) {
+    if (!projCards || projCards.length === 0) return;
     projIdx = 0;
-    var prev = $("#proj-prev"), next = $("#proj-next");
-    if (prev) prev.onclick = function () { if (projCards.length <= 1) return; projIdx = (projIdx - 1 + projCards.length) % projCards.length; cycleProject(); };
-    if (next) next.onclick = function () { if (projCards.length <= 1) return; projIdx = (projIdx + 1) % projCards.length; cycleProject(); };
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      projCards.forEach(function (c) { c.style.transition = 'none'; });
+    projCards.forEach(function(card, i) {
+      var p = CONFIG.projects[i];
+      if (!p) return;
+      var matches = filterKey === 'all' || p.tools.indexOf(filterKey) !== -1;
+      if (matches) {
+        card.classList.remove('hide');
+        card.classList.toggle('active', i === projIdx);
+      } else {
+        card.classList.add('hide');
+        card.classList.remove('active');
+      }
+    });
+  }
+
+  function buildProjects() {
+    var track=$("#proj-track"); if(!track)return;
+    var html=CONFIG.projects.map(function(p,i){
+      return '<div class="proj-card' + (i === 0 ? ' active' : ' hide') + '" data-proj="'+i+'">'
+        +'<div class="proj-img"><img src="'+p.img+'" alt="'+p.title+' workflow"><div class="img-overlay"></div></div>'
+        +'<div class="proj-content">'
+        +'<h3>'+p.title+'<a class="proj-ext" href="#" aria-label="External link">↗</a></h3>'
+        +'<p class="proj-desc">'+p.desc+'</p>'
+        +'<div class="proj-problem"><b>Problem:</b> <span class="proj-body">'+p.problem+'</span></div>'
+        +'<div class="proj-solution"><b>Solution:</b> <span class="proj-body">'+p.solution+'</span></div>'
+        +'<div class="proj-result"><b>Result:</b> <span class="proj-body">'+p.result+'</span></div>'
+        +'<div class="proj-tags">'+p.tools.map(function(t){return "<span>"+t+"</span>";}).join("")+'</div>'
+        +'</div></div>';
+    }).join("");
+    track.innerHTML=html;
+    projCards=[...$$("#proj-track .proj-card")];
+    projIdx=0;
+    buildFilters();
+    var prev=$("#proj-prev"), next=$("#proj-next");
+    if(prev) prev.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx-1+projCards.length)%projCards.length; cycleProject(); };
+    if(next) next.onclick=function(){ if(projCards.length<=1) return; projIdx=(projIdx+1)%projCards.length; cycleProject(); };
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      projCards.forEach(function(c){c.style.transition='none';});
     }
   }
-  function cycleProject() {
-    if (!projCards || projCards.length === 0) return;
-    projCards.forEach(function (c, i) {
-      c.classList.toggle('active', i === projIdx);
-      c.classList.toggle('hide', i !== projIdx);
+  function cycleProject(){
+    if(!projCards||projCards.length===0) return;
+    projCards.forEach(function(c,i){
+      c.classList.toggle('active',i===projIdx);
+      c.classList.toggle('hide',i!==projIdx);
     });
-    if (typeof window.scrollTo === 'function') {
-      var cur = projCards[projIdx];
-      if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if(typeof window.scrollTo==='function'){
+      var cur=projCards[projIdx];
+      if(cur) cur.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
     }
   }
 function setupFooterLinks(){
