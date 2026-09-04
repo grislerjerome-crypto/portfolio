@@ -1845,6 +1845,8 @@ document.addEventListener("DOMContentLoaded",boot);
 addEventListener("resize",()=>{});
 </script>
 
+
+<script>
 // Open project image in lightbox popup
 function openProjectImage(e, element) {
   e.preventDefault();
@@ -1888,5 +1890,7 @@ function openProjectImage(e, element) {
     if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
   };
   document.addEventListener('keydown', esc);
-}</body>
+}
+</script>
+</body>
 </html>
