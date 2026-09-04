@@ -993,6 +993,8 @@ $("#mb-reset").onclick=()=>setMode(null);
     projCards.forEach(function(c){ c.dataset.visible='true'; c.dataset.visibleIdx=c.dataset.proj; });
     buildDots();
     buildFilters();
+    filterProjects(); // apply filter (called by button clicks)
+    buildDots(); // update dots to reflect current filter state
     cycleProject(); // activate first visible card
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=prevProject;
