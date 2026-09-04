@@ -277,9 +277,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 /* ---- Projects Carousel ---- */
 .carousel-wrap{position:relative;overflow:hidden;width:100%}
-.carousel{position:relative;width:100%;margin-top:20px}
-.proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative}
-.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:absolute;inset:0;z-index:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;opacity:0;transform:scale(.985);pointer-events:none;visibility:hidden}
+.carousel{position:relative;width:100%;margin-top:20px;min-height:440px}
+.proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative;min-height:440px}
+.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:absolute;inset:0;z-index:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;min-height:440px;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;opacity:0;transform:scale(.985);pointer-events:none;visibility:hidden}
 .proj-card.active{position:relative;z-index:2;opacity:1;transform:scale(1);pointer-events:auto;visibility:visible}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
 .proj-card.hide{opacity:0!important;pointer-events:none!important;position:absolute;inset:0;visibility:hidden!important}
@@ -292,10 +292,11 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-filter-btn.active{color:var(--txt);background:rgba(255,255,255,.08);border-color:color-mix(in srgb,var(--lime) 42%,transparent)}
 .proj-filter-btn .count{opacity:.6;margin-left:3px}
 .proj-filter-btn.active .count{opacity:1}
-.proj-img{position:relative;overflow:hidden;min-height:300px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:pointer}
-.proj-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:opacity .4s,transform .4s}
-.proj-card:hover .proj-img img{opacity:1;transform:scale(1.03)}
+.proj-img{position:relative;overflow:hidden;height:100%;min-height:440px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:pointer}
+.proj-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;opacity:.92;transition:opacity .4s,transform .4s}
+.proj-card:hover .proj-img img{opacity:1;transform:scale(1.02)}
 .proj-img .img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,22,.05),rgba(12,14,22,.18));pointer-events:none}
+@media(max-width:760px){.proj-card{grid-template-columns:1fr;min-height:auto}.proj-img{min-height:240px;height:240px}.carousel,.proj-track{min-height:auto}}
 .proj-content{padding:26px 24px;display:flex;flex-direction:column;min-height:0}
 .proj-content h3{font-size:1.4rem;margin:0 0 4px;line-height:1.2}
 .proj-meta{font-size:.66rem;color:var(--muted);font-family:var(--mono);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
@@ -806,13 +807,13 @@ const CONFIG = {
       result:"Every submission gets an instant response with full pipeline visibility; consistent automated follow-up lifted engagement from first touch to conversion without manual effort."
     },
     {
-      title:"GHL Pipeline: Payment Follow-up",
+      title:"Missed Call Recovery & Instant Re-Engagement System",
       category:"GHL",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Payment+Flow",
-      desc:"Automated invoice reminders via GHL + payment portal links. Unpaid invoices escalate through email → SMS → call queue.",
-      problem:"28% of invoices went unpaid after 30 days due to manual follow-up gaps.",
-      solution:"GHL payment workflows send branded payment links, auto-escalate to SMS at day 3 and day 7, flag high-value to call queue.",
-      result:"Days Sales Outstanding dropped from 38 to 12. Unpaid invoice rate fell to 4%."
+      img:"missed-call-recovery.png",
+      desc:"Real-time GoHighLevel recovery loop that catches every missed call — slight natural delay, instant personalized SMS, lead tagging, assignment, and internal alerts so no opportunity slips.",
+      problem:"Missed calls were silently burning revenue. No immediate response meant prospects moved on, while the team had no visibility into how many warm opportunities went unanswered.",
+      solution:"Built an instant recovery workflow: on missed call, a brief delay keeps it human, then a personalized SMS fires to the caller while the lead is auto-tagged, assigned to the right team member, and internal notifications trigger — engaging both sides at once.",
+      result:"Missed calls turned into active conversations with zero manual effort; full assignment visibility and faster team response times across the board."
     },
     {
       title:"GHL Pipeline: Client Onboarding",
