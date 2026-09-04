@@ -776,27 +776,104 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
+    // GHL — 5 projects
     {
-      title:"Lead Qualification Pipeline",
-      tools:["GoHighLevel","Zapier","n8n","Make.com"],
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Lead+Flow",
-      desc:"Nightly pipeline that captures every web form, scores it with AI rules, and routes hot leads to the right rep via Slack + SMS.",
-      problem:"A B2B service was losing 60% of leads because nothing followed up within 5 minutes.",
-      solution:"Wired GHL + n8n + Zapier to capture, qualify, and route every lead instantly, with SMS fallback.",
-      result:"Lead response time dropped from 3+ hours to under 30 seconds. Close rate up 34% month over month."
+      title:"GHL Pipeline: Lead Capture",
+      category:"GHL",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Lead+Capture",
+      desc:"GoHighLevel outbound pipeline captures web leads, scores them with AI rules, and notifies the rep within 30 seconds.",
+      problem:"Cold leads went cold within 5 minutes — missed 60% of qualified opportunities.",
+      solution:"GHL form + Zapier webhook → AI scoring via OpenAI → Slack + SMS notification to the right rep with deal context.",
+      result:"Lead response time dropped from 3 hours to 30 seconds. Close rate +34% month-over-month."
     },
     {
-      title:"Invoice Processing Automation",
-      tools:["n8n","Google Gemini","Airtable","Gmail"],
+      title:"GHL Pipeline: Appointment Booking",
+      category:"GHL",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Booking",
+      desc:"Automated 2-way calendar sync that books qualified leads into GoHighLevel calendar and sends confirmation sequences.",
+      problem:"Reps spent 20 hours/week chasing appointments via email and phone tag.",
+      solution:"Zapier: GHL → Calendly sync with custom availability rules + AI follow-up sequence for no-shows.",
+      result:"Appointment booking rate increased 52%. 20 hours/week reclaimed for revenue calls."
+    },
+    {
+      title:"GHL Pipeline: Review Collection",
+      category:"GHL",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Review+Flow",
+      desc:"Post-purchase review collection pipeline: GHL triggers → personalized SMS → review link → follow-up for low ratings.",
+      problem:"Only 12% of customers left reviews — no systematic follow-up process existed.",
+      solution:"GHL workflow sends SMS with dynamic review link 3 days after service completion; negative scores auto-escalate to Slack.",
+      result:"Review volume up 340%. Reputation score improved to 4.8 stars. 89% response rate."
+    },
+    {
+      title:"GHL Pipeline: Payment Follow-up",
+      category:"GHL",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Payment+Flow",
+      desc:"Automated invoice reminders via GHL + payment portal links. Unpaid invoices escalate through email → SMS → call queue.",
+      problem:"28% of invoices went unpaid after 30 days due to manual follow-up gaps.",
+      solution:"GHL payment workflows send branded payment links, auto-escalate to SMS at day 3 and day 7, flag high-value to call queue.",
+      result:"Days Sales Outstanding dropped from 38 to 12. Unpaid invoice rate fell to 4%."
+    },
+    {
+      title:"GHL Pipeline: Client Onboarding",
+      category:"GHL",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Onboard",
+      desc:"Standardized GHL onboarding: welcome sequence, intake forms, document collection, and team assignment all triggered automatically.",
+      problem:"New clients sat idle for 3–5 days waiting for manual handoff across 4 teams.",
+      solution:"GHL snapshot loads intake forms, triggers Zapier to assign Slack channels + Asana tasks + sends welcome email with portal links.",
+      result:"Time-to-start cut from 5 days to same-day. 67% faster revenue recognition. Zero missed onboarding steps."
+    },
+
+    // Zapier — 5 projects
+    {
+      title:"Zapier: E-commerce Abandoned Cart",
+      category:"Zapier",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Cart+Recovery",
+      desc:"3-email sequence with AI-personalized copy triggered 15 minutes after cart abandonment. Includes SMS fallback for high-value carts.",
+      problem:"Shop was losing 4.7% of monthly revenue to abandoned carts — $18k/month in the bin.",
+      solution:"Connected Shopify → Klaviyo via Zapier, used OpenAI to generate personalized email copy per product type, added SMS escalation path.",
+      result:"Recovered 34% of abandoned carts. $6,200/month in recovered revenue. ROAS 8.3x on automation cost."
+    },
+    {
+      title:"Zapier: Invoice Processing",
+      category:"Zapier",
       img:"https://placehold.co/600x400/0e1016/ffffff?text=Invoice+AI",
       desc:"Email attachments are parsed by Gemini, line items extracted to structured rows, and synced to Airtable for approval.",
       problem:"AP team was manually entering 200+ invoices weekly, riddled with data-entry errors.",
-      solution:"Built an n8n flow: Gmail triggers on attachment, Gemini extracts line items, Airtable auto-creates records with confidence scores.",
+      solution:"Built a Zap: Gmail triggers on attachment, Gemini extracts line items, Airtable auto-creates records with confidence scores.",
       result:"Processing time cut from 8 hours to 45 minutes per week. Error rate near zero. First human review only on low-confidence rows."
     },
     {
-      title:"Support Ticket Routing",
-      tools:["Zendesk","Make.com","Zapier","Slack","AI Rules"],
+      title:"Zapier: Support Ticket Routing",
+      category:"Zapier",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Ticket+Router",
+      desc:"Tier-1 tickets auto-resolve with a knowledge-base AI agent; only escalations hit a human — cutting support load by 65%.",
+      problem:"Support inbox flooded with repetitive questions, 6-hour first-response SLA constantly missed.",
+      solution:"Integrated Zendesk with Zapier to classify tickets via AI rules, auto-reply with knowledge links, and route edge cases to Slack.",
+      result:"First-response time under 30 seconds. Support team handles 3x volume without hiring."
+    },
+    {
+      title:"Zapier: Lead Qualification Pipeline",
+      category:"Zapier",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Lead+Flow",
+      desc:"Nightly pipeline that captures every web form, scores it with AI rules, and routes hot leads to the right rep via Slack + SMS.",
+      problem:"A B2B service was losing 60% of leads because nothing followed up within 5 minutes.",
+      solution:"Wired web forms with Zapier to capture, qualify via AI rules, route every lead instantly, with SMS fallback.",
+      result:"Lead response time dropped from 3+ hours to under 30 seconds. Close rate up 34% month over month."
+    },
+    {
+      title:"Zapier: Data Sync Across Tools",
+      category:"Zapier",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Sync+Flow",
+      desc:"Bidirectional sync between Airtable, Notion, and Google Sheets so no matter where data changes, every system stays consistent.",
+      problem:"Teams maintained 3 separate spreadsheets with conflicting data. Decision-making was based on stale, inconsistent records.",
+      solution:"Zapier multi-step Zaps with path rules detected changes in Airtable → updated Notion + Sheets automatically, handled deletions gracefully.",
+      result:"Data consistency errors dropped to zero. Teams saved 8 hours/week on manual reconciliation. Single source of truth restored."
+    },
+
+    // Make.com — 5 projects
+    {
+      title:"Make.com: Support Ticket Routing",
+      category:"Make.com",
       img:"https://placehold.co/600x400/0e1016/ffffff?text=Ticket+Router",
       desc:"Tier-1 tickets auto-resolve with a knowledge-base AI agent; only escalations hit a human — cutting support load by 65%.",
       problem:"Support inbox flooded with repetitive questions, 6-hour first-response SLA constantly missed.",
@@ -804,12 +881,85 @@ const CONFIG = {
       result:"First-response time under 30 seconds. Support team handles 3x volume without hiring."
     },
     {
-      title:"E-commerce Abandoned Cart Recovery",
-      tools:["Shopify","Klaviyo","Zapier","OpenAI","SMS"],
+      title:"Make.com: E-commerce Order Processing",
+      category:"Make.com",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Order+Flow",
+      desc:"Shopify order → Make.com scenario → inventory check → label creation → shipping notification → CRM logging.",
+      problem:"Orders were processed manually through 5 disconnected tools, causing 40% shipping delays.",
+      solution:"Built a Make.com scenario with 7-step workflow: order webhook → stock lookup → Shippo label → email + SMS tracking → HubSpot update.",
+      result:"Order processing time cut from 20 minutes to 2 minutes. Shipping delay rate dropped from 40% to 3%."
+    },
+    {
+      title:"Make.com: Lead Enrichment Pipeline",
+      category:"Make.com",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Enrich+Flow",
+      desc:"Cold lead list → Make.com enrichment scenario → Clearbit + LinkedIn + Apollo → scored and sorted into CRM segments.",
+      problem:"Sales team spent 3 hours/day manually researching 50 leads. 60% were low-quality or uncontactable.",
+      solution:"Make.com scenario auto-enriches leads via Clearbit + Apollo API, scores by company fit + intent signals, routes B2B vs SMB to different CRMs.",
+      result:"Sales productivity up 42%. Lead quality improved: 78% connect rate on enriched leads vs 23% on cold. 12 hours/week reclaimed."
+    },
+    {
+      title:"Make.com: Subscription Billing Sync",
+      category:"Make.com",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Billing+Flow",
+      desc:"Stripe subscription → Make.com → QuickBooks invoice creation → Slack alert on failed payment → customer email retry sequence.",
+      problem:"Finance team manually reconciled 150+ subscriptions monthly across Stripe and QuickBooks. Missed 12 failed payments.",
+      solution:"Make.com scenario: new subscription event → QB invoice auto-creation, failed payment webhook → Slack + customer email sequence + dunning retry workflow.",
+      result:"Reconciliation time cut from 6 hours to 15 minutes. Failed payment recovery up to 78%. Zero missed churn alerts."
+    },
+    {
+      title:"Make.com: Client Onboarding",
+      category:"Make.com",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Onboard+Flow",
+      desc:"Standardized onboarding: welcome sequence, intake forms, document collection, and team assignment all triggered automatically.",
+      problem:"New clients sat idle for 3–5 days waiting for manual handoff across 4 teams.",
+      solution:"Make.com scenario loads intake forms, triggers Slack channel creation + Asana tasks + sends welcome email with portal links.",
+      result:"Time-to-start cut from 5 days to same-day. 67% faster revenue recognition. Zero missed onboarding steps."
+    },
+
+    // n8n — 5 projects
+    {
+      title:"n8n: Lead Qualification Pipeline",
+      category:"n8n",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Lead+Flow",
+      desc:"Nightly pipeline that captures every web form, scores it with AI rules, and routes hot leads to the right rep via Slack + SMS.",
+      problem:"A B2B service was losing 60% of leads because nothing followed up within 5 minutes.",
+      solution:"Wired GHL + n8n + Make.com to capture, qualify, and route every lead instantly, with SMS fallback.",
+      result:"Lead response time dropped from 3+ hours to under 30 seconds. Close rate up 34% month over month."
+    },
+    {
+      title:"n8n: Invoice Processing Automation",
+      category:"n8n",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Invoice+AI",
+      desc:"Email attachments are parsed by Gemini, line items extracted to structured rows, and synced to Airtable for approval.",
+      problem:"AP team was manually entering 200+ invoices weekly, riddled with data-entry errors.",
+      solution:"Built an n8n flow: Gmail triggers on attachment, Gemini extracts line items, Airtable auto-creates records with confidence scores.",
+      result:"Processing time cut from 8 hours to 45 minutes per week. Error rate near zero. First human review only on low-confidence rows."
+    },
+    {
+      title:"n8n: AI-Powered Support Bot",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Support+Bot",
+      desc:"24/7 AI support agent that resolves 65% of Tier-1 tickets instantly via live chat, escalating complex cases to human agents.",
+      problem:"Support team was drowning in 200+ repetitive tickets/day, 60% resolvable with the same 15 answers.",
+      solution:"n8n orchestrated OpenAI + FAQ knowledge base + Zendesk to auto-resolve tickets, route edge cases, log all interactions to Airtable.",
+      result:"Support ticket volume down 65%. First-response time under 10 seconds. Team shifted to high-value strategic work."
+    },
+    {
+      title:"n8n: Data Sync Across Tools",
+      category:"n8n",
+      img:"https://placehold.co/600x400/0e1016/ffffff?text=Sync+Flow",
+      desc:"Bidirectional sync between CRM, accounting, and communication tools so no matter where data changes, every system stays consistent.",
+      problem:"Teams maintained 3 separate systems with conflicting customer data. Billing errors affected 15% of invoices.",
+      solution:"n8n workflow with change detection: CRM update → QuickBooks + Slack notification + email template refresh, handled deletions gracefully.",
+      result:"Data sync errors dropped to zero. Billing disputes reduced by 92%. 6 hours/week saved on manual reconciliation."
+    },
+    {
+      title:"n8n: E-commerce Abandoned Cart Recovery",
+      category:"n8n",
       img:"https://placehold.co/600x400/0e1016/ffffff?text=Cart+Recovery",
       desc:"3-email sequence with AI-personalized copy triggered 15 minutes after cart abandonment. Includes SMS fallback for high-value carts.",
       problem:"Shop was losing 4.7% of monthly revenue to abandoned carts — $18k/month in the bin.",
-      solution:"Connected Shopify → Klaviyo via Zapier, used OpenAI to generate personalized email copy per product type, added SMS escalation path.",
+      solution:"Connected Shopify → Klaviyo via n8n, used OpenAI to generate personalized email copy per product type, added SMS escalation path.",
       result:"Recovered 34% of abandoned carts. $6,200/month in recovered revenue. ROAS 8.3x on automation cost."
     }
   ],
@@ -917,18 +1067,16 @@ $("#mb-reset").onclick=()=>setMode(null);
 
   /* ---- Projects Carousel ---- */
   var projIdx=0, projCards=[];
-  var projToolCounts = {};
-  CONFIG.projects.forEach(function(p){ p.tools.forEach(function(t){ projToolCounts[t]=(projToolCounts[t]||0)+1; }); });
+  var projCategoryCounts = {};
+  CONFIG.projects.forEach(function(p){ projCategoryCounts[p.category]=(projCategoryCounts[p.category]||0)+1; });
 
   function buildFilters() {
     var container = $("#proj-filters"); if (!container) return;
-    var toolCounts = {};
-    CONFIG.projects.forEach(function(p) { p.tools.forEach(function(t) { toolCounts[t]=(toolCounts[t]||0)+1; }); });
     var filters = [{label:"All",key:"all"}].concat(["GHL","Zapier","Make.com","n8n"].map(function(t){return {label:t,key:t};}));
     var html = '<div class="proj-filters">';
     html += '<button class="proj-filter-btn active" data-filter="all">All <span class="count">('+CONFIG.projects.length+')</span></button>';
     filters.slice(1).forEach(function(f) {
-      html += '<button class="proj-filter-btn" data-filter="'+f.key+'">'+f.label+' <span class="count">('+(toolCounts[f.key]||0)+')</span></button>';
+      html += '<button class="proj-filter-btn" data-filter="'+f.key+'">'+f.label+' <span class="count">('+(projCategoryCounts[f.key]||0)+')</span></button>';
     });
     html += '</div>';
     container.innerHTML = html;
@@ -948,7 +1096,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     projCards.forEach(function(card, i) {
       var p = CONFIG.projects[i];
       if (!p) return;
-      var matches = filterKey === 'all' || p.tools.indexOf(filterKey) !== -1;
+      var matches = filterKey === 'all' || (p.category === filterKey);
       if (matches) {
         card.classList.remove('hide');
         card.dataset.visible = 'true';
@@ -983,22 +1131,37 @@ $("#mb-reset").onclick=()=>setMode(null);
         +'<div class="proj-problem"><b>Problem:</b> <span class="proj-body">'+p.problem+'</span></div>'
         +'<div class="proj-solution"><b>Solution:</b> <span class="proj-body">'+p.solution+'</span></div>'
         +'<div class="proj-result"><b>Result:</b> <span class="proj-body">'+p.result+'</span></div>'
-        +'<div class="proj-tags">'+p.tools.map(function(t){return "<span>"+t+"</span>";}).join("")+'</div>'
+        +'<div class="proj-tags category-'+p.category+'"><span class="proj-category">'+p.category+'</span></div>'
         +'</div></div>';
     }).join("");
     track.innerHTML=html;
     projCards=[...$$("#proj-track .proj-card")];
     projIdx=0;
-    // Mark all visible initially
-    projCards.forEach(function(c){ c.dataset.visible='true'; c.dataset.visibleIdx=c.dataset.proj; });
+    // Mark all visible initially, set category
+    projCards.forEach(function(c,i){ c.dataset.visible='true'; c.dataset.visibleIdx=i; c.dataset.category=CONFIG.projects[i].category; });
     buildDots();
     buildFilters();
-    filterProjects(); // apply filter (called by button clicks)
+    filterProjects('all'); // apply default filter and reset
     buildDots(); // update dots to reflect current filter state
     cycleProject(); // activate first visible card
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=prevProject;
     if(next) next.onclick=nextProject;
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.target.closest('.proj-card')) return;
+      if (e.target.closest('#proj-carousel')) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prevProject(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextProject(); }
+      }
+    });
+    // Also allow global arrow key nav when focus is on arrow buttons or dots
+    [prev, next].forEach(function(btn) {
+      if (btn) btn.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prevProject(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextProject(); }
+      });
+    });
   }
   function cycleProject() {
     if (!projCards || projCards.length === 0) return;
