@@ -295,7 +295,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-img{position:relative;overflow:hidden;min-height:300px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:pointer}
 .proj-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:opacity .4s,transform .4s}
 .proj-card:hover .proj-img img{opacity:1;transform:scale(1.03)}
-.proj-img .img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(12,14,22,.3),rgba(12,14,22,.7));pointer-events:none}
+.proj-img .img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,22,.05),rgba(12,14,22,.18));pointer-events:none}
 .proj-content{padding:26px 24px;display:flex;flex-direction:column;min-height:0}
 .proj-content h3{font-size:1.4rem;margin:0 0 4px;line-height:1.2}
 .proj-meta{font-size:.66rem;color:var(--muted);font-family:var(--mono);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
@@ -1850,50 +1850,43 @@ addEventListener("resize",()=>{});
 </script>
 
 
+<style>
+/* Lightbox */
+#proj-lightbox{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(6,8,15,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:32px;animation:lbIn .2s ease}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+#proj-lightbox img{max-width:min(92vw,1100px);max-height:86vh;width:auto;height:auto;display:block;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);background:#0e1016}
+#proj-lightbox .lb-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:1.35rem;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}
+#proj-lightbox .lb-close:hover{background:var(--grad);color:#06080f;border-color:transparent}
+#proj-lightbox .lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.7);background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:99px;backdrop-filter:blur(8px)}
+.proj-img{position:relative;overflow:hidden;min-height:300px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:zoom-in}
+.proj-img::after{content:"Click to Expand";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:#fff;background:rgba(6,8,15,.72);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:99px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;backdrop-filter:blur(8px)}
+.proj-img:hover::after{opacity:1;transform:translate(-50%,-50%) translateY(-2px)}
+</style>
 <script>
-// Open project image in lightbox popup
-function openProjectImage(e, element) {
-  e.preventDefault();
-  var imgSrc = element.querySelector('img').src;
-  var title = element.querySelector('img').alt || 'Project Image';
-  
-  // Create overlay modal
-  var overlay = document.createElement('div');
-  overlay.style.cssText = '
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); z-index: 9999;
-    display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);
-  ';
-  
-  // Close button (X)
-  var closeBtn = document.createElement('div');
-  closeBtn.style.cssText = '
-    position: absolute; top: 20px; right: 30px; color: #fff;
-    font-size: 2rem; font-weight: bold; cursor: pointer;
-    width: 40px; height: 40px; text-align: center; line-height: 40px;
-    background: rgba(0,0,0,0.5); border-radius: 50%;
-  ';
-  closeBtn.textContent = 'X';
-  closeBtn.onclick = function() { overlay.remove(); };
-  
-  // Image
-  var img = document.createElement('img');
-  img.src = imgSrc;
-  img.alt = title;
-  img.style.maxWidth = '90%';
-  img.style.maxHeight = '80%';
-  img.style.boxShadow = '0 0 32px rgba(0,0,0,0.5)';
-  
-  // Append
-  overlay.appendChild(closeBtn);
-  overlay.appendChild(img);
-  document.body.appendChild(overlay);
-  
-  // Close on Escape key
-  var esc = function(e) {
-    if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
-  };
-  document.addEventListener('keydown', esc);
+// Project image lightbox — works for all current + future project cards
+function openProjectImage(e, el){
+  if(e) e.preventDefault();
+  var img = el && el.querySelector ? el.querySelector('img') : null;
+  if(!img || !img.src) return;
+  var src = img.src;
+  var alt = img.alt || 'Project image';
+  // prevent duplicate
+  if(document.getElementById('proj-lightbox')) return;
+  var lb = document.createElement('div');
+  lb.id = 'proj-lightbox';
+  lb.setAttribute('role','dialog');
+  lb.setAttribute('aria-modal','true');
+  lb.innerHTML = '<button class="lb-close" aria-label="Close">\u00d7</button><img src="'+src.replace(/"/g,'&quot;')+'" alt="'+alt.replace(/"/g,'&quot;')+'"><div class="lb-cap">'+alt+'</div>';
+  lb.addEventListener('click', function(ev){
+    if(ev.target===lb) lb.remove();
+  });
+  lb.querySelector('.lb-close').onclick = function(){ lb.remove(); };
+  var onEsc = function(ev){ if(ev.key==='Escape'){ lb.remove(); document.removeEventListener('keydown', onEsc); } };
+  document.addEventListener('keydown', onEsc);
+  // also remove listener when lb removed
+  var obs = new MutationObserver(function(){ if(!document.body.contains(lb)) document.removeEventListener('keydown', onEsc); });
+  obs.observe(document.body, {childList:true});
+  document.body.appendChild(lb);
 }
 </script>
 </body>
