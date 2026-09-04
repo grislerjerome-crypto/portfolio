@@ -1136,6 +1136,10 @@ $("#mb-reset").onclick=()=>setMode(null);
         +'</div></div>';
     }).join("");
     track.innerHTML=html;
+    // Add click handlers for lightbox on all project images
+    $$("#proj-track .proj-img").forEach(function(el) {
+      el.onclick = function(e) { openProjectImage(e, this); };
+    });
     projCards=[...$$("#proj-track .proj-card")];
     projIdx=0;
     // Mark all visible initially, set category
