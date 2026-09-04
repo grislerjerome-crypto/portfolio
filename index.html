@@ -989,8 +989,11 @@ $("#mb-reset").onclick=()=>setMode(null);
     track.innerHTML=html;
     projCards=[...$$("#proj-track .proj-card")];
     projIdx=0;
+    // Mark all visible initially
+    projCards.forEach(function(c){ c.dataset.visible='true'; c.dataset.visibleIdx=c.dataset.proj; });
     buildDots();
     buildFilters();
+    cycleProject(); // activate first visible card
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=prevProject;
     if(next) next.onclick=nextProject;
