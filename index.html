@@ -1022,9 +1022,11 @@ $("#mb-reset").onclick=()=>setMode(null);
   }
   function buildDots() {
     var dots = $("#proj-dots"); if (!dots) return;
-    dots.innerHTML = projCards.map(function (_, i) {
-      return '<i class="' + (i === 0 ? 'on' : '') + '" data-i="' + i + '"></i>';
-    }).join('');
+    var visibleCount = projCards.filter(function(c){ return c.dataset.visible === 'true'; }).length;
+    dots.innerHTML = '';
+    for (var i = 0; i < visibleCount; i++) {
+      dots.innerHTML += '<i class="' + (i === projIdx ? 'on' : '') + '" data-i="' + i + '"></i>';
+    }
     $$('#proj-dots i').forEach(function (d) {
       d.onclick = function () {
         var idx = +d.dataset.i;
