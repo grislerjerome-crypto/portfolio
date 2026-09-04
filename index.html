@@ -279,9 +279,10 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .carousel-wrap{position:relative;overflow:hidden;width:100%}
 .carousel{position:relative;width:100%;margin-top:20px}
 .proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative}
-.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:relative;z-index:2;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .45s ease,transform .45s ease,box-shadow .3s ease;opacity:1;transform:scale(1)}
+.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:absolute;inset:0;z-index:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;opacity:0;transform:scale(.985);pointer-events:none;visibility:hidden}
+.proj-card.active{position:relative;z-index:2;opacity:1;transform:scale(1);pointer-events:auto;visibility:visible}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
-.proj-card.hide{opacity:0;pointer-events:none;position:absolute;inset:0}
+.proj-card.hide{opacity:0!important;pointer-events:none!important;position:absolute;inset:0;visibility:hidden!important}
 .proj-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
 .proj-nav button{width:42px;height:42px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid var(--panel-border);color:var(--txt);font-size:1.1rem;transition:all .2s}
 .proj-nav button:hover{background:var(--grad);color:#06080f;border-color:transparent}
@@ -1061,7 +1062,6 @@ function setMode(id){
   $("#mode-banner").classList.add('show');
   $$("#svc-grid .svc").forEach(c=>c.classList.toggle('active',c.dataset.mode===id));
   renderOperatingSystem(id);
-  if(currentProjMode){ filterProjects(id); }
 }
 $("#mode-ind").onclick=()=>setMode(null);
 $("#mb-reset").onclick=()=>setMode(null);
@@ -1073,7 +1073,7 @@ $("#mb-reset").onclick=()=>setMode(null);
 
   function buildFilters() {
     var container = $("#proj-filters"); if (!container) return;
-    var filters = [{label:"All",key:"all"}].concat(["GHL","Zapier","Make.com","n8n"].map(function(t){return {label:t,key:t};}));
+    var filters = [{label:"All",key:"all"}].concat(["GHL","Make.com","Zapier","n8n"].map(function(t){return {label:t,key:t};}));
     var html = '<div class="proj-filters">';
     html += '<button class="proj-filter-btn active" data-filter="all">All <span class="count">('+CONFIG.projects.length+')</span></button>';
     filters.slice(1).forEach(function(f) {
@@ -1172,10 +1172,6 @@ $("#mb-reset").onclick=()=>setMode(null);
     projCards.forEach(function(c){ c.classList.remove('active'); });
     visibleCards[projIdx].classList.add('active');
     updateDots();
-    if (typeof window.scrollTo === 'function') {
-      var cur = visibleCards[projIdx];
-      if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
   }
   function prevProject() {
     var visibleCards = projCards.filter(function(c){ return c.dataset.visible === 'true'; });
