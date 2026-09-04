@@ -277,9 +277,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
 /* ---- Projects Carousel ---- */
 .carousel-wrap{position:relative;overflow:hidden;width:100%}
-.carousel{position:relative;width:100%;margin-top:20px;min-height:440px}
-.proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative;min-height:440px}
-.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:absolute;inset:0;z-index:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;min-height:440px;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;opacity:0;transform:scale(.985);pointer-events:none;visibility:hidden}
+.carousel{position:relative;width:100%;margin-top:20px;height:440px !important;min-height:440px !important;max-height:440px !important}
+.proj-track{display:grid;grid-template-columns:1fr;gap:0;width:100%;overflow:hidden;position:relative;height:440px !important;min-height:440px !important;max-height:440px !important}
+.proj-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.42);position:absolute;inset:0;z-index:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:.42fr .58fr;height:440px !important;min-height:440px !important;max-height:440px !important;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;opacity:0;transform:scale(.985);pointer-events:none;visibility:hidden}
 .proj-card.active{position:relative;z-index:2;opacity:1;transform:scale(1);pointer-events:auto;visibility:visible}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
 .proj-card.hide{opacity:0!important;pointer-events:none!important;position:absolute;inset:0;visibility:hidden!important}
@@ -292,12 +292,12 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-filter-btn.active{color:var(--txt);background:rgba(255,255,255,.08);border-color:color-mix(in srgb,var(--lime) 42%,transparent)}
 .proj-filter-btn .count{opacity:.6;margin-left:3px}
 .proj-filter-btn.active .count{opacity:1}
-.proj-img{position:relative;overflow:hidden;height:100%;min-height:440px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:pointer}
-.proj-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;opacity:.92;transition:opacity .4s,transform .4s}
+.proj-img{position:relative;overflow:hidden;height:440px !important;min-height:440px !important;max-height:440px !important;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:pointer}
+.proj-img img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important;display:block;opacity:.92;transition:opacity .4s,transform .4s}
 .proj-card:hover .proj-img img{opacity:1;transform:scale(1.02)}
 .proj-img .img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,22,.05),rgba(12,14,22,.18));pointer-events:none}
-@media(max-width:760px){.proj-card{grid-template-columns:1fr;min-height:auto}.proj-img{min-height:240px;height:240px}.carousel,.proj-track{min-height:auto}}
-.proj-content{padding:26px 24px;display:flex;flex-direction:column;min-height:0}
+.proj-content{padding:22px 24px;display:flex;flex-direction:column;min-height:0;height:440px;overflow:hidden;justify-content:flex-start}
+@media(max-width:760px){.proj-card,.carousel,.proj-track{height:auto !important;min-height:auto !important;max-height:none !important;grid-template-columns:1fr}.proj-img{min-height:240px !important;height:240px !important;max-height:240px !important}.proj-content{height:auto;overflow:visible}}
 .proj-content h3{font-size:1.4rem;margin:0 0 4px;line-height:1.2}
 .proj-meta{font-size:.66rem;color:var(--muted);font-family:var(--mono);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
 .proj-meta .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);margin-right:6px}
@@ -1859,7 +1859,9 @@ addEventListener("resize",()=>{});
 #proj-lightbox .lb-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:1.35rem;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}
 #proj-lightbox .lb-close:hover{background:var(--grad);color:#06080f;border-color:transparent}
 #proj-lightbox .lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.7);background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:99px;backdrop-filter:blur(8px)}
-.proj-img{position:relative;overflow:hidden;min-height:300px;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:zoom-in}
+/* uniform thumbnail — same box for every card, cropped; full image in lightbox */
+.proj-img{position:relative;overflow:hidden;height:440px !important;min-height:440px !important;max-height:440px !important;background:linear-gradient(135deg,#0e1016,#12161f);display:grid;place-items:center;cursor:zoom-in}
+.proj-img img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important}
 .proj-img::after{content:"Click to Expand";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:#fff;background:rgba(6,8,15,.72);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:99px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;backdrop-filter:blur(8px)}
 .proj-img:hover::after{opacity:1;transform:translate(-50%,-50%) translateY(-2px)}
 </style>
