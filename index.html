@@ -112,14 +112,14 @@ main,.nav,.footer,.palette-wrap{position:relative;z-index:2}
 @media(min-width:621px){.mobile-menu{display:none!important}}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-section{padding:94px 0;position:relative;scroll-margin-top:86px}
+section{padding:52px 0;position:relative;scroll-margin-top:86px}
 .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.3em;color:var(--lime);text-transform:uppercase;margin-bottom:14px;display:inline-block}
 h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;margin-bottom:14px}
 .lead{color:var(--muted);max-width:640px}
 .status-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;color:var(--muted);border:1px solid var(--panel-border);border-radius:99px;padding:7px 14px;margin-bottom:18px}
 .status-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:blink 1.6s infinite}
 
-.hero{padding:88px 0 72px;min-height:calc(100svh - 64px);display:grid;align-items:center}
+.hero{padding:56px 0 42px;min-height:auto;display:grid;align-items:center}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
 @media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:30px}}
 .graph-card{background:var(--glass);border:1px solid color-mix(in srgb,var(--panel-border) 82%,var(--lime));border-radius:var(--radius);padding:8px;box-shadow:var(--shadow),var(--glow);position:relative;overflow:hidden;isolation:isolate}
@@ -364,8 +364,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 @media(max-width:760px){
   #cur-dot,#cur-ring{display:none}
   .wrap{padding:0 18px}
-  section{padding:70px 0;scroll-margin-top:74px}
-  .hero{padding:62px 0 46px;min-height:auto}
+  section{padding:38px 0;scroll-margin-top:74px}
+  .hero{padding:38px 0 28px;min-height:auto}
   .status-pill{font-size:.64rem;letter-spacing:.1em;max-width:100%}
   .btn{width:100%;text-align:center}
   .btns{gap:10px}
@@ -438,7 +438,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
         <h1 id="hero-h1">I run the systems <span class="grad">behind your business.</span></h1>
         <p class="sub" id="hero-sub">Automation, websites, ecommerce and logistics. The work that keeps everything moving, handled end to end.</p>
         <div class="btns">
-          <button class="btn primary magnetic" onclick="smartScroll('#contact')">Let's Connect</button>
+          <button class="btn primary magnetic" onclick="smartScroll('#contact')">Let's Connect!</button>
           <a class="btn magnetic" href="#services">See the services</a>
         </div>
         <div class="chips" id="chips"></div>
@@ -586,9 +586,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   <section class="cta-band" id="contact">
     <div class="wrap reveal" style="text-align:center">
       <h2 id="cta-h2">Let's take the busywork off your plate.</h2>
-      <p class="lead" style="margin:0 auto 22px" id="cta-sub">Book a free 15 minute teardown. I'll point at the first three things worth handing off in your business.</p>
+      <p class="lead" style="margin:0 auto 22px" id="cta-sub">Book a free 30 minute teardown. I'll point at the first three things worth handing off in your business.</p>
       <div class="btns" style="justify-content:center">
-        <a class="btn primary magnetic" id="cta-btn" href="#">Let's Connect</a>
+        <a class="btn primary magnetic" id="cta-btn" href="#">Let's Connect!</a>
         <a class="btn magnetic" id="cta-email" href="#">Or email me</a>
       </div>
     </div>
@@ -651,7 +651,7 @@ const CONFIG = {
     eyebrow: "SYSTEMS & OPERATIONS",
     h1: "I run the systems <span class='grad'>behind your business.</span>",
     sub: "Automation, websites, ecommerce and logistics. The work that keeps everything moving, handled end to end.",
-    ctaBtn: "Let's Connect", ctaLink: "#contact"
+    ctaBtn: "Let's Connect!", ctaLink: "#contact"
   },
   chips: ["See the services →","Calculate ROI →","View my work →","Email me →"],
 
@@ -967,7 +967,7 @@ const CONFIG = {
     }
   ],
 
-  cta: { h2:"Let's take the busywork off your plate.", sub:"Book a free 30 minute teardown. I'll point at the first three things worth handing off in your business.", btn:"Let's Connect", link:"#contact", email:"grislerjerome@gmail.com" },
+  cta: { h2:"Let's take the busywork off your plate.", sub:"Book a free 30 minute teardown. I'll point at the first three things worth handing off in your business.", btn:"Let's Connect!", link:"#contact", email:"grislerjerome@gmail.com" },
   social: { linkedin:"https://www.linkedin.com/in/jerome-grisler-7041ab3a7/", email:"grislerjerome@gmail.com", facebook:"https://www.facebook.com/jeromegrslr" }
 };
 /* ============================================================================
