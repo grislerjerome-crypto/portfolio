@@ -967,7 +967,7 @@ const CONFIG = {
     }
   ],
 
-  cta: { h2:"Let's take the busywork off your plate.", sub:"Book a free 15 minute teardown. I'll point at the first three things worth handing off in your business.", btn:"Book a free teardown", link:"#contact", email:"grislerjerome@gmail.com" },
+  cta: { h2:"Let's take the busywork off your plate.", sub:"Book a free 30 minute teardown. I'll point at the first three things worth handing off in your business.", btn:"Book a free teardown", link:"#contact", email:"grislerjerome@gmail.com" },
   social: { linkedin:"https://www.linkedin.com/in/jerome-grisler-7041ab3a7/", email:"grislerjerome@gmail.com", facebook:"https://www.facebook.com/jeromegrslr" }
 };
 /* ============================================================================
@@ -1012,12 +1012,12 @@ function applyStatic(){
   $("#cta-h2").textContent=CONFIG.cta.h2;
   $("#cta-sub").textContent=CONFIG.cta.sub;
   $("#cta-btn").textContent=CONFIG.cta.btn;$("#cta-btn").href=CONFIG.cta.link;
-  $("#cta-email").textContent="Or email me";$("#cta-email").href="mailto:"+CONFIG.cta.email;
+  $("#cta-email").textContent="Or email me";$("#cta-email").href="mailto:"+CONFIG.cta.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#footer-tag").textContent=CONFIG.role+", building the engine that runs while you sleep.";
   $$(".brand").forEach(b=>b.innerHTML=CONFIG.name.replace(/(.+)\s(\S+)$/,'$1<b>$2</b>'));
   $("#year").textContent=new Date().getFullYear();
   $("#foot-linkedin").href=CONFIG.social.linkedin;
-  $("#foot-email").href="mailto:"+CONFIG.social.email;
+  $("#foot-email").href="mailto:"+CONFIG.social.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#foot-facebook").href=CONFIG.social.facebook;
   $("#boot-name").textContent=CONFIG.bootName;
   $("#boot-status").textContent="AI AUTOMATIONS, "+CONFIG.role.toUpperCase()+"...";
