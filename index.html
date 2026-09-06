@@ -1135,6 +1135,15 @@ const CONFIG = {
       problem:"Sales teams lost response time and cluttered the CRM with duplicates while manually copying, qualifying and creating opportunities for every new lead.",
       solution:"Built an n8n flow that ingests webhooks and standardizes contact formatting, searches GoHighLevel to check for existing contacts, runs details through an LLM Chain via OpenRouter for intent and quality scoring, then issues an HTTP request to create a fully qualified opportunity directly inside GoHighLevel.",
       result:"Instant lead to opportunity creation with no manual entry or duplicate records. Every incoming lead gets standardized AI scoring and the team saves 12 to 20 hours per week on CRM admin and triage."
+    },
+    {
+      title:"RAG Forge Knowledge Automation",
+      category:"n8n",
+      img:"n8n-rag-forge-knowledge.png",
+      desc:"n8n retrieval workflow that keeps AI knowledge bases live. Drive changes trigger vector cleanup, embedding and Supabase sync for hallucination free answers.",
+      problem:"Knowledge bases went stale whenever handbook documents changed. HR answered the same policy questions manually and wasted time re indexing files, while AI gave outdated answers.",
+      solution:"Built an n8n flow that monitors Google Drive in real time for creates, updates and deletes. It deletes outdated vectors in Supabase when files are revised, downloads updated files, generates fresh embeddings via OpenAI with a data loader and updates the Supabase Vector Store so retrieval stays synchronized.",
+      result:"Guarantees accurate hallucination free AI responses with live file sync. No manual vector maintenance and 10 to 15 hours per week saved on document management and routine inquiries."
     }
   ],
 
