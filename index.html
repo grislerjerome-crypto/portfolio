@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 12 projects
+    // GHL. 13 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -886,6 +886,15 @@ const CONFIG = {
       problem:"Approved applications got stuck waiting on manual work. Someone had to update the status, type an SMS and send an email, which delayed onboarding and created inconsistent follow through.",
       solution:"Built a GoHighLevel workflow on Decision Status change that updates the opportunity to Approved, sends an instant approval SMS and follows with an approval email, all executed automatically the moment the status flips.",
       result:"Approvals now notify instantly across SMS and email, onboarding time shrinks and every approved applicant gets a consistent on time welcome without manual steps."
+    },
+    {
+      title:"Application Decline Flow",
+      category:"GHL",
+      img:"application-decline-flow.png",
+      desc:"Thoughtful GoHighLevel decline flow that closes the loop gracefully. Triggers on pipeline stage change and delivers a clear, empathetic SMS with next steps.",
+      problem:"Declined applicants heard nothing after a decision. Silence created confusion, hurt trust and left the brand looking unprofessional at a sensitive moment.",
+      solution:"Built a GoHighLevel workflow that watches for a pipeline stage change to Declined, updates the opportunity status and immediately sends a professional decline SMS that explains next steps with empathy.",
+      result:"Every decline is handled consistently and kindly. Brand reputation stays intact and applicants get clarity without anyone needing to send manual messages."
     },
 
     // Zapier. 5 projects
