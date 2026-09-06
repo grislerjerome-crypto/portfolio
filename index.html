@@ -1036,13 +1036,13 @@ const CONFIG = {
       result:"One row now notifies every relevant channel automatically and in order. No manual routing and no missed audiences."
     },
     {
-      title:"Make.com: Subscription Billing Sync",
+      title:"Automated Facebook Page Posting",
       category:"Make.com",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Billing+Flow",
-      desc:"Stripe subscription → Make.com → QuickBooks invoice creation → Slack alert on failed payment → customer email retry sequence.",
-      problem:"Finance team manually reconciled 150+ subscriptions monthly across Stripe and QuickBooks. Missed 12 failed payments.",
-      solution:"Make.com scenario: new subscription event → QB invoice auto-creation, failed payment webhook → Slack + customer email sequence + dunning retry workflow.",
-      result:"Reconciliation time cut from 6 hours to 15 minutes. Failed payment recovery up to 78%. Zero missed churn alerts."
+      img:"make-facebook-page-posting.png",
+      desc:"Make.com content flow that publishes from Sheets to Facebook Page, alerts Slack and logs the result back to the row. Calendar drives itself.",
+      problem:"Scheduling Facebook posts by hand and tracking what published was slow and easy to lose control of. Content gaps and duplicate posts crept in.",
+      solution:"Built a Make.com scenario that pulls content from Google Sheets, publishes to Facebook Page, notifies Slack and then updates the sheet row with the publish result for full traceability.",
+      result:"A content calendar in Sheets now publishes itself and logs every outcome. No manual scheduling and no lost posts."
     },
     {
       title:"Make.com: Client Onboarding",
