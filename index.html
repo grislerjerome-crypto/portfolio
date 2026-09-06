@@ -1126,6 +1126,15 @@ const CONFIG = {
       problem:"Repetitive support emails piled up and dragged response times down. The team was stuck answering the same questions again and again.",
       solution:"Built an n8n flow with Gmail trigger. Gemini classifies each email, an AI agent drafts a context aware reply, then the message auto sends and is labeled for traceability.",
       result:"Routine tickets are answered instantly with no human review. The team only handles genuine edge cases and response time collapses."
+    },
+    {
+      title:"Lead Capture to AI Qualification to GoHighLevel",
+      category:"n8n",
+      img:"n8n-lead-capture-ai-qualification-ghl.png",
+      desc:"n8n automation that captures raw webhook leads, deduplicates GoHighLevel and routes only AI qualified prospects into the pipeline as opportunities.",
+      problem:"Sales teams lost response time and cluttered the CRM with duplicates while manually copying, qualifying and creating opportunities for every new lead.",
+      solution:"Built an n8n flow that ingests webhooks and standardizes contact formatting, searches GoHighLevel to check for existing contacts, runs details through an LLM Chain via OpenRouter for intent and quality scoring, then issues an HTTP request to create a fully qualified opportunity directly inside GoHighLevel.",
+      result:"Instant lead to opportunity creation with no manual entry or duplicate records. Every incoming lead gets standardized AI scoring and the team saves 12 to 20 hours per week on CRM admin and triage."
     }
   ],
 
