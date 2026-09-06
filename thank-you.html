@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thank You — Jerome Grisler</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0b0f;--panel:rgba(255,255,255,.035);--panel-border:rgba(255,255,255,.09);--txt:#eef1f5;--muted:#8a93a6;--lime:#b8ff3c;--magenta:#ff3da6;--grad:linear-gradient(120deg,var(--lime),var(--magenta));--font:"Space Grotesk",system-ui,sans-serif;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);min-height:100dvh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(620px 620px at 10% 0%,color-mix(in srgb,var(--lime) 8%,transparent),transparent 60%),radial-gradient(700px 700px at 92% 18%,color-mix(in srgb,var(--magenta) 10%,transparent),transparent 60%)}
+.card{width:min(520px,92vw);background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.5);padding:36px 28px;text-align:center}
+.icon{width:64px;height:64px;border-radius:50%;background:var(--grad);display:grid;place-items:center;margin:0 auto 16px;font-size:1.6rem;box-shadow:0 0 28px color-mix(in srgb,var(--lime) 30%,transparent)}
+h1{font-size:1.6rem;margin-bottom:8px}
+h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{color:var(--muted);line-height:1.5;margin-bottom:20px}
+a.btn{display:block;padding:14px 18px;border-radius:99px;background:var(--grad);color:#06080f;font-weight:700;text-decoration:none;box-shadow:0 0 28px color-mix(in srgb,var(--magenta) 18%,transparent)}
+a.btn:hover{transform:translateY(-1px)}
+.small{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">✓</div>
+  <h1>You’re <span>booked!</span></h1>
+  <p>Thanks for reaching out — I got your details and will send a calendar invite to your email shortly.<br>Check your inbox (and spam) for confirmation. Talk soon!</p>
+  <a class="btn" href="index.html">Back to site →</a>
+  <div class="small">Need to change something? Email <a href="mailto:grislerjerome@gmail.com" style="color:var(--lime)">grislerjerome@gmail.com</a></div>
+</div>
+</body>
+</html>

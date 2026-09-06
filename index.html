@@ -375,6 +375,19 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   .hub-actions{justify-content:center}
   .svc,.cap,.craftee-hero,.roi-out,.tcard{box-shadow:0 10px 28px rgba(0,0,0,.16)}
 }
+
+/* ---- Thank you popup ---- */
+.ty-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.72);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.ty-overlay.open{opacity:1;visibility:visible}
+.ty-modal{width:min(520px,92vw);background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.5);padding:36px 28px;text-align:center;position:relative;transform:scale(.96);transition:transform .3s}
+.ty-overlay.open .ty-modal{transform:scale(1)}
+.ty-icon{width:64px;height:64px;border-radius:50%;background:var(--grad);display:grid;place-items:center;margin:0 auto 16px;font-size:1.6rem;box-shadow:0 0 28px color-mix(in srgb,var(--lime) 30%,transparent)}
+.ty-modal h3{font-size:1.5rem;margin-bottom:8px}
+.ty-modal h3 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ty-modal p{color:var(--muted);font-size:.95rem;line-height:1.5;margin-bottom:20px}
+.ty-modal .ty-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.ty-modal .ty-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
+
 </style>
 </head>
 <body>
@@ -2109,6 +2122,19 @@ addEventListener("resize",()=>{});
 .form-success.show{display:block}
 .form-success h4{color:var(--lime);margin-bottom:6px}
 .req{color:var(--magenta)}
+
+/* ---- Thank you popup ---- */
+.ty-overlay{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.72);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.ty-overlay.open{opacity:1;visibility:visible}
+.ty-modal{width:min(520px,92vw);background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:0 24px 80px rgba(0,0,0,.5);padding:36px 28px;text-align:center;position:relative;transform:scale(.96);transition:transform .3s}
+.ty-overlay.open .ty-modal{transform:scale(1)}
+.ty-icon{width:64px;height:64px;border-radius:50%;background:var(--grad);display:grid;place-items:center;margin:0 auto 16px;font-size:1.6rem;box-shadow:0 0 28px color-mix(in srgb,var(--lime) 30%,transparent)}
+.ty-modal h3{font-size:1.5rem;margin-bottom:8px}
+.ty-modal h3 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ty-modal p{color:var(--muted);font-size:.95rem;line-height:1.5;margin-bottom:20px}
+.ty-modal .ty-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;display:grid;place-items:center;transition:all .2s}
+.ty-modal .ty-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
+
 </style>
 <script>
 // Project image lightbox. works for all current + future project cards
@@ -2209,6 +2235,7 @@ document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
       if(!res.ok) throw new Error('Webhook failed: '+res.status);
     }
     ok.classList.add('show');
+    setTimeout(function(){ try{ showThankYou(); }catch(e){} }, 600);
     btn.textContent="Booked ✓";
     form.reset();
     form.querySelector('[name="notes"]').value='Hi Rome here is what I am looking to hand off and what success looks like for us:\n\n';
@@ -2289,5 +2316,36 @@ window.bkOpen=bkOpen; window.bkClose=bkClose;
     </div>
   </div>
 </div>
+
+<!-- Thank You Popup -->
+<div class="ty-overlay" id="tyOverlay" aria-hidden="true">
+  <div class="ty-modal" role="dialog" aria-modal="true" aria-labelledby="tyTitle">
+    <button class="ty-close" id="tyClose" aria-label="Close" type="button">✕</button>
+    <div class="ty-icon">✓</div>
+    <h3 id="tyTitle">You’re <span>booked!</span></h3>
+    <p>Thanks for reaching out — I got your details and will send a calendar invite to your email shortly.<br>Check your inbox (and spam) for confirmation. Talk soon!</p>
+    <button class="btn-primary" style="width:100%" type="button" id="tyDoneBtn">Done — back to site</button>
+  </div>
+</div>
+
+<script>
+function showThankYou(){
+  var ty=document.getElementById('tyOverlay');
+  var bk=document.getElementById('bkOverlay');
+  if(bk) bk.classList.remove('open');
+  if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+}
+function closeThankYou(){
+  var ty=document.getElementById('tyOverlay');
+  if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  var bk=document.getElementById('bkOverlay');
+  if(bk) bk.classList.remove('open');
+}
+window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
+document.getElementById('tyClose')?.addEventListener('click', closeThankYou);
+document.getElementById('tyDoneBtn')?.addEventListener('click', closeThankYou);
+document.getElementById('tyOverlay')?.addEventListener('click', function(e){ if(e.target===e.currentTarget) closeThankYou(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) closeThankYou(); }});
+</script>
 </body>
 </html>
