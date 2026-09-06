@@ -585,6 +585,68 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       </div>
     </div>
   </section>
+
+<!-- Booking Popup -->
+<div class="bk-overlay" id="bkOverlay" aria-hidden="true">
+  <div class="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bkTitleMain">
+    <div class="bk-head">
+      <div>
+        <div class="eyebrow">30 Minute Teardown · Free</div>
+        <h2 id="bkTitleMain">Book your <span>teardown</span></h2>
+        <p>Pick a time, tell me what you want to hand off. I will point at the first three things worth automating.</p>
+      </div>
+      <button class="bk-close" id="bkCloseMain" aria-label="Close">✕</button>
+    </div>
+    <div class="bk-body">
+      <div class="bk-left">
+        <div class="eyebrow">Select date & time</div>
+        <h3>Jerome Grisler — Systems & Operations</h3>
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrevMain" aria-label="Previous month">‹</button>
+          <b id="calLabelMain">—</b>
+          <button class="cal-nav" id="calNextMain" aria-label="Next month">›</button>
+        </div>
+        <div class="cal-grid" id="calGridMain"></div>
+        <div class="time-grid" id="timeGridMain"></div>
+        <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
+      </div>
+      <form class="bk-form" id="bkFormMain" novalidate>
+        <div class="row2">
+          <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
+          <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
+        </div>
+        <div class="field"><label>Business Name <span class="req">*</span></label><input name="businessName" required placeholder="Acme Co." autocomplete="organization" /></div>
+        <div class="field"><label>Email Address <span class="req">*</span></label><input name="email" type="email" required placeholder="jane@company.com" autocomplete="email" /></div>
+        <div class="field">
+          <label>What services are you inquiring about? <span class="req">*</span></label>
+          <select name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option>AI Automation</option>
+            <option>Website Development</option>
+            <option>E-commerce VA</option>
+            <option>Logistics & Supply Chain VA</option>
+            <option>Multiple services</option>
+            <option>Not sure yet — need teardown</option>
+          </select>
+        </div>
+        <div class="field"><label>Notes</label><textarea name="notes">Hi Rome here is what I am looking to hand off and what success looks like for us:
+
+</textarea></div>
+        <input type="hidden" name="date" id="fDateMain" />
+        <input type="hidden" name="time" id="fTimeMain" />
+        <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
+        <button type="submit" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
+        <button type="button" class="btn-ghost" id="bkCancelMain">Cancel</button>
+        <div class="form-success" id="bkSuccessMain">
+          <h4>Booking received</h4>
+          <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
+        </div>
+        <p style="font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:center">No spam. Your details go to my inbound webhook only.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <footer class="footer">
@@ -2053,6 +2115,51 @@ addEventListener("resize",()=>{});
 .proj-img img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important}
 .proj-img::after{content:"Click to Expand";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:#fff;background:rgba(6,8,15,.72);border:1px solid rgba(255,255,255,.14);padding:7px 12px;border-radius:99px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;backdrop-filter:blur(8px)}
 .proj-img:hover::after{opacity:1;transform:translate(-50%,-50%) translateY(-2px)}
+
+/* ---- Booking popup (matches branding) ---- */
+.bk-overlay{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.62);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.bk-overlay.open{opacity:1;visibility:visible}
+.bk-modal{width:min(920px,100%);max-height:92dvh;overflow:auto;background:var(--glass);border:1px solid var(--panel-border);border-radius:20px;box-shadow:var(--shadow);position:relative;scrollbar-width:thin}
+.bk-modal::-webkit-scrollbar{width:8px} .bk-modal::-webkit-scrollbar-thumb{background:linear-gradient(var(--lime),var(--magenta));border-radius:99px}
+.bk-head{position:sticky;top:0;z-index:2;background:linear-gradient(180deg,rgba(14,16,22,.94),rgba(14,16,22,.78));backdrop-filter:blur(12px);border-bottom:1px solid var(--panel-border);padding:22px 26px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bk-head h2{font-size:clamp(1.3rem,2.8vw,1.65rem);letter-spacing:-.02em}
+.bk-head h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bk-head p{color:var(--muted);font-size:.92rem;margin-top:4px}
+.bk-close{width:38px;height:38px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;display:grid;place-items:center;font-size:1.2rem;transition:all .2s}
+.bk-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
+.bk-body{padding:24px 26px 26px;display:grid;grid-template-columns:1.05fr .95fr;gap:26px}
+@media(max-width:820px){.bk-body{grid-template-columns:1fr}}
+.bk-left{background:rgba(255,255,255,.02);border:1px solid var(--panel-border);border-radius:14px;padding:18px}
+.bk-left h3{margin:6px 0 10px;font-size:1.05rem}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:.78rem}
+.cal-grid .dow{color:var(--muted);font-size:.68rem;padding:4px 0}
+.cal-day{aspect-ratio:1;display:grid;place-items:center;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.02)}
+.cal-day:hover{border-color:var(--panel-border);background:rgba(255,255,255,.06)}
+.cal-day.sel{background:var(--grad);color:#06080f;font-weight:700;border-color:transparent;box-shadow:0 0 18px color-mix(in srgb,var(--lime) 30%,transparent)}
+.cal-day.dis{opacity:.28;pointer-events:none}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.time-btn{padding:10px 10px;border-radius:99px;border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--txt);font-family:var(--mono);font-size:.82rem;cursor:pointer;transition:all .18s}
+.time-btn:hover{border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
+.time-btn.sel{background:var(--grad);color:#06080f;border-color:transparent;font-weight:700}
+.bk-note{margin-top:14px;padding:12px;border-radius:12px;background:rgba(184,255,60,.08);border:1px solid color-mix(in srgb,var(--lime) 18%,transparent);font-size:.82rem;color:var(--muted)}
+.bk-note b{color:var(--txt)}
+.bk-form{display:flex;flex-direction:column;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.field label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);font-family:var(--font);font-size:.92rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:color-mix(in srgb,var(--lime) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--lime) 14%,transparent)}
+.field textarea{min-height:112px;resize:vertical;line-height:1.5}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) calc(50% - 2px),calc(100% - 13px) calc(50% - 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:36px}
+.btn-primary{width:100%;padding:14px 18px;border-radius:99px;border:none;background:var(--grad);color:#06080f;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 0 28px color-mix(in srgb,var(--magenta) 18%,transparent);transition:transform .18s,box-shadow .18s,opacity .2s}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.55;pointer-events:none}
+.btn-ghost{width:100%;padding:11px;border-radius:99px;border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--mono);font-size:.78rem;cursor:pointer}
+.form-success{display:none;text-align:center;padding:18px;border-radius:14px;background:rgba(184,255,60,.08);border:1px solid color-mix(in srgb,var(--lime) 22%,transparent)}
+.form-success.show{display:block}
+.form-success h4{color:var(--lime);margin-bottom:6px}
+.req{color:var(--magenta)}
 </style>
 <script>
 // Project image lightbox. works for all current + future project cards
@@ -2080,6 +2187,98 @@ function openProjectImage(e, el){
   obs.observe(document.body, {childList:true});
   document.body.appendChild(lb);
 }
+</script>
+<script>
+
+/* ---- Booking popup ---- */
+const BK_WEBHOOK_URL = "REPLACE_WITH_YOUR_INBOUND_WEBHOOK_URL";
+let bkCur = new Date(); bkCur.setDate(1);
+let bkSelDate=null, bkSelTime=null;
+const bkSlots=["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
+const bkMonths=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function bkRenderCal(){
+  const y=bkCur.getFullYear(), m=bkCur.getMonth();
+  const lbl=document.getElementById('calLabelMain');
+  if(!lbl) return;
+  lbl.textContent=bkMonths[m]+" "+y;
+  const first=new Date(y,m,1).getDay();
+  const days=new Date(y,m+1,0).getDate();
+  const grid=document.getElementById('calGridMain');
+  grid.innerHTML=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="dow">${d}</div>`).join('');
+  for(let i=0;i<first;i++) grid.innerHTML+=`<div></div>`;
+  const today=new Date(); today.setHours(0,0,0,0);
+  for(let d=1; d<=days; d++){
+    const dt=new Date(y,m,d);
+    const isPast=dt<today;
+    const isSel=bkSelDate && dt.getTime()===bkSelDate.getTime();
+    grid.innerHTML+=`<div class="cal-day ${isPast?'dis':''} ${isSel?'sel':''}" data-d="${d}">${d}</div>`;
+  }
+  grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
+    el.onclick=()=>{ bkSelDate=new Date(y,m,+el.dataset.d); bkRenderCal(); bkRenderTimes(); bkSync(); };
+  });
+}
+function bkRenderTimes(){
+  const g=document.getElementById('timeGridMain');
+  if(!g) return;
+  if(!bkSelDate){ g.innerHTML='<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
+  g.innerHTML=bkSlots.map(s=>`<button type="button" class="time-btn ${bkSelTime===s?'sel':''}" data-t="${s}">${s} PHT</button>`).join('');
+  g.querySelectorAll('.time-btn').forEach(b=>{ b.onclick=()=>{ bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); }; });
+}
+function bkSync(){
+  const dEl=document.getElementById('fDateMain'), tEl=document.getElementById('fTimeMain'), hint=document.getElementById('dateHintMain');
+  if(!hint) return;
+  if(bkSelDate) dEl.value=bkSelDate.toISOString().slice(0,10);
+  if(bkSelTime) tEl.value=bkSelTime;
+  if(bkSelDate && bkSelTime){ hint.textContent="Selected: "+bkSelDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})+" at "+bkSelTime+" PHT"; hint.style.color="var(--lime)"; }
+  else if(bkSelDate){ hint.textContent="Now pick a time"; hint.style.color="var(--muted)"; }
+}
+function bkOpen(){ document.getElementById('bkOverlay').classList.add('open'); document.getElementById('bkOverlay').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; bkRenderCal(); bkRenderTimes(); }
+function bkClose(){ document.getElementById('bkOverlay').classList.remove('open'); document.getElementById('bkOverlay').setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+document.getElementById('calPrevMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()-1); bkRenderCal(); });
+document.getElementById('calNextMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()+1); bkRenderCal(); });
+document.getElementById('bkCloseMain')?.addEventListener('click',bkClose);
+document.getElementById('bkCancelMain')?.addEventListener('click',bkClose);
+document.getElementById('bkOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) bkClose(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') bkClose(); });
+document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const form=e.target;
+  if(!bkSelDate || !bkSelTime){ alert('Please pick a date and time on the left.'); return; }
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  const data=Object.fromEntries(new FormData(form).entries());
+  data.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const btn=document.getElementById('bkSubmitMain'), ok=document.getElementById('bkSuccessMain');
+  btn.textContent="Sending..."; btn.disabled=true;
+  try{
+    if(BK_WEBHOOK_URL.includes('REPLACE')){
+      await new Promise(r=>setTimeout(r,900));
+      console.log('Booking payload (set BK_WEBHOOK_URL):', data);
+    } else {
+      const res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'portfolio-booking',page:location.href})});
+      if(!res.ok) throw new Error('Webhook failed: '+res.status);
+    }
+    ok.classList.add('show');
+    btn.textContent="Booked ✓";
+    form.reset();
+    form.querySelector('[name="notes"]').value='Hi Rome here is what I am looking to hand off and what success looks like for us:\n\n';
+    bkSelDate=null; bkSelTime=null; bkRenderCal(); bkRenderTimes(); bkSync();
+    setTimeout(()=>{ btn.textContent="Confirm Booking →"; btn.disabled=false; },2200);
+  }catch(err){
+    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+err.message);
+    btn.textContent="Confirm Booking →"; btn.disabled=false;
+  }
+});
+// Hook all Let's Connect buttons to open popup
+document.querySelectorAll('#cta-btn, #cta-email').forEach(a=>{
+  a.addEventListener('click',e=>{
+    if(a.id==='cta-btn' || a.textContent.includes("Let's Connect")){ e.preventDefault(); bkOpen(); }
+  });
+});
+document.querySelectorAll('button').forEach(b=>{
+  if(b.textContent.trim()==="Let's Connect!"){ b.addEventListener('click',e=>{ e.preventDefault(); bkOpen(); }); }
+});
+window.bkOpen=bkOpen; window.bkClose=bkClose;
+
 </script>
 </body>
 </html>

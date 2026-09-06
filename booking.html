@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Call — Jerome Grisler</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0a0b0f;--bg-2:#0e1016;--panel:rgba(255,255,255,.035);--panel-border:rgba(255,255,255,.09);
+  --txt:#eef1f5;--muted:#8a93a6;--lime:#b8ff3c;--magenta:#ff3da6;
+  --grad:linear-gradient(120deg,var(--lime),var(--magenta));
+  --glass:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+  --shadow:0 24px 80px rgba(0,0,0,.42);--radius:16px;
+  --font:"Space Grotesk",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;min-height:100dvh;display:grid;place-items:center;padding:24px;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(620px 620px at 10% 0%,color-mix(in srgb,var(--lime) 8%,transparent),transparent 60%),
+  radial-gradient(700px 700px at 92% 18%,color-mix(in srgb,var(--magenta) 10%,transparent),transparent 60%);}
+.grid-bg{position:fixed;inset:-40% 0;z-index:-1;pointer-events:none;opacity:.14;
+  background-image:linear-gradient(color-mix(in srgb,var(--lime) 18%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--lime) 18%,transparent) 1px,transparent 1px);
+  background-size:48px 48px;transform:perspective(420px) rotateX(58deg);-webkit-mask-image:radial-gradient(circle at 50% 26%,#000,transparent 72%);mask-image:radial-gradient(circle at 50% 26%,#000,transparent 72%)}
+
+/* Modal shell - works as page + as popup embed */
+.bk-overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.62);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.bk-overlay.open{opacity:1;visibility:visible}
+.bk-modal{width:min(920px,100%);max-height:92dvh;overflow:auto;background:var(--glass);border:1px solid var(--panel-border);border-radius:20px;box-shadow:var(--shadow);position:relative;scrollbar-width:thin;scrollbar-color:var(--lime) transparent}
+.bk-modal::-webkit-scrollbar{width:8px} .bk-modal::-webkit-scrollbar-thumb{background:linear-gradient(var(--lime),var(--magenta));border-radius:99px}
+.bk-head{position:sticky;top:0;z-index:2;background:linear-gradient(180deg,rgba(14,16,22,.94),rgba(14,16,22,.78));backdrop-filter:blur(12px);border-bottom:1px solid var(--panel-border);padding:22px 26px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bk-head h2{font-size:clamp(1.3rem,2.8vw,1.65rem);letter-spacing:-.02em}
+.bk-head h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bk-head p{color:var(--muted);font-size:.92rem;margin-top:4px}
+.bk-close{width:38px;height:38px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;display:grid;place-items:center;font-size:1.2rem;transition:all .2s}
+.bk-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
+.bk-body{padding:24px 26px 26px;display:grid;grid-template-columns:1.05fr .95fr;gap:26px}
+@media(max-width:820px){.bk-body{grid-template-columns:1fr}}
+
+/* Left - calendar + info */
+.bk-left{background:rgba(255,255,255,.02);border:1px solid var(--panel-border);border-radius:14px;padding:18px}
+.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;color:var(--lime);text-transform:uppercase}
+.bk-left h3{margin:6px 0 10px;font-size:1.05rem}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}
+.cal-head b{font-size:.95rem}
+.cal-nav{width:32px;height:32px;border-radius:50%;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:.78rem}
+.cal-grid .dow{color:var(--muted);font-size:.68rem;padding:4px 0}
+.cal-day{aspect-ratio:1;display:grid;place-items:center;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.02)}
+.cal-day:hover{border-color:var(--panel-border);background:rgba(255,255,255,.06)}
+.cal-day.sel{background:var(--grad);color:#06080f;font-weight:700;border-color:transparent;box-shadow:0 0 18px color-mix(in srgb,var(--lime) 30%,transparent)}
+.cal-day.dis{opacity:.28;pointer-events:none}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.time-btn{padding:10px 10px;border-radius:99px;border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--txt);font-family:var(--mono);font-size:.82rem;cursor:pointer;transition:all .18s}
+.time-btn:hover{border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
+.time-btn.sel{background:var(--grad);color:#06080f;border-color:transparent;font-weight:700}
+.bk-note{margin-top:14px;padding:12px;border-radius:12px;background:rgba(184,255,60,.08);border:1px solid color-mix(in srgb,var(--lime) 18%,transparent);font-size:.82rem;color:var(--muted)}
+.bk-note b{color:var(--txt)}
+
+/* Right - form */
+.bk-form{display:flex;flex-direction:column;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.field label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--txt);font-family:var(--font);font-size:.92rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:color-mix(in srgb,var(--lime) 55%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--lime) 14%,transparent)}
+.field textarea{min-height:112px;resize:vertical;line-height:1.5}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) calc(50% - 2px),calc(100% - 13px) calc(50% - 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:36px}
+.field input::placeholder,.field textarea::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+.btn-primary{margin-top:4px;width:100%;padding:14px 18px;border-radius:99px;border:none;background:var(--grad);color:#06080f;font-weight:700;font-size:.95rem;letter-spacing:.02em;cursor:pointer;box-shadow:0 0 28px color-mix(in srgb,var(--magenta) 18%,transparent);transition:transform .18s,box-shadow .18s,opacity .2s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 32px color-mix(in srgb,var(--magenta) 28%,transparent)}
+.btn-primary:disabled{opacity:.55;pointer-events:none}
+.btn-ghost{width:100%;padding:11px;border-radius:99px;border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--mono);font-size:.78rem;cursor:pointer}
+.form-success{display:none;text-align:center;padding:18px;border-radius:14px;background:rgba(184,255,60,.08);border:1px solid color-mix(in srgb,var(--lime) 22%,transparent)}
+.form-success.show{display:block}
+.form-success h4{color:var(--lime);margin-bottom:6px}
+.req{color:var(--magenta)}
+/* For embedded mode - hide overlay chrome when used as standalone page center */
+body.standalone .bk-overlay{position:static;inset:auto;background:transparent;backdrop-filter:none;opacity:1;visibility:visible;padding:0}
+body.standalone .bk-modal{max-height:none}
+</style>
+</head>
+<body class="standalone">
+<div class="grid-bg"></div>
+<div class="bk-overlay open" id="bkOverlay" aria-hidden="false">
+  <div class="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <div class="bk-head">
+      <div>
+        <div class="eyebrow">30 Minute Teardown · Free</div>
+        <h2 id="bkTitle">Book your <span>teardown</span></h2>
+        <p>Pick a time, tell me what you want to hand off. I will point at the first three things worth automating.</p>
+      </div>
+      <button class="bk-close" id="bkClose" aria-label="Close">✕</button>
+    </div>
+    <div class="bk-body">
+      <div class="bk-left">
+        <div class="eyebrow">Select date & time</div>
+        <h3>Jerome Grisler — Systems & Operations</h3>
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrev" aria-label="Previous month">‹</button>
+          <b id="calLabel">—</b>
+          <button class="cal-nav" id="calNext" aria-label="Next month">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="time-grid" id="timeGrid"></div>
+        <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
+      </div>
+      <form class="bk-form" id="bkForm" novalidate>
+        <div class="row2">
+          <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
+          <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
+        </div>
+        <div class="field"><label>Business Name <span class="req">*</span></label><input name="businessName" required placeholder="Acme Co." autocomplete="organization" /></div>
+        <div class="field"><label>Email Address <span class="req">*</span></label><input name="email" type="email" required placeholder="jane@company.com" autocomplete="email" /></div>
+        <div class="field">
+          <label>What services are you inquiring about? <span class="req">*</span></label>
+          <select name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option>AI Automation</option>
+            <option>Website Development</option>
+            <option>E-commerce VA</option>
+            <option>Logistics & Supply Chain VA</option>
+            <option>Multiple services</option>
+            <option>Not sure yet — need teardown</option>
+          </select>
+        </div>
+        <div class="field"><label>Notes</label><textarea name="notes">Hi Rome — here's what I'm looking to hand off and what success looks like for us:
+
+</textarea></div>
+        <input type="hidden" name="date" id="fDate" />
+        <input type="hidden" name="time" id="fTime" />
+        <p id="dateHint" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
+        <button type="submit" class="btn-primary" id="bkSubmit">Confirm Booking →</button>
+        <button type="button" class="btn-ghost" id="bkCancel">Cancel</button>
+        <div class="form-success" id="bkSuccess">
+          <h4>Booking received</h4>
+          <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
+        </div>
+        <p style="font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:center">By booking you agree to a follow up email. No spam. <br/>Webhook: <code id="whLabel" style="color:var(--lime)">configured</code></p>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+const WEBHOOK_URL = "REPLACE_WITH_YOUR_INBOUND_WEBHOOK_URL";
+document.getElementById('whLabel').textContent = WEBHOOK_URL.includes('REPLACE') ? 'set WEBHOOK_URL in booking.html' : 'connected';
+let cur = new Date(); cur.setDate(1);
+let selDate = null, selTime = null;
+const timeSlots = ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
+const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+function renderCal(){
+  const y = cur.getFullYear(), m = cur.getMonth();
+  document.getElementById('calLabel').textContent = monthNames[m] + " " + y;
+  const first = new Date(y,m,1).getDay();
+  const days = new Date(y,m+1,0).getDate();
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="dow">${d}</div>`).join('');
+  for(let i=0;i<first;i++) grid.innerHTML += `<div></div>`;
+  const today = new Date(); today.setHours(0,0,0,0);
+  for(let d=1; d<=days; d++){
+    const dt = new Date(y,m,d);
+    const isPast = dt < today;
+    const isSel = selDate && dt.getTime()===selDate.getTime();
+    grid.innerHTML += `<div class="cal-day ${isPast?'dis':''} ${isSel?'sel':''}" data-d="${d}">${d}</div>`;
+  }
+  grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
+    el.onclick=()=>{
+      const d = +el.dataset.d;
+      selDate = new Date(y,m,d);
+      renderCal(); renderTimes();
+      syncHidden();
+    };
+  });
+}
+function renderTimes(){
+  const g = document.getElementById('timeGrid');
+  if(!selDate){ g.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
+  g.innerHTML = timeSlots.map(t=>`<button type="button" class="time-btn ${selTime===t?'sel':''}" data-t="${t}">${t} PHT</button>`).join('');
+  g.querySelectorAll('.time-btn').forEach(b=>{
+    b.onclick=()=>{ selTime=b.dataset.t; renderTimes(); syncHidden(); };
+  });
+}
+function syncHidden(){
+  const dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime'), hint=document.getElementById('dateHint');
+  if(selDate) dEl.value = selDate.toISOString().slice(0,10);
+  if(selTime) tEl.value = selTime;
+  if(selDate && selTime){ hint.textContent = "Selected: " + selDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) + " at " + selTime + " PHT"; hint.style.color="var(--lime)"; }
+  else if(selDate){ hint.textContent = "Now pick a time"; hint.style.color="var(--muted)"; }
+}
+document.getElementById('calPrev').onclick=()=>{cur.setMonth(cur.getMonth()-1); renderCal();};
+document.getElementById('calNext').onclick=()=>{cur.setMonth(cur.getMonth()+1); renderCal();};
+renderCal(); renderTimes();
+
+const form=document.getElementById('bkForm'), submit=document.getElementById('bkSubmit'), success=document.getElementById('bkSuccess');
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  if(!selDate || !selTime){ alert('Please pick a date and time on the left.'); return; }
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  submit.textContent="Sending…"; submit.disabled=true;
+  try{
+    if(WEBHOOK_URL.includes('REPLACE')){
+      await new Promise(r=>setTimeout(r,900));
+      console.log('Booking payload (set WEBHOOK_URL to send):', data);
+    } else {
+      const res = await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'portfolio-booking',page:location.href})});
+      if(!res.ok) throw new Error('Webhook failed: '+res.status);
+    }
+    success.classList.add('show');
+    submit.textContent="Booked ✓";
+    form.reset();
+    // keep default notes sentence after reset
+    form.querySelector('[name="notes"]').value="Hi Rome — here's what I'm looking to hand off and what success looks like for us:\n\n";
+    selDate=null; selTime=null; renderCal(); renderTimes(); syncHidden();
+    setTimeout(()=>{ submit.textContent="Confirm Booking →"; submit.disabled=false; },2200);
+  }catch(err){
+    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+err.message);
+    submit.textContent="Confirm Booking →"; submit.disabled=false;
+  }
+});
+document.getElementById('bkClose').onclick=()=>{
+  if(document.body.classList.contains('standalone') && window.opener==null && history.length<=1) location.href='index.html';
+  else document.getElementById('bkOverlay').classList.remove('open');
+};
+document.getElementById('bkCancel').onclick=()=> document.getElementById('bkClose').click();
+document.getElementById('bkOverlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) document.getElementById('bkClose').click(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.getElementById('bkClose').click(); });
+</script>
+</body>
+</html>
