@@ -1027,13 +1027,13 @@ const CONFIG = {
       result:"Scheduled updates publish and self report with no manual posting. The sheet stays current and the social queue runs on autopilot."
     },
     {
-      title:"Make.com: Lead Enrichment Pipeline",
+      title:"Multi-Message Slack Router",
       category:"Make.com",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Enrich+Flow",
-      desc:"Cold lead list → Make.com enrichment scenario → Clearbit + LinkedIn + Apollo → scored and sorted into CRM segments.",
-      problem:"Sales team spent 3 hours/day manually researching 50 leads. 60% were low-quality or uncontactable.",
-      solution:"Make.com scenario auto-enriches leads via Clearbit + Apollo API, scores by company fit + intent signals, routes B2B vs SMB to different CRMs.",
-      result:"Sales productivity up 42%. Lead quality improved: 78% connect rate on enriched leads vs 23% on cold. 12 hours/week reclaimed."
+      img:"make-multi-message-slack-router.png",
+      desc:"Make.com router that fans a single sheet row into sequential Slack delivery. One input automatically notifies every relevant channel in the right order.",
+      problem:"Sending the right update to the right Slack channels by hand was repetitive and easy to get wrong. Messages were missed or posted to the wrong place.",
+      solution:"Built a Make.com flow triggered by a new Google Sheets row that feeds a Router. Each route delivers the message to a specific Slack channel in sequence so coverage is complete without manual copy paste.",
+      result:"One row now notifies every relevant channel automatically and in order. No manual routing and no missed audiences."
     },
     {
       title:"Make.com: Subscription Billing Sync",
