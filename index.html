@@ -2217,6 +2217,21 @@ document.getElementById('bkOverlay')?.addEventListener('click',e=>{ if(e.target=
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') bkClose(); });
 
 
+// thank-you helpers (hoisted)
+if(!window.showThankYou){
+  window.showThankYou=function(){
+    var ty=document.getElementById('tyOverlay');
+    var bk=document.getElementById('bkOverlay');
+    if(bk) bk.classList.remove('open');
+    if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  };
+  window.closeThankYou=function(){
+    var ty=document.getElementById('tyOverlay');
+    if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    var bk=document.getElementById('bkOverlay');
+    if(bk) bk.classList.remove('open');
+  };
+}
 document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const form=e.target;
@@ -2235,10 +2250,10 @@ document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
       if(!res.ok) throw new Error('Webhook failed: '+res.status);
     }
     ok.classList.add('show');
-    setTimeout(function(){ try{ showThankYou(); }catch(e){} }, 600);
+    setTimeout(function(){ try{ showThankYou(); }catch(e){ console.error(e); } }, 150);
     btn.textContent="Booked ✓";
     form.reset();
-    form.querySelector('[name="notes"]').value='Hi Rome here is what I am looking to hand off and what success looks like for us:\n\n';
+    form.querySelector('[name="notes"]').value='';
     bkSelDate=null; bkSelTime=null; bkRenderCal(); bkRenderTimes(); bkSync();
     setTimeout(()=>{ btn.textContent="Confirm Booking →"; btn.disabled=false; },2200);
   }catch(err){
@@ -2329,23 +2344,23 @@ window.bkOpen=bkOpen; window.bkClose=bkClose;
 </div>
 
 <script>
-function showThankYou(){
+function _unused_show(){
   var ty=document.getElementById('tyOverlay');
   var bk=document.getElementById('bkOverlay');
   if(bk) bk.classList.remove('open');
   if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
 }
-function closeThankYou(){
+function _unused_close(){
   var ty=document.getElementById('tyOverlay');
   if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
   var bk=document.getElementById('bkOverlay');
   if(bk) bk.classList.remove('open');
 }
 window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
-document.getElementById('tyClose')?.addEventListener('click', closeThankYou);
-document.getElementById('tyDoneBtn')?.addEventListener('click', closeThankYou);
+document.getElementById('tyClose')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
+document.getElementById('tyDoneBtn')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
 document.getElementById('tyOverlay')?.addEventListener('click', function(e){ if(e.target===e.currentTarget) closeThankYou(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) closeThankYou(); }});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) window.closeThankYou&&window.closeThankYou(); }});
 </script>
 </body>
 </html>
