@@ -2221,7 +2221,7 @@ function bkRenderTimes(){
   const g=document.getElementById('timeGridMain');
   if(!g) return;
   if(!bkSelDate){ g.innerHTML='<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
-  g.innerHTML=bkSlots.map(s=>`<button type="button" class="time-btn ${bkSelTime===s?'sel':''}" data-t="${s}">${s} PHT</button>`).join('');
+  g.innerHTML=bkSlots.map(s=>`<button type="button" class="time-btn ${bkSelTime===s?'sel':''}" data-t="${s}">${s} EST</button>`).join('');
   g.querySelectorAll('.time-btn').forEach(b=>{ b.onclick=()=>{ bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); }; });
 }
 function bkSync(){
@@ -2229,7 +2229,7 @@ function bkSync(){
   if(!hint) return;
   if(bkSelDate) dEl.value=bkSelDate.toISOString().slice(0,10);
   if(bkSelTime) tEl.value=bkSelTime;
-  if(bkSelDate && bkSelTime){ hint.textContent="Selected: "+bkSelDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})+" at "+bkSelTime+" PHT"; hint.style.color="var(--lime)"; }
+  if(bkSelDate && bkSelTime){ hint.textContent="Selected: "+bkSelDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})+" at "+bkSelTime+" EST"; hint.style.color="var(--lime)"; }
   else if(bkSelDate){ hint.textContent="Now pick a time"; hint.style.color="var(--muted)"; }
 }
 function bkOpen(){ document.getElementById('bkOverlay').classList.add('open'); document.getElementById('bkOverlay').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; bkRenderCal(); bkRenderTimes(); }
@@ -2246,7 +2246,7 @@ document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
   if(!bkSelDate || !bkSelTime){ alert('Please pick a date and time on the left.'); return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   const data=Object.fromEntries(new FormData(form).entries());
-  data.timezone=Intl.DateTimeFormat().resolvedOptions().timeZone;
+  data.timezone="America/New_York";
   const btn=document.getElementById('bkSubmitMain'), ok=document.getElementById('bkSuccessMain');
   btn.textContent="Sending..."; btn.disabled=true;
   try{

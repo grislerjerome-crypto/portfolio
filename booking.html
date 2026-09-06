@@ -176,7 +176,7 @@ function renderCal(){
 function renderTimes(){
   const g = document.getElementById('timeGrid');
   if(!selDate){ g.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
-  g.innerHTML = timeSlots.map(t=>`<button type="button" class="time-btn ${selTime===t?'sel':''}" data-t="${t}">${t} PHT</button>`).join('');
+  g.innerHTML = timeSlots.map(t=>`<button type="button" class="time-btn ${selTime===t?'sel':''}" data-t="${t}">${t} EST</button>`).join('');
   g.querySelectorAll('.time-btn').forEach(b=>{
     b.onclick=()=>{ selTime=b.dataset.t; renderTimes(); syncHidden(); };
   });
@@ -185,7 +185,7 @@ function syncHidden(){
   const dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime'), hint=document.getElementById('dateHint');
   if(selDate) dEl.value = selDate.toISOString().slice(0,10);
   if(selTime) tEl.value = selTime;
-  if(selDate && selTime){ hint.textContent = "Selected: " + selDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) + " at " + selTime + " PHT"; hint.style.color="var(--lime)"; }
+  if(selDate && selTime){ hint.textContent = "Selected: " + selDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) + " at " + selTime + " EST"; hint.style.color="var(--lime)"; }
   else if(selDate){ hint.textContent = "Now pick a time"; hint.style.color="var(--muted)"; }
 }
 document.getElementById('calPrev').onclick=()=>{cur.setMonth(cur.getMonth()-1); renderCal();};
@@ -198,7 +198,7 @@ form.addEventListener('submit', async (e)=>{
   if(!selDate || !selTime){ alert('Please pick a date and time on the left.'); return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   const data = Object.fromEntries(new FormData(form).entries());
-  data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  data.timezone = "America/New_York"; // Eastern Time
   submit.textContent="Sending…"; submit.disabled=true;
   try{
     if(WEBHOOK_URL.includes('REPLACE')){
