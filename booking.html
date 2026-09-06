@@ -159,167 +159,96 @@ body.standalone .bk-modal{max-height:none}
     </div>
   </div>
 </div>
+
 <script>
 const WEBHOOK_URL = "REPLACE_WITH_YOUR_INBOUND_WEBHOOK_URL";
-document.getElementById('whLabel').textContent = WEBHOOK_URL.includes('REPLACE') ? 'set WEBHOOK_URL in booking.html' : 'connected';
-let cur = new Date(); cur.setDate(1);
-let selDate = null, selTime = null;
-const timeSlots = ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
-const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-function renderCal(){
-  const y = cur.getFullYear(), m = cur.getMonth();
-  document.getElementById('calLabel').textContent = monthNames[m] + " " + y;
-  const first = new Date(y,m,1).getDay();
-  const days = new Date(y,m+1,0).getDate();
-  const grid = document.getElementById('calGrid');
-  grid.innerHTML = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="dow">${d}</div>`).join('');
-  for(let i=0;i<first;i++) grid.innerHTML += `<div></div>`;
-  const today = new Date(); today.setHours(0,0,0,0);
+document.getElementById('whLabel') && (document.getElementById('whLabel').textContent = WEBHOOK_URL.includes('REPLACE') ? 'set WEBHOOK_URL in booking.html' : 'connected');
+let bkCur = new Date(); bkCur.setDate(1);
+let bkSelDate = null;
+let bkSelTime = null;
+const bkSlots = ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
+const bkMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function bkDateValue(){ return bkSelDate ? bkSelDate.toISOString().slice(0,10) : ""; }
+function bkRenderCal(){
+  const label=document.getElementById('calLabel'), grid=document.getElementById('calGrid');
+  if(!label || !grid) return;
+  const y=bkCur.getFullYear(), m=bkCur.getMonth();
+  label.textContent=bkMonths[m]+' '+y;
+  grid.innerHTML=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>'<div class="dow">'+d+'</div>').join('');
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++) grid.insertAdjacentHTML('beforeend','<div></div>');
+  const today=new Date(); today.setHours(0,0,0,0);
   for(let d=1; d<=days; d++){
-    const dt = new Date(y,m,d);
-    const isPast = dt < today;
-    const isSel = selDate && dt.getTime()===selDate.getTime();
-    grid.innerHTML += `<div class="cal-day ${isPast?'dis':''} ${isSel?'sel':''}" data-d="${d}">${d}</div>`;
+    const dt=new Date(y,m,d), past=dt<today, sel=bkSelDate && dt.getTime()===bkSelDate.getTime();
+    grid.insertAdjacentHTML('beforeend','<div class="cal-day '+(past?'dis ':'')+(sel?'sel':'')+'" data-d="'+d+'">'+d+'</div>');
   }
   grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
-    el.onclick=()=>{
-      const d = +el.dataset.d;
-      selDate = new Date(y,m,d); window.selDate=selDate;
-      renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0);
-      syncHidden();
-    };
+    el.addEventListener('click',()=>{ bkSelDate=new Date(y,m,+el.dataset.d); bkRenderCal(); bkRenderTimes(); bkSync(); });
   });
 }
-function renderTimes(){
-  const g = document.getElementById('timeGrid');
-  if(!selDate){ g.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
-  g.innerHTML = timeSlots.map(t=>`<button type="button" class="time-btn ${selTime===t?'sel':''}" data-t="${t}">${t} EST</button>`).join('');
-  g.querySelectorAll('.time-btn').forEach(b=>{
-    b.onclick=()=>{ selTime=b.dataset.t; window.selTime=b.dataset.t; renderTimes(); syncHidden(); window.bkValidate&&window.bkValidate(); };
-  });
+function bkRenderTimes(){
+  const g=document.getElementById('timeGrid'); if(!g) return;
+  if(!bkSelDate){ g.innerHTML='<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
+  g.innerHTML=bkSlots.map(s=>'<button type="button" class="time-btn '+(bkSelTime===s?'sel':'')+'" data-t="'+s+'">'+s+' EST</button>').join('');
+  g.querySelectorAll('.time-btn').forEach(b=>b.addEventListener('click',()=>{ bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); }));
 }
-function syncHidden(){ window.bkValidate&&window.bkValidate();
-  const dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime'), hint=document.getElementById('dateHint');
-  if(selDate) dEl.value = selDate.toISOString().slice(0,10);
-  if(selTime) tEl.value = selTime;
-  if(selDate && selTime){ hint.textContent = "Selected: " + selDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}) + " at " + selTime + " EST"; hint.style.color="var(--lime)"; }
-  else if(selDate){ hint.textContent = "Now pick a time"; hint.style.color="var(--muted)"; }
-}
-document.getElementById('calPrev').onclick=()=>{cur.setMonth(cur.getMonth()-1); renderCal();};
-document.getElementById('calNext').onclick=()=>{cur.setMonth(cur.getMonth()+1); renderCal();};
-renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0);
-
-// thank-you helpers (hoisted for submit handler)
-if(!window.showThankYou){
-  window.showThankYou=function(){
-    var ty=document.getElementById('tyOverlay');
-    var bk=document.getElementById('bkOverlay');
-    if(bk) bk.classList.remove('open');
-    if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-  };
-  window.closeThankYou=function(){
-    var ty=document.getElementById('tyOverlay');
-    if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    var bk=document.getElementById('bkOverlay');
-    if(bk) bk.classList.remove('open');
-  };
-}
-// ---- Confirm gating ----
-function bkValidate(){
-  var f=document.getElementById('bkForm');
-  var btn=document.getElementById('bkSubmit');
-  if(!f||!btn) return;
-  var fieldsOk = f.checkValidity();
-  var dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime');
-  var dateOk = dEl && dEl.value;
-  var timeOk = tEl && tEl.value;
-  var ok = fieldsOk && dateOk && timeOk;
-  btn.style.opacity = ok ? '' : '.45';
-  btn.style.cursor = 'pointer';
-  btn.dataset.ready = ok ? '1' : '0';
-}
-window.bkValidate=bkValidate;
-(function(){
-  var f=document.getElementById('bkForm');
-  if(!f) return;
-  f.addEventListener('input', bkValidate);
-  f.addEventListener('change', bkValidate);
-})();
-// wrap render functions to re-validate after calendar interaction
-const form=document.getElementById('bkForm'), submit=document.getElementById('bkSubmit'), success=document.getElementById('bkSuccess');
-
-
-// ---- Confirm click handler (prevents native reload) ----
-document.getElementById('bkSubmit')?.addEventListener('click', async ()=>{
-  var form=document.getElementById('bkForm');
-  var btn=document.getElementById('bkSubmit');
-  var successEl=document.getElementById('bkSuccess');
-  if(!form||!btn) return;
-  if(btn.disabled){ var f2=form; if(!f2.checkValidity()){ f2.reportValidity(); return; } var dChk=document.getElementById('fDateMain')||document.getElementById('fDate'), tChk=document.getElementById('fTimeMain')||document.getElementById('fTime'); if(!dChk||!dChk.value||!tChk||!tChk.value){ var hh=document.getElementById('dateHintMain')||document.getElementById('dateHint'); if(hh){hh.style.color='#ff5a5a'; hh.textContent='Please pick a date and time on the calendar.'; setTimeout(function(){hh.style.color='';},2000);} return; } }
-  var _d2=document.getElementById('fDate'), _tm2=document.getElementById('fTime'); if(!_d2 || !_d2.value || !_tm2 || !_tm2.value){ var h=document.getElementById('dateHint'); if(h){h.style.color='#ff5a5a'; setTimeout(function(){h.style.color='';},2000);} return; }
-  if(!form.checkValidity()){ form.reportValidity(); return; }
-  var data=Object.fromEntries(new FormData(form).entries());
-  data.timezone="America/New_York";
-  btn.textContent="Sending\u2026"; btn.disabled=true;
-  try{
-    if(typeof WEBHOOK_URL !== 'undefined' && WEBHOOK_URL.includes('REPLACE')){
-      await new Promise(function(r){ setTimeout(r, 700); });
-      console.log('Booking payload (set WEBHOOK_URL):', data);
-    } else if(typeof WEBHOOK_URL !== 'undefined') {
-      var res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},data,{source:'portfolio-booking',page:location.href}))});
-      if(!res.ok) throw new Error('Webhook failed: '+res.status);
-    }
-    if(successEl) successEl.classList.add('show');
-    btn.textContent="Booked \u2713";
-    setTimeout(function(){ try{ window.showThankYou&&window.showThankYou(); }catch(e){ console.error(e); } }, 150);
-    form.reset();
-    var n=form.querySelector('[name="notes"]'); if(n) n.value='';
-    window.selDate=null; window.selTime=null; selDate=null; selTime=null;
-    try{ renderCal(); renderTimes(); syncHidden(); }catch(e){}
-    setTimeout(function(){ btn.textContent="Confirm Booking \u2192"; window.bkValidate&&window.bkValidate(); btn.disabled=false; }, 2200);
-  }catch(err){
-    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err&&err.message||err));
-    btn.textContent="Confirm Booking \u2192"; btn.disabled=false; window.bkValidate&&window.bkValidate();
+function bkSync(){
+  const d=document.getElementById('fDate'), t=document.getElementById('fTime'), h=document.getElementById('dateHint');
+  if(d) d.value=bkDateValue();
+  if(t) t.value=bkSelTime || '';
+  if(h){
+    if(bkSelDate && bkSelTime){ h.textContent='Ready to book'; h.style.color='var(--lime)'; }
+    else if(bkSelDate){ h.textContent='Now pick an EST time'; h.style.color='var(--muted)'; }
+    else { h.textContent='Select a date and time on the left to continue.'; h.style.color='var(--muted)'; }
   }
-});
-
-form.addEventListener('submit', async (e)=>{
-  e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-  if(!selDate || !selTime){ form.reportValidity(); var h=document.getElementById('dateHint'); if(h){h.style.color='#ff5a5a'; setTimeout(function(){h.style.color='';},2000);} return; }
-  if(!form.checkValidity()){ form.reportValidity(); return; }
-  const data = Object.fromEntries(new FormData(form).entries());
-  data.timezone = "America/New_York"; // Eastern Time
-  submit.textContent="Sending…"; submit.disabled=true;
+}
+function bkOpen(){ const o=document.getElementById('bkOverlay'); if(o){ o.classList.add('open'); o.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; } bkRenderCal(); bkRenderTimes(); bkSync(); }
+function bkClose(){ const o=document.getElementById('bkOverlay'); if(o){ o.classList.remove('open'); o.setAttribute('aria-hidden','true'); } document.body.style.overflow=''; }
+function showThankYou(){ const bk=document.getElementById('bkOverlay'), ty=document.getElementById('tyOverlay'); if(bk) bk.classList.remove('open'); if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; } }
+function closeThankYou(){ const ty=document.getElementById('tyOverlay'); if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); } document.body.style.overflow=''; }
+function bkMissing(form){
+  const req=[['firstName','First Name'],['lastName','Last Name'],['businessName','Business Name'],['email','valid Email Address'],['service','Service']];
+  const missing=[];
+  req.forEach(([n,label])=>{ const el=form.querySelector('[name="'+n+'"]'); if(!el || !el.value.trim() || (n==='email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()))) missing.push(label); });
+  if(!bkSelDate || !bkSelTime) missing.push('date and EST time');
+  return missing;
+}
+async function bkConfirm(e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  const form=document.getElementById('bkForm'), btn=document.getElementById('bkSubmit'), hint=document.getElementById('dateHint');
+  if(!form || !btn) return false;
+  bkSync();
+  const missing=bkMissing(form);
+  if(missing.length){ if(hint){ hint.textContent='Please complete: '+missing.join(', ')+'. Notes is optional.'; hint.style.color='#ff5a5a'; } return false; }
+  const data=Object.fromEntries(new FormData(form).entries()); data.timezone='America/New_York'; data.source='portfolio-booking'; data.page=location.href;
+  btn.textContent='Sending...'; btn.style.pointerEvents='none';
   try{
-    if(WEBHOOK_URL.includes('REPLACE')){
-      await new Promise(r=>setTimeout(r,900));
-      console.log('Booking payload (set WEBHOOK_URL to send):', data);
-    } else {
-      const res = await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'portfolio-booking',page:location.href})});
-      if(!res.ok) throw new Error('Webhook failed: '+res.status);
-    }
-    success.classList.add('show');
-    setTimeout(function(){ try{ showThankYou(); }catch(e){ console.error(e); } }, 150);
-    submit.textContent="Booked ✓";
-    form.reset();
-    // keep default notes sentence after reset
-    form.querySelector('[name="notes"]').value='';
-    selDate=null; selTime=null; renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0); syncHidden();
-    setTimeout(()=>{ submit.textContent="Confirm Booking →"; submit.disabled=false; },2200);
-  }catch(err){
-    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+err.message);
-    submit.textContent="Confirm Booking →"; submit.disabled=false;
-  }
-});
-document.getElementById('bkClose').onclick=()=>{
-  if(document.body.classList.contains('standalone') && window.opener==null && history.length<=1) location.href='index.html';
-  else document.getElementById('bkOverlay').classList.remove('open');
-};
-document.getElementById('bkCancel').onclick=()=> document.getElementById('bkClose').click();
-document.getElementById('bkOverlay').addEventListener('click',e=>{ if(e.target===e.currentTarget) document.getElementById('bkClose').click(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.getElementById('bkClose').click(); });
+    if(!WEBHOOK_URL.includes('REPLACE')){ const res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(!res.ok) throw new Error('Webhook failed: '+res.status); }
+    else { console.log('Booking payload ready for webhook:', data); await new Promise(r=>setTimeout(r,250)); }
+    btn.textContent='Booked ✓'; showThankYou(); return false;
+  }catch(err){ alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err.message||err)); btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; return false; }
+}
+function bkArm(){
+  const form=document.getElementById('bkForm'), btn=document.getElementById('bkSubmit');
+  if(form){ form.onsubmit=e=>{ e.preventDefault(); return false; }; }
+  if(btn){ btn.type='button'; btn.disabled=false; btn.style.cursor='pointer'; btn.style.pointerEvents='auto'; btn.addEventListener('click', bkConfirm); }
+  document.getElementById('calPrev')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()-1); bkRenderCal(); bkSync(); });
+  document.getElementById('calNext')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()+1); bkRenderCal(); bkSync(); });
+  document.getElementById('bkClose')?.addEventListener('click',bkClose);
+  document.getElementById('bkCancel')?.addEventListener('click',bkClose);
+  document.getElementById('bkOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) bkClose(); });
+  document.getElementById('tyClose')?.addEventListener('click',closeThankYou);
+  document.getElementById('tyDoneBtn')?.addEventListener('click',closeThankYou);
+  document.getElementById('tyOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) closeThankYou(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeThankYou(); bkClose(); } });
+  document.querySelectorAll('#cta-btn,#cta-email').forEach(a=>a.addEventListener('click',e=>{ if(a.id==='cta-btn' || a.textContent.includes("Let's Connect")){ e.preventDefault(); bkOpen(); } }));
+  document.querySelectorAll('button').forEach(b=>{ if(b.textContent.trim()==="Let's Connect!") b.addEventListener('click',e=>{ e.preventDefault(); bkOpen(); }); });
+  bkRenderCal(); bkRenderTimes(); bkSync();
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bkArm); else bkArm();
+window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
 </script>
+
 
 <!-- Thank You Popup -->
 <div class="ty-overlay" id="tyOverlay" aria-hidden="true">
@@ -332,24 +261,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.getElemen
   </div>
 </div>
 
-<script>
-function _unused_show(){
-  var ty=document.getElementById('tyOverlay');
-  var bk=document.getElementById('bkOverlay');
-  if(bk) bk.classList.remove('open');
-  if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-}
-function _unused_close(){
-  var ty=document.getElementById('tyOverlay');
-  if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-  var bk=document.getElementById('bkOverlay');
-  if(bk) bk.classList.remove('open');
-}
-window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
-document.getElementById('tyClose')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
-document.getElementById('tyDoneBtn')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
-document.getElementById('tyOverlay')?.addEventListener('click', function(e){ if(e.target===e.currentTarget) closeThankYou(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) window.closeThankYou&&window.closeThankYou(); }});
-</script>
-<script>setTimeout(function(){ try{window.bkValidateMain&&window.bkValidateMain()}catch(e){} try{window.bkValidate&&window.bkValidate()}catch(e){} }, 600);</script></body>
+
+
+</body>
 </html>

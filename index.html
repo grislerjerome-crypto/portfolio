@@ -2163,196 +2163,95 @@ function openProjectImage(e, el){
   document.body.appendChild(lb);
 }
 </script>
-<script>
 
-/* ---- Booking popup ---- */
+<script>
 const BK_WEBHOOK_URL = "REPLACE_WITH_YOUR_INBOUND_WEBHOOK_URL";
 let bkCur = new Date(); bkCur.setDate(1);
-let bkSelDate=null, bkSelTime=null;
-const bkSlots=["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
-const bkMonths=["January","February","March","April","May","June","July","August","September","October","November","December"];
+let bkSelDate = null;
+let bkSelTime = null;
+const bkSlots = ["09:00 AM","10:00 AM","11:00 AM","01:00 PM","02:00 PM","03:00 PM","04:00 PM"];
+const bkMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function bkDateValue(){ return bkSelDate ? bkSelDate.toISOString().slice(0,10) : ""; }
 function bkRenderCal(){
+  const label=document.getElementById('calLabelMain'), grid=document.getElementById('calGridMain');
+  if(!label || !grid) return;
   const y=bkCur.getFullYear(), m=bkCur.getMonth();
-  const lbl=document.getElementById('calLabelMain');
-  if(!lbl) return;
-  lbl.textContent=bkMonths[m]+" "+y;
-  const first=new Date(y,m,1).getDay();
-  const days=new Date(y,m+1,0).getDate();
-  const grid=document.getElementById('calGridMain');
-  grid.innerHTML=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="dow">${d}</div>`).join('');
-  for(let i=0;i<first;i++) grid.innerHTML+=`<div></div>`;
+  label.textContent=bkMonths[m]+' '+y;
+  grid.innerHTML=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>'<div class="dow">'+d+'</div>').join('');
+  const first=new Date(y,m,1).getDay(), days=new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++) grid.insertAdjacentHTML('beforeend','<div></div>');
   const today=new Date(); today.setHours(0,0,0,0);
   for(let d=1; d<=days; d++){
-    const dt=new Date(y,m,d);
-    const isPast=dt<today;
-    const isSel=bkSelDate && dt.getTime()===bkSelDate.getTime();
-    grid.innerHTML+=`<div class="cal-day ${isPast?'dis':''} ${isSel?'sel':''}" data-d="${d}">${d}</div>`;
+    const dt=new Date(y,m,d), past=dt<today, sel=bkSelDate && dt.getTime()===bkSelDate.getTime();
+    grid.insertAdjacentHTML('beforeend','<div class="cal-day '+(past?'dis ':'')+(sel?'sel':'')+'" data-d="'+d+'">'+d+'</div>');
   }
   grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
-    el.onclick=()=>{ bkSelDate=new Date(y,m,+el.dataset.d); window.bkSelDate=bkSelDate; bkRenderCal(); bkRenderTimes(); bkSync(); window.bkValidateMain&&window.bkValidateMain(); };
+    el.addEventListener('click',()=>{ bkSelDate=new Date(y,m,+el.dataset.d); bkRenderCal(); bkRenderTimes(); bkSync(); });
   });
 }
 function bkRenderTimes(){
-  const g=document.getElementById('timeGridMain');
-  if(!g) return;
+  const g=document.getElementById('timeGridMain'); if(!g) return;
   if(!bkSelDate){ g.innerHTML='<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
-  g.innerHTML=bkSlots.map(s=>`<button type="button" class="time-btn ${bkSelTime===s?'sel':''}" data-t="${s}">${s} EST</button>`).join('');
-  g.querySelectorAll('.time-btn').forEach(b=>{ b.onclick=()=>{ bkSelTime=b.dataset.t; window.bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); window.bkValidateMain&&window.bkValidateMain(); }; });
+  g.innerHTML=bkSlots.map(s=>'<button type="button" class="time-btn '+(bkSelTime===s?'sel':'')+'" data-t="'+s+'">'+s+' EST</button>').join('');
+  g.querySelectorAll('.time-btn').forEach(b=>b.addEventListener('click',()=>{ bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); }));
 }
-function bkSync(){ setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); },0);
-  const dEl=document.getElementById('fDateMain'), tEl=document.getElementById('fTimeMain'), hint=document.getElementById('dateHintMain');
-  if(!hint) return;
-  if(bkSelDate) dEl.value=bkSelDate.toISOString().slice(0,10);
-  if(bkSelTime) tEl.value=bkSelTime;
-  if(bkSelDate && bkSelTime){ hint.textContent="Selected: "+bkSelDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})+" at "+bkSelTime+" EST"; hint.style.color="var(--lime)"; }
-  else if(bkSelDate){ hint.textContent="Now pick a time"; hint.style.color="var(--muted)"; }
-}
-function bkOpen(){ document.getElementById('bkOverlay').classList.add('open'); document.getElementById('bkOverlay').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; bkRenderCal(); bkRenderTimes(); }
-function bkClose(){ document.getElementById('bkOverlay').classList.remove('open'); document.getElementById('bkOverlay').setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-document.getElementById('calPrevMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()-1); bkRenderCal(); });
-document.getElementById('calNextMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()+1); bkRenderCal(); });
-document.getElementById('bkCloseMain')?.addEventListener('click',bkClose);
-document.getElementById('bkCancelMain')?.addEventListener('click',bkClose);
-document.getElementById('bkOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) bkClose(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') bkClose(); });
-
-
-// thank-you helpers (hoisted)
-if(!window.showThankYou){
-  window.showThankYou=function(){
-    var ty=document.getElementById('tyOverlay');
-    var bk=document.getElementById('bkOverlay');
-    if(bk) bk.classList.remove('open');
-    if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-  };
-  window.closeThankYou=function(){
-    var ty=document.getElementById('tyOverlay');
-    if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    var bk=document.getElementById('bkOverlay');
-    if(bk) bk.classList.remove('open');
-  };
-}
-// ---- Confirm gating: disabled until required fields + date/time ----
-function bkValidateMain(){
-  var f=document.getElementById('bkFormMain');
-  var btn=document.getElementById('bkSubmitMain');
-  if(!f||!btn) return;
-  var fieldsOk = f.checkValidity();
-  var dEl=document.getElementById('fDateMain'), tEl=document.getElementById('fTimeMain');
-  var dateOk = dEl && dEl.value;
-  var timeOk = tEl && tEl.value;
-  var ok = fieldsOk && dateOk && timeOk;
-  // visual gating only — keep button enabled so click always fires
-  btn.style.opacity = ok ? '' : '.45';
-  btn.style.cursor = 'pointer';
-  btn.dataset.ready = ok ? '1' : '0';
-  var hint=document.getElementById('dateHintMain');
-  if(hint){
-    if(!dateOk || !timeOk) hint.textContent = 'Select a date and time on the left to continue.';
-    else if(!fieldsOk) hint.textContent = 'Fill all required fields to enable Confirm.';
-    else hint.textContent = 'Selected: ' + dEl.value + ' at ' + tEl.value + ' EST — ready to book';
+function bkSync(){
+  const d=document.getElementById('fDateMain'), t=document.getElementById('fTimeMain'), h=document.getElementById('dateHintMain');
+  if(d) d.value=bkDateValue();
+  if(t) t.value=bkSelTime || '';
+  if(h){
+    if(bkSelDate && bkSelTime){ h.textContent='Ready to book'; h.style.color='var(--lime)'; }
+    else if(bkSelDate){ h.textContent='Now pick an EST time'; h.style.color='var(--muted)'; }
+    else { h.textContent='Select a date and time on the left to continue.'; h.style.color='var(--muted)'; }
   }
 }
-window.bkValidateMain=bkValidateMain;
-// bind on input/change
-(function(){
-  var f=document.getElementById('bkFormMain');
-  if(!f) return;
-  f.addEventListener('input', bkValidateMain);
-  f.addEventListener('change', bkValidateMain);
-  // also observe hidden date/time
-  var obs=new MutationObserver(bkValidateMain);
-  var d=document.getElementById('fDateMain'), tm=document.getElementById('fTimeMain');
-  if(d) obs.observe(d,{attributes:true,attributeFilter:['value']});
-  if(tm) obs.observe(tm,{attributes:true,attributeFilter:['value']});
-})();
-// Call after calendar renders
-var _origBkRenderCal = window.bkRenderCal;
-var _origBkRenderTimes = window.bkRenderTimes;
-var _origBkSync = window.bkSync;
-if(_origBkRenderCal) window.bkRenderCal = function(){ _origBkRenderCal(); setTimeout(bkValidateMain,0); };
-if(_origBkRenderTimes) window.bkRenderTimes = function(){ _origBkRenderTimes(); setTimeout(bkValidateMain,0); };
-// Wrap bkSync to also trigger validate after syncHidden
-var _origBkSyncFn = (typeof bkSync !== 'undefined') ? bkSync : null;
-
-
-// ---- Confirm click handler (button type=button prevents native reload) ----
-document.getElementById('bkSubmitMain')?.addEventListener('click', async ()=>{
-  var form=document.getElementById('bkFormMain');
-  var btn=document.getElementById('bkSubmitMain');
-  var ok=document.getElementById('bkSuccessMain');
-  if(!form||!btn) return;
-  /* allow click even when not ready — validate inside */
-  var _d=document.getElementById('fDateMain'), _tm=document.getElementById('fTimeMain'); if(!_d || !_d.value || !_tm || !_tm.value){ var hint=document.getElementById('dateHintMain'); if(hint){hint.style.color='#ff5a5a'; setTimeout(function(){hint.style.color='';},2000);} return; }
-  if(!form.checkValidity()){ form.reportValidity(); return; }
-  var data=Object.fromEntries(new FormData(form).entries());
-  data.timezone="America/New_York";
-  btn.textContent="Sending..."; btn.disabled=true;
+function bkOpen(){ const o=document.getElementById('bkOverlay'); if(o){ o.classList.add('open'); o.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; } bkRenderCal(); bkRenderTimes(); bkSync(); }
+function bkClose(){ const o=document.getElementById('bkOverlay'); if(o){ o.classList.remove('open'); o.setAttribute('aria-hidden','true'); } document.body.style.overflow=''; }
+function showThankYou(){ const bk=document.getElementById('bkOverlay'), ty=document.getElementById('tyOverlay'); if(bk) bk.classList.remove('open'); if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; } }
+function closeThankYou(){ const ty=document.getElementById('tyOverlay'); if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); } document.body.style.overflow=''; }
+function bkMissing(form){
+  const req=[['firstName','First Name'],['lastName','Last Name'],['businessName','Business Name'],['email','valid Email Address'],['service','Service']];
+  const missing=[];
+  req.forEach(([n,label])=>{ const el=form.querySelector('[name="'+n+'"]'); if(!el || !el.value.trim() || (n==='email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()))) missing.push(label); });
+  if(!bkSelDate || !bkSelTime) missing.push('date and EST time');
+  return missing;
+}
+async function bkConfirm(e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  const form=document.getElementById('bkFormMain'), btn=document.getElementById('bkSubmitMain'), hint=document.getElementById('dateHintMain');
+  if(!form || !btn) return false;
+  bkSync();
+  const missing=bkMissing(form);
+  if(missing.length){ if(hint){ hint.textContent='Please complete: '+missing.join(', ')+'. Notes is optional.'; hint.style.color='#ff5a5a'; } return false; }
+  const data=Object.fromEntries(new FormData(form).entries()); data.timezone='America/New_York'; data.source='portfolio-booking'; data.page=location.href;
+  btn.textContent='Sending...'; btn.style.pointerEvents='none';
   try{
-    if(typeof BK_WEBHOOK_URL !== 'undefined' && BK_WEBHOOK_URL.includes('REPLACE')){
-      await new Promise(function(r){ setTimeout(r, 700); });
-      console.log('Booking payload (set BK_WEBHOOK_URL):', data);
-    } else if(typeof BK_WEBHOOK_URL !== 'undefined') {
-      var res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},data,{source:'portfolio-booking',page:location.href}))});
-      if(!res.ok) throw new Error('Webhook failed: '+res.status);
-    } else {
-      await new Promise(function(r){ setTimeout(r, 700); });
-    }
-    if(ok) ok.classList.add('show');
-    btn.textContent="Booked \u2713";
-    // show thank-you popup
-    setTimeout(function(){ try{ window.showThankYou&&window.showThankYou(); }catch(e){ console.error(e); } }, 150);
-    form.reset();
-    var notesEl=form.querySelector('[name="notes"]'); if(notesEl) notesEl.value='';
-    window.bkSelDate=null; window.bkSelTime=null; bkSelDate=null; bkSelTime=null;
-    try{ bkRenderCal(); bkRenderTimes(); bkSync(); }catch(e){}
-    setTimeout(function(){ btn.textContent="Confirm Booking \u2192"; window.bkValidateMain&&window.bkValidateMain(); }, 2200);
-  }catch(err){
-    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err&&err.message||err));
-    btn.textContent="Confirm Booking \u2192"; btn.disabled=false; window.bkValidateMain&&window.bkValidateMain();
-  }
-});
-
-document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{ e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); if(e) e.preventDefault();
-  const form=e.target;
-  if(!bkSelDate || !bkSelTime){ form.reportValidity(); document.getElementById('dateHintMain').style.color='#ff5a5a'; setTimeout(function(){document.getElementById('dateHintMain').style.color='';},2000); return; }
-  if(!form.checkValidity()){ form.reportValidity(); return; }
-  const data=Object.fromEntries(new FormData(form).entries());
-  data.timezone="America/New_York";
-  const btn=document.getElementById('bkSubmitMain'), ok=document.getElementById('bkSuccessMain');
-  btn.textContent="Sending..."; btn.disabled=true;
-  try{
-    if(BK_WEBHOOK_URL.includes('REPLACE')){
-      await new Promise(r=>setTimeout(r,900));
-      console.log('Booking payload (set BK_WEBHOOK_URL):', data);
-    } else {
-      const res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...data,source:'portfolio-booking',page:location.href})});
-      if(!res.ok) throw new Error('Webhook failed: '+res.status);
-    }
-    ok.classList.add('show');
-    setTimeout(function(){ try{ showThankYou(); }catch(e){ console.error(e); } }, 150);
-    btn.textContent="Booked ✓";
-    form.reset();
-    form.querySelector('[name="notes"]').value='';
-    bkSelDate=null; bkSelTime=null; bkRenderCal(); bkRenderTimes(); bkSync();
-    setTimeout(()=>{ btn.textContent="Confirm Booking →"; btn.disabled=false; },2200);
-  }catch(err){
-    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+err.message);
-    btn.textContent="Confirm Booking →"; btn.disabled=false;
-  }
-});
-// Hook all Let's Connect buttons to open popup
-document.querySelectorAll('#cta-btn, #cta-email').forEach(a=>{
-  a.addEventListener('click',e=>{
-    if(a.id==='cta-btn' || a.textContent.includes("Let's Connect")){ e.preventDefault(); bkOpen(); }
-  });
-});
-document.querySelectorAll('button').forEach(b=>{
-  if(b.textContent.trim()==="Let's Connect!"){ b.addEventListener('click',e=>{ e.preventDefault(); bkOpen(); }); }
-});
-window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); window.bkValidate&&window.bkValidate(); }, 500); }); setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); },300);
-
+    if(!BK_WEBHOOK_URL.includes('REPLACE')){ const res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(!res.ok) throw new Error('Webhook failed: '+res.status); }
+    else { console.log('Booking payload ready for webhook:', data); await new Promise(r=>setTimeout(r,250)); }
+    btn.textContent='Booked ✓'; showThankYou(); return false;
+  }catch(err){ alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err.message||err)); btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; return false; }
+}
+function bkArm(){
+  const form=document.getElementById('bkFormMain'), btn=document.getElementById('bkSubmitMain');
+  if(form){ form.onsubmit=e=>{ e.preventDefault(); return false; }; }
+  if(btn){ btn.type='button'; btn.disabled=false; btn.style.cursor='pointer'; btn.style.pointerEvents='auto'; btn.addEventListener('click', bkConfirm); }
+  document.getElementById('calPrevMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()-1); bkRenderCal(); bkSync(); });
+  document.getElementById('calNextMain')?.addEventListener('click',()=>{ bkCur.setMonth(bkCur.getMonth()+1); bkRenderCal(); bkSync(); });
+  document.getElementById('bkCloseMain')?.addEventListener('click',bkClose);
+  document.getElementById('bkCancelMain')?.addEventListener('click',bkClose);
+  document.getElementById('bkOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) bkClose(); });
+  document.getElementById('tyClose')?.addEventListener('click',closeThankYou);
+  document.getElementById('tyDoneBtn')?.addEventListener('click',closeThankYou);
+  document.getElementById('tyOverlay')?.addEventListener('click',e=>{ if(e.target===e.currentTarget) closeThankYou(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeThankYou(); bkClose(); } });
+  document.querySelectorAll('#cta-btn,#cta-email').forEach(a=>a.addEventListener('click',e=>{ if(a.id==='cta-btn' || a.textContent.includes("Let's Connect")){ e.preventDefault(); bkOpen(); } }));
+  document.querySelectorAll('button').forEach(b=>{ if(b.textContent.trim()==="Let's Connect!") b.addEventListener('click',e=>{ e.preventDefault(); bkOpen(); }); });
+  bkRenderCal(); bkRenderTimes(); bkSync();
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bkArm); else bkArm();
+window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
 </script>
+
 
 <div class="bk-overlay" id="bkOverlay" aria-hidden="true">
   <div class="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bkTitleMain">
@@ -2423,24 +2322,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMCont
   </div>
 </div>
 
-<script>
-function _unused_show(){
-  var ty=document.getElementById('tyOverlay');
-  var bk=document.getElementById('bkOverlay');
-  if(bk) bk.classList.remove('open');
-  if(ty){ ty.classList.add('open'); ty.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-}
-function _unused_close(){
-  var ty=document.getElementById('tyOverlay');
-  if(ty){ ty.classList.remove('open'); ty.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-  var bk=document.getElementById('bkOverlay');
-  if(bk) bk.classList.remove('open');
-}
-window.showThankYou=showThankYou; window.closeThankYou=closeThankYou;
-document.getElementById('tyClose')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
-document.getElementById('tyDoneBtn')?.addEventListener('click', function(){ window.closeThankYou&&window.closeThankYou(); });
-document.getElementById('tyOverlay')?.addEventListener('click', function(e){ if(e.target===e.currentTarget) closeThankYou(); });
-document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) window.closeThankYou&&window.closeThankYou(); }});
-</script>
-<script>setTimeout(function(){ try{window.bkValidateMain&&window.bkValidateMain()}catch(e){} try{window.bkValidate&&window.bkValidate()}catch(e){} }, 600);</script></body>
+
+
+</body>
 </html>
