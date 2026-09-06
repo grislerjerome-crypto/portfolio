@@ -2189,7 +2189,7 @@ function bkRenderCal(){
     grid.innerHTML+=`<div class="cal-day ${isPast?'dis':''} ${isSel?'sel':''}" data-d="${d}">${d}</div>`;
   }
   grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
-    el.onclick=()=>{ bkSelDate=new Date(y,m,+el.dataset.d); bkRenderCal(); bkRenderTimes(); bkSync(); };
+    el.onclick=()=>{ bkSelDate=new Date(y,m,+el.dataset.d); window.bkSelDate=bkSelDate; bkRenderCal(); bkRenderTimes(); bkSync(); window.bkValidateMain&&window.bkValidateMain(); };
   });
 }
 function bkRenderTimes(){
@@ -2197,9 +2197,9 @@ function bkRenderTimes(){
   if(!g) return;
   if(!bkSelDate){ g.innerHTML='<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
   g.innerHTML=bkSlots.map(s=>`<button type="button" class="time-btn ${bkSelTime===s?'sel':''}" data-t="${s}">${s} EST</button>`).join('');
-  g.querySelectorAll('.time-btn').forEach(b=>{ b.onclick=()=>{ bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); }; });
+  g.querySelectorAll('.time-btn').forEach(b=>{ b.onclick=()=>{ bkSelTime=b.dataset.t; window.bkSelTime=b.dataset.t; bkRenderTimes(); bkSync(); window.bkValidateMain&&window.bkValidateMain(); }; });
 }
-function bkSync(){
+function bkSync(){ setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); },0);
   const dEl=document.getElementById('fDateMain'), tEl=document.getElementById('fTimeMain'), hint=document.getElementById('dateHintMain');
   if(!hint) return;
   if(bkSelDate) dEl.value=bkSelDate.toISOString().slice(0,10);
@@ -2232,10 +2232,48 @@ if(!window.showThankYou){
     if(bk) bk.classList.remove('open');
   };
 }
+// ---- Confirm gating: disabled until required fields + date/time ----
+function bkValidateMain(){
+  var f=document.getElementById('bkFormMain');
+  var btn=document.getElementById('bkSubmitMain');
+  if(!f||!btn) return;
+  var fd=new FormData(f);
+  var hasNames=(fd.get('firstName')||'').trim() && (fd.get('lastName')||'').trim() && (fd.get('businessName')||'').trim();
+  var email=(fd.get('email')||'').trim();
+  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  var svc=(fd.get('service')||'').trim();
+  var ok = hasNames && emailOk && svc && window.bkSelDate && window.bkSelTime;
+  // expose globally for calendar callbacks
+  btn.disabled = !ok;
+  btn.style.opacity = ok ? '' : '.45';
+  btn.style.cursor = ok ? '' : 'not-allowed';
+}
+window.bkValidateMain=bkValidateMain;
+// bind on input/change
+(function(){
+  var f=document.getElementById('bkFormMain');
+  if(!f) return;
+  f.addEventListener('input', bkValidateMain);
+  f.addEventListener('change', bkValidateMain);
+  // also observe hidden date/time
+  var obs=new MutationObserver(bkValidateMain);
+  var d=document.getElementById('fDateMain'), tm=document.getElementById('fTimeMain');
+  if(d) obs.observe(d,{attributes:true,attributeFilter:['value']});
+  if(tm) obs.observe(tm,{attributes:true,attributeFilter:['value']});
+})();
+// Call after calendar renders
+var _origBkRenderCal = window.bkRenderCal;
+var _origBkRenderTimes = window.bkRenderTimes;
+var _origBkSync = window.bkSync;
+if(_origBkRenderCal) window.bkRenderCal = function(){ _origBkRenderCal(); setTimeout(bkValidateMain,0); };
+if(_origBkRenderTimes) window.bkRenderTimes = function(){ _origBkRenderTimes(); setTimeout(bkValidateMain,0); };
+// Wrap bkSync to also trigger validate after syncHidden
+var _origBkSyncFn = (typeof bkSync !== 'undefined') ? bkSync : null;
+
 document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
-  e.preventDefault();
+  e.preventDefault(); e.stopPropagation();
   const form=e.target;
-  if(!bkSelDate || !bkSelTime){ alert('Please pick a date and time on the calendar.'); return; }
+  if(!bkSelDate || !bkSelTime){ form.reportValidity(); document.getElementById('dateHintMain').style.color='#ff5a5a'; setTimeout(function(){document.getElementById('dateHintMain').style.color='';},2000); return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   const data=Object.fromEntries(new FormData(form).entries());
   data.timezone="America/New_York";
@@ -2270,7 +2308,7 @@ document.querySelectorAll('#cta-btn, #cta-email').forEach(a=>{
 document.querySelectorAll('button').forEach(b=>{
   if(b.textContent.trim()==="Let's Connect!"){ b.addEventListener('click',e=>{ e.preventDefault(); bkOpen(); }); }
 });
-window.bkOpen=bkOpen; window.bkClose=bkClose;
+window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMContentLoaded', function(){ setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); window.bkValidate&&window.bkValidate(); }, 500); }); setTimeout(function(){ window.bkValidateMain&&window.bkValidateMain(); },300);
 
 </script>
 
@@ -2320,7 +2358,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose;
         <input type="hidden" name="date" id="fDateMain" />
         <input type="hidden" name="time" id="fTimeMain" />
         <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="submit" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
+        <button type="submit" class="btn-primary" id="bkSubmitMain" disabled>Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancelMain" onclick="window.bkClose&&window.bkClose()">Cancel</button>
         <div class="form-success" id="bkSuccessMain">
           <h4>Booking received</h4>

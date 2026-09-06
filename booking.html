@@ -148,7 +148,7 @@ body.standalone .bk-modal{max-height:none}
         <input type="hidden" name="date" id="fDate" />
         <input type="hidden" name="time" id="fTime" />
         <p id="dateHint" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="submit" class="btn-primary" id="bkSubmit">Confirm Booking →</button>
+        <button type="submit" class="btn-primary" id="bkSubmit" disabled>Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancel" onclick="document.getElementById('bkClose').click()">Cancel</button>
         <div class="form-success" id="bkSuccess">
           <h4>Booking received</h4>
@@ -185,8 +185,8 @@ function renderCal(){
   grid.querySelectorAll('.cal-day:not(.dis)').forEach(el=>{
     el.onclick=()=>{
       const d = +el.dataset.d;
-      selDate = new Date(y,m,d);
-      renderCal(); renderTimes();
+      selDate = new Date(y,m,d); window.selDate=selDate;
+      renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0);
       syncHidden();
     };
   });
@@ -196,10 +196,10 @@ function renderTimes(){
   if(!selDate){ g.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-family:var(--mono);font-size:.78rem;text-align:center;padding:8px">Pick a date to see times</p>'; return; }
   g.innerHTML = timeSlots.map(t=>`<button type="button" class="time-btn ${selTime===t?'sel':''}" data-t="${t}">${t} EST</button>`).join('');
   g.querySelectorAll('.time-btn').forEach(b=>{
-    b.onclick=()=>{ selTime=b.dataset.t; renderTimes(); syncHidden(); };
+    b.onclick=()=>{ selTime=b.dataset.t; window.selTime=b.dataset.t; renderTimes(); syncHidden(); window.bkValidate&&window.bkValidate(); };
   });
 }
-function syncHidden(){
+function syncHidden(){ window.bkValidate&&window.bkValidate();
   const dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime'), hint=document.getElementById('dateHint');
   if(selDate) dEl.value = selDate.toISOString().slice(0,10);
   if(selTime) tEl.value = selTime;
@@ -208,7 +208,7 @@ function syncHidden(){
 }
 document.getElementById('calPrev').onclick=()=>{cur.setMonth(cur.getMonth()-1); renderCal();};
 document.getElementById('calNext').onclick=()=>{cur.setMonth(cur.getMonth()+1); renderCal();};
-renderCal(); renderTimes();
+renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0);
 
 // thank-you helpers (hoisted for submit handler)
 if(!window.showThankYou){
@@ -225,12 +225,33 @@ if(!window.showThankYou){
     if(bk) bk.classList.remove('open');
   };
 }
+// ---- Confirm gating ----
+function bkValidate(){
+  var f=document.getElementById('bkForm');
+  var btn=document.getElementById('bkSubmit');
+  if(!f||!btn) return;
+  var fd=new FormData(f);
+  var hasNames=(fd.get('firstName')||'').trim() && (fd.get('lastName')||'').trim() && (fd.get('businessName')||'').trim();
+  var email=(fd.get('email')||'').trim();
+  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  var svc=(fd.get('service')||'').trim();
+  var ok = hasNames && emailOk && svc && window.selDate && window.selTime;
+  btn.disabled = !ok;
+}
+window.bkValidate=bkValidate;
+(function(){
+  var f=document.getElementById('bkForm');
+  if(!f) return;
+  f.addEventListener('input', bkValidate);
+  f.addEventListener('change', bkValidate);
+})();
+// wrap render functions to re-validate after calendar interaction
 const form=document.getElementById('bkForm'), submit=document.getElementById('bkSubmit'), success=document.getElementById('bkSuccess');
 
 
 form.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  if(!selDate || !selTime){ alert('Please pick a date and time on the calendar.'); return; }
+  e.preventDefault(); e.stopPropagation();
+  if(!selDate || !selTime){ form.reportValidity(); var h=document.getElementById('dateHint'); if(h){h.style.color='#ff5a5a'; setTimeout(function(){h.style.color='';},2000);} return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   const data = Object.fromEntries(new FormData(form).entries());
   data.timezone = "America/New_York"; // Eastern Time
@@ -249,7 +270,7 @@ form.addEventListener('submit', async (e)=>{
     form.reset();
     // keep default notes sentence after reset
     form.querySelector('[name="notes"]').value='';
-    selDate=null; selTime=null; renderCal(); renderTimes(); syncHidden();
+    selDate=null; selTime=null; renderCal(); renderTimes(); setTimeout(function(){ window.bkValidate&&window.bkValidate(); },0); syncHidden();
     setTimeout(()=>{ submit.textContent="Confirm Booking →"; submit.disabled=false; },2200);
   }catch(err){
     alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+err.message);
