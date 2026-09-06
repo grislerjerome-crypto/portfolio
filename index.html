@@ -2116,7 +2116,7 @@ addEventListener("resize",()=>{});
 .field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) calc(50% - 2px),calc(100% - 13px) calc(50% - 2px);background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:36px}
 .btn-primary{width:100%;padding:14px 18px;border-radius:99px;border:none;background:var(--grad);color:#06080f;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 0 28px color-mix(in srgb,var(--magenta) 18%,transparent);transition:transform .18s,box-shadow .18s,opacity .2s}
 .btn-primary:hover{transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.55;pointer-events:none}
+.btn-primary:disabled{opacity:.55;}
 .btn-ghost{width:100%;padding:11px;border-radius:99px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:var(--muted);font-family:var(--mono);font-size:.78rem;cursor:pointer}
 .form-success{display:none;text-align:center;padding:18px;border-radius:14px;background:rgba(184,255,60,.08);border:1px solid color-mix(in srgb,var(--lime) 22%,transparent)}
 .form-success.show{display:block}
@@ -2244,7 +2244,7 @@ function bkValidateMain(){
   var ok = fieldsOk && dateOk && timeOk;
   // visual gating only — keep button enabled so click always fires
   btn.style.opacity = ok ? '' : '.45';
-  btn.style.cursor = ok ? 'not-allowed' : '';
+  btn.style.cursor = 'pointer';
   btn.dataset.ready = ok ? '1' : '0';
   var hint=document.getElementById('dateHintMain');
   if(hint){
