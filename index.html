@@ -2059,7 +2059,7 @@ addEventListener("resize",()=>{});
 .proj-img:hover::after{opacity:1;transform:translate(-50%,-50%) translateY(-2px)}
 
 /* ---- Booking popup (matches branding) ---- */
-.bk-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.96);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.bk-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.62);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
 .bk-overlay.open{opacity:1;visibility:visible}
 .bk-modal{width:min(920px,100%);max-height:92dvh;overflow:auto;background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:var(--shadow);position:relative;scrollbar-width:thin}
 .bk-modal::-webkit-scrollbar{width:8px} .bk-modal::-webkit-scrollbar-thumb{background:linear-gradient(var(--lime),var(--magenta));border-radius:99px}
@@ -2240,7 +2240,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose;
         <h2 id="bkTitleMain">Book your <span>teardown</span></h2>
         <p>Pick a time, tell me what you want to hand off. I will point at the first three things worth automating.</p>
       </div>
-      <button class="bk-close" id="bkCloseMain" aria-label="Close">✕</button>
+      <button class="bk-close" id="bkCloseMain" aria-label="Close" type="button" onclick="window.bkClose&&window.bkClose()">✕</button>
     </div>
     <div class="bk-body">
       <div class="bk-left">
@@ -2279,7 +2279,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose;
         <input type="hidden" name="time" id="fTimeMain" />
         <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
         <button type="submit" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
-        <button type="button" class="btn-ghost" id="bkCancelMain">Cancel</button>
+        <button type="button" class="btn-ghost" id="bkCancelMain" onclick="window.bkClose&&window.bkClose()">Cancel</button>
         <div class="form-success" id="bkSuccessMain">
           <h4>Booking received</h4>
           <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
