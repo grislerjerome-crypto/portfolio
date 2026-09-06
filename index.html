@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 14 projects
+    // GHL. 15 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -904,6 +904,15 @@ const CONFIG = {
       problem:"There was no reliable way to confirm required documents arrived. Incomplete applications lingered in limbo, review was delayed and staff wasted time chasing files manually.",
       solution:"Built a conditional GoHighLevel workflow that checks if documents are uploaded and the decision is still pending. When both are true it moves the opportunity to Under Review, updates custom fields and sends an SMS team alert. If conditions are not met the workflow exits cleanly.",
       result:"Only complete applications reach review. Verification runs automatically, the pipeline stays accurate and the team is notified the moment an application is truly ready."
+    },
+    {
+      title:"New Lead Application Sender",
+      category:"GHL",
+      img:"new-lead-application-sender.png",
+      desc:"GoHighLevel outreach flow that engages new leads instantly. Sends the application link by SMS and email, tags the contact and advances the opportunity without delay.",
+      problem:"New leads entered the pipeline but waited too long for an application link. That gap caused drop off before prospects could even start the application.",
+      solution:"Built a GoHighLevel workflow triggered when pipeline stage becomes New Lead. It immediately sends an SMS with the application link, follows with a welcome email, updates the contact field to Application Link Sent and moves the opportunity forward.",
+      result:"New leads get instant multi channel outreach and time to application collapses. Fewer drop offs and a steadier flow of started applications."
     },
 
     // Zapier. 5 projects
