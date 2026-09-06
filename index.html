@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 16 projects
+    // GHL. 17 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -922,6 +922,15 @@ const CONFIG = {
       problem:"Applicants received the link but many never submitted. Without systematic follow up they simply forgot and the opportunity sat idle with no clear close out.",
       solution:"Built a laddered GoHighLevel workflow that waits 2 hours then checks if the application was submitted. If not it sends SMS reminder one, waits again and checks, then reminder two, waits again, then reminder three. If still not submitted it closes the opportunity as No Response.",
       result:"Incomplete applications recover at a much higher rate. More than 40 percent are re engaged before auto close, keeping the pipeline clean and active."
+    },
+    {
+      title:"Smart Review Routing & Reputation Control System",
+      category:"GHL",
+      img:"smart-review-routing.png",
+      desc:"Intelligent GoHighLevel feedback router that turns every rating into the right next step. One SMS for a 1 to 5 score, then conditional logic sends happy clients to public reviews and unhappy clients to private resolution.",
+      problem:"Feedback was unmanaged. Generic review requests pushed unhappy experiences into public view while many satisfied clients never left a review, keeping volume low and reputation inaccurate.",
+      solution:"Built a two step control workflow. A tagged contact receives an SMS asking for a quick 1 to 5 rating. Low scores trigger a private follow up to resolve concerns and capture internal feedback. High scores redirect instantly to a public review. If no reply in 48 hours a second SMS retries the same routing automatically.",
+      result:"A controlled feedback loop that steadily grows high quality public reviews while containing negative experiences privately. Stronger reputation, clearer customer insight and a fully automated system with no manual chasing."
     },
 
     // Zapier. 5 projects
