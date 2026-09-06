@@ -1153,6 +1153,15 @@ const CONFIG = {
       problem:"Teams wasted hours sorting inbound business data, triaging high risk issues and copy pasting details across CRMs, sheets and chat channels with constant human error.",
       solution:"Built an n8n flow that ingests live payloads via Webhook Trigger and validates data, uses OpenAI to evaluate sentiment, churn risk, deal value and context, parses decisions and routes across 4 specialized paths for High Value, Risk, Additional Info and Default, then upserts HubSpot contacts, appends full records to Google Sheets, sends targeted Telegram alerts and drafts executive summaries in Gmail.",
       result:"Real time lead triage and risk alerts reach the right team instantly. HubSpot, Sheets, Telegram and Gmail stay fully synchronized and 15 to 25 hours per week of admin and reporting is saved."
+    },
+    {
+      title:"RAG Pipeline & AI Chatbot",
+      category:"n8n",
+      img:"n8n-rag-pipeline-chatbot.png",
+      desc:"n8n RAG stack that turns every Drive upload into instant answers. Files embed via OpenAI into Pinecone and a chat agent serves sourced replies.",
+      problem:"Answers were buried across scattered documents no one had time to search, slowing support and creating inconsistent replies.",
+      solution:"Built an n8n flow where a Google Drive upload triggers ingestion, OpenAI generates embeddings that land in Pinecone and a chat agent answers directly from that knowledge base with sources.",
+      result:"Instant sourced answers on demand and the knowledge base re indexes itself every time a file is dropped in with no manual maintenance."
     }
   ],
 
