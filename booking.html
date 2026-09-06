@@ -148,7 +148,7 @@ body.standalone .bk-modal{max-height:none}
         <input type="hidden" name="date" id="fDate" />
         <input type="hidden" name="time" id="fTime" />
         <p id="dateHint" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="button" class="btn-primary" id="bkSubmit" disabled>Confirm Booking →</button>
+        <button type="button" class="btn-primary" id="bkSubmit">Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancel" onclick="document.getElementById('bkClose').click()">Cancel</button>
         <div class="form-success" id="bkSuccess">
           <h4>Booking received</h4>
@@ -231,12 +231,13 @@ function bkValidate(){
   var btn=document.getElementById('bkSubmit');
   if(!f||!btn) return;
   var fieldsOk = f.checkValidity();
-  var dateOk = document.getElementById('fDate') && document.getElementById('fDate').value;
-  var timeOk = document.getElementById('fTime') && document.getElementById('fTime').value;
+  var dEl=document.getElementById('fDate'), tEl=document.getElementById('fTime');
+  var dateOk = dEl && dEl.value;
+  var timeOk = tEl && tEl.value;
   var ok = fieldsOk && dateOk && timeOk;
-  btn.disabled = !ok;
   btn.style.opacity = ok ? '' : '.45';
-  btn.style.cursor = ok ? '' : 'not-allowed';
+  btn.style.cursor = ok ? 'not-allowed' : '';
+  btn.dataset.ready = ok ? '1' : '0';
 }
 window.bkValidate=bkValidate;
 (function(){

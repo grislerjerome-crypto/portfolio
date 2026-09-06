@@ -2237,20 +2237,20 @@ function bkValidateMain(){
   var f=document.getElementById('bkFormMain');
   var btn=document.getElementById('bkSubmitMain');
   if(!f||!btn) return;
-  // Use native validity for text fields (required + email type + service required)
   var fieldsOk = f.checkValidity();
-  var dateOk = document.getElementById('fDateMain') && document.getElementById('fDateMain').value;
-  var timeOk = document.getElementById('fTimeMain') && document.getElementById('fTimeMain').value;
+  var dEl=document.getElementById('fDateMain'), tEl=document.getElementById('fTimeMain');
+  var dateOk = dEl && dEl.value;
+  var timeOk = tEl && tEl.value;
   var ok = fieldsOk && dateOk && timeOk;
-  btn.disabled = !ok;
+  // visual gating only — keep button enabled so click always fires
   btn.style.opacity = ok ? '' : '.45';
-  btn.style.cursor = ok ? '' : 'not-allowed';
-  // debug hint
+  btn.style.cursor = ok ? 'not-allowed' : '';
+  btn.dataset.ready = ok ? '1' : '0';
   var hint=document.getElementById('dateHintMain');
   if(hint){
     if(!dateOk || !timeOk) hint.textContent = 'Select a date and time on the left to continue.';
     else if(!fieldsOk) hint.textContent = 'Fill all required fields to enable Confirm.';
-    else hint.textContent = 'Selected: ' + document.getElementById('fDateMain').value + ' at ' + document.getElementById('fTimeMain').value + ' EST — ready to book';
+    else hint.textContent = 'Selected: ' + dEl.value + ' at ' + tEl.value + ' EST — ready to book';
   }
 }
 window.bkValidateMain=bkValidateMain;
@@ -2282,7 +2282,7 @@ document.getElementById('bkSubmitMain')?.addEventListener('click', async ()=>{
   var btn=document.getElementById('bkSubmitMain');
   var ok=document.getElementById('bkSuccessMain');
   if(!form||!btn) return;
-  if(btn.disabled){ var f2=form; if(!f2.checkValidity()){ f2.reportValidity(); return; } var dChk=document.getElementById('fDateMain')||document.getElementById('fDate'), tChk=document.getElementById('fTimeMain')||document.getElementById('fTime'); if(!dChk||!dChk.value||!tChk||!tChk.value){ var hh=document.getElementById('dateHintMain')||document.getElementById('dateHint'); if(hh){hh.style.color='#ff5a5a'; hh.textContent='Please pick a date and time on the calendar.'; setTimeout(function(){hh.style.color='';},2000);} return; } }
+  /* allow click even when not ready — validate inside */
   var _d=document.getElementById('fDateMain'), _tm=document.getElementById('fTimeMain'); if(!_d || !_d.value || !_tm || !_tm.value){ var hint=document.getElementById('dateHintMain'); if(hint){hint.style.color='#ff5a5a'; setTimeout(function(){hint.style.color='';},2000);} return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   var data=Object.fromEntries(new FormData(form).entries());
@@ -2400,7 +2400,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMCont
         <input type="hidden" name="date" id="fDateMain" />
         <input type="hidden" name="time" id="fTimeMain" />
         <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="button" class="btn-primary" id="bkSubmitMain" disabled>Confirm Booking →</button>
+        <button type="button" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancelMain" onclick="window.bkClose&&window.bkClose()">Cancel</button>
         <div class="form-success" id="bkSuccessMain">
           <h4>Booking received</h4>
