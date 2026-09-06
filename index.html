@@ -998,13 +998,13 @@ const CONFIG = {
       result:"High priority leads trigger an instant enriched AI drafted alert. Nothing hot goes cold and sales sees the right lead at the right time."
     },
     {
-      title:"Zapier: Data Sync Across Tools",
+      title:"Spreadsheet Event Scheduler",
       category:"Zapier",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Sync+Flow",
-      desc:"Bidirectional sync between Airtable, Notion, and Google Sheets so no matter where data changes, every system stays consistent.",
-      problem:"Teams maintained 3 separate spreadsheets with conflicting data. Decision-making was based on stale, inconsistent records.",
-      solution:"Zapier multi-step Zaps with path rules detected changes in Airtable → updated Notion + Sheets automatically, handled deletions gracefully.",
-      result:"Data consistency errors dropped to zero. Teams saved 8 hours/week on manual reconciliation. Single source of truth restored."
+      img:"zapier-spreadsheet-event-scheduler.png",
+      desc:"Zapier scheduler that turns sheet rows into calendar events instantly. Watches Sheets, creates Google Calendar events and notifies Slack.",
+      problem:"Events entered in spreadsheets never reached team calendars. Conflicts and missed events piled up because calendars stayed out of sync.",
+      solution:"Built a Zapier flow that watches Google Sheets for new or updated rows, creates detailed Google Calendar events and sends a Slack channel notification so the team knows right away.",
+      result:"Zero missed events. Every spreadsheet entry syncs instantly to calendars with team alerts and scheduling stays conflict free."
     },
 
     // Make.com. 5 projects
