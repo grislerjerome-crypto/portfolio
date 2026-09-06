@@ -971,13 +971,13 @@ const CONFIG = {
       result:"Zero lost attachments. Every file is auto organized in Google Drive with instant team alerts and no manual filing."
     },
     {
-      title:"Zapier: Invoice Processing",
+      title:"Shopify Fraud & Inventory Monitor",
       category:"Zapier",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Invoice+AI",
-      desc:"Email attachments are parsed by Gemini, line items extracted to structured rows, and synced to Airtable for approval.",
-      problem:"AP team was manually entering 200+ invoices weekly, riddled with data-entry errors.",
-      solution:"Built a Zap: Gmail triggers on attachment, Gemini extracts line items, Airtable auto-creates records with confidence scores.",
-      result:"Processing time cut from 8 hours to 45 minutes per week. Error rate near zero. First human review only on low-confidence rows."
+      img:"zapier-shopify-fraud-inventory.png",
+      desc:"Zapier fraud and inventory guard that watches every Shopify order, checks Sheets and routes risk instantly to Slack or the sheet for next action.",
+      problem:"Ecommerce teams lost time and money manually monitoring flagged Shopify orders, cross checking inventory logs and updating tracking sheets or setting reminders. Risk slipped through late.",
+      solution:"Built a Zapier flow triggered when Shopify flags an order as high risk. Formatter cleans the payload, a Sheets lookup finds the item record and conditional paths split dynamically. Path D sends targeted Slack reminders for immediate review, Path A updates the sheet row and applies strict filters for further processing.",
+      result:"Suspicious orders get instant response to prevent chargebacks and fulfillment errors. Shopify, Sheets and Slack stay synced automatically and 10 to 15 hours per week of manual review is saved."
     },
     {
       title:"Zapier: Support Ticket Routing",
