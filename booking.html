@@ -24,7 +24,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:
   background-size:48px 48px;transform:perspective(420px) rotateX(58deg);-webkit-mask-image:radial-gradient(circle at 50% 26%,#000,transparent 72%);mask-image:radial-gradient(circle at 50% 26%,#000,transparent 72%)}
 
 /* Modal shell - works as page + as popup embed */
-.bk-overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.96);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.bk-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.96);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
 .bk-overlay.open{opacity:1;visibility:visible}
 .bk-modal{width:min(920px,100%);max-height:92dvh;overflow:auto;background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:var(--shadow);position:relative;scrollbar-width:thin;scrollbar-color:var(--lime) transparent}
 .bk-modal::-webkit-scrollbar{width:8px} .bk-modal::-webkit-scrollbar-thumb{background:linear-gradient(var(--lime),var(--magenta));border-radius:99px}
@@ -141,7 +141,7 @@ body.standalone .bk-modal{max-height:none}
           <h4>Booking received</h4>
           <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
         </div>
-        <p style="font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:center">By booking you agree to a follow up email. No spam. <br/>Webhook: <code id="whLabel" style="color:var(--lime)">configured</code></p>
+        
       </form>
     </div>
   </div>

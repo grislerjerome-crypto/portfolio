@@ -335,7 +335,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .palette .hint{padding:10px 16px;font-family:var(--mono);font-size:.7rem;color:var(--muted);border-top:1px solid var(--panel-border)}
 
 /* ---- Ava chat widget ---- */
-.ava-launch{position:fixed;right:22px;bottom:84px;z-index:90;width:62px;height:62px;border-radius:22px;border:1px solid color-mix(in srgb,var(--lime) 42%,transparent);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--lime) 24%,#111827),color-mix(in srgb,var(--magenta) 24%,#111827));box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 34px color-mix(in srgb,var(--lime) 22%,transparent);color:var(--txt);cursor:pointer;display:grid;place-items:center;overflow:hidden;transition:transform .25s,border-color .25s}
+.ava-launch{position:fixed;right:22px;bottom:84px;z-index:9999;width:62px;height:62px;border-radius:22px;border:1px solid color-mix(in srgb,var(--lime) 42%,transparent);background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.18),transparent 32%),linear-gradient(135deg,color-mix(in srgb,var(--lime) 24%,#111827),color-mix(in srgb,var(--magenta) 24%,#111827));box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 34px color-mix(in srgb,var(--lime) 22%,transparent);color:var(--txt);cursor:pointer;display:grid;place-items:center;overflow:hidden;transition:transform .25s,border-color .25s}
 .ava-launch:hover{transform:translateY(-4px) scale(1.03);border-color:var(--lime)}
 .ava-launch span{font-family:var(--mono);font-weight:900;letter-spacing:.05em}.ava-launch i{position:absolute;inset:9px;border:1px solid rgba(255,255,255,.18);border-radius:18px;animation:avaMiniOrbit 5s linear infinite}.ava-launch b{position:absolute;right:8px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
 .ava-chat{position:fixed;right:22px;bottom:156px;z-index:91;width:min(392px,calc(100vw - 28px));max-height:min(680px,calc(100svh - 128px));display:none;flex-direction:column;background:rgba(7,10,16,.86);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 32px 90px rgba(0,0,0,.48),0 0 55px color-mix(in srgb,var(--magenta) 16%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);overflow:hidden}
@@ -587,63 +587,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   </section>
 
 <!-- Booking Popup -->
-<div class="bk-overlay" id="bkOverlay" aria-hidden="true">
-  <div class="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bkTitleMain">
-    <div class="bk-head">
-      <div>
-        <div class="eyebrow">30 Minute Teardown · Free</div>
-        <h2 id="bkTitleMain">Book your <span>teardown</span></h2>
-        <p>Pick a time, tell me what you want to hand off. I will point at the first three things worth automating.</p>
-      </div>
-      <button class="bk-close" id="bkCloseMain" aria-label="Close">✕</button>
-    </div>
-    <div class="bk-body">
-      <div class="bk-left">
-        <div class="eyebrow">Select date & time</div>
-        <h3>Jerome Grisler — Systems & Operations</h3>
-        <div class="cal-head">
-          <button class="cal-nav" id="calPrevMain" aria-label="Previous month">‹</button>
-          <b id="calLabelMain">—</b>
-          <button class="cal-nav" id="calNextMain" aria-label="Next month">›</button>
-        </div>
-        <div class="cal-grid" id="calGridMain"></div>
-        <div class="time-grid" id="timeGridMain"></div>
-        <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
-      </div>
-      <form class="bk-form" id="bkFormMain" novalidate>
-        <div class="row2">
-          <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
-          <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
-        </div>
-        <div class="field"><label>Business Name <span class="req">*</span></label><input name="businessName" required placeholder="Acme Co." autocomplete="organization" /></div>
-        <div class="field"><label>Email Address <span class="req">*</span></label><input name="email" type="email" required placeholder="jane@company.com" autocomplete="email" /></div>
-        <div class="field">
-          <label>What services are you inquiring about? <span class="req">*</span></label>
-          <select name="service" required>
-            <option value="" disabled selected>Select a service</option>
-            <option>AI Automation</option>
-            <option>Website Development</option>
-            <option>E-commerce VA</option>
-            <option>Logistics & Supply Chain VA</option>
-            <option>Multiple services</option>
-            <option>Not sure yet — need teardown</option>
-          </select>
-        </div>
-        <div class="field"><label>Notes</label><textarea name="notes" placeholder="What's taking too much time for your business right now?"></textarea></div>
-        <input type="hidden" name="date" id="fDateMain" />
-        <input type="hidden" name="time" id="fTimeMain" />
-        <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="submit" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
-        <button type="button" class="btn-ghost" id="bkCancelMain">Cancel</button>
-        <div class="form-success" id="bkSuccessMain">
-          <h4>Booking received</h4>
-          <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
-        </div>
-        <p style="font-family:var(--mono);font-size:.68rem;color:var(--muted);text-align:center">No spam. Your details go to my inbound webhook only.</p>
-      </form>
-    </div>
-  </div>
-</div>
+
 
 </main>
 
@@ -2115,7 +2059,7 @@ addEventListener("resize",()=>{});
 .proj-img:hover::after{opacity:1;transform:translate(-50%,-50%) translateY(-2px)}
 
 /* ---- Booking popup (matches branding) ---- */
-.bk-overlay{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.96);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.bk-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,15,.96);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
 .bk-overlay.open{opacity:1;visibility:visible}
 .bk-modal{width:min(920px,100%);max-height:92dvh;overflow:auto;background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:20px;box-shadow:var(--shadow);position:relative;scrollbar-width:thin}
 .bk-modal::-webkit-scrollbar{width:8px} .bk-modal::-webkit-scrollbar-thumb{background:linear-gradient(var(--lime),var(--magenta));border-radius:99px}
@@ -2287,5 +2231,63 @@ document.querySelectorAll('button').forEach(b=>{
 window.bkOpen=bkOpen; window.bkClose=bkClose;
 
 </script>
+
+<div class="bk-overlay" id="bkOverlay" aria-hidden="true">
+  <div class="bk-modal" role="dialog" aria-modal="true" aria-labelledby="bkTitleMain">
+    <div class="bk-head">
+      <div>
+        <div class="eyebrow">30 Minute Teardown · Free</div>
+        <h2 id="bkTitleMain">Book your <span>teardown</span></h2>
+        <p>Pick a time, tell me what you want to hand off. I will point at the first three things worth automating.</p>
+      </div>
+      <button class="bk-close" id="bkCloseMain" aria-label="Close">✕</button>
+    </div>
+    <div class="bk-body">
+      <div class="bk-left">
+        <div class="eyebrow">Select date & time</div>
+        <h3>Jerome Grisler — Systems & Operations</h3>
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrevMain" aria-label="Previous month">‹</button>
+          <b id="calLabelMain">—</b>
+          <button class="cal-nav" id="calNextMain" aria-label="Next month">›</button>
+        </div>
+        <div class="cal-grid" id="calGridMain"></div>
+        <div class="time-grid" id="timeGridMain"></div>
+        <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
+      </div>
+      <form class="bk-form" id="bkFormMain" novalidate>
+        <div class="row2">
+          <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
+          <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
+        </div>
+        <div class="field"><label>Business Name <span class="req">*</span></label><input name="businessName" required placeholder="Acme Co." autocomplete="organization" /></div>
+        <div class="field"><label>Email Address <span class="req">*</span></label><input name="email" type="email" required placeholder="jane@company.com" autocomplete="email" /></div>
+        <div class="field">
+          <label>What services are you inquiring about? <span class="req">*</span></label>
+          <select name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option>AI Automation</option>
+            <option>Website Development</option>
+            <option>E-commerce VA</option>
+            <option>Logistics & Supply Chain VA</option>
+            <option>Multiple services</option>
+            <option>Not sure yet — need teardown</option>
+          </select>
+        </div>
+        <div class="field"><label>Notes</label><textarea name="notes" placeholder="What's taking too much time for your business right now?"></textarea></div>
+        <input type="hidden" name="date" id="fDateMain" />
+        <input type="hidden" name="time" id="fTimeMain" />
+        <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
+        <button type="submit" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
+        <button type="button" class="btn-ghost" id="bkCancelMain">Cancel</button>
+        <div class="form-success" id="bkSuccessMain">
+          <h4>Booking received</h4>
+          <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>
