@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 11 projects
+    // GHL. 12 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -877,6 +877,15 @@ const CONFIG = {
       problem:"Applicants submitted forms but nothing happened automatically. Records stayed outdated, pipeline stages never moved and the team had no signal that a new application needed attention.",
       solution:"Built a GoHighLevel workflow triggered on form submission that updates custom fields, moves the opportunity to Application Submitted, sends an immediate SMS confirmation and fires an internal notification so ownership is clear.",
       result:"Applications process instantly with real time team alerts and accurate pipeline updates. No manual entry, no missed follow ups and faster time to review."
+    },
+    {
+      title:"Application Approval Flow",
+      category:"GHL",
+      img:"application-approval-flow.png",
+      desc:"Status triggered GoHighLevel flow that handles approvals end to end. Opportunity updates to Approved then approval SMS and email fire automatically on decision change.",
+      problem:"Approved applications got stuck waiting on manual work. Someone had to update the status, type an SMS and send an email, which delayed onboarding and created inconsistent follow through.",
+      solution:"Built a GoHighLevel workflow on Decision Status change that updates the opportunity to Approved, sends an instant approval SMS and follows with an approval email, all executed automatically the moment the status flips.",
+      result:"Approvals now notify instantly across SMS and email, onboarding time shrinks and every approved applicant gets a consistent on time welcome without manual steps."
     },
 
     // Zapier. 5 projects
