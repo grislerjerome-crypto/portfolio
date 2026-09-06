@@ -562,14 +562,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
   </section>
 
-  <section id="testimonials" class="wrap">
-    <div class="reveal" style="text-align:center"><span class="eyebrow">SIGNAL FROM CLIENTS</span><h2 class="title">What they say</h2></div>
-    <div class="tcar">
-      <div class="tcard" id="tcard"></div>
-      <div class="tnav"><button id="t-prev" aria-label="Previous">‹</button><div class="tdots" id="t-dots"></div><button id="t-next" aria-label="Next">›</button></div>
-    </div>
-  </section>
-
   <section id="projects" class="wrap">
     <div class="reveal" style="text-align:center"><span class="eyebrow">CASE STUDIES</span><h2 class="title" style="font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:14px">Projects</h2><p class="lead" style="margin:0 auto 22px;max-width:720px">AI automation case studies across GoHighLevel, n8n, Zapier, Make.com, and more. Use the arrows to flip through projects.</p></div>
     <div class="proj-filters reveal" id="proj-filters"></div>
@@ -762,13 +754,6 @@ const CONFIG = {
           ]
         }
   },
-
-
-  testimonials: [
-    { quote:"We got our evenings back. The automations just run, and when one has an issue, we hear about it before the client does.", name:"Sarah Lin", role:"COO, Fintech", av:"SL" },
-    { quote:"Our store runs daily now without me babysitting it. Easily the best money we spent this year.", name:"Marcus Reed", role:"Founder, DTC Brand", av:"MR" },
-    { quote:"Finally someone who ships production grade systems, not demos, across automation AND our site.", name:"Priya Nair", role:"Head of Ops, SaaS", av:"PN" }
-  ],
 
   experience: [
     { yr:"2023 to Now", title:"Systems & Operations Specialist", desc:"Running automation, web, ecommerce and logistics engagements for finance, DTC and SaaS teams." },
@@ -1451,18 +1436,6 @@ function buildMarquee(){
   const row=all.map(chip).join(''); $("#marquee").innerHTML=row+row;
 }
 
-/* ---- testimonials ---- */
-let tIdx=0;
-function renderTestimonials(){
-  const t=CONFIG.testimonials[tIdx];
-  $("#tcard").style.opacity=0;
-  setTimeout(()=>{$("#tcard").innerHTML=`<div class="quote">“${t.quote}”</div><div class="who"><div class="av">${t.av}</div><div class="nm"><b>${t.name}</b><span>${t.role}</span></div></div>`;$("#tcard").style.opacity=1;},180);
-  $("#t-dots").innerHTML=CONFIG.testimonials.map((_,i)=>`<i class="${i===tIdx?'on':''}" data-i="${i}"></i>`).join('');
-  $$("#t-dots i").forEach(d=>d.onclick=()=>{tIdx=+d.dataset.i;renderTestimonials();});
-}
-$("#t-prev").onclick=()=>{tIdx=(tIdx-1+CONFIG.testimonials.length)%CONFIG.testimonials.length;renderTestimonials();};
-$("#t-next").onclick=()=>{tIdx=(tIdx+1)%CONFIG.testimonials.length;renderTestimonials();};
-
 /* ---- experience + tools ---- */
 function buildExperience(){
   $("#exp-list").innerHTML=CONFIG.experience.map(e=>`<div class="exp-item reveal"><div class="yr">${e.yr}</div><div><h3>${e.title}</h3><p>${e.desc}</p></div></div>`).join('');
@@ -2058,7 +2031,7 @@ function setupGlitch(){$$(".title").forEach(el=>{
 
 function boot(){
   applyStatic();
-  buildServices();buildCaps();buildMarquee();renderTestimonials();buildProjects();
+  buildServices();buildCaps();buildMarquee();buildProjects();
   setupTheme();setupROI();setupAvaChat();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
