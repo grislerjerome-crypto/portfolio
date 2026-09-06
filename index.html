@@ -1162,6 +1162,15 @@ const CONFIG = {
       problem:"Answers were buried across scattered documents no one had time to search, slowing support and creating inconsistent replies.",
       solution:"Built an n8n flow where a Google Drive upload triggers ingestion, OpenAI generates embeddings that land in Pinecone and a chat agent answers directly from that knowledge base with sources.",
       result:"Instant sourced answers on demand and the knowledge base re indexes itself every time a file is dropped in with no manual maintenance."
+    },
+    {
+      title:"Lead Temperature Router",
+      category:"n8n",
+      img:"n8n-lead-temperature-router.png",
+      desc:"n8n triage flow that scores every form submission as Cold, Warm or Hot via Switch and appends instantly to the matching Google Sheet for tailored follow up.",
+      problem:"New leads needed routing by intent but manual triage was slow and inconsistent. Hot prospects cooled while reps guessed who to contact first.",
+      solution:"Built an n8n flow triggered on form submission that scores intent through a Switch. Cold leads for awareness, Warm for nurturing and Hot for immediate sales action are appended to their matching Google Sheet automatically.",
+      result:"Every lead is triaged and routed the instant it arrives with no manual sorting. Outreach matches intent from first touch."
     }
   ],
 
