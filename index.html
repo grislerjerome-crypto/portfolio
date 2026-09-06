@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 10 projects
+    // GHL. 11 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -868,6 +868,15 @@ const CONFIG = {
       problem:"The issue was not getting bookings but getting people to show up. Single emails were ignored and reminders sent too far from the appointment time failed to prevent last minute no shows.",
       solution:"Implemented timed reminders at key decision points. 24 hours, 1 hour and 5 minutes before the slot, stacking email first then email plus SMS as urgency rises, with a short delay trigger for a precise last minute nudge.",
       result:"Missed appointments dropped, reminder engagement increased and scheduling became far more predictable and efficient across the team."
+    },
+    {
+      title:"Application Submitted Handler",
+      category:"GHL",
+      img:"application-submitted-handler.png",
+      desc:"Instant GoHighLevel handler that fires on form submission. Updates custom fields, advances the opportunity, confirms by SMS and alerts the team in real time.",
+      problem:"Applicants submitted forms but nothing happened automatically. Records stayed outdated, pipeline stages never moved and the team had no signal that a new application needed attention.",
+      solution:"Built a GoHighLevel workflow triggered on form submission that updates custom fields, moves the opportunity to Application Submitted, sends an immediate SMS confirmation and fires an internal notification so ownership is clear.",
+      result:"Applications process instantly with real time team alerts and accurate pipeline updates. No manual entry, no missed follow ups and faster time to review."
     },
 
     // Zapier. 5 projects
