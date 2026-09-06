@@ -125,7 +125,7 @@ body.standalone .bk-modal{max-height:none}
         <div class="time-grid" id="timeGrid"></div>
         <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
       </div>
-      <form class="bk-form" id="bkForm" novalidate>
+      <form class="bk-form" id="bkForm" novalidate onsubmit="return false;" onsubmit="return false;">
         <div class="row2">
           <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
           <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
@@ -148,7 +148,7 @@ body.standalone .bk-modal{max-height:none}
         <input type="hidden" name="date" id="fDate" />
         <input type="hidden" name="time" id="fTime" />
         <p id="dateHint" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="submit" class="btn-primary" id="bkSubmit" disabled>Confirm Booking →</button>
+        <button type="button" class="btn-primary" id="bkSubmit" disabled>Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancel" onclick="document.getElementById('bkClose').click()">Cancel</button>
         <div class="form-success" id="bkSuccess">
           <h4>Booking received</h4>
@@ -249,8 +249,42 @@ window.bkValidate=bkValidate;
 const form=document.getElementById('bkForm'), submit=document.getElementById('bkSubmit'), success=document.getElementById('bkSuccess');
 
 
+// ---- Confirm click handler (prevents native reload) ----
+document.getElementById('bkSubmit')?.addEventListener('click', async ()=>{
+  var form=document.getElementById('bkForm');
+  var btn=document.getElementById('bkSubmit');
+  var successEl=document.getElementById('bkSuccess');
+  if(!form||!btn) return;
+  if(btn.disabled) return;
+  if(!window.selDate || !window.selTime){ var h=document.getElementById('dateHint'); if(h){h.style.color='#ff5a5a'; setTimeout(function(){h.style.color='';},2000);} return; }
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  var data=Object.fromEntries(new FormData(form).entries());
+  data.timezone="America/New_York";
+  btn.textContent="Sending\u2026"; btn.disabled=true;
+  try{
+    if(typeof WEBHOOK_URL !== 'undefined' && WEBHOOK_URL.includes('REPLACE')){
+      await new Promise(function(r){ setTimeout(r, 700); });
+      console.log('Booking payload (set WEBHOOK_URL):', data);
+    } else if(typeof WEBHOOK_URL !== 'undefined') {
+      var res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},data,{source:'portfolio-booking',page:location.href}))});
+      if(!res.ok) throw new Error('Webhook failed: '+res.status);
+    }
+    if(successEl) successEl.classList.add('show');
+    btn.textContent="Booked \u2713";
+    setTimeout(function(){ try{ window.showThankYou&&window.showThankYou(); }catch(e){ console.error(e); } }, 150);
+    form.reset();
+    var n=form.querySelector('[name="notes"]'); if(n) n.value='';
+    window.selDate=null; window.selTime=null; selDate=null; selTime=null;
+    try{ renderCal(); renderTimes(); syncHidden(); }catch(e){}
+    setTimeout(function(){ btn.textContent="Confirm Booking \u2192"; window.bkValidate&&window.bkValidate(); btn.disabled=false; }, 2200);
+  }catch(err){
+    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err&&err.message||err));
+    btn.textContent="Confirm Booking \u2192"; btn.disabled=false; window.bkValidate&&window.bkValidate();
+  }
+});
+
 form.addEventListener('submit', async (e)=>{
-  e.preventDefault(); e.stopPropagation();
+  e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
   if(!selDate || !selTime){ form.reportValidity(); var h=document.getElementById('dateHint'); if(h){h.style.color='#ff5a5a'; setTimeout(function(){h.style.color='';},2000);} return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   const data = Object.fromEntries(new FormData(form).entries());

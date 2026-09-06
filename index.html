@@ -2270,8 +2270,45 @@ if(_origBkRenderTimes) window.bkRenderTimes = function(){ _origBkRenderTimes(); 
 // Wrap bkSync to also trigger validate after syncHidden
 var _origBkSyncFn = (typeof bkSync !== 'undefined') ? bkSync : null;
 
-document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{
-  e.preventDefault(); e.stopPropagation();
+
+// ---- Confirm click handler (button type=button prevents native reload) ----
+document.getElementById('bkSubmitMain')?.addEventListener('click', async ()=>{
+  var form=document.getElementById('bkFormMain');
+  var btn=document.getElementById('bkSubmitMain');
+  var ok=document.getElementById('bkSuccessMain');
+  if(!form||!btn) return;
+  if(btn.disabled) return;
+  if(!window.bkSelDate || !window.bkSelTime){ var hint=document.getElementById('dateHintMain'); if(hint){hint.style.color='#ff5a5a'; setTimeout(function(){hint.style.color='';},2000);} return; }
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  var data=Object.fromEntries(new FormData(form).entries());
+  data.timezone="America/New_York";
+  btn.textContent="Sending..."; btn.disabled=true;
+  try{
+    if(typeof BK_WEBHOOK_URL !== 'undefined' && BK_WEBHOOK_URL.includes('REPLACE')){
+      await new Promise(function(r){ setTimeout(r, 700); });
+      console.log('Booking payload (set BK_WEBHOOK_URL):', data);
+    } else if(typeof BK_WEBHOOK_URL !== 'undefined') {
+      var res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},data,{source:'portfolio-booking',page:location.href}))});
+      if(!res.ok) throw new Error('Webhook failed: '+res.status);
+    } else {
+      await new Promise(function(r){ setTimeout(r, 700); });
+    }
+    if(ok) ok.classList.add('show');
+    btn.textContent="Booked \u2713";
+    // show thank-you popup
+    setTimeout(function(){ try{ window.showThankYou&&window.showThankYou(); }catch(e){ console.error(e); } }, 150);
+    form.reset();
+    var notesEl=form.querySelector('[name="notes"]'); if(notesEl) notesEl.value='';
+    window.bkSelDate=null; window.bkSelTime=null; bkSelDate=null; bkSelTime=null;
+    try{ bkRenderCal(); bkRenderTimes(); bkSync(); }catch(e){}
+    setTimeout(function(){ btn.textContent="Confirm Booking \u2192"; window.bkValidateMain&&window.bkValidateMain(); }, 2200);
+  }catch(err){
+    alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err&&err.message||err));
+    btn.textContent="Confirm Booking \u2192"; btn.disabled=false; window.bkValidateMain&&window.bkValidateMain();
+  }
+});
+
+document.getElementById('bkFormMain')?.addEventListener('submit', async (e)=>{ e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); if(e) e.preventDefault();
   const form=e.target;
   if(!bkSelDate || !bkSelTime){ form.reportValidity(); document.getElementById('dateHintMain').style.color='#ff5a5a'; setTimeout(function(){document.getElementById('dateHintMain').style.color='';},2000); return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
@@ -2335,7 +2372,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMCont
         <div class="time-grid" id="timeGridMain"></div>
         <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
       </div>
-      <form class="bk-form" id="bkFormMain" novalidate>
+      <form class="bk-form" id="bkFormMain" novalidate onsubmit="return false;">
         <div class="row2">
           <div class="field"><label>First Name <span class="req">*</span></label><input name="firstName" required placeholder="Jane" autocomplete="given-name" /></div>
           <div class="field"><label>Last Name <span class="req">*</span></label><input name="lastName" required placeholder="Doe" autocomplete="family-name" /></div>
@@ -2358,7 +2395,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; document.addEventListener('DOMCont
         <input type="hidden" name="date" id="fDateMain" />
         <input type="hidden" name="time" id="fTimeMain" />
         <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
-        <button type="submit" class="btn-primary" id="bkSubmitMain" disabled>Confirm Booking →</button>
+        <button type="button" class="btn-primary" id="bkSubmitMain" disabled>Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancelMain" onclick="window.bkClose&&window.bkClose()">Cancel</button>
         <div class="form-success" id="bkSuccessMain">
           <h4>Booking received</h4>
