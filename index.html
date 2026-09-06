@@ -1171,6 +1171,15 @@ const CONFIG = {
       problem:"New leads needed routing by intent but manual triage was slow and inconsistent. Hot prospects cooled while reps guessed who to contact first.",
       solution:"Built an n8n flow triggered on form submission that scores intent through a Switch. Cold leads for awareness, Warm for nurturing and Hot for immediate sales action are appended to their matching Google Sheet automatically.",
       result:"Every lead is triaged and routed the instant it arrives with no manual sorting. Outreach matches intent from first touch."
+    },
+    {
+      title:"Invoice Follow-Up System",
+      category:"n8n",
+      img:"n8n-invoice-follow-up.png",
+      desc:"n8n finance flow that chases overdue invoices on autopilot. Daily Sheets read tiers by days overdue and escalates Gmail reminders with internal alerts.",
+      problem:"Chasing overdue invoices by hand was awkward, inconsistent and easy to forget. Late payments slipped past without systematic follow up.",
+      solution:"Built an n8n flow with a daily Sheets read. Invoices are tiered by days overdue, escalating Gmail reminders send automatically and internal alerts trigger at 30 plus days so nothing is missed.",
+      result:"Overdue invoices chase themselves with no manual follow up. Nothing slips past 30 days unnoticed and cash flow stays consistent."
     }
   ],
 
