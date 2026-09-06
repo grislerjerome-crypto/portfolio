@@ -2237,16 +2237,21 @@ function bkValidateMain(){
   var f=document.getElementById('bkFormMain');
   var btn=document.getElementById('bkSubmitMain');
   if(!f||!btn) return;
-  var fd=new FormData(f);
-  var hasNames=(fd.get('firstName')||'').trim() && (fd.get('lastName')||'').trim() && (fd.get('businessName')||'').trim();
-  var email=(fd.get('email')||'').trim();
-  var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  var svc=(fd.get('service')||'').trim();
-  var ok = hasNames && emailOk && svc && window.bkSelDate && window.bkSelTime;
-  // expose globally for calendar callbacks
+  // Use native validity for text fields (required + email type + service required)
+  var fieldsOk = f.checkValidity();
+  var dateOk = document.getElementById('fDateMain') && document.getElementById('fDateMain').value;
+  var timeOk = document.getElementById('fTimeMain') && document.getElementById('fTimeMain').value;
+  var ok = fieldsOk && dateOk && timeOk;
   btn.disabled = !ok;
   btn.style.opacity = ok ? '' : '.45';
   btn.style.cursor = ok ? '' : 'not-allowed';
+  // debug hint
+  var hint=document.getElementById('dateHintMain');
+  if(hint){
+    if(!dateOk || !timeOk) hint.textContent = 'Select a date and time on the left to continue.';
+    else if(!fieldsOk) hint.textContent = 'Fill all required fields to enable Confirm.';
+    else hint.textContent = 'Selected: ' + document.getElementById('fDateMain').value + ' at ' + document.getElementById('fTimeMain').value + ' EST — ready to book';
+  }
 }
 window.bkValidateMain=bkValidateMain;
 // bind on input/change
@@ -2277,8 +2282,8 @@ document.getElementById('bkSubmitMain')?.addEventListener('click', async ()=>{
   var btn=document.getElementById('bkSubmitMain');
   var ok=document.getElementById('bkSuccessMain');
   if(!form||!btn) return;
-  if(btn.disabled) return;
-  if(!window.bkSelDate || !window.bkSelTime){ var hint=document.getElementById('dateHintMain'); if(hint){hint.style.color='#ff5a5a'; setTimeout(function(){hint.style.color='';},2000);} return; }
+  if(btn.disabled){ var f2=form; if(!f2.checkValidity()){ f2.reportValidity(); return; } var dChk=document.getElementById('fDateMain')||document.getElementById('fDate'), tChk=document.getElementById('fTimeMain')||document.getElementById('fTime'); if(!dChk||!dChk.value||!tChk||!tChk.value){ var hh=document.getElementById('dateHintMain')||document.getElementById('dateHint'); if(hh){hh.style.color='#ff5a5a'; hh.textContent='Please pick a date and time on the calendar.'; setTimeout(function(){hh.style.color='';},2000);} return; } }
+  var _d=document.getElementById('fDateMain'), _tm=document.getElementById('fTimeMain'); if(!_d || !_d.value || !_tm || !_tm.value){ var hint=document.getElementById('dateHintMain'); if(hint){hint.style.color='#ff5a5a'; setTimeout(function(){hint.style.color='';},2000);} return; }
   if(!form.checkValidity()){ form.reportValidity(); return; }
   var data=Object.fromEntries(new FormData(form).entries());
   data.timezone="America/New_York";
@@ -2437,5 +2442,5 @@ document.getElementById('tyDoneBtn')?.addEventListener('click', function(){ wind
 document.getElementById('tyOverlay')?.addEventListener('click', function(e){ if(e.target===e.currentTarget) closeThankYou(); });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ty=document.getElementById('tyOverlay'); if(ty && ty.classList.contains('open')) window.closeThankYou&&window.closeThankYou(); }});
 </script>
-</body>
+<script>setTimeout(function(){ try{window.bkValidateMain&&window.bkValidateMain()}catch(e){} try{window.bkValidate&&window.bkValidate()}catch(e){} }, 600);</script></body>
 </html>
