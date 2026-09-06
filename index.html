@@ -778,7 +778,7 @@ const CONFIG = {
   tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe"],
 
   projects: [
-    // GHL. 15 projects
+    // GHL. 16 projects
         {
           title:"Booking Reminder System",
           category:"GHL",
@@ -913,6 +913,15 @@ const CONFIG = {
       problem:"New leads entered the pipeline but waited too long for an application link. That gap caused drop off before prospects could even start the application.",
       solution:"Built a GoHighLevel workflow triggered when pipeline stage becomes New Lead. It immediately sends an SMS with the application link, follows with a welcome email, updates the contact field to Application Link Sent and moves the opportunity forward.",
       result:"New leads get instant multi channel outreach and time to application collapses. Fewer drop offs and a steadier flow of started applications."
+    },
+    {
+      title:"Application Reminder Ladder",
+      category:"GHL",
+      img:"application-reminder-ladder.png",
+      desc:"Multi step GoHighLevel reminder ladder that never lets an applicant slip away. Timed checks and escalating SMS nudges recover unfinished applications before the opportunity auto closes.",
+      problem:"Applicants received the link but many never submitted. Without systematic follow up they simply forgot and the opportunity sat idle with no clear close out.",
+      solution:"Built a laddered GoHighLevel workflow that waits 2 hours then checks if the application was submitted. If not it sends SMS reminder one, waits again and checks, then reminder two, waits again, then reminder three. If still not submitted it closes the opportunity as No Response.",
+      result:"Incomplete applications recover at a much higher rate. More than 40 percent are re engaged before auto close, keeping the pipeline clean and active."
     },
 
     // Zapier. 5 projects
