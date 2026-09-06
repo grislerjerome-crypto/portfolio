@@ -1092,13 +1092,13 @@ const CONFIG = {
       result:"Instant 24/7 responses handle most routine questions without human help and save 12 to 25 hours per week on support and note taking."
     },
     {
-      title:"n8n: Invoice Processing Automation",
+      title:"Automated Email Outreach",
       category:"n8n",
-      img:"https://placehold.co/600x400/0e1016/ffffff?text=Invoice+AI",
-      desc:"Email attachments are parsed by Gemini, line items extracted to structured rows, and synced to Airtable for approval.",
-      problem:"AP team was manually entering 200+ invoices weekly, riddled with data-entry errors.",
-      solution:"Built an n8n flow: Gmail triggers on attachment, Gemini extracts line items, Airtable auto-creates records with confidence scores.",
-      result:"Processing time cut from 8 hours to 45 minutes per week. Error rate near zero. First human review only on low-confidence rows."
+      img:"n8n-automated-email-outreach.png",
+      desc:"n8n outreach engine that personalizes cold email at volume. Hourly Sheets pull, AI per sector, Outlook send and status logged back automatically.",
+      problem:"Personalizing cold emails at volume was slow and there was no clean record of what actually sent, making follow up messy.",
+      solution:"Built an n8n flow that pulls from Google Sheets hourly, uses AI to personalize per sector, sends via Outlook and logs sent or failed status back to the sheet for tracking.",
+      result:"High volume personalized outreach now runs on autopilot with full delivery tracking and no manual send log."
     },
     {
       title:"n8n: AI-Powered Support Bot",
