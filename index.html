@@ -1144,6 +1144,15 @@ const CONFIG = {
       problem:"Knowledge bases went stale whenever handbook documents changed. HR answered the same policy questions manually and wasted time re indexing files, while AI gave outdated answers.",
       solution:"Built an n8n flow that monitors Google Drive in real time for creates, updates and deletes. It deletes outdated vectors in Supabase when files are revised, downloads updated files, generates fresh embeddings via OpenAI with a data loader and updates the Supabase Vector Store so retrieval stays synchronized.",
       result:"Guarantees accurate hallucination free AI responses with live file sync. No manual vector maintenance and 10 to 15 hours per week saved on document management and routine inquiries."
+    },
+    {
+      title:"Cross-System Intelligence",
+      category:"n8n",
+      img:"n8n-cross-system-intelligence.png",
+      desc:"n8n AI layer that unifies HubSpot, Sheets, Telegram and Gmail. Webhook payloads are validated, scored by OpenAI and routed across 4 paths for instant triage.",
+      problem:"Teams wasted hours sorting inbound business data, triaging high risk issues and copy pasting details across CRMs, sheets and chat channels with constant human error.",
+      solution:"Built an n8n flow that ingests live payloads via Webhook Trigger and validates data, uses OpenAI to evaluate sentiment, churn risk, deal value and context, parses decisions and routes across 4 specialized paths for High Value, Risk, Additional Info and Default, then upserts HubSpot contacts, appends full records to Google Sheets, sends targeted Telegram alerts and drafts executive summaries in Gmail.",
+      result:"Real time lead triage and risk alerts reach the right team instantly. HubSpot, Sheets, Telegram and Gmail stay fully synchronized and 15 to 25 hours per week of admin and reporting is saved."
     }
   ],
 
