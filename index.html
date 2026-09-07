@@ -2100,6 +2100,7 @@ addEventListener("resize",()=>{});
 @media(max-width:820px){.bk-body{grid-template-columns:1fr}}
 .bk-left{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px}
 .bk-left h3{margin:6px 0 10px;font-size:1.05rem}
+.ghl-cal{width:100%;min-height:720px;border:none;overflow:hidden;border-radius:10px;background:#0b0e15;filter:invert(.92) hue-rotate(180deg) saturate(.85)}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:.78rem}
 .cal-grid .dow{color:var(--muted);font-size:.68rem;padding:4px 0}
@@ -2280,7 +2281,7 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; 
       <div class="bk-left" id="ghlCalWrapMain">
         <div class="eyebrow">Step 2 — Pick your Meet slot</div>
         <h3>Jerome Grisler — Systems & Operations</h3>
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/H0Uo2pzGDYIGjUUe2ict" allow="payment" style="width:100%;min-height:720px;border:none;overflow:hidden" scrolling="no" id="H0Uo2pzGDYIGjUUe2ict_1788792474647" title="Book your teardown"></iframe>
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/H0Uo2pzGDYIGjUUe2ict" allow="payment" class="ghl-cal" scrolling="no" id="H0Uo2pzGDYIGjUUe2ict_1788792474647" title="Book your teardown"></iframe>
         <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
         <div class="bk-note"><b>How this works:</b> Send your details on the right, then pick your slot here. Your Google Meet invite sends automatically.</div>
       </div>
