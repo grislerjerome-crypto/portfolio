@@ -2100,7 +2100,6 @@ addEventListener("resize",()=>{});
 @media(max-width:820px){.bk-body{grid-template-columns:1fr}}
 .bk-left{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px}
 .bk-left h3{margin:6px 0 10px;font-size:1.05rem}
-.ghl-cal{width:100%;min-height:720px;border:none;overflow:hidden;border-radius:10px;background:#0b0e15;filter:invert(.92) hue-rotate(180deg) saturate(.85)}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:.78rem}
 .cal-grid .dow{color:var(--muted);font-size:.68rem;padding:4px 0}
@@ -2228,6 +2227,7 @@ function bkMissing(form){
   const req=[['firstName','First Name'],['lastName','Last Name'],['businessName','Business Name'],['email','valid Email Address'],['service','Service']];
   const missing=[];
   req.forEach(([n,label])=>{ const el=form.querySelector('[name="'+n+'"]'); if(!el || !el.value.trim() || (n==='email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()))) missing.push(label); });
+  if(!bkSelDate || !bkSelTime) missing.push('date and EST time');
   return missing;
 }
 async function bkConfirm(e){
@@ -2242,8 +2242,14 @@ async function bkConfirm(e){
   try{
     if(!BK_WEBHOOK_URL.includes('REPLACE')){ const res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(!res.ok) throw new Error('Webhook failed: '+res.status); }
     else { console.log('Booking payload ready for webhook:', data); await new Promise(r=>setTimeout(r,250)); }
-    btn.textContent='Details sent ✓'; const gv=n=>((form.querySelector('[name="'+n+'"]')||{}).value||'').trim(); const gf=document.getElementById('H0Uo2pzGDYIGjUUe2ict_1788792474647'); if(gf){ gf.src='https://api.leadconnectorhq.com/widget/booking/H0Uo2pzGDYIGjUUe2ict?first_name='+encodeURIComponent(gv('firstName'))+'&last_name='+encodeURIComponent(gv('lastName'))+'&email='+encodeURIComponent(gv('email')); } const s=document.getElementById('bkSuccessMain'); if(s) s.classList.add('show'); const c=document.getElementById('ghlCalWrapMain'); if(c) c.scrollIntoView({behavior:'smooth',block:'start'}); return false;
-  }catch(err){ alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err.message||err)); btn.textContent='Continue → Pick your slot'; btn.style.pointerEvents='auto'; return false; }
+    const br=await fetch('api/book.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    const bj=await br.json().catch(function(){ return {}; });
+    if(bj.ok){ btn.textContent='Booked ✓'; showThankYou(); }
+    else if(bj.code==='NO_CONFIG'){ btn.textContent='Details sent ✓'; const s=document.getElementById('bkSuccessMain'); if(s) s.classList.add('show'); }
+    else if(bj.code==='SLOT_TAKEN'){ if(hint){ hint.textContent='That slot just filled — please pick another date or time.'; hint.style.color='#ff5a5a'; } btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; }
+    else { throw new Error(bj.error||'Booking failed. Please try again.'); }
+    return false;
+  }catch(err){ alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err.message||err)); btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; return false; }
 }
 function bkArm(){
   const form=document.getElementById('bkFormMain'), btn=document.getElementById('bkSubmitMain');
@@ -2278,12 +2284,17 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; 
       <button class="bk-close" id="bkCloseMain" aria-label="Close" type="button" onclick="window.bkClose&&window.bkClose()">✕</button>
     </div>
     <div class="bk-body">
-      <div class="bk-left" id="ghlCalWrapMain">
-        <div class="eyebrow">Step 2 — Pick your Meet slot</div>
+      <div class="bk-left">
+        <div class="eyebrow">Select date & time</div>
         <h3>Jerome Grisler — Systems & Operations</h3>
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/H0Uo2pzGDYIGjUUe2ict" allow="payment" class="ghl-cal" scrolling="no" id="H0Uo2pzGDYIGjUUe2ict_1788792474647" title="Book your teardown"></iframe>
-        <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
-        <div class="bk-note"><b>How this works:</b> Send your details on the right, your name and email carry over automatically, just pick a day and time here. Your Google Meet invite sends automatically.</div>
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrevMain" aria-label="Previous month">‹</button>
+          <b id="calLabelMain">—</b>
+          <button class="cal-nav" id="calNextMain" aria-label="Next month">›</button>
+        </div>
+        <div class="cal-grid" id="calGridMain"></div>
+        <div class="time-grid" id="timeGridMain"></div>
+        <div class="bk-note"><b>How this works:</b> Choose a date and time on the left, then complete the form on the right. You will get an instant calendar invite and I will follow up with a brief prep note.</div>
       </div>
       <form class="bk-form" id="bkFormMain" novalidate onsubmit="return false;">
         <div class="row2">
@@ -2310,12 +2321,12 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; 
         <div class="field"><label>Notes</label><textarea name="notes" placeholder="What's taking too much time for your business right now?"></textarea></div>
         <input type="hidden" name="date" id="fDateMain" />
         <input type="hidden" name="time" id="fTimeMain" />
-        <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Step 1 — send your details, then pick your Meet slot on the left.</p>
-        <button type="button" class="btn-primary" id="bkSubmitMain">Continue → Pick your slot</button>
+        <p id="dateHintMain" style="font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:-4px 0 2px">Select a date and time on the left to continue.</p>
+        <button type="button" class="btn-primary" id="bkSubmitMain">Confirm Booking →</button>
         <button type="button" class="btn-ghost" id="bkCancelMain" onclick="window.bkClose&&window.bkClose()">Cancel</button>
         <div class="form-success" id="bkSuccessMain">
-          <h4>Details received</h4>
-          <p style="color:var(--muted);font-size:.9rem">Now pick your Meet slot on the left to lock it in. Your Google Meet invite sends automatically.</p>
+          <h4>Booking received</h4>
+          <p style="color:var(--muted);font-size:.9rem">Thanks — I will send a calendar invite to your email shortly. If you do not see it, check spam and reply to grislerjerome@gmail.com.</p>
         </div>
         
       </form>
