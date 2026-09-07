@@ -44,10 +44,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:
 @media(max-width:820px){.bk-body{grid-template-columns:1fr}}
 
 /* Left - calendar + info */
-.bk-left{background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px;backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);box-shadow:0 14px 42px rgba(0,0,0,.35),0 0 44px color-mix(in srgb,var(--magenta) 10%,transparent);position:relative;overflow:hidden}
-.bk-left::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 30%,transparent 70%,color-mix(in srgb,var(--magenta) 12%,transparent));pointer-events:none}
-.bk-left>*{position:relative}
-.bk-left iframe{background:#0b0e15;border-radius:10px}
+.bk-left{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px}
 .eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;color:var(--lime);text-transform:uppercase}
 .bk-left h3{margin:6px 0 10px;font-size:1.05rem}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 10px}
