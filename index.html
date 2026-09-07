@@ -2242,13 +2242,7 @@ async function bkConfirm(e){
   try{
     if(!BK_WEBHOOK_URL.includes('REPLACE')){ const res=await fetch(BK_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); if(!res.ok) throw new Error('Webhook failed: '+res.status); }
     else { console.log('Booking payload ready for webhook:', data); await new Promise(r=>setTimeout(r,250)); }
-    const br=await fetch('api/book.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    const bj=await br.json().catch(function(){ return {}; });
-    if(bj.ok){ btn.textContent='Booked ✓'; showThankYou(); }
-    else if(bj.code==='NO_CONFIG'){ btn.textContent='Details sent ✓'; const s=document.getElementById('bkSuccessMain'); if(s) s.classList.add('show'); }
-    else if(bj.code==='SLOT_TAKEN'){ if(hint){ hint.textContent='That slot just filled — please pick another date or time.'; hint.style.color='#ff5a5a'; } btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; }
-    else { throw new Error(bj.error||'Booking failed. Please try again.'); }
-    return false;
+    btn.textContent='Booked ✓'; showThankYou(); return false;
   }catch(err){ alert('Could not send booking. Please email grislerjerome@gmail.com directly.\n\n'+(err.message||err)); btn.textContent='Confirm Booking →'; btn.style.pointerEvents='auto'; return false; }
 }
 function bkArm(){
