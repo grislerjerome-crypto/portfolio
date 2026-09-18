@@ -231,20 +231,28 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 
 /* ---- Craftee Sites showcase (blends with console theme) ---- */
 #craftee .lead{max-width:680px;color:var(--muted);margin-bottom:26px}
-.craftee-show{display:grid;grid-template-columns:1fr;gap:18px}
+.craftee-show{display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,.95fr);gap:18px;align-items:stretch}
 .craftee-hero{background:radial-gradient(600px 320px at 12% 0%,color-mix(in srgb,var(--magenta) 16%,transparent),transparent 60%),var(--glass);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
 .craftee-hero h3{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;line-height:1.15;margin:14px 0 10px;max-width:640px}
 .craftee-hero p{color:var(--muted);max-width:560px;margin-bottom:18px}
 .craftee-badge{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;color:var(--magenta);border:1px solid color-mix(in srgb,var(--magenta) 35%,transparent);border-radius:99px;padding:5px 12px;text-transform:uppercase}
 .craftee-go{display:inline-block;background:color-mix(in srgb,var(--magenta) 22%,transparent);border-color:color-mix(in srgb,var(--magenta) 45%,transparent);color:var(--txt)}
 .craftee-go:hover{box-shadow:0 0 24px color-mix(in srgb,var(--magenta) 45%,transparent);transform:translateY(-2px)}
-.craftee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.craftee-featured{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:100%}
+.craftee-feature{position:relative;min-height:286px;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow);isolation:isolate;background:#101115;transform:translateZ(0)}
+.craftee-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 36%,rgba(7,8,12,.38) 52%,rgba(7,8,12,.96) 100%);z-index:1;pointer-events:none}
+.craftee-feature img{width:100%;height:100%;min-height:286px;object-fit:cover;object-position:top center;display:block;opacity:.9;transition:transform .35s ease,opacity .35s ease}
+.craftee-feature:hover img{transform:scale(1.045);opacity:1}
+.craftee-feature:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+.craftee-feature-copy{position:absolute;z-index:2;left:16px;right:16px;bottom:15px}.craftee-feature-kicker{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:5px}.craftee-feature h3{font-size:1rem;line-height:1.15;margin:0 0 6px}.craftee-feature p{font-size:.78rem;line-height:1.35;color:var(--muted);margin:0}.craftee-feature-open{display:inline-flex;margin-top:9px;font-family:var(--mono);font-size:.68rem;color:var(--txt);gap:5px;align-items:center}.craftee-feature:hover .craftee-feature-open{color:var(--lime)}
+.craftee-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .craftee-grid .svc h3{font-size:1.05rem;margin-bottom:8px}
 .craftee-grid .svc p{color:var(--muted);font-size:.88rem;margin-bottom:12px}
 .craftee-grid .svc .chip-cmd{display:inline-block;font-family:var(--mono);font-size:.72rem;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 30%,transparent);border-radius:99px;padding:4px 10px;cursor:pointer;text-decoration:none;transition:background .2s}
 .craftee-grid .svc .chip-cmd:hover{background:color-mix(in srgb,var(--lime) 14%,transparent)}
+@media(max-width:980px){.craftee-show{grid-template-columns:1fr}.craftee-featured{min-height:300px}}
 @media(max-width:860px){.craftee-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.craftee-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.craftee-grid,.craftee-featured{grid-template-columns:1fr}.craftee-feature{min-height:250px}.craftee-feature img{min-height:250px}}
 
 .roi{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);border-top:1px solid var(--panel-border);border-bottom:1px solid var(--panel-border)}
 .roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;margin-top:30px}
@@ -577,6 +585,26 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
         <h3>Websites &amp; Online Stores, handled end to end</h3>
         <p>Craftee Sites is my web development hustle. I don't just design a pretty page, I build the whole selling engine so you can focus on your business.</p>
         <a class="btn craftee-go magnetic" href="craftee/index.html" target="_blank" rel="noopener">See Craftee Sites →</a>
+      </div>
+      <div class="craftee-featured reveal" aria-label="Featured ecommerce demo">
+        <a class="craftee-feature" href="https://apparel.agentrome.site/" target="_blank" rel="noopener" aria-label="Open the APPAREL LAB storefront demo">
+          <img src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" />
+          <span class="craftee-feature-copy">
+            <span class="craftee-feature-kicker">Featured website</span>
+            <h3>APPAREL LAB Storefront</h3>
+            <p>Catalog, cart, checkout and customer portal.</p>
+            <span class="craftee-feature-open">Open storefront ↗</span>
+          </span>
+        </a>
+        <a class="craftee-feature" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener" aria-label="Open the APPAREL LAB admin dashboard demo">
+          <img src="apparel-lab-admin.png" alt="APPAREL LAB admin dashboard preview" />
+          <span class="craftee-feature-copy">
+            <span class="craftee-feature-kicker">Featured admin</span>
+            <h3>APPAREL LAB Admin</h3>
+            <p>Products, orders, inventory, customers and promotions.</p>
+            <span class="craftee-feature-open">Open admin ↗</span>
+          </span>
+        </a>
       </div>
       <div class="craftee-grid">
         <div class="svc reveal"><h3>Storefront &amp; Catalog</h3><p>Conversion-focused product pages, collections and lookbooks tailored to your brand.</p></div>
