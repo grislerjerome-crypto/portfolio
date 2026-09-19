@@ -18,11 +18,15 @@ with sync_playwright() as p:
     assert 'Sample coming soon' in page.locator('#ecom-starter').inner_text()
     assert page.locator('#ecom-premium a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/admin-login']
     page.locator('#craftee').scroll_into_view_if_needed()
-    page.locator('[data-ecom-view="admin"]').click()
-    assert page.locator('#ecom-preview-image').get_attribute('src')=='apparel-lab-admin.png'
-    assert page.locator('[data-ecom-view="admin"]').get_attribute('aria-pressed')=='true'
-    page.locator('[data-ecom-view="store"]').click()
-    assert page.locator('#ecom-preview-image').get_attribute('src')=='apparel-lab-storefront.png'
+    previews=page.locator('#ecom-premium .ecom-preview img')
+    assert previews.count()==2
+    srcs=previews.evaluate_all('(els)=>els.map(e=>e.getAttribute("src"))')
+    assert srcs==['apparel-lab-storefront.png','apparel-lab-admin.png']
+    assert previews.evaluate_all('(els)=>els.every(e=>e.complete&&e.naturalWidth>0)')
+    fit=previews.first.evaluate("e=>getComputedStyle(e).objectFit")
+    assert fit=='contain'
+    assert 'entire storefront scaled down' in page.locator('#ecom-premium').inner_text().lower()
+    assert 'entire admin view scaled down' in page.locator('#ecom-premium').inner_text().lower()
     page.locator('#ecom-starter summary').click()
     assert page.locator('#ecom-starter details').get_attribute('open') is not None
     page.screenshot(path=str(artifacts/'portfolio-ecommerce-desktop.png'))
@@ -52,7 +56,7 @@ with sync_playwright() as p:
             page.locator('#craftee').scroll_into_view_if_needed()
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(width,theme,'overflow')
             assert page.locator('#ecom-premium').is_visible()
-            assert page.locator('#ecom-preview-image').evaluate('(e)=>e.complete&&e.naturalWidth>0')
+            assert page.locator('#ecom-premium .ecom-preview img').first.evaluate('(e)=>e.complete&&e.naturalWidth>0')
             page.locator('#operations-samples').scroll_into_view_if_needed()
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(width,theme,'ops overflow')
         if width==375:
@@ -68,5 +72,5 @@ with sync_playwright() as p:
         page.locator('#ava-input').press('Escape')
         assert not page.locator('#ava-chat').evaluate("e=>e.classList.contains('open')")
     assert not errors,errors
-    print(json.dumps({'url':url,'operations':results,'projectCount':44,'responsiveWidths':[375,768,1440],'themes':['dark','light'],'previewSwitch':'passed','details':'passed','avaNetworkFallback':'passed','pageErrors':errors},indent=2))
+    print(json.dumps({'url':url,'operations':results,'projectCount':44,'responsiveWidths':[375,768,1440],'themes':['dark','light'],'premiumMiniPreviews':'passed','details':'passed','avaNetworkFallback':'passed','pageErrors':errors},indent=2))
     browser.close()
