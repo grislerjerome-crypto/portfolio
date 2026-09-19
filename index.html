@@ -116,14 +116,14 @@ main,.nav,.footer,.palette-wrap{position:relative;z-index:2}
 .theme-toggle:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
 .menu-btn{display:none;background:none;border:0;color:var(--txt);font-size:1.4rem;cursor:pointer}
 @media(max-width:980px){.nav ul{display:none}.hud .clock{display:none}.menu-btn{display:block}}
-@media(max-width:620px){.cmd-btn span{display:none}.hud .stat.mode .mlabel{display:none}}
+@media(max-width:620px){.cmd-btn span{display:none}.hud .stat.mode{display:none}.nav .wrap{gap:8px;padding:12px 16px}.nav-brand-group{gap:8px;min-width:0}.brand{font-size:.8rem;letter-spacing:.1em}.hud{gap:8px;margin-left:auto}.cmd-btn{display:none}.theme-toggle,.menu-btn{flex-shrink:0}}
 
 /* mobile dropdown menu */
 .mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:2px;padding:10px 16px 16px;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--panel-border);z-index:49}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-family:var(--mono);font-size:.95rem;color:var(--muted);padding:12px 10px;border-radius:9px;transition:color .2s,background .2s}
 .mobile-menu a:hover{color:var(--txt);background:rgba(255,255,255,.04)}
-@media(min-width:621px){.mobile-menu{display:none!important}}
+@media(min-width:981px){.mobile-menu{display:none!important}}
 
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
 section{padding:52px 0;position:relative;scroll-margin-top:86px}
@@ -231,6 +231,15 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 
 /* ---- Craftee Sites showcase (blends with console theme) ---- */
 #craftee .lead{max-width:680px;color:var(--muted);margin-bottom:26px}
+#operations-samples{margin-top:52px;margin-bottom:52px}#operations-samples .lead{margin-bottom:24px}
+.ecom-tiers{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px}
+.ecom-tier,.ops-shell{padding:28px;border:1px solid var(--panel-border);border-radius:var(--radius);background:var(--glass);box-shadow:var(--shadow);min-width:0}
+.ecom-premium{background:radial-gradient(ellipse at top right,color-mix(in srgb,var(--magenta) 12%,transparent),transparent 65%),var(--glass)}
+.ecom-tier h3{font-size:clamp(1.4rem,2.5vw,1.9rem);line-height:1.2;margin:18px 0 12px}.ecom-tier p,.ops-shell p{color:var(--muted);line-height:1.65}.ecom-coming{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed var(--panel-border);border-radius:16px;margin:24px 0;padding:24px}.ecom-coming>span{font-size:3rem;color:var(--magenta)}.ecom-coming p{font-size:.85rem;max-width:260px;margin-top:10px}
+.ecom-switch,.ops-switch,.ecom-links{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.ecom-switch button,.ops-switch button{font:inherit;font-size:.85rem;border:1px solid var(--panel-border);border-radius:99px;padding:10px 16px;color:var(--txt);background:var(--glass);cursor:pointer}.ecom-switch button[aria-pressed="true"],.ops-switch button[aria-pressed="true"]{background:var(--lime);color:#111;border-color:var(--lime)}
+.ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:#101115}.ecom-preview img{display:block;width:100%;height:260px;object-fit:cover;object-position:top}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-detail{border-top:1px solid var(--panel-border);margin:20px 0;padding-top:16px}.ecom-detail summary{cursor:pointer;font-weight:600}.ecom-detail p{font-size:.9rem;margin-top:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.ops-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:24px}.ops-queue{display:grid;gap:10px;align-content:start}.ops-case{padding:16px;text-align:left;border:1px solid var(--panel-border);border-radius:12px;background:var(--glass);color:var(--txt);cursor:pointer;font:inherit}.ops-case span{display:block;color:var(--muted);font-size:.8rem;margin-top:5px}.ops-case[aria-pressed="true"]{border-color:var(--lime);box-shadow:inset 3px 0 var(--lime)}.ops-output{border:1px solid var(--panel-border);border-radius:16px;padding:22px;min-width:0}.ops-output h3{font-size:1.3rem;margin:10px 0}.ops-output ol{padding-left:20px;color:var(--muted);line-height:1.8;margin:14px 0}.ops-deliverable{padding:16px;border-radius:12px;background:color-mix(in srgb,var(--lime) 7%,transparent);white-space:pre-line;font-size:.88rem;color:var(--txt)!important}.ops-note{font-size:.8rem;margin-top:16px}.ecom-tier button:focus-visible,.ecom-tier summary:focus-visible,.ops-shell button:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+@media(max-width:800px){.ecom-tiers,.ops-layout{grid-template-columns:1fr}.ecom-tier,.ops-shell{padding:20px}.ecom-preview img{height:230px}}
 .craftee-show{display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,.95fr);gap:18px;align-items:stretch}
 .craftee-hero{background:radial-gradient(600px 320px at 12% 0%,color-mix(in srgb,var(--magenta) 16%,transparent),transparent 60%),var(--glass);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
 .craftee-hero h3{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;line-height:1.15;margin:14px 0 10px;max-width:640px}
@@ -305,7 +314,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-card.active{position:relative;z-index:2;opacity:1;transform:scale(1);pointer-events:auto;visibility:visible}
 .proj-card:hover{box-shadow:0 32px 90px rgba(0,0,0,.55),0 0 40px color-mix(in srgb,var(--magenta) 12%,transparent)}
 .proj-card.hide{opacity:0!important;pointer-events:none!important;position:absolute;inset:0;visibility:hidden!important}
-.proj-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.proj-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}.proj-nav .tdots{flex-wrap:wrap;justify-content:center;min-width:0}.proj-nav button{flex-shrink:0}
 .proj-nav button{width:42px;height:42px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:var(--txt);font-size:1.1rem;transition:all .2s}
 .proj-nav button:hover{background:var(--grad);color:#06080f;border-color:transparent}
 .proj-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:20px}
@@ -575,45 +584,44 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 
   <section id="craftee" class="wrap">
     <div class="reveal">
-      <span class="eyebrow">ANOTHER HUSTLE · CRAFTEE SITES</span>
-      <h2 class="title">Done-for-you websites &amp; online stores</h2>
-      <p class="lead">One of my other lanes under Craftee, a complete website &amp; online store system: storefront, catalog, cart, checkout, payments, inventory, orders, customers and marketing, built for your business.</p>
+      <span class="eyebrow">ECOMMERCE SHOWCASE · CRAFTEE SITES</span>
+      <h2 class="title">Your store. Your control.</h2>
+      <p class="lead">Complete ecommerce websites with admin access. Choose a direction, then shape the store around your business. This is a website service, not a source code sale.</p>
     </div>
-    <div class="craftee-show">
-      <div class="craftee-hero tilt">
-        <div class="craftee-badge">CRAFTEE SITES · WEB DEV</div>
-        <h3>Websites &amp; Online Stores, handled end to end</h3>
-        <p>Craftee Sites is my web development hustle. I don't just design a pretty page, I build the whole selling engine so you can focus on your business.</p>
-        <a class="btn craftee-go magnetic" href="craftee/index.html" target="_blank" rel="noopener">See Craftee Sites →</a>
-      </div>
-      <div class="craftee-featured reveal" aria-label="Featured ecommerce demo">
-        <a class="craftee-feature" href="https://apparel.agentrome.site/" target="_blank" rel="noopener" aria-label="Open the APPAREL LAB storefront demo">
-          <img src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" />
-          <span class="craftee-feature-copy">
-            <span class="craftee-feature-kicker">Featured website</span>
-            <h3>APPAREL LAB Storefront</h3>
-            <p>Catalog, cart, checkout and customer portal.</p>
-            <span class="craftee-feature-open">Open storefront ↗</span>
-          </span>
-        </a>
-        <a class="craftee-feature" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener" aria-label="Open the APPAREL LAB admin dashboard demo">
-          <img src="apparel-lab-admin.png" alt="APPAREL LAB admin dashboard preview" />
-          <span class="craftee-feature-copy">
-            <span class="craftee-feature-kicker">Featured admin</span>
-            <h3>APPAREL LAB Admin</h3>
-            <p>Products, orders, inventory, customers and promotions.</p>
-            <span class="craftee-feature-open">Open admin ↗</span>
-          </span>
-        </a>
-      </div>
-      <div class="craftee-grid">
-        <div class="svc reveal"><h3>Storefront &amp; Catalog</h3><p>Conversion-focused product pages, collections and lookbooks tailored to your brand.</p></div>
-        <div class="svc reveal"><h3>Cart &amp; Checkout</h3><p>Fast, frictionless checkout with multiple payment methods and abandoned-cart recovery.</p></div>
-        <div class="svc reveal"><h3>Inventory &amp; Orders</h3><p>Real-time stock, order management and fulfillment workflows that scale with you.</p></div>
-        <div class="svc reveal"><h3>Customers &amp; Marketing</h3><p>Email capture, retention flows and analytics wired into one operating system.</p></div>
-        <div class="svc reveal"><h3>Live Store Demo</h3><p>See a working storefront, admin and funnel. Click through the full build.</p><a class="chip-cmd" href="craftee/store.html" target="_blank" rel="noopener">Open store →</a></div>
-        <div class="svc reveal"><h3>Growth Command Funnel</h3><p>See how I capture leads, automate repetitive tasks, reduce workload, and help operations run cleaner.</p><a class="chip-cmd" href="craftee/funnel.html" target="_blank" rel="noopener">Open funnel →</a></div>
-      </div>
+    <div class="ecom-tiers">
+      <article class="ecom-tier reveal" id="ecom-starter">
+        <span class="craftee-badge">STARTER</span>
+        <h3>A clear place to start.</h3>
+        <p>A complete ecommerce website with admin access. We agree on the features your business needs before the build.</p>
+        <div class="ecom-coming"><span aria-hidden="true">◈</span><strong>Sample coming soon</strong><p>The Starter preview is being prepared. No demo is available yet.</p></div>
+        <details class="ecom-detail"><summary>Is Starter right for me?</summary><p>Start here if you want to discuss your first store. Share your products, order process and goals with Rome to confirm scope and pricing.</p></details>
+        <button class="btn" type="button" data-ava-question="Tell me about Starter ecommerce">Ask Ava about Starter</button>
+      </article>
+      <article class="ecom-tier ecom-premium reveal" id="ecom-premium">
+        <span class="craftee-badge">PREMIUM · APPAREL LAB</span>
+        <h3>Explore both sides of the store.</h3>
+        <p>See the customer experience and the admin dashboard in the existing Premium build.</p>
+        <div class="ecom-switch" role="group" aria-label="Premium preview">
+          <button type="button" data-ecom-view="store" aria-pressed="true">Storefront</button>
+          <button type="button" data-ecom-view="admin" aria-pressed="false">Admin dashboard</button>
+        </div>
+        <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" loading="lazy" width="1440" height="900"><figcaption id="ecom-preview-caption" aria-live="polite">Customer view: browse the APPAREL LAB storefront.</figcaption></figure>
+        <div class="ecom-links"><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">Open storefront ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Open admin ↗</a></div>
+        <p class="ecom-status"><strong>Build preview.</strong> Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The admin link is currently unavailable while hosting is being connected.</p>
+        <details class="ecom-detail"><summary>What would my store include?</summary><p>A complete ecommerce website with admin access, tailored to an agreed scope. Payments, shipping, integrations and launch requirements are confirmed with Rome before delivery.</p></details>
+        <button class="chip-cmd" type="button" data-ava-question="Tell me about Premium ecommerce">Ask Ava about Premium →</button>
+      </article>
+    </div>
+    <p class="ecom-more"><a class="chip-cmd" href="craftee/index.html" target="_blank" rel="noopener">Explore Craftee Sites →</a> <a class="chip-cmd" href="#operations-samples">See operations samples ↓</a></p>
+  </section>
+
+  <section id="operations-samples" class="wrap">
+    <div class="reveal"><span class="eyebrow">OPERATIONS IN PRACTICE</span><h2 class="title">The work behind a smoother day.</h2><p class="lead">Explore what I can contribute as an Ecommerce VA or Supply Chain and Logistics VA. These interactive workflows use illustrative sample data, not client cases or claimed results.</p></div>
+    <div class="ops-shell reveal">
+      <div class="ops-switch" role="group" aria-label="Operations sample category"><button type="button" data-ops-mode="ecommerce" aria-pressed="true">Ecommerce VA</button><button type="button" data-ops-mode="logistics" aria-pressed="false">Supply Chain and Logistics VA</button></div>
+      <div class="ops-layout"><div id="ops-queue" class="ops-queue" role="group" aria-label="Sample tasks"></div><div class="ops-output" id="ops-output" aria-live="polite"></div></div>
+      <p class="ops-note">Sample workspace only. No store, carrier or supplier is connected. Actions reveal draft deliverables and do not send messages or change records.</p>
+      <noscript><p>Ecommerce support: order exceptions, inventory checks and customer reply drafts. Logistics support: shipment exceptions, supplier coordination and delivery documentation.</p></noscript>
     </div>
   </section>
 
@@ -1530,44 +1538,237 @@ function animateNum(el,target,prefix){
 
 /* ---- Ava static portfolio agent ---- */
 const AVA_KB = [
-  {keys:["who","about","jerome","rome"],q:"Who is Rome?",a:"Rome is Jerome Grisler, a remote professional based in Angeles City, Pampanga, Philippines. He helps businesses reduce repetitive work, improve workflows, build stronger websites, and create systems that support long term growth."},
-  {keys:["service","offer","do","help"],q:"What services does Rome offer?",a:"Rome focuses on four service areas: AI automation, website development, ecommerce and operations support, and logistics or supply chain workflow support. He can also help with related work like customer service operations, marketing tasks, lead generation, CRM workflows, and ongoing business support."},
-  {keys:["automation","automate","repetitive","task"],q:"Can Rome build automations?",a:"Yes. Rome can build automations that reduce repetitive tasks, improve follow up, organize data, update CRMs, route leads, handle inquiries, and make daily business processes smoother."},
-  {keys:["website","site","web","funnel","gohighlevel","ghl"],q:"Can Rome build websites?",a:"Yes. Rome builds clean, functional, conversion focused websites, landing pages, portfolio pages, service pages, GoHighLevel pages, funnels, and simple store style pages. The goal is not only a good looking website, but one that communicates clearly and supports business growth."},
-  {keys:["ecommerce","ecom","customer service","operations","lead gen","marketing"],q:"Can Rome help with ecommerce and operations?",a:"Yes. Rome can support ecommerce and operations related work such as customer service operations, order or store support, admin workflows, product or content updates, marketing task support, lead generation, and CRM or pipeline assistance."},
-  {keys:["logistics","supply","shipment","inventory"],q:"Can Rome help with logistics?",a:"Yes. Rome can help with logistics and supply chain related workflows, including tracking, coordination, reporting, inventory organization, supplier follow up, and process documentation."},
-  {keys:["process","start","call","work style","how work"],q:"How does working with Rome start?",a:"Rome starts by understanding the business deeply. The beginning can feel careful because he wants to see the full picture first, including tools, workflows, pain points, repetitive tasks, weak spots, and goals. Once the direction is clear, the work becomes sharper, smoother, and more valuable."},
-  {keys:["price","pricing","rate","cost","charge","quote"],q:"How much does Rome charge?",a:"Rome's general rate is $8 to $15 per hour, depending on the business need, scope, and complexity. Some work can also be project based. This is only a general pricing guide, the final quote comes from Rome after he understands the work."},
-  {keys:["confidential","privacy","nda","non solicitation","private"],q:"Does Rome keep business information private?",a:"Yes. Rome treats business information carefully and can work under a confidentiality or non solicitation agreement when required. I can discuss his professional work, but I do not share personal or private information."},
-  {keys:["contact","email","book","appointment","cta"],q:"How do I contact Rome?",a:"You can contact Rome through the email and social links on this portfolio. Once the booking link is added, you can also use the booking CTA. If you reach out, share your business details, pain points, current tools, repetitive tasks, timeline, and the result you want."},
-  {keys:["proof","portfolio","example","work","projects"],q:"Can I see Rome's work?",a:"Yes. This portfolio is the best place to start. Rome will continue updating his proof of work and examples, but you can already explore his services, Craftee Sites work, and the systems he is building."},
-  {keys:["result","growth","benefit","outcome"],q:"What results can Rome help with?",a:"Rome's work is designed to reduce manual work, improve systems, lower unnecessary operational cost, support clearer execution, and create more room for long term business growth. Exact results depend on the business, scope, and consistency of execution."}
+  {
+    "keys": [
+      "starter"
+    ],
+    "q": "Tell me about Starter ecommerce",
+    "a": "Starter is a complete ecommerce website service with admin access, not a source code package. The sample is coming soon, so there is no Starter demo link yet. Share your products and order process with Rome to confirm scope and pricing."
+  },
+  {
+    "keys": [
+      "premium",
+      "apparel",
+      "admin dashboard"
+    ],
+    "q": "Tell me about Premium ecommerce",
+    "a": "APPAREL LAB is the existing Premium ecommerce build with a storefront and admin dashboard. Preview it at https://apparel.agentrome.site/ and https://apparel.agentrome.site/admin-login. Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The supplied admin link is currently unavailable while hosting is being connected."
+  },
+  {
+    "keys": [
+      "hosting",
+      "hostinger",
+      "payment",
+      "production",
+      "launch"
+    ],
+    "q": "Is Premium ready for launch?",
+    "a": "Hostinger hosting linkage for APPAREL LAB is still in progress. Production readiness and payment integration are not confirmed. Rome will agree on payments, shipping, integrations and launch requirements with you before delivery."
+  },
+  {
+    "keys": [
+      "source code",
+      "template",
+      "buy code",
+      "admin access"
+    ],
+    "q": "Do I get an ecommerce website or source code?",
+    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The Starter sample is coming soon; APPAREL LAB is the Premium build preview."
+  },
+  {
+    "keys": [
+      "operations sample",
+      "va sample",
+      "illustrative",
+      "contribute",
+      "sample project"
+    ],
+    "q": "What operations samples can I explore?",
+    "a": "Operations in Practice shows illustrative Ecommerce VA and Supply Chain and Logistics VA workflows. Explore order exceptions, inventory checks, customer reply drafts, shipment tracking, supplier coordination and delivery documentation at the operations samples section. These use sample data, not past client cases or results. Nothing is sent or changed."
+  },
+  {
+    "keys": [
+      "ecommerce va",
+      "ecom",
+      "customer support",
+      "operations",
+      "order",
+      "inventory"
+    ],
+    "q": "Can Rome help with ecommerce operations?",
+    "a": "Rome can contribute order review, customer support drafts, product updates, inventory checks and clear team handoffs as an Ecommerce VA. Explore the illustrative tasks in Operations in Practice. He also builds complete ecommerce websites with admin access through Craftee Sites."
+  },
+  {
+    "keys": [
+      "logistics",
+      "supply chain",
+      "shipment",
+      "supplier",
+      "delivery"
+    ],
+    "q": "Can Rome help with logistics?",
+    "a": "Rome can support shipment tracking, supplier coordination, delivery documentation, reporting and operational follow up. Operations in Practice has illustrative logistics tasks with carrier inquiries, dispatch follow ups and receipt checklists. These are samples, not client case studies or connected systems."
+  },
+  {
+    "keys": [
+      "who",
+      "jerome",
+      "about rome"
+    ],
+    "q": "Who is Rome?",
+    "a": "Rome is Jerome Grisler, a remote professional based in Angeles City, Pampanga, Philippines. He helps businesses with AI automation, website development, Ecommerce VA support and Supply Chain and Logistics VA support."
+  },
+  {
+    "keys": [
+      "service",
+      "offer"
+    ],
+    "q": "What services does Rome offer?",
+    "a": "Rome offers AI automation, website development, Ecommerce VA support and Supply Chain and Logistics VA support. Website work includes complete ecommerce sites with admin access through Craftee Sites. What would you like to improve in your business?"
+  },
+  {
+    "keys": [
+      "automation",
+      "automate",
+      "ghl",
+      "n8n",
+      "zapier",
+      "make.com"
+    ],
+    "q": "Can Rome build automations?",
+    "a": "Rome builds lead routing, CRM updates, inquiry handling, reporting and follow up workflows. Explore the 44 AI automation projects across GoHighLevel, Make.com, Zapier and n8n in the Projects carousel."
+  },
+  {
+    "keys": [
+      "website",
+      "web",
+      "funnel"
+    ],
+    "q": "Can Rome build websites?",
+    "a": "Rome builds business websites, landing pages, GoHighLevel pages and funnels, and complete ecommerce websites with admin access. Explore Starter and Premium in the ecommerce showcase. Scope and launch requirements are agreed with Rome."
+  },
+  {
+    "keys": [
+      "process",
+      "work style",
+      "timeline"
+    ],
+    "q": "How does working with Rome start?",
+    "a": "Rome starts by understanding your business, current tools, pain points and desired outcome. Scope and expectations are agreed before execution. Timeline and ongoing support depend on the work."
+  },
+  {
+    "keys": [
+      "price",
+      "pricing",
+      "rate",
+      "cost",
+      "quote",
+      "charge"
+    ],
+    "q": "How much does Rome charge?",
+    "a": "The public general hourly guide is $8 to $15 depending on scope and complexity. Some work is project based. This is not a fixed ecommerce package price. Rome confirms the final quote after reviewing your requirements."
+  },
+  {
+    "keys": [
+      "contact",
+      "email",
+      "book",
+      "appointment"
+    ],
+    "q": "How do I contact Rome?",
+    "a": "Use the existing Let's Connect! button to open the booking popup, or use the email and social links in Contact. Booking times use America/New_York. I can help organize your brief, but I do not book calls or send this chat to Rome."
+  },
+  {
+    "keys": [
+      "proof",
+      "portfolio",
+      "example",
+      "projects"
+    ],
+    "q": "Can I see Rome's work?",
+    "a": "Explore 44 AI automation projects in the Projects carousel, Starter and Premium in the ecommerce showcase, and separate illustrative VA workflows in Operations in Practice. The Starter sample is coming soon. APPAREL LAB is a Premium build preview with hosting linkage still in progress."
+  },
+  {
+    "keys": [
+      "private",
+      "password",
+      "credential",
+      "family",
+      "address",
+      "income",
+      "confidential",
+      "nda"
+    ],
+    "q": "Does Rome keep information private?",
+    "a": "I discuss only Rome's professional work and public contact options. I do not share personal details, passwords or private client information. Rome can work under confidentiality or non solicitation agreements when required."
+  }
 ];
+/* Ecommerce previews and illustrative operations samples. No external writes. */
+function setupShowcases(){
+  document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{
+    const admin=btn.dataset.ecomView==='admin';
+    document.querySelectorAll('[data-ecom-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+    const image=document.getElementById('ecom-preview-image');
+    image.src=admin?'apparel-lab-admin.png':'apparel-lab-storefront.png';
+    image.alt=admin?'APPAREL LAB admin dashboard preview':'APPAREL LAB storefront preview';
+    document.getElementById('ecom-preview-caption').textContent=admin?'Business view: preview the APPAREL LAB admin dashboard.':'Customer view: browse the APPAREL LAB storefront.';
+  }));
+  const samples={
+    ecommerce:[
+      {title:'Order exception review',tag:'Sample order 1042 · Address incomplete',context:'An illustrative order is missing a unit number. Shipping needs clarification before fulfillment.',steps:['Check the order details and store policy.','Draft a clarification request for the customer.','Log the hold reason and next follow up for the team.'],deliverable:'Draft customer reply: Please confirm the unit number for your delivery address so the team can prepare your order.\nHandoff note: Address confirmation pending. Keep fulfillment on hold until the customer replies.'},
+      {title:'Inventory reconciliation',tag:'Sample item Canvas Tote · Stock mismatch',context:'The sample catalog and warehouse count disagree. Availability needs review, not an unverified stock change.',steps:['Compare the catalog, reserved orders and warehouse count.','Flag the discrepancy and request a recount.','Prepare a proposed adjustment for owner approval.'],deliverable:'Inventory review note: Canvas Tote has a count discrepancy. Request a warehouse recount and check reserved orders.\nApproval needed: Confirm the correct available quantity before changing the catalog.'},
+      {title:'Customer support triage',tag:'Sample ticket 208 · Return request',context:'A sample customer asks to return an item. The next step depends on the store policy and order details.',steps:['Review the order and approved returns policy.','Ask for missing information without promising a refund.','Tag the ticket and prepare an escalation if needed.'],deliverable:'Draft customer reply: I can help review your return request. Please share your order reference and the item you would like to return.\nTicket note: Policy review pending. No refund has been approved or issued.'}
+    ],
+    logistics:[
+      {title:'Shipment exception tracking',tag:'Sample shipment 301 · Carrier update overdue',context:'A sample shipment has no new carrier scan. The delivery estimate is unconfirmed.',steps:['Check the tracking history and planned delivery window.','Prepare a carrier inquiry with the shipment reference.','Update the exception tracker with the owner and next check.'],deliverable:'Draft carrier inquiry: Please confirm the current location and revised delivery estimate for shipment 301.\nException log: Awaiting carrier confirmation. Next action: Review the carrier response before updating the customer.'},
+      {title:'Supplier coordination',tag:'Sample purchase order 502 · Dispatch unconfirmed',context:'A supplier has not confirmed dispatch for an illustrative purchase order.',steps:['Compare the purchase order with the supplier acknowledgment.','Request dispatch timing and any outstanding requirements.','Prepare an escalation if the agreed schedule is at risk.'],deliverable:'Draft supplier follow up: Please confirm the dispatch date and outstanding requirements for purchase order 502.\nHandoff note: Dispatch is unconfirmed. Flag any schedule risk to the purchasing owner.'},
+      {title:'Delivery documentation',tag:'Sample delivery 604 · Receipt missing',context:'An illustrative delivery record is missing proof of receipt. Completion cannot be assumed.',steps:['Check the delivery reference and receiving record.','Request proof of delivery from the carrier or receiving team.','Organize the documents and flag unresolved differences.'],deliverable:'Document checklist: Delivery reference recorded. Proof of receipt requested. Quantity confirmation pending.\nHandoff note: Keep the record under review until receipt and quantity are verified.'}
+    ]
+  };
+  let mode='ecommerce';
+  const queue=document.getElementById('ops-queue'),output=document.getElementById('ops-output');
+  function select(i){
+    const s=samples[mode][i];
+    queue.querySelectorAll('button').forEach((b,n)=>b.setAttribute('aria-pressed',String(n===i)));
+    output.replaceChildren();
+    const label=document.createElement('span');label.className='craftee-feature-kicker';label.textContent='ILLUSTRATIVE SAMPLE';output.append(label);
+    const title=document.createElement('h3');title.textContent=s.title;output.append(title);
+    const context=document.createElement('p');context.textContent=s.context;output.append(context);
+    const list=document.createElement('ol');s.steps.forEach(step=>{const li=document.createElement('li');li.textContent=step;list.append(li);});output.append(list);
+    const toggle=document.createElement('button');toggle.className='btn';toggle.type='button';toggle.textContent='Reveal sample deliverable';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls','ops-deliverable');output.append(toggle);
+    const draft=document.createElement('p');draft.id='ops-deliverable';draft.className='ops-deliverable';draft.hidden=true;draft.textContent=s.deliverable;output.append(draft);
+    toggle.onclick=()=>{draft.hidden=!draft.hidden;toggle.setAttribute('aria-expanded',String(!draft.hidden));toggle.textContent=draft.hidden?'Reveal sample deliverable':'Hide sample deliverable';};
+  }
+  function render(){queue.replaceChildren();samples[mode].forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.className='ops-case';b.textContent=s.title;const tag=document.createElement('span');tag.textContent=s.tag;b.append(tag);b.onclick=()=>select(i);queue.append(b);});select(0);}
+  document.querySelectorAll('[data-ops-mode]').forEach(btn=>btn.addEventListener('click',()=>{mode=btn.dataset.opsMode;document.querySelectorAll('[data-ops-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));render();}));
+  render();
+}
+
 function setupAvaChat(){
   const box=$("#ava-chat"),launch=$("#ava-launch"),close=$("#ava-close"),form=$("#ava-form"),input=$("#ava-input"),messages=$("#ava-messages"),suggest=$("#ava-suggest");
   if(!box||!launch||!form||!input||!messages||!suggest)return;
   function add(who,text){const d=document.createElement("div");d.className="ava-msg "+who;d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
   function open(){box.classList.add("open");launch.setAttribute("aria-expanded","true");if(!messages.dataset.ready){add("bot","Hi, I'm Ava. I can answer questions about Rome's professional work, services, pricing, process, and how to contact him. I do not share personal or private information.");messages.dataset.ready="1";}setTimeout(()=>input.focus(),80);}
   function shut(){box.classList.remove("open");launch.setAttribute("aria-expanded","false");}
-  // Live Ava: calls a Cloudflare Worker that proxies OpenAI with the knowledge base as the system prompt.
-  // Until the worker URL/key is set, or if the fetch fails, it falls back to the static AVA_KB so the widget never breaks.
+  // Live Ava uses Cloudflare Workers AI with the approved public knowledge base.
+  // Network errors and offline backend responses use the local approved answers.
   const AVA_ENDPOINT = "https://ava-chat-worker.ava-chat-rome-grisler.workers.dev/api/ava"; // free Cloudflare Workers AI brain (no key)
   const AVA_QUESTIONS = [
-    "Who is Rome?",
-    "What services does Rome offer?",
+    "Tell me about Starter ecommerce",
+    "Tell me about Premium ecommerce",
+    "What operations samples can I explore?",
     "Can Rome build automations?",
-    "Can Rome build websites?",
-    "Can Rome help with ecommerce and operations?",
-    "Can Rome help with logistics?"
+    "How much does Rome charge?",
+    "How do I contact Rome?"
   ];
   const avaHist = [];
-  function fallbackAnswer(q){const t=q.toLowerCase();let best=null,score=0;AVA_KB.forEach(item=>{let s=0;item.keys.forEach(k=>{if(t.includes(k))s++;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. I can answer questions about Rome's professional work, services, pricing, process, and portfolio. For exact scope or a custom quote, contact Rome through the email, social links, or booking CTA once it is added.";}
+  function fallbackAnswer(q){const t=q.toLowerCase();if(/password|credential|secret|family|home address|private income/.test(t))return AVA_KB[AVA_KB.length-1].a;let best=null,score=0;AVA_KB.forEach(item=>{let s=t===item.q.toLowerCase()?100:0;item.keys.forEach(k=>{if(t.includes(k))s+=k.length;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. Ask about Rome's services, ecommerce tiers or illustrative operations samples. Use Let's Connect! or the public contact links for an exact scope or quote.";}
   async function askAva(q){
     avaHist.push({role:"user",content:q});
     try{
       const res = await fetch(AVA_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:avaHist}),signal:AbortSignal.timeout(15000)});
       const data = await res.json();
-      const reply = (data&&data.reply)?data.reply:fallbackAnswer(q);
+      const reply = (res.ok&&data&&!data.offline&&typeof data.reply==="string"&&data.reply.trim())?data.reply:fallbackAnswer(q);
       avaHist.push({role:"assistant",content:reply});
       return reply;
     }catch(e){ return fallbackAnswer(q); }
@@ -1583,6 +1784,8 @@ function setupAvaChat(){
     suggest.innerHTML=AVA_QUESTIONS.map(x=>`<button type="button" class="ava-chip">${x}</button>`).join("");
     suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=btn.textContent;input.value="";send(q);});
   }
+  document.querySelectorAll("[data-ava-question]").forEach(btn=>btn.addEventListener("click",()=>{open();send(btn.dataset.avaQuestion);}));
+  box.addEventListener("keydown",e=>{if(e.key==="Escape"){shut();launch.focus();}});
   launch.onclick=()=>box.classList.contains("open")?shut():open(); close.onclick=shut;
   form.onsubmit=e=>{e.preventDefault();const q=input.value;input.value="";send(q);};
 }
@@ -1596,7 +1799,8 @@ function setupPalette(){
     {ic:"⚙",label:"How I work",go:"#capabilities"},
     {ic:"AI",label:"Ava, AI Agent",go:"#ava"},
     {ic:"$",label:"ROI Calculator",go:"#roi"},
-    {ic:"▦",label:"Work",go:"#craftee"},
+    {ic:"▦",label:"Ecommerce showcase",go:"#craftee"},
+    {ic:"◈",label:"Operations samples",go:"#operations-samples"},
     {ic:"◈",label:"Projects",go:"#projects"},
     {ic:"✉",label:"Contact",go:"#contact"},
     {ic:"◐",label:"Toggle light / dark",act:toggleTheme},
@@ -2091,7 +2295,7 @@ function setupGlitch(){$$(".title").forEach(el=>{
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();buildProjects();
-  setupTheme();setupROI();setupAvaChat();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupAvaChat();setupShowcases();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
