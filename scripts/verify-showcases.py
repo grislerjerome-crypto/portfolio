@@ -22,6 +22,7 @@ with sync_playwright() as p:
     assert previews.count()==2
     srcs=previews.evaluate_all('(els)=>els.map(e=>e.getAttribute("src"))')
     assert srcs==['apparel-lab-storefront.png','apparel-lab-admin.png']
+    page.wait_for_function("Array.from(document.querySelectorAll('#ecom-premium .ecom-preview img')).every(e=>e.complete&&e.naturalWidth>0)")
     assert previews.evaluate_all('(els)=>els.every(e=>e.complete&&e.naturalWidth>0)')
     fit=previews.first.evaluate("e=>getComputedStyle(e).objectFit")
     assert fit=='contain'

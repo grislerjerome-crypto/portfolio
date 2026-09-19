@@ -1704,14 +1704,6 @@ const AVA_KB = [
 ];
 /* Ecommerce previews and illustrative operations samples. No external writes. */
 function setupShowcases(){
-  document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{
-    const admin=btn.dataset.ecomView==='admin';
-    document.querySelectorAll('[data-ecom-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
-    const image=document.getElementById('ecom-preview-image');
-    image.src=admin?'apparel-lab-admin.png':'apparel-lab-storefront.png';
-    image.alt=admin?'APPAREL LAB admin dashboard preview':'APPAREL LAB storefront preview';
-    document.getElementById('ecom-preview-caption').textContent=admin?'Business view: preview the APPAREL LAB admin dashboard.':'Customer view: browse the APPAREL LAB storefront.';
-  }));
   const samples={
     ecommerce:[
       {title:'Order exception review',tag:'Sample order 1042 · Address incomplete',context:'An illustrative order is missing a unit number. Shipping needs clarification before fulfillment.',steps:['Check the order details and store policy.','Draft a clarification request for the customer.','Log the hold reason and next follow up for the team.'],deliverable:'Draft customer reply: Please confirm the unit number for your delivery address so the team can prepare your order.\nHandoff note: Address confirmation pending. Keep fulfillment on hold until the customer replies.'},
