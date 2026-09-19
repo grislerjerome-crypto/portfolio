@@ -22,9 +22,15 @@ with sync_playwright() as p:
     assert page.locator('#ecom-starter a').count()==0
     assert 'Sample coming soon' in page.locator('#ecom-starter').inner_text()
     assert page.locator('#ecom-premium a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/admin-login']
-    previews=page.locator('#ecom-premium .ecom-preview img')
-    assert previews.count()==2
-    assert previews.evaluate_all('(els)=>els.every(e=>e.getAttribute("src")&&getComputedStyle(e).objectFit==="contain")')
+    preview=page.locator('#ecom-preview-image')
+    assert preview.count()==1
+    assert preview.get_attribute('src')=='apparel-lab-storefront.png'
+    assert preview.evaluate('(e)=>getComputedStyle(e).objectFit==="cover"')
+    page.locator('[data-ecom-view="admin"]').click()
+    assert preview.get_attribute('src')=='apparel-lab-admin.png'
+    assert 'Dashboard preview' in page.locator('#ecom-preview-caption').inner_text()
+    page.locator('[data-ecom-view="store"]').click()
+    assert preview.get_attribute('src')=='apparel-lab-storefront.png'
 
     # New sections are separate and the old queue is gone.
     assert page.locator('#ecommerce-operations').count()==1
