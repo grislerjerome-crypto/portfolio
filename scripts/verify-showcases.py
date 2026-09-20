@@ -19,8 +19,17 @@ with sync_playwright() as p:
 
     # Existing protected content remains intact.
     assert page.locator('.proj-card').count()==44
-    assert page.locator('#ecom-starter a').count()==0
-    assert 'Sample coming soon' in page.locator('#ecom-starter').inner_text()
+    assert page.locator('#ecom-starter a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://github.com/grislerjerome-crypto/starter-ecom-vibe-app']
+    assert 'THREADLAB' in page.locator('#ecom-starter').inner_text()
+    starter=page.locator('#starter-preview-image')
+    assert starter.count()==1
+    assert starter.get_attribute('src')=='starter-ecom-homepage.png'
+    page.locator('[data-starter-view="shop"]').click()
+    assert starter.get_attribute('src')=='starter-ecom-shop.png'
+    assert 'Shop preview' in page.locator('#starter-preview-caption').inner_text()
+    page.locator('[data-starter-view="home"]').click()
+    assert starter.get_attribute('src')=='starter-ecom-homepage.png'
+    assert 'Build preview. Hostinger hosting linkage' not in page.locator('#ecom-premium').inner_text()
     assert page.locator('#ecom-premium a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/admin-login']
     preview=page.locator('#ecom-preview-image')
     assert preview.count()==1

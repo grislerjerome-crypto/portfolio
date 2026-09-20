@@ -603,12 +603,17 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
     <div class="ecom-tiers">
       <article class="ecom-tier reveal" id="ecom-starter">
-        <span class="craftee-badge">STARTER</span>
-        <h3>A clear place to start.</h3>
-        <p>A complete ecommerce website with admin access. We agree on the features your business needs before the build.</p>
-        <div class="ecom-links"><a class="btn" href="https://github.com/grislerjerome-crypto/starter-ecom-vibe-app" target="_blank" rel="noopener">View starter code ↗</a></div>
-        <p>A clean Laravel starter with Blade views, Tailwind from CDN, and shared-hosting-ready structure. Cart and checkout are placeholders until you connect a real database and payments.</p>
-        <details class="ecom-detail"><summary>Is Starter right for me?</summary><p>Start here if you want to discuss your first store. Share your products, order process and goals with Rome to confirm scope and pricing.</p></details>
+        <span class="craftee-badge">STARTER · THREADLAB</span>
+        <h3>Launch with the essentials.</h3>
+        <p>See the Starter ecommerce website with a clean customer homepage and shop flow built for shared hosting.</p>
+        <div class="ecom-switch" role="group" aria-label="Starter preview tabs">
+          <button type="button" data-starter-view="home" aria-pressed="true">Homepage</button>
+          <button type="button" data-starter-view="shop" aria-pressed="false">Shop</button>
+        </div>
+        <figure class="ecom-preview"><img id="starter-preview-image" src="starter-ecom-homepage.png" alt="THREADLAB starter ecommerce homepage preview" loading="lazy" width="1440" height="1000"><figcaption id="starter-preview-caption" aria-live="polite">Homepage preview: clean landing page for a starter store.</figcaption></figure>
+        <div class="ecom-links"><a class="btn" href="https://github.com/grislerjerome-crypto/starter-ecom-vibe-app" target="_blank" rel="noopener">Open starter repo ↗</a></div>
+        <p>A Laravel starter with Blade views, Tailwind CDN and shared hosting structure. Cart and checkout stay as placeholders until a real database and payments are connected.</p>
+        <details class="ecom-detail"><summary>Is Starter right for me?</summary><p>Start here if you want your first store online with a practical catalog, shop pages and admin access planned around your business.</p></details>
         <button class="btn" type="button" data-ava-question="Tell me about Starter ecommerce">Ask Ava about Starter</button>
       </article>
       <article class="ecom-tier ecom-premium reveal" id="ecom-premium">
@@ -621,7 +626,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
         </div>
         <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB homepage preview" loading="lazy" width="1440" height="1000"><figcaption id="ecom-preview-caption" aria-live="polite">Homepage preview: customer storefront view.</figcaption></figure>
         <div class="ecom-links"><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">Open storefront ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Open admin ↗</a></div>
-        <p class="ecom-status"><strong>Build preview.</strong> Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The admin link is currently unavailable while hosting is being connected.</p>
         <details class="ecom-detail"><summary>What would my store include?</summary><p>A complete ecommerce website with admin access, tailored to an agreed scope. Payments, shipping, integrations and launch requirements are confirmed with Rome before delivery.</p></details>
         <button class="chip-cmd" type="button" data-ava-question="Tell me about Premium ecommerce">Ask Ava about Premium →</button>
       </article>
@@ -1639,7 +1643,7 @@ const AVA_KB = [
       "starter"
     ],
     "q": "Tell me about Starter ecommerce",
-    "a": "Starter is a complete ecommerce website service with admin access, not a source code package. The sample is coming soon, so there is no Starter demo link yet. Share your products and order process with Rome to confirm scope and pricing."
+    "a": "Starter is a complete ecommerce website service with admin access, not a source code package. The THREADLAB Starter sample is now visible in the ecommerce showcase with homepage and shop previews. It uses Laravel, Blade views, Tailwind CDN and shared hosting structure, with database and payments connected during a real client build."
   },
   {
     "keys": [
@@ -1669,7 +1673,7 @@ const AVA_KB = [
       "admin access"
     ],
     "q": "Do I get an ecommerce website or source code?",
-    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The Starter sample is coming soon; APPAREL LAB is the Premium build preview."
+    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The THREADLAB Starter sample is visible in the ecommerce showcase, and APPAREL LAB shows the Premium storefront and admin dashboard preview."
   },
   {
     "keys": [
@@ -1782,7 +1786,7 @@ const AVA_KB = [
       "projects"
     ],
     "q": "Can I see Rome's work?",
-    "a": "Explore 44 AI automation projects in the Projects carousel, Starter and Premium in the ecommerce showcase, plus separate Ecommerce Operations and Supply Chain and Logistics interactive sections. Operations figures are illustrative sample data. The Starter sample is coming soon. APPAREL LAB is a Premium build preview with hosting linkage still in progress."
+    "a": "Explore 44 AI automation projects in the Projects carousel, THREADLAB Starter and APPAREL LAB Premium in the ecommerce showcase, plus separate Ecommerce Operations and Supply Chain and Logistics interactive sections. Operations figures are illustrative sample data."
   },
   {
     "keys": [
@@ -1801,6 +1805,17 @@ const AVA_KB = [
 ];
 /* Interactive illustrative operations visuals. No external writes. */
 function setupOperationsVisuals(){
+  const starterPreview={
+    home:{src:'starter-ecom-homepage.png',alt:'THREADLAB starter ecommerce homepage preview',caption:'Homepage preview: clean landing page for a starter store.'},
+    shop:{src:'starter-ecom-shop.png',alt:'THREADLAB starter ecommerce shop preview',caption:'Shop preview: simple catalog flow for starter ecommerce.'}
+  };
+  const starterImage=document.getElementById('starter-preview-image');
+  const starterCaption=document.getElementById('starter-preview-caption');
+  document.querySelectorAll('[data-starter-view]').forEach(btn=>btn.addEventListener('click',()=>{
+    const data=starterPreview[btn.dataset.starterView];if(!data||!starterImage)return;
+    document.querySelectorAll('[data-starter-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));
+    starterImage.src=data.src;starterImage.alt=data.alt;if(starterCaption)starterCaption.textContent=data.caption;
+  }));
   const ecomPreview={
     store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB homepage preview',caption:'Homepage preview: customer storefront view.'},
     admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Dashboard preview: store management view.'}
