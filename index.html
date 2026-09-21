@@ -232,13 +232,12 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 
 /* ---- Craftee Sites showcase (blends with console theme) ---- */
 #craftee .lead{max-width:680px;color:var(--muted);margin-bottom:26px}
-.ecom-tiers{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px}
-.ecom-tier{padding:28px;border:1px solid var(--panel-border);border-radius:var(--radius);background:var(--glass);box-shadow:var(--shadow);min-width:0}
-.ecom-premium{background:radial-gradient(ellipse at top right,color-mix(in srgb,var(--magenta) 12%,transparent),transparent 65%),var(--glass)}
-.ecom-tier h3{font-size:clamp(1.4rem,2.5vw,1.9rem);line-height:1.2;margin:18px 0 12px}.ecom-tier p{color:var(--muted);line-height:1.65}.ecom-coming{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px dashed var(--panel-border);border-radius:16px;margin:24px 0;padding:24px}.ecom-coming>span{font-size:3rem;color:var(--magenta)}.ecom-coming p{font-size:.85rem;max-width:260px;margin-top:10px}
+.ecom-book-shell{position:relative;perspective:1800px}.ecom-tiers{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;align-items:stretch;filter:drop-shadow(0 34px 80px rgba(0,0,0,.34))}.ecom-tier{position:relative;padding:28px;border:1px solid var(--panel-border);background:radial-gradient(720px 360px at 12% 0%,color-mix(in srgb,var(--lime) 10%,transparent),transparent 62%),var(--glass);box-shadow:var(--shadow);min-width:0;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s}.ecom-starter{border-radius:var(--radius) 6px 6px var(--radius);transform-origin:right center}.ecom-premium{border-radius:6px var(--radius) var(--radius) 6px;transform-origin:left center;background:radial-gradient(ellipse at top right,color-mix(in srgb,var(--magenta) 12%,transparent),transparent 65%),var(--glass)}.ecom-tier::after{content:"";position:absolute;top:22px;bottom:22px;width:1px;background:linear-gradient(180deg,transparent,var(--panel-border),transparent);opacity:.8}.ecom-starter::after{right:-1px}.ecom-premium::after{left:-1px}.ecom-tier.is-active{border-color:color-mix(in srgb,var(--lime) 42%,var(--panel-border));box-shadow:0 32px 90px rgba(0,0,0,.32),0 0 38px color-mix(in srgb,var(--lime) 12%,transparent)}.ecom-book[data-active-page="premium"] .ecom-starter{transform:rotateY(-8deg) translateX(6px)}.ecom-book[data-active-page="starter"] .ecom-premium{transform:rotateY(8deg) translateX(-6px)}
+.ecom-book-controls{display:flex;justify-content:flex-end;gap:10px;margin:-6px 0 14px}.ecom-turn{width:42px;height:42px;border-radius:50%;border:1px solid var(--panel-border);background:var(--glass);color:var(--txt);cursor:pointer;font-size:1.1rem}.ecom-turn:hover{border-color:var(--lime);transform:translateY(-2px)}
+.ecom-plan-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:18px 0 14px}.ecom-plan-title{margin:0!important;font-size:clamp(1.8rem,3vw,2.45rem)!important}.ecom-price{font:700 .82rem var(--mono);color:#111;background:linear-gradient(120deg,var(--lime),var(--cyan));border-radius:999px;padding:9px 12px;white-space:nowrap}.ecom-tier h3{font-size:clamp(1.4rem,2.5vw,1.9rem);line-height:1.2;margin:18px 0 12px}.ecom-tier p{color:var(--muted);line-height:1.65}.ecom-features{display:grid;gap:10px;margin:20px 0;padding:0;list-style:none}.ecom-features li{display:flex;gap:10px;align-items:flex-start;color:var(--txt);font-size:.92rem}.ecom-features li::before{content:"✓";display:grid;place-items:center;flex:0 0 19px;height:19px;border-radius:50%;background:color-mix(in srgb,var(--lime) 18%,transparent);color:var(--lime);font:800 .75rem var(--mono)}
 .ecom-switch,.ecom-links{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.ecom-switch button{font:inherit;font-size:.85rem;border:1px solid var(--panel-border);border-radius:99px;padding:10px 16px;color:var(--txt);background:var(--glass);cursor:pointer}.ecom-switch button[aria-pressed="true"]{background:var(--lime);color:#111;border-color:var(--lime)}
-.ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:radial-gradient(520px 220px at 50% 0%,rgba(255,61,166,.12),transparent 68%),#07090f}.ecom-preview img{display:block;width:100%;height:340px;object-fit:cover;object-position:top;background:#080b12}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-detail{border-top:1px solid var(--panel-border);margin:20px 0;padding-top:16px}.ecom-detail summary{cursor:pointer;font-weight:600}.ecom-detail p{font-size:.9rem;margin-top:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
-.ecom-tier button:focus-visible,.ecom-tier summary:focus-visible,.ops-view-btn:focus-visible,.route-node:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+.ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:radial-gradient(520px 220px at 50% 0%,rgba(255,61,166,.12),transparent 68%),#07090f}.ecom-preview img{display:block;width:100%;height:340px;object-fit:cover;object-position:top;background:#080b12}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd}#starter-preview-image{object-fit:contain;object-position:top center;padding:10px;background:#f8f5f2}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+.ecom-tier button:focus-visible,.ecom-tier a:focus-visible,.ops-view-btn:focus-visible,.route-node:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 
 /* ---- Operations intelligence dashboards ---- */
 #ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
@@ -254,7 +253,7 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .lane-panel{grid-column:1/-1;padding:0;overflow:hidden}.route-node{appearance:none;border:0;background:none;color:var(--cyan);font:600 .64rem var(--mono);cursor:pointer;text-align:left;padding:0}.route-node[aria-pressed="true"]{color:var(--lime);text-shadow:0 0 9px color-mix(in srgb,var(--lime) 60%,transparent)}.shipment-detail{grid-column:1/-1;display:grid;grid-template-columns:1.3fr repeat(3,.7fr);gap:1px;padding:0;background:var(--panel-border);overflow:hidden}.shipment-detail>div{background:color-mix(in srgb,var(--bg) 94%,transparent);padding:12px 14px}.shipment-detail span{display:block;color:var(--muted);font:500 .55rem var(--mono);text-transform:uppercase;letter-spacing:.08em}.shipment-detail strong{display:block;margin-top:4px;font-size:.75rem}.shipment-alert{color:var(--magenta)}
 @keyframes opsPulse{50%{opacity:.35;transform:scale(.72)}}@keyframes lineDraw{from{stroke-dashoffset:90}to{stroke-dashoffset:0}}@keyframes throughput{to{transform:scaleY(.72);filter:hue-rotate(24deg)}}
 @media(max-width:900px){.ops-story{grid-template-columns:1fr}.commerce-dashboard,.logistics-dashboard{grid-template-columns:1fr}.order-mix,.status-distribution{grid-template-columns:126px 1fr}.inventory-panel,.lane-panel,.shipment-detail{grid-column:1}.commerce-kpis,.logistics-kpis{grid-template-columns:repeat(2,1fr)}.dash-kpi:nth-child(2){border-right:0}.dash-kpi:nth-child(-n+2){border-bottom:1px solid var(--panel-border)}}
-@media(max-width:800px){.ecom-tiers{grid-template-columns:1fr}.ecom-tier{padding:20px}.ecom-preview img{height:260px}}
+@media(max-width:800px){.ecom-tiers{grid-template-columns:1fr;gap:18px;filter:none}.ecom-starter,.ecom-premium{border-radius:var(--radius);transform:none!important}.ecom-tier::after{display:none}.ecom-tier{padding:20px}.ecom-preview img{height:260px}.ecom-book-controls{justify-content:flex-start;margin-top:0}.ecom-plan-head{flex-direction:column}.ecom-price{align-self:flex-start}}
 @media(max-width:560px){.commerce-stage,.logistics-stage{border-radius:16px}.command-bar{align-items:flex-start;flex-direction:column}.dash-kpi{padding:12px}.commerce-dashboard,.logistics-dashboard{padding:8px;gap:8px}.sales-chart{height:175px}.order-mix,.status-distribution{grid-template-columns:1fr;justify-items:center}.mix-list,.service-bars{width:100%}.data-table{min-width:620px}.inventory-panel,.lane-panel{overflow:auto}.shipment-detail{grid-template-columns:1fr 1fr}.shipment-detail>div:first-child{grid-column:1/-1}.ops-view-btn{font-size:.61rem;padding:7px 8px}.clock-label{display:none}}
 @media(prefers-reduced-motion:reduce){.console-live::before,.sales-line,.throughput-chart i{animation:none!important}.sales-line{stroke-dasharray:none}}
 .craftee-show{display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,.95fr);gap:18px;align-items:stretch}
@@ -606,35 +605,39 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <h2 class="title">Your store. Your control.</h2>
       <p class="lead">Great, elegant websites for your growing business. Choose a direction, then shape the site around your products. This is a website service, not a source code sale.</p>
     </div>
-    <div class="ecom-tiers">
-      <article class="ecom-tier reveal" id="ecom-starter">
-        <span class="craftee-badge">STARTER · THREADLAB</span>
-        <h3>Launch with the essentials.</h3>
-        <p>A simple but elegant website that becomes the digital profile of your entire business, showcasing your products to the world.</p>
-        <div class="ecom-switch" role="group" aria-label="Starter preview tabs">
-          <button type="button" data-starter-view="home" aria-pressed="true">Homepage</button>
-          <button type="button" data-starter-view="shop" aria-pressed="false">Shop</button>
-        </div>
-        <figure class="ecom-preview"><img id="starter-preview-image" src="starter-ecom-homepage.png" alt="THREADLAB starter website homepage preview" loading="lazy" width="1440" height="1000"><figcaption id="starter-preview-caption" aria-live="polite">Homepage preview: clean landing page for a starter website.</figcaption></figure>
-        <div class="ecom-links"><a class="btn" href="https://github.com/grislerjerome-crypto/starter-ecom-vibe-app" target="_blank" rel="noopener">Open starter repo ↗</a></div>
-        <details class="ecom-detail"><summary>Is Starter right for me?</summary><p>Start here if you want an elegant online profile that showcases your products and grows with your business.</p></details>
-        <button class="btn" type="button" data-ava-question="Tell me about Starter ecommerce">Ask Ava about Starter</button>
-      </article>
-      <article class="ecom-tier ecom-premium reveal" id="ecom-premium">
-        <span class="craftee-badge">PREMIUM · APPAREL LAB</span>
-        <h3>Explore the complete store system.</h3>
-        <p>See the storefront, customer dashboard and admin dashboard in the existing Premium build.</p>
-        <div class="ecom-switch" role="group" aria-label="Premium preview tabs">
-          <button type="button" data-ecom-view="store" aria-pressed="true">Storefront</button>
-          <button type="button" data-ecom-view="customer" aria-pressed="false">Customer Dashboard</button>
-          <button type="button" data-ecom-view="admin" aria-pressed="false">Admin Dashboard</button>
-        </div>
-        <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" loading="lazy" width="1440" height="1000"><figcaption id="ecom-preview-caption" aria-live="polite">Storefront preview: customer shopping experience.</figcaption></figure>
-        <div class="ecom-links"><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">Open storefront ↗</a><a class="btn" href="https://apparel.agentrome.site/customer-login" target="_blank" rel="noopener">Customer sign in ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Open admin ↗</a></div>
-        <p class="ecom-status">Customer and admin areas use demo sign in flows. Access availability depends on the current demo deployment.</p>
-        <details class="ecom-detail"><summary>What would my store include?</summary><p>A complete ecommerce website with storefront, customer and admin access tailored to an agreed scope. Payments, shipping, integrations and launch requirements are confirmed with Rome before delivery.</p></details>
-        <button class="chip-cmd" type="button" data-ava-question="Tell me about Premium ecommerce">Ask Ava about Premium →</button>
-      </article>
+    <div class="ecom-book-shell">
+      <div class="ecom-book-controls" aria-label="Store plan pages">
+        <button class="ecom-turn" type="button" data-ecom-page="starter" aria-label="Show Starter page">‹</button>
+        <button class="ecom-turn" type="button" data-ecom-page="premium" aria-label="Show Premium page">›</button>
+      </div>
+      <div class="ecom-tiers ecom-book" data-active-page="starter">
+        <article class="ecom-tier ecom-plan ecom-starter is-active reveal" id="ecom-starter" data-plan-page="starter">
+          <span class="craftee-badge">STARTER · THREADLAB</span>
+          <div class="ecom-plan-head"><h3 class="ecom-plan-title">Starter</h3><span class="ecom-price">Up to $499</span></div>
+          <p>A simple but elegant website that becomes the digital profile of your entire business, showcasing your products to the world.</p>
+          <figure class="ecom-preview"><img id="starter-preview-image" src="starter-ecom-homepage.png" alt="THREADLAB starter website homepage preview" loading="lazy" width="1440" height="1000"><figcaption>Featured homepage preview: clean product showcase for a growing business.</figcaption></figure>
+          <ul class="ecom-features" aria-label="Starter included features">
+            <li>Professional storefront</li><li>Custom Designs & Features</li><li>Product catalog up to 25 products</li><li>Shopping cart</li><li>Mobile responsive design</li><li>Social Media & Email integrations</li><li>Product variants with sizes and colors</li><li>Basic analytics</li><li>Request Quote pop-up</li><li>Contact Form</li>
+          </ul>
+          <div class="ecom-links"><button class="btn primary" type="button" onclick="bkOpen()">Get Started</button><a class="btn" href="https://threadlab.agentrome.site" target="_blank" rel="noopener">View Starter Store ↗</a></div>
+        </article>
+        <article class="ecom-tier ecom-plan ecom-premium reveal" id="ecom-premium" data-plan-page="premium">
+          <span class="craftee-badge">PREMIUM · APPAREL LAB</span>
+          <div class="ecom-plan-head"><h3 class="ecom-plan-title">Premium</h3><span class="ecom-price">Up to $799 + $15/mo care</span></div>
+          <p>For brands that need the full store experience, from storefront and secure checkout to customer accounts, inventory and admin control.</p>
+          <div class="ecom-switch" role="group" aria-label="Premium preview tabs">
+            <button type="button" data-ecom-view="store" aria-pressed="true">Storefront</button>
+            <button type="button" data-ecom-view="customer" aria-pressed="false">Customer Dashboard</button>
+            <button type="button" data-ecom-view="admin" aria-pressed="false">Admin Dashboard</button>
+          </div>
+          <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" loading="lazy" width="1440" height="1000"><figcaption id="ecom-preview-caption" aria-live="polite">Storefront preview: customer shopping experience.</figcaption></figure>
+          <ul class="ecom-features" aria-label="Premium included features">
+            <li>Everything in Starter, plus unlimited products</li><li>Secure checkout & Payment integration</li><li>Inventory tracking & low stock alerts</li><li>Customer accounts & segmentation</li><li>Discount codes, bundles, seasonal promos & reviews</li><li>Advanced product & variant management</li><li>Advanced analytics + marketing integrations</li><li>Custom design, advanced integrations & automation</li><li>Priority support</li><li>AI chat bot</li>
+          </ul>
+          <div class="ecom-links"><button class="btn primary" type="button" onclick="bkOpen()">Build My Store</button><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">View Premium Store ↗</a><a class="btn" href="https://apparel.agentrome.site/customer-login" target="_blank" rel="noopener">Customer Dashboard ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Admin Dashboard ↗</a></div>
+          <p class="ecom-status">Customer and admin areas use demo sign in flows. Access availability depends on the current demo deployment.</p>
+        </article>
+      </div>
     </div>
     <p class="ecom-more"><a class="chip-cmd" href="craftee/index.html" target="_blank" rel="noopener">Explore Craftee Sites →</a> <a class="chip-cmd" href="#ecommerce-operations">See ecommerce operations ↓</a> <a class="chip-cmd" href="#logistics-operations">See logistics operations ↓</a></p>
   </section>
@@ -1636,7 +1639,7 @@ const AVA_KB = [
       "starter"
     ],
     "q": "Tell me about Starter ecommerce",
-    "a": "Starter is a simple but elegant website Rome builds for your growing business. It becomes the digital profile of your entire business, showcasing your products in the digital world. It does not include a checkout page, payments or an admin dashboard. Those are added on Premium or custom builds."
+    "a": "Starter is a simple but elegant website Rome builds for your growing business. It becomes the digital profile of your entire business, showcasing your products in the digital world. The live demo is threadlab.agentrome.site. It does not include a checkout page, payments or an admin dashboard. Those are added on Premium or custom builds."
   },
   {
     "keys": [
@@ -1798,9 +1801,16 @@ const AVA_KB = [
 ];
 /* Interactive illustrative operations visuals. No external writes. */
 function setupOperationsVisuals(){
-  const starterPreview={home:{src:'starter-ecom-homepage.png',alt:'THREADLAB starter ecommerce homepage preview',caption:'Homepage preview: clean landing page for a starter store.'},shop:{src:'starter-ecom-shop.png',alt:'THREADLAB starter ecommerce shop preview',caption:'Shop preview: simple catalog flow for starter ecommerce.'}};
-  const starterImage=document.getElementById('starter-preview-image'),starterCaption=document.getElementById('starter-preview-caption');
-  document.querySelectorAll('[data-starter-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=starterPreview[btn.dataset.starterView];if(!data||!starterImage)return;document.querySelectorAll('[data-starter-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));starterImage.src=data.src;starterImage.alt=data.alt;if(starterCaption)starterCaption.textContent=data.caption;}));
+  const book=document.querySelector('.ecom-book');
+  function setPlanPage(page){
+    if(!book)return;
+    book.dataset.activePage=page;
+    document.querySelectorAll('[data-plan-page]').forEach(panel=>panel.classList.toggle('is-active',panel.dataset.planPage===page));
+  }
+  document.querySelectorAll('[data-ecom-page]').forEach(btn=>btn.addEventListener('click',()=>setPlanPage(btn.dataset.ecomPage)));
+  document.querySelectorAll('[data-plan-page]').forEach(panel=>panel.addEventListener('click',e=>{
+    if(!e.target.closest('a,button'))setPlanPage(panel.dataset.planPage);
+  }));
   const ecomPreview={store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB storefront preview',caption:'Storefront preview: customer shopping experience.'},customer:{src:'apparel-lab-customer.png',alt:'APPAREL LAB customer dashboard preview',caption:'Customer Dashboard preview: orders, saved pieces and account status.'},admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Admin Dashboard preview: store management view.'}};
   const ecomImage=document.getElementById('ecom-preview-image'),ecomCaption=document.getElementById('ecom-preview-caption');
   document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=ecomPreview[btn.dataset.ecomView];if(!data||!ecomImage)return;document.querySelectorAll('[data-ecom-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));ecomImage.src=data.src;ecomImage.alt=data.alt;if(ecomCaption)ecomCaption.textContent=data.caption;}));

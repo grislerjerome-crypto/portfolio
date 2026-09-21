@@ -16,16 +16,25 @@ with sync_playwright() as p:
     page.wait_for_timeout(1900)
 
     assert page.locator('.proj-card').count()==44
-    assert page.locator('#ecom-starter a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://github.com/grislerjerome-crypto/starter-ecom-vibe-app']
-    assert 'THREADLAB' in page.locator('#ecom-starter').inner_text()
+    assert page.locator('#ecom-starter a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://threadlab.agentrome.site/']
+    starter_text=page.locator('#ecom-starter').inner_text()
+    assert all(x in starter_text for x in ['Starter','Up to $499','Professional storefront','View Starter Store'])
+    assert 'Shop' not in page.locator('#ecom-starter .ecom-switch').inner_text() if page.locator('#ecom-starter .ecom-switch').count() else True
+    assert page.locator('#ecom-starter details').count()==0
     starter=page.locator('#starter-preview-image')
-    page.locator('[data-starter-view="shop"]').click(); assert starter.get_attribute('src')=='starter-ecom-shop.png'
-    page.locator('[data-starter-view="home"]').click(); assert starter.get_attribute('src')=='starter-ecom-homepage.png'
+    assert starter.get_attribute('src')=='starter-ecom-homepage.png'
+    assert starter.evaluate('(e)=>getComputedStyle(e).objectFit==="contain"')
+    page.locator('[data-ecom-page="premium"]').click(); assert page.locator('.ecom-book').get_attribute('data-active-page')=='premium'
+    page.locator('[data-ecom-page="starter"]').click(); assert page.locator('.ecom-book').get_attribute('data-active-page')=='starter'
 
     premium=page.locator('#ecom-premium')
-    assert all(x in premium.inner_text() for x in ['storefront','customer dashboard','admin dashboard'])
+    premium_text=premium.inner_text().lower()
+    assert all(x in premium_text for x in ['storefront','customer dashboard','admin dashboard'])
     assert premium.locator('[data-ecom-view]').count()==3
     assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/customer-login','https://apparel.agentrome.site/admin-login']
+    assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.textContent.trim())')==['View Premium Store ↗','Customer Dashboard ↗','Admin Dashboard ↗']
+    assert premium.locator('details').count()==0
+    page.locator('[data-ecom-page="premium"]').click(); page.wait_for_timeout(760)
     preview=page.locator('#ecom-preview-image')
     for tab,src,caption in [('customer','apparel-lab-customer.png','Customer Dashboard preview'),('admin','apparel-lab-admin.png','Admin Dashboard preview'),('store','apparel-lab-storefront.png','Storefront preview')]:
         page.locator(f'[data-ecom-view="{tab}"]').click(); assert preview.get_attribute('src')==src; assert caption in page.locator('#ecom-preview-caption').inner_text()

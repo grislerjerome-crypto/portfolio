@@ -20,8 +20,14 @@ assert.equal(html.slice(html.indexOf('function bkOpen()')),base.slice(base.index
 
 for(const id of ['ecom-starter','ecom-premium','ecommerce-operations','logistics-operations'])assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id+' must be unique');
 assert.equal((html.match(/data-ecom-view=/g)||[]).length,3,'Three Premium preview tabs');
+assert.equal((html.match(/data-starter-view=/g)||[]).length,0,'Starter has only one featured homepage image');
+assert(html.includes('https://threadlab.agentrome.site'),'ThreadLab Starter store is linked');
+assert(html.includes('View Starter Store'),'Starter CTA label updated');
+assert(html.includes('Up to $499')&&html.includes('Up to $799 + $15/mo care'),'Plan pricing is visible');
+assert(!/Is Starter right for me\?|What would my store include\?/.test(html),'Old detail accordions removed');
 assert(html.includes("customer:{src:'apparel-lab-customer.png'"),'Customer preview is wired');
-assert(html.includes('https://apparel.agentrome.site/customer-login'),'Customer sign in is linked');
+assert(html.includes('https://apparel.agentrome.site/customer-login'),'Customer dashboard is linked');
+assert(html.includes('View Premium Store')&&html.includes('Customer Dashboard')&&html.includes('Admin Dashboard'),'Premium CTA labels updated');
 assert(/storefront, customer dashboard and admin dashboard/i.test(html),'Premium public copy names all three views');
 
 const desktopNav=html.match(/<ul>[\s\S]*?<\/ul>/)[0];
