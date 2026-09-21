@@ -99,8 +99,8 @@ with sync_playwright() as p:
 
     reduced=browser.new_context(viewport={'width':375,'height':812},reduced_motion='reduce')
     rpage=reduced.new_page(); reduced_errors=[]; rpage.on('pageerror',lambda e:reduced_errors.append(str(e)))
-    rpage.goto(url,wait_until='domcontentloaded'); rpage.wait_for_timeout(1900)
-    names=rpage.locator('.sales-line, .throughput-chart i, .console-live::before').evaluate_all('(els)=>els.map(e=>getComputedStyle(e).animationName)') if False else rpage.locator('.sales-line, .throughput-chart i').evaluate_all('(els)=>els.map(e=>getComputedStyle(e).animationName)')
+    rpage.goto(url,wait_until='domcontentloaded'); rpage.wait_for_selector('.sales-line'); rpage.wait_for_timeout(1900)
+    names=rpage.locator('.sales-line, .throughput-chart i').evaluate_all('(els)=>els.map(e=>getComputedStyle(e).animationName)')
     assert names and all(name=='none' for name in names),names
     assert rpage.locator('#ecommerce-operations .data-table').is_visible() and rpage.locator('#logistics-operations .data-table').is_visible()
     assert rpage.evaluate('document.documentElement.scrollWidth<=innerWidth')
