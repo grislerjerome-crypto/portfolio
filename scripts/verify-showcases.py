@@ -24,8 +24,7 @@ with sync_playwright() as p:
     starter=page.locator('#starter-preview-image')
     assert starter.get_attribute('src')=='starter-ecom-homepage.png'
     assert starter.evaluate('(e)=>getComputedStyle(e).objectFit==="contain"')
-    page.locator('[data-ecom-page="premium"]').click(); assert page.locator('.ecom-book').get_attribute('data-active-page')=='premium'
-    page.locator('[data-ecom-page="starter"]').click(); assert page.locator('.ecom-book').get_attribute('data-active-page')=='starter'
+    assert page.locator('[data-ecom-page], .ecom-book, .ecom-book-controls, .ecom-turn').count()==0
 
     premium=page.locator('#ecom-premium')
     premium_text=premium.inner_text().lower()
@@ -33,8 +32,10 @@ with sync_playwright() as p:
     assert premium.locator('[data-ecom-view]').count()==3
     assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/customer-login','https://apparel.agentrome.site/admin-login']
     assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.textContent.trim())')==['View Premium Store ↗','Customer Dashboard ↗','Admin Dashboard ↗']
+    assert 'customer@apparellab.com' in premium_text and 'admin@apparellab.com' in premium_text
+    assert 'Customer and admin areas use demo sign in flows' not in premium.inner_text()
+    assert page.get_by_text('Explore Craftee Sites').count()==0
     assert premium.locator('details').count()==0
-    page.locator('[data-ecom-page="premium"]').click(); page.wait_for_timeout(760)
     preview=page.locator('#ecom-preview-image')
     for tab,src,caption in [('customer','apparel-lab-customer.png','Customer Dashboard preview'),('admin','apparel-lab-admin.png','Admin Dashboard preview'),('store','apparel-lab-storefront.png','Storefront preview')]:
         page.locator(f'[data-ecom-view="{tab}"]').click(); assert preview.get_attribute('src')==src; assert caption in page.locator('#ecom-preview-caption').inner_text()

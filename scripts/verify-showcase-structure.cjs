@@ -28,7 +28,10 @@ assert(!/Is Starter right for me\?|What would my store include\?/.test(html),'Ol
 assert(html.includes("customer:{src:'apparel-lab-customer.png'"),'Customer preview is wired');
 assert(html.includes('https://apparel.agentrome.site/customer-login'),'Customer dashboard is linked');
 assert(html.includes('View Premium Store')&&html.includes('Customer Dashboard')&&html.includes('Admin Dashboard'),'Premium CTA labels updated');
-assert(/storefront, customer dashboard and admin dashboard/i.test(html),'Premium public copy names all three views');
+assert(!/ecom-book|ecom-turn|data-ecom-page|data-plan-page/.test(html),'Page turn controls and fold state removed');
+assert(html.includes('customer@apparellab.com')&&html.includes('admin@apparellab.com'),'Demo dashboard credentials are shown');
+assert(!html.includes('Customer and admin areas use demo sign in flows'),'Old demo availability sentence removed');
+assert(!html.includes('Explore Craftee Sites'),'Explore Craftee Sites chip removed');
 
 const desktopNav=html.match(/<ul>[\s\S]*?<\/ul>/)[0];
 const mobileNav=html.match(/<div class="mobile-menu"[\s\S]*?<\/div>/)[0];
