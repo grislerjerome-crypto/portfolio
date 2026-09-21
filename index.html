@@ -101,12 +101,13 @@ main,.nav,.footer,.palette-wrap{position:relative;z-index:2}
 .brand b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hud{display:flex;align-items:center;gap:12px}
 .hud .stat{font-family:var(--mono);font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+.hud .clock{white-space:nowrap}.clock-label{color:var(--lime);font-size:.62rem;letter-spacing:.08em}
 .hud .stat .led{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px var(--lime);animation:blink 1.6s infinite}
 .hud .stat.mode{cursor:pointer;border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:5px 11px;transition:border-color .2s,color .2s}
 .hud .stat.mode:hover{border-color:color-mix(in srgb,var(--lime) 45%,transparent);color:var(--txt)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.nav ul{display:flex;gap:22px;list-style:none}
-.nav ul a{font-size:.88rem;color:var(--muted);transition:color .2s;position:relative}
+.nav ul{display:flex;gap:14px;list-style:none}
+.nav ul a{font-size:.8rem;color:var(--muted);transition:color .2s;position:relative;white-space:nowrap}
 .nav ul a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);transition:width .25s}
 .nav ul a:hover{color:var(--txt)}.nav ul a:hover::after{width:100%}
 .cmd-btn{font-family:var(--mono);font-size:.76rem;color:var(--muted);border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);border-radius:8px;padding:7px 11px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
@@ -239,20 +240,23 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:radial-gradient(520px 220px at 50% 0%,rgba(255,61,166,.12),transparent 68%),#07090f}.ecom-preview img{display:block;width:100%;height:340px;object-fit:cover;object-position:top;background:#080b12}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-detail{border-top:1px solid var(--panel-border);margin:20px 0;padding-top:16px}.ecom-detail summary{cursor:pointer;font-weight:600}.ecom-detail p{font-size:.9rem;margin-top:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
 .ecom-tier button:focus-visible,.ecom-tier summary:focus-visible,.ops-view-btn:focus-visible,.route-node:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 
-/* ---- Ecommerce operations dashboard ---- */
-#ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:720px;margin-bottom:24px}
-.ops-sample-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 34%,transparent);border-radius:99px;padding:6px 10px;background:color-mix(in srgb,var(--lime) 6%,transparent)}.ops-sample-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
-.commerce-stage{position:relative;overflow:hidden;border:1px solid var(--panel-border);border-radius:28px;padding:clamp(18px,3vw,34px);background:radial-gradient(760px 360px at 82% 0%,color-mix(in srgb,var(--magenta) 17%,transparent),transparent 64%),radial-gradient(560px 300px at 5% 100%,color-mix(in srgb,var(--cyan) 13%,transparent),transparent 68%),var(--glass);box-shadow:var(--shadow);isolation:isolate}.commerce-stage::before{content:"";position:absolute;inset:0;opacity:.22;pointer-events:none;background-image:linear-gradient(color-mix(in srgb,var(--cyan) 15%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--cyan) 15%,transparent) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent)}
-.commerce-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);gap:24px;align-items:stretch}.ops-copy{display:flex;flex-direction:column;justify-content:center}.ops-copy h3{font-size:clamp(1.5rem,3vw,2.35rem);line-height:1.05;margin:16px 0 12px}.ops-copy>p{color:var(--muted);line-height:1.6}.pain-stack{display:grid;gap:8px;margin:20px 0}.pain-signal{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted)}.pain-signal i{width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 12px var(--magenta);animation:opsPulse 1.8s ease-in-out infinite}.pain-signal:nth-child(2) i{animation-delay:.45s}.pain-signal:nth-child(3) i{animation-delay:.9s}.ops-outcome{border-left:2px solid var(--lime);padding:3px 0 3px 13px;color:var(--txt)!important;font-weight:600}.ops-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.ops-view-btn{font:600 .72rem var(--mono);letter-spacing:.04em;color:var(--muted);border:1px solid var(--panel-border);border-radius:99px;padding:9px 12px;background:color-mix(in srgb,var(--bg) 76%,transparent);cursor:pointer}.ops-view-btn[aria-pressed="true"]{color:#08110a;background:var(--lime);border-color:var(--lime);box-shadow:0 0 22px color-mix(in srgb,var(--lime) 34%,transparent)}
-.order-console{min-width:0;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:inset 0 1px rgba(255,255,255,.08);overflow:hidden}.console-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--panel-border);font:600 .7rem var(--mono);color:var(--muted)}.console-live{color:var(--lime);display:flex;align-items:center;gap:7px}.console-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:opsPulse 1.5s infinite}.order-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--panel-border)}.order-kpi{background:color-mix(in srgb,var(--bg) 94%,transparent);padding:15px}.order-kpi span{display:block;color:var(--muted);font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.08em}.order-kpi strong{display:block;font:700 clamp(1.25rem,3vw,1.8rem) var(--mono);margin-top:7px}.order-kpi strong.hot{color:var(--magenta)}.order-body{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(150px,.85fr);gap:16px;padding:16px}.order-stream{height:218px;overflow:hidden;position:relative;mask-image:linear-gradient(to bottom,transparent 0,black 12%,black 88%,transparent)}.order-stream-track{display:grid;gap:8px;animation:orderDrift 12s linear infinite}.order-row{display:grid;grid-template-columns:62px 1fr auto;gap:9px;align-items:center;padding:10px;border:1px solid var(--panel-border);border-radius:10px;background:color-mix(in srgb,var(--glass) 84%,transparent);font:500 .67rem var(--mono)}.order-row span:nth-child(2){color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.order-state{font-size:.58rem;border-radius:99px;padding:4px 7px;color:var(--lime);background:color-mix(in srgb,var(--lime) 10%,transparent)}.order-row.exception .order-state{color:var(--magenta);background:color-mix(in srgb,var(--magenta) 10%,transparent)}.order-chart{min-width:0;display:flex;flex-direction:column}.order-chart h4{font:600 .66rem var(--mono);color:var(--muted);margin-bottom:10px}.chart-bars{height:142px;display:flex;align-items:end;gap:7px;padding:10px 4px 0;border-bottom:1px solid var(--panel-border);background:linear-gradient(to top,color-mix(in srgb,var(--cyan) 6%,transparent),transparent)}.chart-bars i{flex:1;min-width:5px;height:var(--h);border-radius:5px 5px 1px 1px;background:linear-gradient(to top,var(--cyan),var(--magenta));box-shadow:0 0 14px color-mix(in srgb,var(--cyan) 30%,transparent);transform-origin:bottom;animation:barBreathe 2.8s ease-in-out infinite alternate}.chart-bars i:nth-child(2n){animation-delay:.3s}.chart-bars i:nth-child(3n){animation-delay:.7s}.chart-caption{display:flex;justify-content:space-between;color:var(--muted);font:500 .58rem var(--mono);margin-top:8px}.console-readout{margin-top:auto;padding-top:12px;font:.68rem var(--mono);color:var(--lime)}
-
-/* ---- Supply chain route control ---- */
-.logistics-stage{position:relative;overflow:hidden;border:1px solid color-mix(in srgb,var(--cyan) 28%,var(--panel-border));border-radius:8px 34px 8px 34px;padding:clamp(18px,3vw,34px);background:linear-gradient(125deg,color-mix(in srgb,var(--bg) 94%,transparent),color-mix(in srgb,var(--cyan) 6%,var(--glass)));box-shadow:var(--shadow);isolation:isolate}.logistics-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(245px,.65fr);gap:26px;align-items:stretch}.route-console{position:relative;min-height:390px;border:1px solid var(--panel-border);border-radius:18px;background:radial-gradient(circle at 46% 45%,color-mix(in srgb,var(--cyan) 11%,transparent),transparent 48%),color-mix(in srgb,var(--bg) 86%,transparent);overflow:hidden}.route-console::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 27px,color-mix(in srgb,var(--cyan) 9%,transparent) 28px)}.route-map{position:absolute;inset:42px 26px 105px}.route-line{position:absolute;height:2px;transform-origin:left center;background:linear-gradient(90deg,var(--lime),var(--cyan));box-shadow:0 0 10px color-mix(in srgb,var(--cyan) 45%,transparent);opacity:.72}.route-line.a{left:13%;top:63%;width:33%;transform:rotate(-25deg)}.route-line.b{left:43%;top:41%;width:30%;transform:rotate(15deg)}.route-line.c{left:69%;top:49%;width:22%;transform:rotate(-31deg)}.route-runner{position:absolute;z-index:3;left:13%;top:63%;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 6px #fff,0 0 18px var(--cyan);animation:routeTravel 7s ease-in-out infinite}.route-node{position:absolute;z-index:4;width:82px;transform:translate(-50%,-50%);border:1px solid color-mix(in srgb,var(--cyan) 38%,var(--panel-border));border-radius:12px;padding:9px 7px;background:color-mix(in srgb,var(--bg) 94%,transparent);color:var(--txt);font:600 .61rem var(--mono);cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.2)}.route-node small{display:block;color:var(--muted);font-size:.52rem;margin-top:3px}.route-node[data-node="origin"]{left:12%;top:66%}.route-node[data-node="port"]{left:43%;top:38%}.route-node[data-node="hub"]{left:71%;top:52%}.route-node[data-node="delivery"]{left:91%;top:31%}.route-node[aria-pressed="true"]{border-color:var(--lime);box-shadow:0 0 24px color-mix(in srgb,var(--lime) 26%,transparent)}.route-node.exception::after{content:"";position:absolute;right:-5px;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--magenta);box-shadow:0 0 0 0 color-mix(in srgb,var(--magenta) 55%,transparent);animation:exceptionPulse 1.5s infinite}.route-titlebar{position:absolute;z-index:4;left:16px;right:16px;top:14px;display:flex;justify-content:space-between;font:.65rem var(--mono);color:var(--muted)}.throughput{position:absolute;z-index:4;left:16px;right:16px;bottom:14px;display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:end}.throughput-copy span{display:block;font:500 .58rem var(--mono);color:var(--muted)}.throughput-copy strong{display:block;font:700 1.5rem var(--mono);color:var(--cyan);margin-top:5px}.throughput-bars{height:62px;display:flex;align-items:end;gap:5px}.throughput-bars i{flex:1;height:var(--h);background:linear-gradient(to top,var(--magenta),var(--cyan));border-radius:3px 3px 0 0;animation:throughput 2.4s ease-in-out infinite alternate}.throughput-bars i:nth-child(2n){animation-delay:.4s}.shipment-card{display:flex;flex-direction:column;border-top:3px solid var(--cyan);padding:4px 0}.shipment-card h3{font-size:clamp(1.45rem,3vw,2.2rem);line-height:1.08;margin:16px 0 12px}.shipment-card>p{color:var(--muted);line-height:1.6}.shipment-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}.shipment-meta div{border:1px solid var(--panel-border);border-radius:12px;padding:12px;background:color-mix(in srgb,var(--glass) 70%,transparent)}.shipment-meta span{display:block;font:.58rem var(--mono);color:var(--muted);text-transform:uppercase}.shipment-meta strong{display:block;font:.77rem var(--mono);margin-top:6px}.shipment-alert{padding:13px;border-left:2px solid var(--magenta);background:color-mix(in srgb,var(--magenta) 6%,transparent);color:var(--txt)!important;font-size:.82rem}.shipment-outcome{margin-top:auto;padding-top:18px;color:var(--txt)!important;font-weight:600}.shipment-outcome b{color:var(--lime)}
-@keyframes opsPulse{50%{opacity:.35;transform:scale(.72)}}@keyframes orderDrift{to{transform:translateY(-50%)}}@keyframes barBreathe{to{transform:scaleY(.72);filter:hue-rotate(24deg)}}@keyframes exceptionPulse{70%{box-shadow:0 0 0 14px transparent}}@keyframes routeTravel{0%,8%{left:13%;top:63%}31%{left:43%;top:37%}60%{left:71%;top:51%}88%,100%{left:91%;top:30%}}@keyframes throughput{to{transform:scaleY(.7);filter:hue-rotate(30deg)}}
-@media(max-width:900px){.commerce-grid,.logistics-grid{grid-template-columns:1fr}.ops-copy{order:0}.order-console{order:1}.route-console{min-height:370px}.shipment-card{min-height:300px}}
+/* ---- Operations intelligence dashboards ---- */
+#ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
+.ops-sample-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 34%,transparent);border-radius:99px;padding:6px 10px;background:color-mix(in srgb,var(--lime) 6%,transparent)}.ops-sample-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+.ops-story{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-bottom:18px}.ops-story-copy{color:var(--muted);max-width:780px}.ops-story-copy b{color:var(--txt)}.ops-controls{display:flex;flex-wrap:wrap;gap:7px}.ops-view-btn{font:600 .68rem var(--mono);letter-spacing:.04em;color:var(--muted);border:1px solid var(--panel-border);border-radius:8px;padding:8px 11px;background:color-mix(in srgb,var(--bg) 78%,transparent);cursor:pointer}.ops-view-btn[aria-pressed="true"]{color:#08110a;background:var(--lime);border-color:var(--lime);box-shadow:0 0 20px color-mix(in srgb,var(--lime) 26%,transparent)}
+.commerce-stage,.logistics-stage{position:relative;overflow:hidden;border:1px solid var(--panel-border);box-shadow:var(--shadow);isolation:isolate}.commerce-stage{border-radius:24px;background:radial-gradient(800px 360px at 100% 0%,color-mix(in srgb,var(--magenta) 15%,transparent),transparent 64%),radial-gradient(580px 300px at 0 100%,color-mix(in srgb,var(--cyan) 12%,transparent),transparent 68%),color-mix(in srgb,var(--bg) 90%,transparent)}.commerce-stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(color-mix(in srgb,var(--cyan) 15%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--cyan) 15%,transparent) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(#000,transparent 72%)}
+.command-bar{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--panel-border);font:600 .68rem var(--mono);color:var(--muted)}.console-live{display:flex;align-items:center;gap:7px;color:var(--lime)}.console-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime);animation:opsPulse 1.5s infinite}.commerce-kpis,.logistics-kpis{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--panel-border)}.dash-kpi{padding:16px 18px;border-right:1px solid var(--panel-border);background:color-mix(in srgb,var(--bg) 72%,transparent)}.dash-kpi:last-child{border-right:0}.dash-kpi span{display:block;color:var(--muted);font:500 .6rem var(--mono);text-transform:uppercase;letter-spacing:.09em}.dash-kpi strong{display:block;font:700 clamp(1.2rem,2.7vw,1.75rem) var(--mono);margin-top:6px}.dash-kpi em{display:block;font:500 .6rem var(--mono);font-style:normal;color:var(--lime);margin-top:3px}.dash-kpi .hot{color:var(--magenta)}
+.commerce-dashboard{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(245px,.55fr);gap:12px;padding:12px}.dash-panel{border:1px solid var(--panel-border);border-radius:14px;background:color-mix(in srgb,var(--bg) 86%,transparent);padding:14px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.panel-head h4{font:600 .68rem var(--mono);letter-spacing:.08em;color:var(--muted)}.panel-head span{font:600 .6rem var(--mono);color:var(--lime)}
+.sales-chart{height:210px;position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(to bottom,color-mix(in srgb,var(--cyan) 8%,transparent),transparent),repeating-linear-gradient(to bottom,transparent 0 41px,var(--panel-border) 42px)}.sales-chart svg{width:100%;height:100%;overflow:visible}.sales-area{fill:url(#salesFill)}.sales-line{fill:none;stroke:var(--cyan);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px color-mix(in srgb,var(--cyan) 58%,transparent));stroke-dasharray:520;animation:lineDraw 3.4s ease-in-out infinite alternate}.chart-axis{display:flex;justify-content:space-between;color:var(--muted);font:500 .58rem var(--mono);margin-top:7px}
+.order-mix{display:grid;grid-template-columns:132px 1fr;align-items:center;gap:14px;min-height:210px}.donut{width:126px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--lime) 0 52%,var(--cyan) 52% 79%,var(--magenta) 79% 91%,#566074 91%);position:relative;box-shadow:0 0 26px color-mix(in srgb,var(--cyan) 13%,transparent);transition:background .35s}.donut::after{content:attr(data-center);position:absolute;inset:23px;border-radius:50%;display:grid;place-items:center;text-align:center;background:var(--bg);font:700 .72rem var(--mono);color:var(--txt);white-space:pre-line}.mix-list{display:grid;gap:9px}.mix-item{display:grid;grid-template-columns:8px 1fr auto;align-items:center;gap:7px;font:500 .62rem var(--mono);color:var(--muted)}.mix-item i{width:7px;height:7px;border-radius:50%;background:var(--mix);box-shadow:0 0 8px var(--mix)}.mix-item b{color:var(--txt)}
+.inventory-panel{grid-column:1/-1;padding:0;overflow:hidden}.data-table{width:100%;border-collapse:collapse;font:500 .64rem var(--mono)}.data-table th{text-align:left;color:var(--muted);font-size:.57rem;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;border-bottom:1px solid var(--panel-border);background:rgba(255,255,255,.025)}.data-table td{padding:11px 14px;border-bottom:1px solid var(--panel-border);white-space:nowrap}.data-table tr:last-child td{border-bottom:0}.data-table tr{transition:background .2s}.data-table tbody tr:hover{background:color-mix(in srgb,var(--cyan) 7%,transparent)}.stock-meter{display:flex;align-items:center;gap:8px}.stock-meter span{width:76px;height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.stock-meter i{display:block;height:100%;width:var(--stock);background:linear-gradient(90deg,var(--magenta),var(--lime))}.status-pill-sm{display:inline-flex;border-radius:99px;padding:4px 7px;color:var(--status,var(--lime));background:color-mix(in srgb,var(--status,var(--lime)) 10%,transparent)}
+.logistics-stage{border-radius:7px 28px 7px 28px;border-color:color-mix(in srgb,var(--cyan) 30%,var(--panel-border));background:linear-gradient(125deg,color-mix(in srgb,var(--bg) 96%,transparent),color-mix(in srgb,var(--cyan) 7%,var(--glass)))}.logistics-stage .ops-view-btn[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan)}.logistics-dashboard{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr);gap:12px;padding:12px}.throughput-chart{height:180px;display:flex;align-items:end;gap:7px;padding:18px 6px 4px;border-bottom:1px solid var(--panel-border);background:repeating-linear-gradient(to bottom,transparent 0 35px,color-mix(in srgb,var(--cyan) 10%,transparent) 36px)}.throughput-chart i{height:var(--h);flex:1;min-width:5px;border-radius:4px 4px 0 0;background:linear-gradient(to top,color-mix(in srgb,var(--cyan) 38%,transparent),var(--cyan));transform-origin:bottom;animation:throughput 2.5s ease-in-out infinite alternate;animation-delay:var(--d,0s)}.status-distribution{display:grid;grid-template-columns:116px 1fr;align-items:center;gap:16px}.status-donut{background:conic-gradient(var(--cyan) 0 46%,var(--lime) 46% 76%,var(--magenta) 76% 88%,#5f6675 88%)}.service-bars{display:grid;gap:10px}.service-bar{display:grid;grid-template-columns:60px 1fr 32px;align-items:center;gap:7px;color:var(--muted);font:500 .6rem var(--mono)}.service-bar span{height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}.service-bar i{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--cyan),var(--lime));box-shadow:0 0 8px color-mix(in srgb,var(--cyan) 40%,transparent)}.service-bar b{color:var(--txt)}
+.lane-panel{grid-column:1/-1;padding:0;overflow:hidden}.route-node{appearance:none;border:0;background:none;color:var(--cyan);font:600 .64rem var(--mono);cursor:pointer;text-align:left;padding:0}.route-node[aria-pressed="true"]{color:var(--lime);text-shadow:0 0 9px color-mix(in srgb,var(--lime) 60%,transparent)}.shipment-detail{grid-column:1/-1;display:grid;grid-template-columns:1.3fr repeat(3,.7fr);gap:1px;padding:0;background:var(--panel-border);overflow:hidden}.shipment-detail>div{background:color-mix(in srgb,var(--bg) 94%,transparent);padding:12px 14px}.shipment-detail span{display:block;color:var(--muted);font:500 .55rem var(--mono);text-transform:uppercase;letter-spacing:.08em}.shipment-detail strong{display:block;margin-top:4px;font-size:.75rem}.shipment-alert{color:var(--magenta)}
+@keyframes opsPulse{50%{opacity:.35;transform:scale(.72)}}@keyframes lineDraw{from{stroke-dashoffset:90}to{stroke-dashoffset:0}}@keyframes throughput{to{transform:scaleY(.72);filter:hue-rotate(24deg)}}
+@media(max-width:900px){.ops-story{grid-template-columns:1fr}.commerce-dashboard,.logistics-dashboard{grid-template-columns:1fr}.order-mix,.status-distribution{grid-template-columns:126px 1fr}.inventory-panel,.lane-panel,.shipment-detail{grid-column:1}.commerce-kpis,.logistics-kpis{grid-template-columns:repeat(2,1fr)}.dash-kpi:nth-child(2){border-right:0}.dash-kpi:nth-child(-n+2){border-bottom:1px solid var(--panel-border)}}
 @media(max-width:800px){.ecom-tiers{grid-template-columns:1fr}.ecom-tier{padding:20px}.ecom-preview img{height:260px}}
-@media(max-width:560px){.commerce-stage,.logistics-stage{padding:14px;border-radius:18px}.order-body{grid-template-columns:1fr}.order-chart{min-height:190px}.order-kpi{padding:11px}.order-kpi strong{font-size:1.15rem}.order-row{grid-template-columns:54px 1fr auto}.route-console{min-height:430px}.route-map{inset:50px 5px 120px}.route-node{width:66px;padding:8px 4px;font-size:.55rem}.throughput{grid-template-columns:92px 1fr}.shipment-meta{grid-template-columns:1fr}.ops-controls{gap:6px}.ops-view-btn{padding:8px 9px;font-size:.65rem}}
-@media(prefers-reduced-motion:reduce){.pain-signal i,.console-live::before,.order-stream-track,.chart-bars i,.route-runner,.route-node.exception::after,.throughput-bars i{animation:none!important}.order-stream{mask-image:none}.route-runner{left:71%;top:51%}}
+@media(max-width:560px){.commerce-stage,.logistics-stage{border-radius:16px}.command-bar{align-items:flex-start;flex-direction:column}.dash-kpi{padding:12px}.commerce-dashboard,.logistics-dashboard{padding:8px;gap:8px}.sales-chart{height:175px}.order-mix,.status-distribution{grid-template-columns:1fr;justify-items:center}.mix-list,.service-bars{width:100%}.data-table{min-width:620px}.inventory-panel,.lane-panel{overflow:auto}.shipment-detail{grid-template-columns:1fr 1fr}.shipment-detail>div:first-child{grid-column:1/-1}.ops-view-btn{font-size:.61rem;padding:7px 8px}.clock-label{display:none}}
+@media(prefers-reduced-motion:reduce){.console-live::before,.sales-line,.throughput-chart i{animation:none!important}.sales-line{stroke-dasharray:none}}
 .craftee-show{display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,.95fr);gap:18px;align-items:stretch}
 .craftee-hero{background:radial-gradient(600px 320px at 12% 0%,color-mix(in srgb,var(--magenta) 16%,transparent),transparent 60%),var(--glass);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
 .craftee-hero h3{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;line-height:1.15;margin:14px 0 10px;max-width:640px}
@@ -461,14 +465,15 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
     <ul>
       <li><a href="#services">Services</a></li>
-      <li><a href="#capabilities">How I work</a></li>
-      <li><a href="#ava">Ava</a></li>
-      <li><a href="#roi">ROI</a></li>
       <li><a href="#craftee">Web Dev</a></li>
+      <li><a href="#ecommerce-operations">Ecommerce</a></li>
+      <li><a href="#logistics-operations">Logistics</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#roi">ROI</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="hud">
-      <div class="stat clock"><span class="led"></span><span id="clock">--:--:--</span></div>
+      <div class="stat clock" title="America/New_York time"><span class="led"></span><span class="clock-label">EST USA</span><span id="clock">--:--:--</span></div>
       <div class="stat mode" id="mode-ind" title="Click to reset"><span class="mlabel">MODE:</span> <b id="mode-name">OVERVIEW</b></div>
       <button class="cmd-btn" id="cmd-open"><span>⌘ Command</span><kbd>⌘K</kbd></button>
       <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☀</button>
@@ -477,11 +482,11 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="#services">Services</a>
-    <a href="#capabilities">How I work</a>
-    <a href="#ava">Ava</a>
-    <a href="#roi">ROI</a>
     <a href="#craftee">Web Dev</a>
+    <a href="#ecommerce-operations">Ecommerce</a>
+    <a href="#logistics-operations">Logistics</a>
     <a href="#projects">Projects</a>
+    <a href="#roi">ROI</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -617,15 +622,17 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       </article>
       <article class="ecom-tier ecom-premium reveal" id="ecom-premium">
         <span class="craftee-badge">PREMIUM · APPAREL LAB</span>
-        <h3>Explore both sides of the store.</h3>
-        <p>See the customer experience and the admin dashboard in the existing Premium build.</p>
+        <h3>Explore the complete store system.</h3>
+        <p>See the storefront, customer dashboard and admin dashboard in the existing Premium build.</p>
         <div class="ecom-switch" role="group" aria-label="Premium preview tabs">
-          <button type="button" data-ecom-view="store" aria-pressed="true">Homepage</button>
-          <button type="button" data-ecom-view="admin" aria-pressed="false">Dashboard</button>
+          <button type="button" data-ecom-view="store" aria-pressed="true">Storefront</button>
+          <button type="button" data-ecom-view="customer" aria-pressed="false">Customer Dashboard</button>
+          <button type="button" data-ecom-view="admin" aria-pressed="false">Admin Dashboard</button>
         </div>
-        <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB homepage preview" loading="lazy" width="1440" height="1000"><figcaption id="ecom-preview-caption" aria-live="polite">Homepage preview: customer storefront view.</figcaption></figure>
-        <div class="ecom-links"><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">Open storefront ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Open admin ↗</a></div>
-        <details class="ecom-detail"><summary>What would my store include?</summary><p>A complete ecommerce website with admin access, tailored to an agreed scope. Payments, shipping, integrations and launch requirements are confirmed with Rome before delivery.</p></details>
+        <figure class="ecom-preview"><img id="ecom-preview-image" src="apparel-lab-storefront.png" alt="APPAREL LAB storefront preview" loading="lazy" width="1440" height="1000"><figcaption id="ecom-preview-caption" aria-live="polite">Storefront preview: customer shopping experience.</figcaption></figure>
+        <div class="ecom-links"><a class="btn" href="https://apparel.agentrome.site/" target="_blank" rel="noopener">Open storefront ↗</a><a class="btn" href="https://apparel.agentrome.site/customer-login" target="_blank" rel="noopener">Customer sign in ↗</a><a class="btn" href="https://apparel.agentrome.site/admin-login" target="_blank" rel="noopener">Open admin ↗</a></div>
+        <p class="ecom-status">Customer and admin areas use demo sign in flows. Access availability depends on the current demo deployment.</p>
+        <details class="ecom-detail"><summary>What would my store include?</summary><p>A complete ecommerce website with storefront, customer and admin access tailored to an agreed scope. Payments, shipping, integrations and launch requirements are confirmed with Rome before delivery.</p></details>
         <button class="chip-cmd" type="button" data-ava-question="Tell me about Premium ecommerce">Ask Ava about Premium →</button>
       </article>
     </div>
@@ -635,56 +642,43 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   <section id="ecommerce-operations" class="wrap">
     <div class="reveal">
       <span class="eyebrow">ECOMMERCE OPERATIONS</span>
-      <h2 class="title">Orders move. You stop chasing them.</h2>
-      <p class="lead">When exceptions, stock checks and customer updates stack up, the owner becomes the queue. Rome turns that daily noise into one monitored operating rhythm.</p>
+      <h2 class="title">A commerce command center, not another order list.</h2>
+      <p class="lead">Scattered orders, stock surprises and customer updates create daily fire drills. Rome turns them into one managed view with priorities, ownership and a clean next action.</p>
     </div>
-    <div class="commerce-stage reveal">
-      <div class="commerce-grid">
-        <div class="ops-copy">
-          <span class="ops-sample-label">Illustrative sample data</span>
-          <h3>See the store before it becomes a fire.</h3>
-          <p>One view surfaces what needs action now, what can wait and who owns the next step.</p>
-          <div class="pain-stack" aria-label="Common ecommerce burnout signals">
-            <span class="pain-signal"><i></i>Late orders hiding across tabs</span>
-            <span class="pain-signal"><i></i>Stock mismatches found after checkout</span>
-            <span class="pain-signal"><i></i>Customer updates written from scratch</span>
-          </div>
-          <p class="ops-outcome">Rome triages exceptions, keeps handoffs clear and gives the owner back focus.</p>
-          <div class="ops-controls" role="group" aria-label="Ecommerce dashboard view">
-            <button class="ops-view-btn" type="button" data-commerce-view="flow" aria-pressed="true">Order flow</button>
-            <button class="ops-view-btn" type="button" data-commerce-view="exceptions" aria-pressed="false">Exceptions</button>
-            <button class="ops-view-btn" type="button" data-commerce-view="stock" aria-pressed="false">Stock watch</button>
-          </div>
+    <div class="ops-story reveal">
+      <p class="ops-story-copy"><b>Pain:</b> the owner becomes the database. <b>Rome:</b> monitors sales, order mix and inventory exceptions. <b>Relief:</b> the team works from one clear queue.</p>
+      <div class="ops-controls" role="group" aria-label="Ecommerce dashboard range">
+        <button class="ops-view-btn" type="button" data-commerce-view="week" aria-pressed="true">7 days</button>
+        <button class="ops-view-btn" type="button" data-commerce-view="month" aria-pressed="false">30 days</button>
+        <button class="ops-view-btn" type="button" data-commerce-view="quarter" aria-pressed="false">90 days</button>
+      </div>
+    </div>
+    <div class="commerce-stage reveal" aria-label="Illustrative ecommerce management dashboard">
+      <div class="command-bar"><span>COMMERCE COMMAND / SAMPLE DATABASE</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live">SYNC ACTIVE</span></div>
+      <div class="commerce-kpis">
+        <div class="dash-kpi"><span>Net sales</span><strong id="commerce-kpi-a">$48.6K</strong><em id="commerce-kpi-a-note">+12.4% vs prior</em></div>
+        <div class="dash-kpi"><span>Orders</span><strong id="commerce-kpi-b">1,284</strong><em id="commerce-kpi-b-note">92% fulfilled</em></div>
+        <div class="dash-kpi"><span>Avg order value</span><strong id="commerce-kpi-c">$74.20</strong><em id="commerce-kpi-c-note">+$5.80</em></div>
+        <div class="dash-kpi"><span>Needs action</span><strong class="hot" id="commerce-kpi-d">14</strong><em id="commerce-kpi-d-note">5 high priority</em></div>
+      </div>
+      <div class="commerce-dashboard">
+        <div class="dash-panel">
+          <div class="panel-head"><h4 id="commerce-chart-title">SALES TREND / 7 DAYS</h4><span id="commerce-readout">$48.6K SAMPLE NET SALES</span></div>
+          <div class="sales-chart"><svg viewBox="0 0 640 210" preserveAspectRatio="none" aria-label="Illustrative sales area chart"><defs><linearGradient id="salesFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8" stop-opacity=".38"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></linearGradient></defs><path class="sales-area" id="sales-area" d="M0 175 L80 150 L160 161 L240 112 L320 126 L400 74 L480 92 L560 42 L640 58 L640 210 L0 210 Z"/><polyline class="sales-line" id="sales-line" points="0,175 80,150 160,161 240,112 320,126 400,74 480,92 560,42 640,58"/></svg></div>
+          <div class="chart-axis"><span>START</span><span>MIDPOINT</span><span>NOW</span></div>
         </div>
-        <div class="order-console" aria-label="Illustrative ecommerce operations dashboard">
-          <div class="console-top"><span>STORE OPS / SAMPLE DATABASE</span><span class="console-live">MONITORING</span></div>
-          <div class="order-kpis">
-            <div class="order-kpi"><span id="commerce-kpi-a-label">Orders today</span><strong id="commerce-kpi-a">128</strong></div>
-            <div class="order-kpi"><span id="commerce-kpi-b-label">Ready</span><strong id="commerce-kpi-b">114</strong></div>
-            <div class="order-kpi"><span id="commerce-kpi-c-label">Needs review</span><strong class="hot" id="commerce-kpi-c">14</strong></div>
-          </div>
-          <div class="order-body">
-            <div class="order-stream" aria-label="Animated sample order stream">
-              <div class="order-stream-track" id="order-stream-track">
-                <div class="order-row"><span>#S1048</span><span>Payment verified</span><b class="order-state">READY</b></div>
-                <div class="order-row exception"><span>#S1047</span><span>Address check</span><b class="order-state">REVIEW</b></div>
-                <div class="order-row"><span>#S1046</span><span>Pick list sent</span><b class="order-state">MOVING</b></div>
-                <div class="order-row exception"><span>#S1045</span><span>Stock mismatch</span><b class="order-state">REVIEW</b></div>
-                <div class="order-row"><span>#S1044</span><span>Carrier assigned</span><b class="order-state">READY</b></div>
-                <div class="order-row"><span>#S1043</span><span>Customer updated</span><b class="order-state">DONE</b></div>
-                <div class="order-row"><span>#S1048</span><span>Payment verified</span><b class="order-state">READY</b></div>
-                <div class="order-row exception"><span>#S1047</span><span>Address check</span><b class="order-state">REVIEW</b></div>
-                <div class="order-row"><span>#S1046</span><span>Pick list sent</span><b class="order-state">MOVING</b></div>
-                <div class="order-row exception"><span>#S1045</span><span>Stock mismatch</span><b class="order-state">REVIEW</b></div>
-              </div>
-            </div>
-            <div class="order-chart">
-              <h4 id="commerce-chart-title">ORDER VOLUME / 8 HOURS</h4>
-              <div class="chart-bars" id="commerce-chart" aria-hidden="true"><i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:48%"></i><i style="--h:76%"></i><i style="--h:62%"></i><i style="--h:91%"></i><i style="--h:72%"></i><i style="--h:84%"></i></div>
-              <div class="chart-caption"><span>08:00</span><span>NOW</span></div>
-              <div class="console-readout" id="commerce-readout" aria-live="polite">Flow view: 14 sample orders need review.</div>
-            </div>
-          </div>
+        <div class="dash-panel">
+          <div class="panel-head"><h4>ORDER MIX</h4><span id="mix-total">1,284 TOTAL</span></div>
+          <div class="order-mix"><div class="donut" id="commerce-donut" data-center="92% FULFILLED"></div><div class="mix-list"><div class="mix-item"><i style="--mix:var(--lime)"></i><span>Fulfilled</span><b id="mix-a">52%</b></div><div class="mix-item"><i style="--mix:var(--cyan)"></i><span>Processing</span><b id="mix-b">27%</b></div><div class="mix-item"><i style="--mix:var(--magenta)"></i><span>Review</span><b id="mix-c">12%</b></div><div class="mix-item"><i style="--mix:#566074"></i><span>Returns</span><b id="mix-d">9%</b></div></div></div>
+        </div>
+        <div class="dash-panel inventory-panel">
+          <div class="panel-head" style="padding:14px 14px 0"><h4>INVENTORY DATABASE / WATCHLIST</h4><span>4 SAMPLE SKUS</span></div>
+          <table class="data-table"><thead><tr><th>SKU</th><th>Product</th><th>Stock</th><th>Velocity</th><th>Status</th><th>Owner</th></tr></thead><tbody>
+            <tr><td>AL-TEE-041</td><td>Glitch Heavyweight Tee</td><td><div class="stock-meter"><span><i style="--stock:78%"></i></span>78</div></td><td>8.4/day</td><td><b class="status-pill-sm">HEALTHY</b></td><td>Fulfillment</td></tr>
+            <tr><td>AL-PNT-018</td><td>Utility Cargo Pant</td><td><div class="stock-meter"><span><i style="--stock:24%"></i></span>12</div></td><td>6.1/day</td><td><b class="status-pill-sm" style="--status:var(--magenta)">REORDER</b></td><td>Purchasing</td></tr>
+            <tr><td>AL-HOD-007</td><td>Signal Zip Hoodie</td><td><div class="stock-meter"><span><i style="--stock:51%"></i></span>34</div></td><td>3.2/day</td><td><b class="status-pill-sm" style="--status:var(--cyan)">WATCH</b></td><td>Rome</td></tr>
+            <tr><td>AL-CAP-023</td><td>Core Panel Cap</td><td><div class="stock-meter"><span><i style="--stock:91%"></i></span>103</div></td><td>4.7/day</td><td><b class="status-pill-sm">HEALTHY</b></td><td>Warehouse</td></tr>
+          </tbody></table>
         </div>
       </div>
     </div>
@@ -693,33 +687,33 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   <section id="logistics-operations" class="wrap">
     <div class="reveal">
       <span class="eyebrow">SUPPLY CHAIN / LOGISTICS</span>
-      <h2 class="title">Every handoff stays visible.</h2>
-      <p class="lead">When carrier updates, supplier replies and delivery records live in different places, one exception can consume the day. Rome keeps the route, owner and next action in view.</p>
+      <h2 class="title">A control database for every lane and handoff.</h2>
+      <p class="lead">Carrier portals, supplier replies and delivery records should not live in separate worlds. Rome maintains the shipment picture, flags exceptions and keeps the next owner visible.</p>
     </div>
-    <div class="logistics-stage reveal">
-      <div class="logistics-grid">
-        <div class="route-console" aria-label="Illustrative animated shipment route">
-          <div class="route-titlebar"><span>ROUTE CONTROL / SAMPLE SHIPMENT</span><span>SCN 301</span></div>
-          <div class="route-map">
-            <span class="route-line a"></span><span class="route-line b"></span><span class="route-line c"></span><span class="route-runner" aria-hidden="true"></span>
-            <button class="route-node" type="button" data-node="origin" aria-pressed="false">SUPPLIER<small>Confirmed</small></button>
-            <button class="route-node exception" type="button" data-node="port" aria-pressed="true">PORT<small>Exception</small></button>
-            <button class="route-node" type="button" data-node="hub" aria-pressed="false">HUB<small>Planned</small></button>
-            <button class="route-node" type="button" data-node="delivery" aria-pressed="false">DELIVERY<small>Pending</small></button>
-          </div>
-          <div class="throughput"><div class="throughput-copy"><span>SAMPLE THROUGHPUT</span><strong id="throughput-value">84%</strong></div><div class="throughput-bars" aria-hidden="true"><i style="--h:35%"></i><i style="--h:55%"></i><i style="--h:48%"></i><i style="--h:72%"></i><i style="--h:61%"></i><i style="--h:86%"></i><i style="--h:78%"></i><i style="--h:92%"></i><i style="--h:84%"></i></div></div>
-        </div>
-        <div class="shipment-card">
-          <span class="ops-sample-label">Illustrative sample data</span>
-          <h3 id="shipment-title">Port exception detected.</h3>
-          <p id="shipment-copy">The carrier scan is overdue. Delivery timing should not be promised until the route is confirmed.</p>
-          <div class="shipment-meta">
-            <div><span>Owner</span><strong id="shipment-owner">Carrier desk</strong></div>
-            <div><span>Next check</span><strong id="shipment-next">14:30</strong></div>
-          </div>
-          <p class="shipment-alert" id="shipment-alert" aria-live="polite">Action: Request location and revised arrival time.</p>
-          <p class="shipment-outcome"><b>Rome's role:</b> track exceptions, coordinate follow up and keep customers and teams updated without guesswork.</p>
-        </div>
+    <div class="ops-story reveal">
+      <p class="ops-story-copy"><b>Pain:</b> status arrives late and exceptions spread. <b>Rome:</b> reconciles lanes, milestones and inventory handoffs. <b>Relief:</b> decisions happen before customers have to ask.</p>
+      <div class="ops-controls" role="group" aria-label="Logistics shipment filter">
+        <button class="ops-view-btn" type="button" data-log-filter="all" aria-pressed="true">All lanes</button>
+        <button class="ops-view-btn" type="button" data-log-filter="ocean" aria-pressed="false">Ocean</button>
+        <button class="ops-view-btn" type="button" data-log-filter="air" aria-pressed="false">Air</button>
+        <button class="ops-view-btn" type="button" data-log-filter="road" aria-pressed="false">Road</button>
+      </div>
+    </div>
+    <div class="logistics-stage reveal" aria-label="Illustrative supply chain management database">
+      <div class="command-bar"><span>SUPPLY CONTROL / SAMPLE RECORDS</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live">18 LANES TRACKED</span></div>
+      <div class="logistics-kpis">
+        <div class="dash-kpi"><span>In transit</span><strong id="log-kpi-a">18</strong><em>Across 4 regions</em></div><div class="dash-kpi"><span>On time</span><strong id="log-kpi-b">92%</strong><em>+3.1 pts</em></div><div class="dash-kpi"><span>Exceptions</span><strong class="hot" id="log-kpi-c">3</strong><em>1 critical</em></div><div class="dash-kpi"><span>Units moving</span><strong id="log-kpi-d">8,420</strong><em>Sample volume</em></div>
+      </div>
+      <div class="logistics-dashboard">
+        <div class="dash-panel"><div class="panel-head"><h4>WEEKLY THROUGHPUT / UNITS</h4><span id="throughput-value">8,420</span></div><div class="throughput-chart" aria-label="Illustrative weekly shipment volume"><i style="--h:42%;--d:.1s"></i><i style="--h:58%;--d:.2s"></i><i style="--h:49%;--d:.3s"></i><i style="--h:73%;--d:.4s"></i><i style="--h:66%;--d:.5s"></i><i style="--h:91%;--d:.6s"></i><i style="--h:82%;--d:.7s"></i><i style="--h:76%;--d:.8s"></i><i style="--h:96%;--d:.9s"></i><i style="--h:86%;--d:1s"></i><i style="--h:71%;--d:1.1s"></i><i style="--h:89%;--d:1.2s"></i></div><div class="chart-axis"><span>WK 01</span><span>WK 06</span><span>WK 12</span></div></div>
+        <div class="dash-panel"><div class="panel-head"><h4>SHIPMENT STATUS</h4><span id="status-total">18 ACTIVE</span></div><div class="status-distribution"><div class="donut status-donut" data-center="92% ON TIME"></div><div class="service-bars"><div class="service-bar"><b>Ocean</b><span><i style="--w:88%"></i></span><b>88%</b></div><div class="service-bar"><b>Air</b><span><i style="--w:97%"></i></span><b>97%</b></div><div class="service-bar"><b>Road</b><span><i style="--w:91%"></i></span><b>91%</b></div><div class="service-bar"><b>Rail</b><span><i style="--w:94%"></i></span><b>94%</b></div></div></div></div>
+        <div class="dash-panel lane-panel"><div class="panel-head" style="padding:14px 14px 0"><h4>LANE DATABASE / ACTIVE SHIPMENTS</h4><span id="lane-count">4 RECORDS</span></div><table class="data-table"><thead><tr><th>Shipment</th><th>Mode</th><th>Lane</th><th>Milestone</th><th>ETA</th><th>Status</th></tr></thead><tbody>
+          <tr data-mode="ocean"><td><button class="route-node" data-node="port" type="button" aria-pressed="true">SCN-301</button></td><td>Ocean</td><td>Shenzhen → Long Beach</td><td>Port scan</td><td>Apr 04</td><td><b class="status-pill-sm" style="--status:var(--magenta)">EXCEPTION</b></td></tr>
+          <tr data-mode="air"><td><button class="route-node" data-node="origin" type="button" aria-pressed="false">AIR-118</button></td><td>Air</td><td>Manila → New York</td><td>Departed</td><td>Apr 02</td><td><b class="status-pill-sm">ON TIME</b></td></tr>
+          <tr data-mode="road"><td><button class="route-node" data-node="hub" type="button" aria-pressed="false">RDX-774</button></td><td>Road</td><td>Dallas → Phoenix</td><td>Hub received</td><td>Apr 03</td><td><b class="status-pill-sm" style="--status:var(--cyan)">WATCH</b></td></tr>
+          <tr data-mode="road"><td><button class="route-node" data-node="delivery" type="button" aria-pressed="false">RDX-781</button></td><td>Road</td><td>Chicago → Detroit</td><td>Final mile</td><td>Apr 01</td><td><b class="status-pill-sm">ON TIME</b></td></tr>
+        </tbody></table></div>
+        <div class="dash-panel shipment-detail"><div><span>Selected record</span><strong id="shipment-title">Port exception detected</strong></div><div><span>Owner</span><strong id="shipment-owner">Carrier desk</strong></div><div><span>Next check</span><strong id="shipment-next">14:30 EST</strong></div><div><span>Action</span><strong class="shipment-alert" id="shipment-alert">Request revised arrival</strong></div></div>
       </div>
     </div>
   </section>
@@ -1651,7 +1645,7 @@ const AVA_KB = [
       "admin dashboard"
     ],
     "q": "Tell me about Premium ecommerce",
-    "a": "APPAREL LAB is the existing Premium ecommerce build with a storefront and admin dashboard. Preview it at https://apparel.agentrome.site/ and https://apparel.agentrome.site/admin-login. Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The supplied admin link is currently unavailable while hosting is being connected."
+    "a": "APPAREL LAB is the existing Premium ecommerce build with a storefront, customer dashboard and admin dashboard. Preview it at https://apparel.agentrome.site/ and https://apparel.agentrome.site/admin-login. Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The supplied admin link is currently unavailable while hosting is being connected."
   },
   {
     "keys": [
@@ -1672,7 +1666,7 @@ const AVA_KB = [
       "admin access"
     ],
     "q": "Do I get an ecommerce website or source code?",
-    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The THREADLAB Starter sample is visible in the ecommerce showcase, and APPAREL LAB shows the Premium storefront and admin dashboard preview."
+    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The THREADLAB Starter sample is visible in the ecommerce showcase, and APPAREL LAB shows the Premium storefront, customer dashboard and admin dashboard previews."
   },
   {
     "keys": [
@@ -1683,7 +1677,7 @@ const AVA_KB = [
       "burnout"
     ],
     "q": "What operations dashboards can I explore?",
-    "a": "Explore two separate interactive sections. Ecommerce Operations shows a moving sample order database, exception views, stock watch and gradient activity charts. Supply Chain and Logistics shows an animated route, shipment nodes, an exception pulse and sample throughput. Every metric is explicitly illustrative sample data, not a client result or connected system."
+    "a": "Explore two separate interactive sections. Ecommerce Operations shows sales trends, order mix, status metrics and an inventory database. Supply Chain and Logistics shows shipment distribution, on time status bars, throughput and a filterable lane database. Every metric is explicitly illustrative sample data, not a client result or connected system."
   },
   {
     "keys": [
@@ -1804,58 +1798,22 @@ const AVA_KB = [
 ];
 /* Interactive illustrative operations visuals. No external writes. */
 function setupOperationsVisuals(){
-  const starterPreview={
-    home:{src:'starter-ecom-homepage.png',alt:'THREADLAB starter ecommerce homepage preview',caption:'Homepage preview: clean landing page for a starter store.'},
-    shop:{src:'starter-ecom-shop.png',alt:'THREADLAB starter ecommerce shop preview',caption:'Shop preview: simple catalog flow for starter ecommerce.'}
-  };
-  const starterImage=document.getElementById('starter-preview-image');
-  const starterCaption=document.getElementById('starter-preview-caption');
-  document.querySelectorAll('[data-starter-view]').forEach(btn=>btn.addEventListener('click',()=>{
-    const data=starterPreview[btn.dataset.starterView];if(!data||!starterImage)return;
-    document.querySelectorAll('[data-starter-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));
-    starterImage.src=data.src;starterImage.alt=data.alt;if(starterCaption)starterCaption.textContent=data.caption;
-  }));
-  const ecomPreview={
-    store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB homepage preview',caption:'Homepage preview: customer storefront view.'},
-    admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Dashboard preview: store management view.'}
-  };
-  const ecomImage=document.getElementById('ecom-preview-image');
-  const ecomCaption=document.getElementById('ecom-preview-caption');
-  document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{
-    const data=ecomPreview[btn.dataset.ecomView];if(!data||!ecomImage)return;
-    document.querySelectorAll('[data-ecom-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));
-    ecomImage.src=data.src;ecomImage.alt=data.alt;if(ecomCaption)ecomCaption.textContent=data.caption;
-  }));
-  const views={
-    flow:{labels:['Orders today','Ready','Needs review'],values:['128','114','14'],title:'ORDER VOLUME / 8 HOURS',readout:'Flow view: 14 sample orders need review.',bars:[38,56,48,76,62,91,72,84]},
-    exceptions:{labels:['Open alerts','Assigned','Waiting'],values:['14','9','5'],title:'EXCEPTIONS / SAMPLE PRIORITY',readout:'Exception view: address and stock checks lead the queue.',bars:[72,42,88,58,94,48,65,36]},
-    stock:{labels:['Items watched','Healthy','Recount'],values:['42','39','3'],title:'STOCK WATCH / SAMPLE LEVELS',readout:'Stock view: 3 sample items need a recount.',bars:[84,79,62,91,45,74,56,88]}
-  };
-  const buttons=[...document.querySelectorAll('[data-commerce-view]')];
-  const bars=[...document.querySelectorAll('#commerce-chart i')];
-  function setCommerce(view){
-    const data=views[view];if(!data)return;
-    buttons.forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.commerceView===view)));
-    ['a','b','c'].forEach((key,i)=>{const label=document.getElementById('commerce-kpi-'+key+'-label'),value=document.getElementById('commerce-kpi-'+key);if(label)label.textContent=data.labels[i];if(value)value.textContent=data.values[i];});
-    const title=document.getElementById('commerce-chart-title'),readout=document.getElementById('commerce-readout');if(title)title.textContent=data.title;if(readout)readout.textContent=data.readout;
-    bars.forEach((bar,i)=>bar.style.setProperty('--h',data.bars[i]+'%'));
-  }
-  buttons.forEach(btn=>btn.addEventListener('click',()=>setCommerce(btn.dataset.commerceView)));
-  const nodes={
-    origin:{title:'Supplier confirmed.',copy:'Goods and documents are ready for pickup in this sample route.',owner:'Supplier team',next:'Pickup 09:00',alert:'Action: Confirm pickup reference and document set.',throughput:'96%'},
-    port:{title:'Port exception detected.',copy:'The carrier scan is overdue. Delivery timing should not be promised until the route is confirmed.',owner:'Carrier desk',next:'14:30',alert:'Action: Request location and revised arrival time.',throughput:'84%'},
-    hub:{title:'Hub capacity checked.',copy:'Inbound volume is visible before the shipment reaches the transfer point.',owner:'Hub planner',next:'Arrival 18:10',alert:'Action: Reserve the receiving slot and watch the port update.',throughput:'78%'},
-    delivery:{title:'Delivery handoff planned.',copy:'The receiving team has a clear owner and the latest confirmed timing.',owner:'Receiving team',next:'Window pending',alert:'Action: Hold customer timing until the exception clears.',throughput:'71%'}
-  };
-  const routeNodes=[...document.querySelectorAll('.route-node')];
-  function setNode(key){
-    const data=nodes[key];if(!data)return;
-    routeNodes.forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.node===key)));
-    const fields={title:'shipment-title',copy:'shipment-copy',owner:'shipment-owner',next:'shipment-next',alert:'shipment-alert',throughput:'throughput-value'};
-    Object.entries(fields).forEach(([prop,id])=>{const el=document.getElementById(id);if(el)el.textContent=data[prop];});
-  }
-  routeNodes.forEach(node=>node.addEventListener('click',()=>setNode(node.dataset.node)));
-  setCommerce('flow');setNode('port');
+  const starterPreview={home:{src:'starter-ecom-homepage.png',alt:'THREADLAB starter ecommerce homepage preview',caption:'Homepage preview: clean landing page for a starter store.'},shop:{src:'starter-ecom-shop.png',alt:'THREADLAB starter ecommerce shop preview',caption:'Shop preview: simple catalog flow for starter ecommerce.'}};
+  const starterImage=document.getElementById('starter-preview-image'),starterCaption=document.getElementById('starter-preview-caption');
+  document.querySelectorAll('[data-starter-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=starterPreview[btn.dataset.starterView];if(!data||!starterImage)return;document.querySelectorAll('[data-starter-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));starterImage.src=data.src;starterImage.alt=data.alt;if(starterCaption)starterCaption.textContent=data.caption;}));
+  const ecomPreview={store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB storefront preview',caption:'Storefront preview: customer shopping experience.'},customer:{src:'apparel-lab-customer.png',alt:'APPAREL LAB customer dashboard preview',caption:'Customer Dashboard preview: orders, saved pieces and account status.'},admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Admin Dashboard preview: store management view.'}};
+  const ecomImage=document.getElementById('ecom-preview-image'),ecomCaption=document.getElementById('ecom-preview-caption');
+  document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=ecomPreview[btn.dataset.ecomView];if(!data||!ecomImage)return;document.querySelectorAll('[data-ecom-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));ecomImage.src=data.src;ecomImage.alt=data.alt;if(ecomCaption)ecomCaption.textContent=data.caption;}));
+  const commerce={week:{values:['$48.6K','1,284','$74.20','14'],notes:['+12.4% vs prior','92% fulfilled','+$5.80','5 high priority'],title:'SALES TREND / 7 DAYS',readout:'$48.6K SAMPLE NET SALES',total:'1,284 TOTAL',mix:[52,27,12,9],points:'0,175 80,150 160,161 240,112 320,126 400,74 480,92 560,42 640,58'},month:{values:['$186K','4,932','$76.10','31'],notes:['+8.7% vs prior','94% fulfilled','+$3.20','9 high priority'],title:'SALES TREND / 30 DAYS',readout:'$186K SAMPLE NET SALES',total:'4,932 TOTAL',mix:[58,24,10,8],points:'0,184 80,164 160,132 240,145 320,94 400,108 480,62 560,79 640,31'},quarter:{values:['$542K','14,806','$78.40','47'],notes:['+16.2% vs prior','95% fulfilled','+$6.70','12 high priority'],title:'SALES TREND / 90 DAYS',readout:'$542K SAMPLE NET SALES',total:'14,806 TOTAL',mix:[63,21,9,7],points:'0,191 80,172 160,148 240,119 320,135 400,88 480,69 560,47 640,24'}};
+  const commerceButtons=[...document.querySelectorAll('[data-commerce-view]')];
+  function setCommerce(key){const d=commerce[key];if(!d)return;commerceButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.commerceView===key)));['a','b','c','d'].forEach((x,i)=>{const v=document.getElementById('commerce-kpi-'+x),n=document.getElementById('commerce-kpi-'+x+'-note');if(v)v.textContent=d.values[i];if(n)n.textContent=d.notes[i];});document.getElementById('commerce-chart-title').textContent=d.title;document.getElementById('commerce-readout').textContent=d.readout;document.getElementById('mix-total').textContent=d.total;d.mix.forEach((v,i)=>{const el=document.getElementById('mix-'+['a','b','c','d'][i]);if(el)el.textContent=v+'%';});const pts=d.points,area=document.getElementById('sales-area'),line=document.getElementById('sales-line');if(line)line.setAttribute('points',pts);if(area)area.setAttribute('d','M'+pts.replaceAll(' ',', L')+' L640 210 L0 210 Z');const stops=[d.mix[0],d.mix[0]+d.mix[1],d.mix[0]+d.mix[1]+d.mix[2]];document.getElementById('commerce-donut').style.background=`conic-gradient(var(--lime) 0 ${stops[0]}%,var(--cyan) ${stops[0]}% ${stops[1]}%,var(--magenta) ${stops[1]}% ${stops[2]}%,#566074 ${stops[2]}%)`;}
+  commerceButtons.forEach(btn=>btn.addEventListener('click',()=>setCommerce(btn.dataset.commerceView)));
+  const filterButtons=[...document.querySelectorAll('[data-log-filter]')],rows=[...document.querySelectorAll('#logistics-operations tbody tr[data-mode]')];
+  function filterLanes(key){filterButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.logFilter===key)));let shown=0;rows.forEach(row=>{const visible=key==='all'||row.dataset.mode===key;row.hidden=!visible;if(visible)shown++;});const count=document.getElementById('lane-count');if(count)count.textContent=shown+' RECORD'+(shown===1?'':'S');}
+  filterButtons.forEach(btn=>btn.addEventListener('click',()=>filterLanes(btn.dataset.logFilter)));
+  const nodes={origin:{title:'Air shipment departed',owner:'Air freight desk',next:'11:00 EST',alert:'Verify arrival scan',throughput:'2,160'},port:{title:'Port exception detected',owner:'Carrier desk',next:'14:30 EST',alert:'Request revised arrival',throughput:'8,420'},hub:{title:'Hub receipt under watch',owner:'Hub planner',next:'16:45 EST',alert:'Confirm dock capacity',throughput:'5,730'},delivery:{title:'Final mile handoff',owner:'Receiving team',next:'09:15 EST',alert:'Confirm proof of delivery',throughput:'3,480'}};
+  const routeNodes=[...document.querySelectorAll('.route-node')];function setNode(key){const d=nodes[key];if(!d)return;routeNodes.forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.node===key)));const fields={title:'shipment-title',owner:'shipment-owner',next:'shipment-next',alert:'shipment-alert',throughput:'throughput-value'};Object.entries(fields).forEach(([prop,id])=>{const el=document.getElementById(id);if(el)el.textContent=d[prop];});}
+  routeNodes.forEach(node=>node.addEventListener('click',()=>setNode(node.dataset.node)));setCommerce('week');filterLanes('all');setNode('port');
 }
 
 function setupAvaChat(){
@@ -2181,7 +2139,7 @@ function setupScroll(){
   top.onclick=()=>scrollTo({top:0,behavior:prefersReduced()?"auto":"smooth"});
   update();
 }
-function setupClock(){const el=$("#clock");function t(){const d=new Date();el.textContent=[d.getHours(),d.getMinutes(),d.getSeconds()].map(n=>String(n).padStart(2,'0')).join(':');}t();setInterval(t,1000);}
+function setupClock(){const el=$("#clock"),fmt=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});function t(){if(el)el.textContent=fmt.format(new Date());}t();setInterval(t,1000);}
 function setupReveal(){
   const els=$$(".reveal");
   if(prefersReduced()){els.forEach(el=>el.classList.add("show"));return;}
