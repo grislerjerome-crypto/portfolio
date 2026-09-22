@@ -22,11 +22,14 @@ for(const id of ['ecom-starter','ecom-premium','ecommerce-operations','logistics
 assert.equal((html.match(/data-ecom-view=/g)||[]).length,3,'Three Premium preview tabs');
 assert.equal((html.match(/data-starter-view=/g)||[]).length,0,'Starter has only one featured homepage image');
 assert(html.includes('https://threadlab.agentrome.site'),'ThreadLab Starter store is linked');
+assert(html.includes('class="ecom-preview-link" href="https://threadlab.agentrome.site"'),'Starter preview image is clickable');
 assert(html.includes('View Starter Store'),'Starter CTA label updated');
 assert(html.includes('Up to $499')&&html.includes('Up to $799 + $15/mo care'),'Plan pricing is visible');
 assert(!/Is Starter right for me\?|What would my store include\?/.test(html),'Old detail accordions removed');
 assert(html.includes("customer:{src:'apparel-lab-customer.png'"),'Customer preview is wired');
 assert(html.includes('https://apparel.agentrome.site/customer-login'),'Customer dashboard is linked');
+assert(html.includes('id="ecom-preview-link" href="https://apparel.agentrome.site/"'),'Premium preview image starts on storefront link');
+assert(html.includes("href:'https://apparel.agentrome.site/customer-login'")&&html.includes("href:'https://apparel.agentrome.site/admin-login'"),'Premium preview image links update per selected dashboard');
 assert(html.includes('View Premium Store')&&html.includes('Customer Dashboard')&&html.includes('Admin Dashboard'),'Premium CTA labels updated');
 assert(!/ecom-book|ecom-turn|data-ecom-page|data-plan-page/.test(html),'Page turn controls and fold state removed');
 assert(html.includes('customer@apparellab.com')&&html.includes('admin@apparellab.com'),'Demo dashboard credentials are shown');

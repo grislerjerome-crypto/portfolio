@@ -16,13 +16,15 @@ with sync_playwright() as p:
     page.wait_for_timeout(1900)
 
     assert page.locator('.proj-card').count()==44
-    assert page.locator('#ecom-starter a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://threadlab.agentrome.site/']
+    assert page.locator('#ecom-starter a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://threadlab.agentrome.site/','https://threadlab.agentrome.site/']
     starter_text=page.locator('#ecom-starter').inner_text()
     assert all(x in starter_text for x in ['Starter','Up to $499','Professional storefront','View Starter Store'])
     assert 'Shop' not in page.locator('#ecom-starter .ecom-switch').inner_text() if page.locator('#ecom-starter .ecom-switch').count() else True
     assert page.locator('#ecom-starter details').count()==0
     starter=page.locator('#starter-preview-image')
     assert starter.get_attribute('src')=='starter-ecom-homepage.png'
+    assert page.locator('#ecom-starter .ecom-preview-link').evaluate('(e)=>e.href')=='https://threadlab.agentrome.site/'
+    assert page.locator('#ecom-starter .ecom-preview-link').get_attribute('target')=='_blank'
     assert starter.evaluate('(e)=>getComputedStyle(e).objectFit==="contain"')
     assert page.locator('[data-ecom-page], .ecom-book, .ecom-book-controls, .ecom-turn').count()==0
 
@@ -30,8 +32,8 @@ with sync_playwright() as p:
     premium_text=premium.inner_text().lower()
     assert all(x in premium_text for x in ['storefront','customer dashboard','admin dashboard'])
     assert premium.locator('[data-ecom-view]').count()==3
-    assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/customer-login','https://apparel.agentrome.site/admin-login']
-    assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.textContent.trim())')==['View Premium Store ↗','Customer Dashboard ↗','Admin Dashboard ↗']
+    assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/','https://apparel.agentrome.site/customer-login','https://apparel.agentrome.site/admin-login']
+    assert premium.locator('.ecom-links a').evaluate_all('(els)=>els.map(e=>e.textContent.trim())')==['View Premium Store ↗','Customer Dashboard ↗','Admin Dashboard ↗']
     assert 'customer@apparellab.com' in premium_text and 'admin@apparellab.com' in premium_text
     assert 'Login using Demo dashboards access:' in premium.inner_text()
     assert 'Demo dashboard access' not in premium.inner_text()
@@ -39,8 +41,10 @@ with sync_playwright() as p:
     assert page.get_by_text('Explore Craftee Sites').count()==0
     assert premium.locator('details').count()==0
     preview=page.locator('#ecom-preview-image')
-    for tab,src,caption in [('customer','apparel-lab-customer.png','Customer Dashboard preview'),('admin','apparel-lab-admin.png','Admin Dashboard preview'),('store','apparel-lab-storefront.png','Storefront preview')]:
-        page.locator(f'[data-ecom-view="{tab}"]').click(); assert preview.get_attribute('src')==src; assert caption in page.locator('#ecom-preview-caption').inner_text()
+    preview_link=page.locator('#ecom-preview-link')
+    for tab,src,caption,href in [('customer','apparel-lab-customer.png','Customer Dashboard preview','https://apparel.agentrome.site/customer-login'),('admin','apparel-lab-admin.png','Admin Dashboard preview','https://apparel.agentrome.site/admin-login'),('store','apparel-lab-storefront.png','Storefront preview','https://apparel.agentrome.site/')]:
+        page.locator(f'[data-ecom-view="{tab}"]').click(); assert preview.get_attribute('src')==src; assert caption in page.locator('#ecom-preview-caption').inner_text(); assert preview_link.evaluate('(e)=>e.href')==href
+    assert preview_link.get_attribute('target')=='_blank'
     assert preview.evaluate('(e)=>getComputedStyle(e).objectFit==="cover"')
 
     desktop_nav=page.locator('.nav ul a').evaluate_all('(els)=>els.map(e=>[e.textContent.trim(),e.getAttribute("href")])')
