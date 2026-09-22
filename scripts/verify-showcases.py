@@ -33,6 +33,8 @@ with sync_playwright() as p:
     assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.href)')==['https://apparel.agentrome.site/','https://apparel.agentrome.site/customer-login','https://apparel.agentrome.site/admin-login']
     assert premium.locator('a').evaluate_all('(els)=>els.map(e=>e.textContent.trim())')==['View Premium Store ↗','Customer Dashboard ↗','Admin Dashboard ↗']
     assert 'customer@apparellab.com' in premium_text and 'admin@apparellab.com' in premium_text
+    assert 'Login using Demo dashboards access:' in premium.inner_text()
+    assert 'Demo dashboard access' not in premium.inner_text()
     assert 'Customer and admin areas use demo sign in flows' not in premium.inner_text()
     assert page.get_by_text('Explore Craftee Sites').count()==0
     assert premium.locator('details').count()==0

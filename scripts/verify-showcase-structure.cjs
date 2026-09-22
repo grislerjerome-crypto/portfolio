@@ -30,6 +30,7 @@ assert(html.includes('https://apparel.agentrome.site/customer-login'),'Customer 
 assert(html.includes('View Premium Store')&&html.includes('Customer Dashboard')&&html.includes('Admin Dashboard'),'Premium CTA labels updated');
 assert(!/ecom-book|ecom-turn|data-ecom-page|data-plan-page/.test(html),'Page turn controls and fold state removed');
 assert(html.includes('customer@apparellab.com')&&html.includes('admin@apparellab.com'),'Demo dashboard credentials are shown');
+assert(html.includes('Login using Demo dashboards access:')&&!html.includes('Demo dashboard access</strong>'),'Demo dashboard access label updated');
 assert(!html.includes('Customer and admin areas use demo sign in flows'),'Old demo availability sentence removed');
 assert(!html.includes('Explore Craftee Sites'),'Explore Craftee Sites chip removed');
 
