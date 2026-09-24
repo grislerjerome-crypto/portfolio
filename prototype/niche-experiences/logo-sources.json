@@ -1,0 +1,254 @@
+[
+  {
+    "name": "n8n",
+    "file": "assets/n8n.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/n8n.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "zapier",
+    "file": "assets/zapier.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/zapier.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "make",
+    "file": "assets/make.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/make.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "openai",
+    "file": "assets/openai.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/openai.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "anthropic",
+    "file": "assets/anthropic.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/anthropic.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "googlegemini",
+    "file": "assets/googlegemini.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googlegemini.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "langchain",
+    "file": "assets/langchain.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/langchain.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "supabase",
+    "file": "assets/supabase.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/supabase.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "notion",
+    "file": "assets/notion.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/notion.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "airtable",
+    "file": "assets/airtable.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/airtable.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "slack",
+    "file": "assets/slack.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/slack.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "twilio",
+    "file": "assets/twilio.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/twilio.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "react",
+    "file": "assets/react.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/react.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "nextdotjs",
+    "file": "assets/nextdotjs.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/nextdotjs.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "typescript",
+    "file": "assets/typescript.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/typescript.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "tailwindcss",
+    "file": "assets/tailwindcss.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/tailwindcss.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "nodedotjs",
+    "file": "assets/nodedotjs.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/nodedotjs.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "python",
+    "file": "assets/python.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/python.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "laravel",
+    "file": "assets/laravel.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/laravel.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "postgresql",
+    "file": "assets/postgresql.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/postgresql.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "mongodb",
+    "file": "assets/mongodb.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/mongodb.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "docker",
+    "file": "assets/docker.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/docker.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "github",
+    "file": "assets/github.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/github.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "vercel",
+    "file": "assets/vercel.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/vercel.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "cloudflare",
+    "file": "assets/cloudflare.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/cloudflare.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "figma",
+    "file": "assets/figma.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/figma.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "shopify",
+    "file": "assets/shopify.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/shopify.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "amazon",
+    "file": "assets/amazon.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/amazon.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "woocommerce",
+    "file": "assets/woocommerce.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/woocommerce.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "stripe",
+    "file": "assets/stripe.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/stripe.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "ebay",
+    "file": "assets/ebay.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/ebay.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "etsy",
+    "file": "assets/etsy.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/etsy.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "zendesk",
+    "file": "assets/zendesk.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/zendesk.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "googleanalytics",
+    "file": "assets/googleanalytics.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googleanalytics.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "dhl",
+    "file": "assets/dhl.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/dhl.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "fedex",
+    "file": "assets/fedex.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/fedex.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "ups",
+    "file": "assets/ups.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/ups.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "sap",
+    "file": "assets/sap.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/sap.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "odoo",
+    "file": "assets/odoo.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/odoo.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "googlemaps",
+    "file": "assets/googlemaps.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googlemaps.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "googlesheets",
+    "file": "assets/googlesheets.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@13/icons/googlesheets.svg",
+    "collection": "Simple Icons 13, original brand marks; trademarks belong to their owners"
+  },
+  {
+    "name": "gohighlevel",
+    "file": "assets/gohighlevel.png",
+    "source": "https://www.google.com/s2/favicons?domain=gohighlevel.com&sz=128",
+    "collection": "Official domain favicon retrieved through Google favicon cache"
+  }
+]

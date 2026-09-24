@@ -1,0 +1,128 @@
+{
+  "results": [
+    {
+      "mode": "ai",
+      "viewport": [
+        1440,
+        1100
+      ],
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "logos": 21,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 05\nSample handoff complete. Rome reviews the next conversation."
+    },
+    {
+      "mode": "web",
+      "viewport": [
+        1440,
+        1100
+      ],
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "logos": 18,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 05\nLocal preview ready. Nothing has been deployed."
+    },
+    {
+      "mode": "ecom",
+      "viewport": [
+        1440,
+        1100
+      ],
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "logos": 8,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 04\nSample orders reconciled. No real records were changed."
+    },
+    {
+      "mode": "logistics",
+      "viewport": [
+        1440,
+        1100
+      ],
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "logos": 8,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 04\nSample delivery completed. S2085 remains held for address review."
+    },
+    {
+      "mode": "ai",
+      "viewport": [
+        390,
+        844
+      ],
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "logos": 21,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 05\nSample handoff complete. Rome reviews the next conversation."
+    },
+    {
+      "mode": "web",
+      "viewport": [
+        390,
+        844
+      ],
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "logos": 18,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 05\nLocal preview ready. Nothing has been deployed."
+    },
+    {
+      "mode": "ecom",
+      "viewport": [
+        390,
+        844
+      ],
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "logos": 8,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 04\nSample orders reconciled. No real records were changed."
+    },
+    {
+      "mode": "logistics",
+      "viewport": [
+        390,
+        844
+      ],
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "logos": 8,
+        "overflow": []
+      },
+      "run_pause_resume_reset": "passed",
+      "final_activity": "\u203a SIMULATION / 04\nSample delivery completed. S2085 remains held for address review."
+    }
+  ],
+  "console_and_page_errors": [],
+  "failed_http": [],
+  "reduced_motion": "passed",
+  "keyboard_tabs": "passed"
+}
