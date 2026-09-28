@@ -52,8 +52,12 @@ with sync_playwright() as p:
     expected=[['Services','#services'],['Web Dev','#craftee'],['Ecommerce','#ecommerce-operations'],['Logistics','#logistics-operations'],['Projects','#projects'],['ROI','#roi'],['Contact','#contact']]
     assert desktop_nav==expected and mobile_nav==expected
     assert page.locator('.nav ul').get_by_text('How I work').count()==0 and page.locator('.nav ul').get_by_text('Ava',exact=True).count()==0
-    assert page.locator('.clock-label').inner_text()=='EST USA'
-    assert page.evaluate("new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())")[:5]==page.locator('#clock').inner_text()[:5]
+    zone=page.evaluate("new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',timeZoneName:'short'}).formatToParts(new Date()).find(p=>p.type==='timeZoneName').value")
+    assert page.locator('.clock-label').inner_text()==zone+' USA'
+    # Freeze sample activity so layout and range fixtures stay deterministic.
+    if page.locator('#commerce-simulation-toggle').get_attribute('aria-pressed')=='true':
+        page.locator('#commerce-simulation-toggle').click()
+    assert page.evaluate("new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(new Date())")[:5]==page.locator('#clock').inner_text()[:5]
 
     assert page.locator('#ecommerce-operations .donut').count()==1
     assert page.locator('#ecommerce-operations .sales-chart').count()==1
@@ -65,7 +69,7 @@ with sync_playwright() as p:
     assert page.locator('#logistics-operations .ops-sample-label').text_content()=='Illustrative sample data'
 
     page.locator('[data-commerce-view="month"]').click()
-    assert page.locator('#commerce-kpi-a').inner_text()=='$186K'
+    assert page.locator('#commerce-kpi-a').inner_text()=='$186,000.00'
     assert page.locator('#commerce-chart-title').inner_text()=='SALES TREND / 30 DAYS'
     assert page.locator('[data-commerce-view="month"]').get_attribute('aria-pressed')=='true'
     month_points=page.locator('#sales-line').get_attribute('points')

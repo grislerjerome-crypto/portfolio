@@ -49,7 +49,7 @@ for(const nav of [desktopNav,mobileNav]){
   for(const href of ['#services','#craftee','#ecommerce-operations','#logistics-operations','#projects','#roi','#contact'])assert(nav.includes(`href="${href}"`),`Missing ${href}`);
 }
 assert(html.includes('timeZone:"America/New_York"'),'Clock uses America/New_York');
-assert(html.includes('<span class="clock-label">EST USA</span>'),'Clock has exact EST USA label');
+assert(html.includes('<span class="clock-label">ET USA</span>')&&html.includes("clock.zone+' USA'"),'Clock derives EDT or EST from New York time');
 assert(html.includes('@media(max-width:980px){.nav ul{display:none}.hud .clock{display:none}.menu-btn{display:block}}'),'No responsive nav dead zone');
 
 assert.equal((html.match(/data-commerce-view=/g)||[]).length,3,'Three ecommerce time ranges');
@@ -66,4 +66,4 @@ assert(!/innerHTML\s*=\s*(?:q|input\.value|data\.reply)/.test(added),'No visitor
 const newSections=html.slice(html.indexOf('<section id="craftee"'),html.indexOf('<section id="projects"'));
 assert(!/[\u2013\u2014]/.test(newSections),'New visible sections have no en or em dashes');
 for(const asset of ['apparel-lab-storefront.png','apparel-lab-customer.png','apparel-lab-admin.png'])assert(fs.existsSync(asset),asset+' missing');
-console.log(JSON.stringify({scriptsParsed,configUnchanged:true,projects:after.projects.length,bookingFunctionsUnchanged:true,premiumTabs:3,navLinks:7,clock:'America/New_York / EST USA',ecommerceRanges:3,logisticsFilters:4,managementDashboardMarkers:true,reducedMotionFallback:true,addedSecretScan:'passed',newCopyDashScan:'passed'}));
+console.log(JSON.stringify({scriptsParsed,configUnchanged:true,projects:after.projects.length,bookingFunctionsUnchanged:true,premiumTabs:3,navLinks:7,clock:'America/New_York / dynamic EDT or EST',ecommerceRanges:3,logisticsFilters:4,managementDashboardMarkers:true,reducedMotionFallback:true,addedSecretScan:'passed',newCopyDashScan:'passed'}));

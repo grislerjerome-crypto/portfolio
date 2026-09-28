@@ -473,7 +473,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="hud">
-      <div class="stat clock" title="America/New_York time"><span class="led"></span><span class="clock-label">EST USA</span><span id="clock">--:--:--</span></div>
+      <div class="stat clock" title="America/New_York time"><span class="led"></span><span class="clock-label">ET USA</span><span id="clock">--:--:--</span></div>
       <div class="stat mode" id="mode-ind" title="Click to reset"><span class="mlabel">MODE:</span> <b id="mode-name">OVERVIEW</b></div>
       <button class="cmd-btn" id="cmd-open"><span>⌘ Command</span><kbd>⌘K</kbd></button>
       <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☀</button>
@@ -653,7 +653,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       </div>
     </div>
     <div class="commerce-stage reveal" aria-label="Illustrative ecommerce management dashboard">
-      <div class="command-bar"><span>COMMERCE COMMAND / SAMPLE DATABASE</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live">SYNC ACTIVE</span></div>
+      <div class="command-bar"><span>COMMERCE COMMAND / SAMPLE DATABASE</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live" id="commerce-simulation-status">SIMULATION PAUSED</span><button class="ops-view-btn" type="button" id="commerce-simulation-toggle" aria-pressed="false" aria-describedby="commerce-simulation-status">Play simulation</button></div>
       <div class="commerce-kpis">
         <div class="dash-kpi"><span>Net sales</span><strong id="commerce-kpi-a">$48.6K</strong><em id="commerce-kpi-a-note">+12.4% vs prior</em></div>
         <div class="dash-kpi"><span>Orders</span><strong id="commerce-kpi-b">1,284</strong><em id="commerce-kpi-b-note">92% fulfilled</em></div>
@@ -1807,14 +1807,79 @@ const AVA_KB = [
     "a": "I discuss only Rome's professional work and public contact options. I do not share personal details, passwords or private client information. Rome can work under confidentiality or non solicitation agreements when required."
   }
 ];
+/* Illustrative simulation state. No client data or external writes. */
+function createCommerceSimulation(random=Math.random){
+  const bases={week:{sales:48600,orders:1284,mix:[52,27,12,9]},month:{sales:186000,orders:4932,mix:[58,24,10,8]},quarter:{sales:542000,orders:14806,mix:[63,21,9,7]}};
+  let sales=0,orders=0;const stock=[78,12,34,103];
+  return {
+    delay:()=>5000+Math.floor(random()*2001),
+    tick(){sales+=(500+Math.floor(random()*4501))/100;orders++;stock.forEach((n,i)=>stock[i]=Math.max(0,n+(random()<.5?-1:1)));},
+    snapshot(key='week'){
+      const b=bases[key]||bases.week,counts=b.mix.map(p=>Math.floor(b.orders*p/100));
+      counts[0]+=b.orders-counts.reduce((a,n)=>a+n,0);counts[1]+=orders;
+      const total=b.orders+orders,mix=counts.map(n=>n/total*100);
+      return {sales:Math.round((b.sales+sales)*100)/100,orders:total,mix,stock:[...stock]};
+    }
+  };
+}
+const commerceSimulation=createCommerceSimulation();
+function setupCommerceSimulation(render){
+  const section=document.getElementById('ecommerce-operations'),button=document.getElementById('commerce-simulation-toggle'),status=document.getElementById('commerce-simulation-status');
+  if(!section||!button||section.dataset.simulationReady)return;
+  section.dataset.simulationReady='true';
+  const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  let paused=motion.matches,inView=false,timer=null;
+  function sync(){
+    clearTimeout(timer);timer=null;
+    button.textContent=paused?'Play simulation':'Pause simulation';
+    button.setAttribute('aria-pressed',String(!paused));
+    const running=!paused&&!document.hidden&&inView;
+    status.textContent=running?'SIMULATION ACTIVE':'SIMULATION PAUSED';
+    if(running)timer=setTimeout(()=>{commerceSimulation.tick();render();sync();},commerceSimulation.delay());
+  }
+  button.addEventListener('click',()=>{paused=!paused;sync();});
+  document.addEventListener('visibilitychange',sync);
+  motion.addEventListener('change',()=>{paused=motion.matches;sync();});
+  new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;sync();},{threshold:0}).observe(section);
+  sync();
+}
 /* Interactive illustrative operations visuals. No external writes. */
 function setupOperationsVisuals(){
+  const root=document.getElementById('ecommerce-operations');
+  if(!root||root.dataset.operationsReady)return;
+  root.dataset.operationsReady='true';
   const ecomPreview={store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB storefront preview',caption:'Storefront preview: customer shopping experience.',href:'https://apparel.agentrome.site/',label:'Open APPAREL LAB storefront'},customer:{src:'apparel-lab-customer.png',alt:'APPAREL LAB customer dashboard preview',caption:'Customer Dashboard preview: orders, saved pieces and account status.',href:'https://apparel.agentrome.site/customer-login',label:'Open APPAREL LAB customer dashboard'},admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Admin Dashboard preview: store management view.',href:'https://apparel.agentrome.site/admin-login',label:'Open APPAREL LAB admin dashboard'}};
   const ecomImage=document.getElementById('ecom-preview-image'),ecomCaption=document.getElementById('ecom-preview-caption'),ecomLink=document.getElementById('ecom-preview-link');
   document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=ecomPreview[btn.dataset.ecomView];if(!data||!ecomImage)return;document.querySelectorAll('[data-ecom-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));ecomImage.src=data.src;ecomImage.alt=data.alt;if(ecomCaption)ecomCaption.textContent=data.caption;if(ecomLink){ecomLink.href=data.href;ecomLink.setAttribute('aria-label',data.label);}}));
   const commerce={week:{values:['$48.6K','1,284','$74.20','14'],notes:['+12.4% vs prior','92% fulfilled','+$5.80','5 high priority'],title:'SALES TREND / 7 DAYS',readout:'$48.6K SAMPLE NET SALES',total:'1,284 TOTAL',mix:[52,27,12,9],points:'0,175 80,150 160,161 240,112 320,126 400,74 480,92 560,42 640,58'},month:{values:['$186K','4,932','$76.10','31'],notes:['+8.7% vs prior','94% fulfilled','+$3.20','9 high priority'],title:'SALES TREND / 30 DAYS',readout:'$186K SAMPLE NET SALES',total:'4,932 TOTAL',mix:[58,24,10,8],points:'0,184 80,164 160,132 240,145 320,94 400,108 480,62 560,79 640,31'},quarter:{values:['$542K','14,806','$78.40','47'],notes:['+16.2% vs prior','95% fulfilled','+$6.70','12 high priority'],title:'SALES TREND / 90 DAYS',readout:'$542K SAMPLE NET SALES',total:'14,806 TOTAL',mix:[63,21,9,7],points:'0,191 80,172 160,148 240,119 320,135 400,88 480,69 560,47 640,24'}};
   const commerceButtons=[...document.querySelectorAll('[data-commerce-view]')];
-  function setCommerce(key){const d=commerce[key];if(!d)return;commerceButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.commerceView===key)));['a','b','c','d'].forEach((x,i)=>{const v=document.getElementById('commerce-kpi-'+x),n=document.getElementById('commerce-kpi-'+x+'-note');if(v)v.textContent=d.values[i];if(n)n.textContent=d.notes[i];});document.getElementById('commerce-chart-title').textContent=d.title;document.getElementById('commerce-readout').textContent=d.readout;document.getElementById('mix-total').textContent=d.total;d.mix.forEach((v,i)=>{const el=document.getElementById('mix-'+['a','b','c','d'][i]);if(el)el.textContent=v+'%';});const pts=d.points,area=document.getElementById('sales-area'),line=document.getElementById('sales-line');if(line)line.setAttribute('points',pts);if(area)area.setAttribute('d','M'+pts.replaceAll(' ',', L')+' L640 210 L0 210 Z');const stops=[d.mix[0],d.mix[0]+d.mix[1],d.mix[0]+d.mix[1]+d.mix[2]];document.getElementById('commerce-donut').style.background=`conic-gradient(var(--lime) 0 ${stops[0]}%,var(--cyan) ${stops[0]}% ${stops[1]}%,var(--magenta) ${stops[1]}% ${stops[2]}%,#566074 ${stops[2]}%)`;}
+  let commerceKey='week';
+  const money=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
+  function setCommerce(key){
+    const d=commerce[key];if(!d)return;commerceKey=key;
+    const state=commerceSimulation.snapshot(key),sales=money.format(state.sales),orders=state.orders.toLocaleString('en-US');
+    const values=[sales,orders,money.format(state.sales/state.orders),d.values[3]];
+    const notes=[d.notes[0],state.mix[0].toFixed(1)+'% fulfilled','Net sales / orders',d.notes[3]];
+    commerceButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.commerceView===key)));
+    ['a','b','c','d'].forEach((x,i)=>{document.getElementById('commerce-kpi-'+x).textContent=values[i];document.getElementById('commerce-kpi-'+x+'-note').textContent=notes[i];});
+    document.getElementById('commerce-chart-title').textContent=d.title;
+    document.getElementById('commerce-readout').textContent=sales+' SAMPLE NET SALES';
+    document.getElementById('mix-total').textContent=orders+' TOTAL';
+    state.mix.forEach((v,i)=>document.getElementById('mix-'+['a','b','c','d'][i]).textContent=v.toFixed(1)+'%');
+    const pts=d.points,area=document.getElementById('sales-area'),line=document.getElementById('sales-line');
+    if(line)line.setAttribute('points',pts);
+    if(area)area.setAttribute('d','M'+pts.replaceAll(' ',', L')+' L640 210 L0 210 Z');
+    const stops=[state.mix[0],state.mix[0]+state.mix[1],state.mix[0]+state.mix[1]+state.mix[2]],donut=document.getElementById('commerce-donut');
+    donut.dataset.center=state.mix[0].toFixed(1)+'% FULFILLED';
+    donut.style.background=`conic-gradient(var(--lime) 0 ${stops[0]}%,var(--cyan) ${stops[0]}% ${stops[1]}%,var(--magenta) ${stops[1]}% ${stops[2]}%,#566074 ${stops[2]}%)`;
+    document.querySelectorAll('#ecommerce-operations .inventory-panel tbody tr').forEach((row,i)=>{
+      const n=state.stock[i],meter=row.querySelector('.stock-meter'),pill=row.querySelector('.status-pill-sm');
+      meter.lastChild.textContent=String(n);meter.querySelector('i').style.setProperty('--stock',Math.min(100,n/[100,50,67,113][i]*100)+'%');
+      pill.textContent=n<=15?'REORDER':n<=40?'WATCH':'HEALTHY';
+      pill.style.setProperty('--status',n<=15?'var(--magenta)':n<=40?'var(--cyan)':'var(--lime)');
+    });
+  }
+  setupCommerceSimulation(()=>setCommerce(commerceKey));
   commerceButtons.forEach(btn=>btn.addEventListener('click',()=>setCommerce(btn.dataset.commerceView)));
   const filterButtons=[...document.querySelectorAll('[data-log-filter]')],rows=[...document.querySelectorAll('#logistics-operations tbody tr[data-mode]')];
   function filterLanes(key){filterButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.logFilter===key)));let shown=0;rows.forEach(row=>{const visible=key==='all'||row.dataset.mode===key;row.hidden=!visible;if(visible)shown++;});const count=document.getElementById('lane-count');if(count)count.textContent=shown+' RECORD'+(shown===1?'':'S');}
@@ -1842,23 +1907,33 @@ function setupAvaChat(){
     "How do I contact Rome?"
   ];
   const avaHist = [];
+  input.maxLength=2000;
+  let avaBusy=false;
+  function trimAvaHistory(){
+    while(avaHist.length>19||new TextEncoder().encode(JSON.stringify({messages:avaHist})).length>28000)avaHist.shift();
+    // Keep complete recent user/assistant turns where possible.
+    while(avaHist.length>1&&avaHist[0].role==='assistant')avaHist.shift();
+  }
   function fallbackAnswer(q){const t=q.toLowerCase();if(/password|credential|secret|family|home address|private income/.test(t))return AVA_KB[AVA_KB.length-1].a;let best=null,score=0;AVA_KB.forEach(item=>{let s=t===item.q.toLowerCase()?100:0;item.keys.forEach(k=>{if(t.includes(k))s+=k.length;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. Ask about Rome's services, ecommerce tiers or the illustrative operations dashboards. Use Let's Connect! or the public contact links for an exact scope or quote.";}
   async function askAva(q){
-    avaHist.push({role:"user",content:q});
+    avaHist.push({role:"user",content:q});trimAvaHistory();
+    let reply;
     try{
       const res = await fetch(AVA_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:avaHist}),signal:AbortSignal.timeout(15000)});
       const data = await res.json();
-      const reply = (res.ok&&data&&!data.offline&&typeof data.reply==="string"&&data.reply.trim())?data.reply:fallbackAnswer(q);
-      avaHist.push({role:"assistant",content:reply});
-      return reply;
-    }catch(e){ return fallbackAnswer(q); }
+      reply = (res.ok&&data&&!data.offline&&typeof data.reply==="string"&&data.reply.trim())?data.reply:fallbackAnswer(q);
+    }catch(e){reply=fallbackAnswer(q);}
+    avaHist.push({role:"assistant",content:reply.slice(0,4000)});trimAvaHistory();
+    return reply;
   }
   function send(q){
-    const q2=q.trim(); if(!q2)return;
+    const q2=q.trim().slice(0,2000); if(!q2||avaBusy)return;
+    avaBusy=true;form.setAttribute('aria-busy','true');
+    const submit=form.querySelector('button[type="submit"]');if(submit)submit.disabled=true;
     if(suggest)suggest.style.display="none";
     add("user",q2);
     const wait=document.createElement("div"); wait.className="ava-msg bot"; wait.textContent="…"; messages.appendChild(wait); messages.scrollTop=messages.scrollHeight;
-    askAva(q2).then(r=>{wait.textContent=r;}).catch(()=>{wait.textContent=fallbackAnswer(q2);});
+    askAva(q2).then(r=>{wait.textContent=r;}).catch(()=>{wait.textContent=fallbackAnswer(q2);}).finally(()=>{avaBusy=false;form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;});
   }
   if(suggest){
     suggest.innerHTML=AVA_QUESTIONS.map(x=>`<button type="button" class="ava-chip">${x}</button>`).join("");
@@ -1867,7 +1942,7 @@ function setupAvaChat(){
   document.querySelectorAll("[data-ava-question]").forEach(btn=>btn.addEventListener("click",()=>{open();send(btn.dataset.avaQuestion);}));
   box.addEventListener("keydown",e=>{if(e.key==="Escape"){shut();launch.focus();}});
   launch.onclick=()=>box.classList.contains("open")?shut():open(); close.onclick=shut;
-  form.onsubmit=e=>{e.preventDefault();const q=input.value;input.value="";send(q);};
+  form.onsubmit=e=>{e.preventDefault();if(avaBusy)return;const q=input.value;input.value="";send(q);};
 }
 
 /* ---- command palette ---- */
@@ -1889,22 +1964,29 @@ function setupPalette(){
   ];
   const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:"Mode: "+s.name,act:()=>setMode(s.id)}));
   const items=base.concat(modeItems);
-  let active=0,filtered=items;
+  let active=0,filtered=items,previousFocus=null;
+  wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','Command menu');
+  input.setAttribute('role','combobox');input.setAttribute('aria-label','Search commands');input.setAttribute('aria-controls','palette-list');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','false');
+  list.setAttribute('role','listbox');list.setAttribute('aria-label','Commands');
   function render(){
     filtered=items.filter(it=>it.label.toLowerCase().includes(input.value.toLowerCase()));
-    list.innerHTML=filtered.map((it,i)=>`<div class="item ${i===active?'active':''}" data-i="${i}"><span class="ic">${it.ic}</span>${it.label}</div>`).join('');
+    active=Math.max(0,Math.min(active,filtered.length-1));
+    list.innerHTML=filtered.map((it,i)=>`<div id="palette-option-${i}" role="option" aria-selected="${i===active}" class="item ${i===active?'active':''}" data-i="${i}"><span class="ic">${it.ic}</span>${it.label}</div>`).join('')||'<div class="hint" role="status">No matching commands</div>';
+    if(filtered.length)input.setAttribute('aria-activedescendant','palette-option-'+active);else input.removeAttribute('aria-activedescendant');
     $$("#palette-list .item").forEach(el=>el.onclick=()=>choose(+el.dataset.i));
+    const selected=list.querySelector('.active');if(selected)selected.scrollIntoView({block:'nearest'});
   }
-  function choose(i){const it=filtered[i];if(!it)return;if(it.go)smartScroll(it.go);if(it.act)it.act();close();}
-  function open(){wrap.classList.add('open');input.value="";active=0;render();setTimeout(()=>input.focus(),10);}
-  function close(){wrap.classList.remove('open');}
-  $("#cmd-open").onclick=open;
+  function choose(i){const it=filtered[i];if(!it)return;close();if(it.go)smartScroll(it.go);if(it.act)it.act();}
+  function open(){if(wrap.classList.contains('open'))return;previousFocus=document.activeElement;wrap.classList.add('open');input.setAttribute('aria-expanded','true');input.value="";active=0;render();input.focus();}
+  function close(){wrap.classList.remove('open');input.setAttribute('aria-expanded','false');if(previousFocus&&previousFocus.isConnected)previousFocus.focus({preventScroll:true});}
+  $("#cmd-open").onclick=()=>wrap.classList.contains('open')?close():open();
   input.oninput=()=>{active=0;render();};
   input.onkeydown=e=>{
     if(e.key==="ArrowDown"){e.preventDefault();active=Math.min(filtered.length-1,active+1);render();}
     else if(e.key==="ArrowUp"){e.preventDefault();active=Math.max(0,active-1);render();}
     else if(e.key==="Enter"){e.preventDefault();choose(active);}
-    else if(e.key==="Escape"){close();}
+    else if(e.key==="Escape"){e.preventDefault();e.stopPropagation();close();}
+    else if(e.key==="Tab"){e.preventDefault();input.focus();}
   };
   wrap.onclick=e=>{if(e.target===wrap)close();};
   addEventListener("keydown",e=>{
@@ -2147,7 +2229,12 @@ function setupScroll(){
   top.onclick=()=>scrollTo({top:0,behavior:prefersReduced()?"auto":"smooth"});
   update();
 }
-function setupClock(){const el=$("#clock"),fmt=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});function t(){if(el)el.textContent=fmt.format(new Date());}t();setInterval(t,1000);}
+function newYorkTime(date=new Date()){
+  const parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23",timeZoneName:"short"}).formatToParts(date);
+  const part=type=>parts.find(p=>p.type===type).value;
+  return {time:part('hour')+':'+part('minute')+':'+part('second'),zone:part('timeZoneName')};
+}
+function setupClock(){const el=$("#clock"),label=$(".clock-label");function t(){const clock=newYorkTime();if(el)el.textContent=clock.time;if(label)label.textContent=clock.zone+' USA';}t();setInterval(t,1000);}
 function setupReveal(){
   const els=$$(".reveal");
   if(prefersReduced()){els.forEach(el=>el.classList.add("show"));return;}
