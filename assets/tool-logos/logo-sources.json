@@ -1,0 +1,97 @@
+{
+  "GoHighLevel": {
+    "file": "assets/tool-logos/gohighlevel.png",
+    "source": "https://www.google.com/s2/favicons?sz=128&domain_url=https://www.gohighlevel.com",
+    "type": "Google favicon cache for official domain"
+  },
+  "Zapier": {
+    "file": "assets/tool-logos/zapier.svg",
+    "source": "https://cdn.simpleicons.org/zapier/FF4F00",
+    "type": "Simple Icons CDN"
+  },
+  "Make.com": {
+    "file": "assets/tool-logos/make-com.svg",
+    "source": "https://cdn.simpleicons.org/make/6d00cc",
+    "type": "Simple Icons CDN"
+  },
+  "n8n": {
+    "file": "assets/tool-logos/n8n.svg",
+    "source": "https://cdn.simpleicons.org/n8n/EA4B71",
+    "type": "Simple Icons CDN"
+  },
+  "HubSpot": {
+    "file": "assets/tool-logos/hubspot.svg",
+    "source": "https://cdn.simpleicons.org/hubspot/FF7A59",
+    "type": "Simple Icons CDN"
+  },
+  "Google Gemini": {
+    "file": "assets/tool-logos/google-gemini.svg",
+    "source": "https://cdn.simpleicons.org/googlegemini/8e75ff",
+    "type": "Simple Icons CDN"
+  },
+  "WordPress": {
+    "file": "assets/tool-logos/wordpress.svg",
+    "source": "https://cdn.simpleicons.org/wordpress/21759B",
+    "type": "Simple Icons CDN"
+  },
+  "Shopify": {
+    "file": "assets/tool-logos/shopify.svg",
+    "source": "https://cdn.simpleicons.org/shopify/95BF47",
+    "type": "Simple Icons CDN"
+  },
+  "WooCommerce": {
+    "file": "assets/tool-logos/woocommerce.svg",
+    "source": "https://cdn.simpleicons.org/woocommerce/96588A",
+    "type": "Simple Icons CDN"
+  },
+  "Notion": {
+    "file": "assets/tool-logos/notion.svg",
+    "source": "https://cdn.simpleicons.org/notion/ffffff",
+    "type": "Simple Icons CDN"
+  },
+  "Stripe": {
+    "file": "assets/tool-logos/stripe.svg",
+    "source": "https://cdn.simpleicons.org/stripe/635BFF",
+    "type": "Simple Icons CDN"
+  },
+  "Zendesk": {
+    "file": "assets/tool-logos/zendesk.svg",
+    "source": "https://cdn.simpleicons.org/zendesk/03363D",
+    "type": "Simple Icons CDN"
+  },
+  "Hermes Agent": {
+    "file": "assets/tool-logos/hermes-agent.png",
+    "source": "https://www.google.com/s2/favicons?sz=128&domain_url=https://hermes-agent.nousresearch.com",
+    "type": "Google favicon cache for official domain"
+  },
+  "Claude Code": {
+    "file": "assets/tool-logos/claude-code.svg",
+    "source": "https://cdn.simpleicons.org/claude/d97706",
+    "type": "Simple Icons CDN"
+  },
+  "OpenAI": {
+    "file": "assets/tool-logos/openai.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg",
+    "type": "Simple Icons SVG"
+  },
+  "Slack": {
+    "file": "assets/tool-logos/slack.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/slack.svg",
+    "type": "Simple Icons SVG"
+  },
+  "Twilio": {
+    "file": "assets/tool-logos/twilio.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twilio.svg",
+    "type": "Simple Icons SVG"
+  },
+  "Canva": {
+    "file": "assets/tool-logos/canva.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/canva.svg",
+    "type": "Simple Icons SVG"
+  },
+  "ChatGPT Codex": {
+    "file": "assets/tool-logos/chatgpt-codex.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg",
+    "type": "Simple Icons SVG"
+  }
+}

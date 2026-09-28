@@ -170,6 +170,7 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .tool-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.84rem;color:var(--txt);background:var(--panel);border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:8px 15px;white-space:nowrap;transition:border-color .2s,transform .2s}
 .tool-chip:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
 .tool-ico{width:22px;height:22px;display:grid;place-items:center;flex:0 0 22px}
+.tool-ico img{width:22px;height:22px;display:block;object-fit:contain;border-radius:5px;filter:drop-shadow(0 0 8px rgba(184,255,60,.18))}
 
 /* services / modes */
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:30px}
@@ -918,7 +919,7 @@ const CONFIG = {
     { yr:"2020 to 2023", title:"Operations Lead", desc:"Ran operational systems and process improvement for a distributed remote team." }
   ],
 
-  tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Webflow","Shopify","WooCommerce","Notion","Airtable","Trello","Slack","Twilio","Stripe","Hermes Agent","ChatGPT Codex","Claude Code"],
+  tools: ["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Shopify","WooCommerce","Notion","Slack","Twilio","Stripe","Hermes Agent","ChatGPT Codex","Claude Code","Zendesk","Canva"],
 
   projects: [
     // GHL. 20 projects
@@ -1345,19 +1346,31 @@ function smartScroll(target){
 
 /* ---- branded tool logos ---- */
 const LOGOS = {
-  "GoHighLevel":{c:"#FF5C00",g:"G"},"Zapier":{c:"#FF4F00",g:"Z"},"Make.com":{c:"#FF6F2C",g:"M"},"n8n":{c:"#EA4B71",g:"8"},
-  "HubSpot":{c:"#FF7A59",g:"H"},"OpenAI":{c:"#10A37F",g:"AI"},"Google Gemini":{c:"#4285F4",g:"✦"},"Microsoft Copilot":{c:"#00A4EF",g:"✧"},
-  "Notion":{c:"#222222",g:"N"},"Airtable":{c:"#18BFFF",g:"▦"},"Asana":{c:"#F06A6A",g:"⁂"},"Monday.com":{c:"#FF3D57",g:"≡"},
-  "WordPress":{c:"#21759B",g:"W"},"Webflow":{c:"#4353FF",g:"Wf"},"Figma":{c:"#F24E1E",g:"F"},"GSAP":{c:"#0ae448",g:"G"},"Cloudflare":{c:"#F38020",g:"CF"},
-  "Shopify":{c:"#95BF47",g:"S"},"WooCommerce":{c:"#96588A",g:"Wc"},"Zendesk":{c:"#03363D",g:"Zd"},"Canva":{c:"#00C4CC",g:"C"},"Oberlo":{c:"#2d6ae3",g:"O"},
-  "Trello":{c:"#0079BF",g:"T"},"AfterShip":{c:"#3B5BFF",g:"A"},"Stripe":{c:"#635BFF",g:"S"},"Twilio":{c:"#F22F46",g:"T"},"Slack":{c:"#E01E5A",g:"#"},
-  "Excel/Sheets":{c:"#0f9d58",g:"▦"},"Analytics":{c:"#4285F4",g:"📊"},"Helpdesk":{c:"#6b7280",g:"H"},"Monitor":{c:"#b8ff3c",g:"◎"},"Email":{c:"#3b82f6",g:"✉"},"Voice":{c:"#a855f7",g:"☏"},"Webhook":{c:"#8b5cf6",g:"↻"},"AI":{c:"#10A37F",g:"AI"},"Gemini":{c:"#4285F4",g:"✦"},"Sheets":{c:"#0f9d58",g:"▦"},"Webhooks":{c:"#8b5cf6",g:"↻"},"Woo":{c:"#96588A",g:"Wc"},"Hermes Agent":{c:"#b8ff3c",g:"✦"},"ChatGPT Codex":{c:"#10A37F",g:"◈"},"Claude Code":{c:"#d97706",g:"◆"}
+  "GoHighLevel":{img:"assets/tool-logos/gohighlevel.png"},
+  "Zapier":{img:"assets/tool-logos/zapier.svg"},
+  "Make.com":{img:"assets/tool-logos/make-com.svg"},
+  "n8n":{img:"assets/tool-logos/n8n.svg"},
+  "HubSpot":{img:"assets/tool-logos/hubspot.svg"},
+  "OpenAI":{img:"assets/tool-logos/openai.svg"},
+  "Google Gemini":{img:"assets/tool-logos/google-gemini.svg"},
+  "WordPress":{img:"assets/tool-logos/wordpress.svg"},
+  "Shopify":{img:"assets/tool-logos/shopify.svg"},
+  "WooCommerce":{img:"assets/tool-logos/woocommerce.svg"},
+  "Notion":{img:"assets/tool-logos/notion.svg"},
+  "Slack":{img:"assets/tool-logos/slack.svg"},
+  "Twilio":{img:"assets/tool-logos/twilio.svg"},
+  "Stripe":{img:"assets/tool-logos/stripe.svg"},
+  "Hermes Agent":{img:"assets/tool-logos/hermes-agent.png"},
+  "ChatGPT Codex":{img:"assets/tool-logos/chatgpt-codex.svg"},
+  "Claude Code":{img:"assets/tool-logos/claude-code.svg"},
+  "Zendesk":{img:"assets/tool-logos/zendesk.svg"},
+  "Canva":{img:"assets/tool-logos/canva.svg"}
 };
+function escAttr(v){return String(v).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
 function logoSVG(name){
-  const t=LOGOS[name]||{c:"#b8ff3c",g:(name[0]||"?")};
-  const dark = document.documentElement.getAttribute('data-theme')!=='light';
-  const stroke = (name==="Notion") && dark ? "#ffffff" : t.c;
-  return `<svg viewBox="0 0 24 24" width="22" height="22"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="rgba(255,255,255,.04)" stroke="${stroke}" stroke-opacity=".55"/><text x="12" y="16" font-size="10" font-family="JetBrains Mono,monospace" font-weight="700" fill="${stroke}" text-anchor="middle">${t.g}</text></svg>`;
+  const t=LOGOS[name];
+  if(t&&t.img) return `<img src="${escAttr(t.img)}" alt="${escAttr(name)} logo" loading="lazy" decoding="async">`;
+  return `<svg viewBox="0 0 24 24" width="22" height="22"><rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="rgba(255,255,255,.04)" stroke="#b8ff3c" stroke-opacity=".55"/><text x="12" y="16" font-size="10" font-family="JetBrains Mono,monospace" font-weight="700" fill="#b8ff3c" text-anchor="middle">${escAttr((name[0]||"?").toUpperCase())}</text></svg>`;
 }
 function chip(name){ return `<span class="tool-chip"><span class="tool-ico">${logoSVG(name)}</span>${name}</span>`; }
 

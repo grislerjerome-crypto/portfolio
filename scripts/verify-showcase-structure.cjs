@@ -10,7 +10,12 @@ for(const m of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)){
 const base=cp.execFileSync('git',['show','HEAD:index.html'],{encoding:'utf8'}).replace(/\r\n/g,'\n');
 function config(s){const start=s.indexOf('const CONFIG');const end=s.indexOf('\n};',start);assert(start>=0&&end>start);return vm.runInNewContext(s.slice(start,end+3)+';CONFIG');}
 const before=config(base),after=config(html);
-assert.equal(JSON.stringify(before),JSON.stringify(after),'CONFIG and all project records must remain identical');
+const beforeForCompare=JSON.parse(JSON.stringify(before));
+const afterForCompare=JSON.parse(JSON.stringify(after));
+delete beforeForCompare.tools;
+delete afterForCompare.tools;
+assert.equal(JSON.stringify(beforeForCompare),JSON.stringify(afterForCompare),'CONFIG apart from tools and all project records must remain identical');
+assert.equal(JSON.stringify(after.tools),JSON.stringify(["GoHighLevel","Zapier","Make.com","n8n","HubSpot","OpenAI","Google Gemini","WordPress","Shopify","WooCommerce","Notion","Slack","Twilio","Stripe","Hermes Agent","ChatGPT Codex","Claude Code","Zendesk","Canva"]),'Tools carousel list updated');
 assert.equal(after.projects.length,44);
 
 const bookingStart=html.indexOf('<!-- Booking Popup -->');
