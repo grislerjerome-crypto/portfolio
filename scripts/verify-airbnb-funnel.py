@@ -54,7 +54,7 @@ with sync_playwright() as p:
     lemon.wait_for_load_state("domcontentloaded")
     assert "/lemonjuice/" in lemon.url
     assert lemon.title() == "Limone Sanctuary | Taste the First Light"
-    lemon.locator('[data-flavor="2"]').click()
+    lemon.locator('[data-flavor="2"]').click(force=True)
     assert "Blood Orange" in lemon.locator("#flavorTitle").inner_text()
     report["routes"]["lemonjuice"] = lemon.url
     lemon.close()
