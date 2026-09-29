@@ -20,6 +20,7 @@ with sync_playwright() as p:
     images = page.locator("#funnels .funnel-preview img")
     assert features.count() == 2
     assert previews.count() == 2
+    page.wait_for_function("() => [...document.querySelectorAll('#funnels .funnel-preview img')].every(img => img.complete)", timeout=15000)
     assert images.evaluate_all("imgs => imgs.every(img => img.complete && img.naturalWidth > 0)")
     assert previews.nth(0).get_attribute("href") == "airbnb/"
     assert previews.nth(1).get_attribute("href") == "lemonjuice/"
