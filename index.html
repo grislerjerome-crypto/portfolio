@@ -240,6 +240,14 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:radial-gradient(520px 220px at 50% 0%,rgba(255,61,166,.12),transparent 68%),#07090f;display:grid;grid-template-rows:340px 46px}.ecom-preview-link{display:block;height:100%;cursor:pointer}.ecom-preview-link:hover img{filter:brightness(1.08)}.ecom-preview img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;background:#080b12;transition:filter .2s ease}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd;display:flex;align-items:center}#starter-preview-image{object-fit:contain;object-position:top center;padding:10px;background:#f8f5f2}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
 .ecom-tier button:focus-visible,.ecom-tier a:focus-visible,.ops-view-btn:focus-visible,.route-node:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 
+/* ---- Conversion funnel showcase ---- */
+#funnels .lead{max-width:760px;color:var(--muted);margin-bottom:26px}
+.funnel-feature{position:relative;display:grid;grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr);gap:0;border:1px solid var(--panel-border);border-radius:var(--radius);overflow:hidden;background:radial-gradient(760px 380px at 0% 0%,color-mix(in srgb,var(--magenta) 11%,transparent),transparent 62%),var(--glass);box-shadow:var(--shadow)}
+.funnel-feature-copy{padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0}.funnel-feature-copy h3{font-size:clamp(2rem,4vw,3.6rem);line-height:1;margin:18px 0 16px}.funnel-feature-copy p{color:var(--muted);line-height:1.72;margin:0}.funnel-feature-copy .ecom-links{margin-top:28px}.funnel-feature-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.funnel-feature-meta span{font:600 .66rem var(--mono);letter-spacing:.08em;color:var(--txt);border:1px solid var(--panel-border);border-radius:99px;padding:7px 10px;background:rgba(255,255,255,.03)}
+.funnel-preview{position:relative;display:block;min-height:460px;overflow:hidden;border-left:1px solid var(--panel-border);background:#080b12}.funnel-preview::after{content:"OPEN EXPERIENCE  ↗";position:absolute;right:18px;bottom:18px;padding:10px 13px;border:1px solid rgba(255,255,255,.34);border-radius:99px;background:rgba(5,7,12,.74);backdrop-filter:blur(12px);font:600 .65rem var(--mono);letter-spacing:.11em;color:#fff;transition:transform .25s ease,background .25s ease}.funnel-preview img{display:block;width:100%;height:100%;min-height:460px;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .25s ease}.funnel-preview:hover img{transform:scale(1.025);filter:brightness(1.08)}.funnel-preview:hover::after{transform:translateY(-3px);background:rgba(5,7,12,.9)}.funnel-preview:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
+@media(max-width:820px){.funnel-feature{grid-template-columns:1fr}.funnel-preview{min-height:340px;border-left:0;border-top:1px solid var(--panel-border)}.funnel-preview img{min-height:340px}.funnel-feature-copy{padding:28px}}
+@media(max-width:560px){.funnel-preview,.funnel-preview img{min-height:250px}.funnel-preview::after{right:12px;bottom:12px}.funnel-feature-copy .btn{width:100%}}
+
 /* ---- Operations intelligence dashboards ---- */
 #ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
 .ops-sample-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 34%,transparent);border-radius:99px;padding:6px 10px;background:color-mix(in srgb,var(--lime) 6%,transparent)}.ops-sample-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
@@ -636,6 +644,26 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
         </article>
     </div>
     <p class="ecom-more"><a class="chip-cmd" href="#ecommerce-operations">See ecommerce operations ↓</a> <a class="chip-cmd" href="#logistics-operations">See logistics operations ↓</a></p>
+  </section>
+
+  <section id="funnels" class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">CONVERSION FUNNELS</span>
+      <h2 class="title">A booking journey guests can feel.</h2>
+      <p class="lead">Immersive funnel experiences that turn property discovery into a clear path toward booking.</p>
+    </div>
+    <article class="funnel-feature reveal">
+      <div class="funnel-feature-copy">
+        <span class="craftee-badge">FEATURED · AIRBNB</span>
+        <h3>The Threshold</h3>
+        <p>A cinematic short term rental funnel with a scroll controlled entrance, interactive room discovery, guest proof, dynamic pricing, and a focused reservation flow.</p>
+        <div class="funnel-feature-meta" aria-label="Funnel features"><span>IMMERSIVE SCROLL</span><span>INTERACTIVE ROOMS</span><span>BOOKING UX</span></div>
+        <div class="ecom-links"><a class="btn primary" href="airbnb/" target="_blank" rel="noopener">View Airbnb Funnel ↗</a></div>
+      </div>
+      <a class="funnel-preview" href="airbnb/" target="_blank" rel="noopener" aria-label="Open The Threshold Airbnb funnel">
+        <img src="airbnb-funnel-homepage.png" alt="The Threshold Airbnb funnel homepage preview" loading="lazy" width="1440" height="1000">
+      </a>
+    </article>
   </section>
 
   <section id="ecommerce-operations" class="wrap">

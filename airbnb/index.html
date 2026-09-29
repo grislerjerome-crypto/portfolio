@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1210">
+  <meta name="description" content="The Threshold, an immersive luxury stay booking concept.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%230b1210'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='34' fill='%23f2eee6'%3ET%3C/text%3E%3C/svg%3E">
+  <title>The Threshold | Private stay in Joshua Tree</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Gilda+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#stay">Skip to the property</a>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="The Threshold home">
+      <span class="brand-mark">T</span>
+      <span>THE THRESHOLD</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#stay">The stay</a>
+      <a href="#spaces">Spaces</a>
+      <a href="#location">Location</a>
+      <a href="#stories">Guest stories</a>
+    </nav>
+    <button class="nav-cta js-book" type="button">Check availability</button>
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#stay">The stay</a>
+    <a href="#spaces">Spaces</a>
+    <a href="#location">Location</a>
+    <a href="#stories">Guest stories</a>
+    <button class="button button-light js-book" type="button">Check availability</button>
+  </div>
+
+  <main id="top">
+    <section class="threshold" id="threshold" aria-label="Property arrival">
+      <div class="threshold-sticky">
+        <div class="exterior-scene" aria-hidden="true"></div>
+        <div class="interior-scene" aria-hidden="true"></div>
+        <div class="scene-shade" aria-hidden="true"></div>
+        <div class="architectural-frame" aria-hidden="true">
+          <div class="frame-top"></div>
+          <div class="frame-left"></div>
+          <div class="frame-right"></div>
+          <div class="door door-left"><span class="handle"></span></div>
+          <div class="door door-right"></div>
+        </div>
+
+        <div class="hero-content">
+          <p class="eyebrow">A private stay in Joshua Tree</p>
+          <h1>Your weekend begins<br>at the door.</h1>
+          <p class="hero-copy">Private desert views, considered interiors, and space for the people you came to see.</p>
+          <div class="hero-actions">
+            <button class="button button-light js-book" type="button">Check availability</button>
+            <a class="text-link" href="#stay">Step inside <span>↘</span></a>
+          </div>
+          <div class="hero-proof" aria-label="Property highlights">
+            <span><strong>4.96</strong> guest rating</span>
+            <span><strong>8</strong> guests</span>
+            <span><strong>4</strong> bedrooms</span>
+          </div>
+        </div>
+
+        <div class="entry-message" aria-hidden="true">
+          <p>Everything is ready.</p>
+          <strong>You only need to arrive.</strong>
+        </div>
+
+        <div class="scroll-cue" aria-hidden="true">
+          <span>Approach the entrance</span>
+          <i></i>
+        </div>
+        <button class="skip-tour" id="skipTour" type="button">Skip entrance</button>
+        <div class="scene-progress" aria-hidden="true"><span id="sceneProgress"></span></div>
+      </div>
+    </section>
+
+    <section class="arrival" id="stay">
+      <div class="section-number">01 / ARRIVAL</div>
+      <div class="arrival-copy reveal">
+        <p class="eyebrow bronze">Inside the stay</p>
+        <h2>Made for being together.<br>Designed for breathing room.</h2>
+      </div>
+      <div class="arrival-detail reveal">
+        <p>A quiet desert retreat where natural materials, generous gathering spaces, and uninterrupted views make every part of the stay feel considered.</p>
+        <button class="quiet-link" id="watchStory" type="button">Watch the 45 second story <span>▶</span></button>
+      </div>
+      <div class="ambient-strip" aria-hidden="true">
+        <span>Sun warmed concrete</span><i></i><span>Private two acre setting</span><i></i><span>Night sky views</span>
+      </div>
+    </section>
+
+    <section class="spaces" id="spaces">
+      <div class="spaces-intro reveal">
+        <div>
+          <p class="eyebrow bronze">Explore the house</p>
+          <h2>Every room has<br>a reason to stay.</h2>
+        </div>
+        <p>Select a space to move through the property. Each detail is designed for comfort, connection, and an unhurried pace.</p>
+      </div>
+
+      <div class="room-explorer reveal" id="roomExplorer">
+        <div class="room-visual">
+          <img id="roomImage" src="assets/living.jpg" alt="Warm modern living room with desert views">
+          <div class="room-shade"></div>
+          <button class="hotspot hotspot-one" type="button" data-note="Wood burning fireplace with evening setup" aria-label="Fireplace detail"><span></span></button>
+          <button class="hotspot hotspot-two" type="button" data-note="Panoramic doors open directly to the terrace" aria-label="Terrace access detail"><span></span></button>
+          <div class="hotspot-note" id="hotspotNote" aria-live="polite"></div>
+          <div class="room-index"><span id="roomNumber">01</span> / 04</div>
+        </div>
+        <div class="room-panel">
+          <div class="room-tabs" role="tablist" aria-label="Property rooms">
+            <button class="room-tab active" type="button" role="tab" aria-selected="true" data-room="living">Great room</button>
+            <button class="room-tab" type="button" role="tab" aria-selected="false" data-room="kitchen">Kitchen</button>
+            <button class="room-tab" type="button" role="tab" aria-selected="false" data-room="suite">Primary suite</button>
+            <button class="room-tab" type="button" role="tab" aria-selected="false" data-room="pool">Outdoor space</button>
+          </div>
+          <div class="room-copy" id="roomCopy">
+            <p class="eyebrow" id="roomKicker">Space 01</p>
+            <h3 id="roomTitle">Designed for the hours nobody wants to end.</h3>
+            <p id="roomDescription">Open desert views and deep seating make this the natural center of the house, from first coffee to the final glass.</p>
+            <ul id="roomFeatures">
+              <li>Seats up to 10 guests</li>
+              <li>Wood burning fireplace</li>
+              <li>Direct terrace access</li>
+            </ul>
+            <button class="quiet-link light" id="viewGallery" type="button">View the full gallery <span>↗</span></button>
+          </div>
+          <div class="floor-plan" aria-label="Simplified property layout">
+            <span class="plan-label">Property flow</span>
+            <div class="plan-map">
+              <button class="plan-room active" type="button" data-room="living" style="--x:8%;--y:20%;--w:42%;--h:50%">LIVING</button>
+              <button class="plan-room" type="button" data-room="kitchen" style="--x:52%;--y:20%;--w:38%;--h:28%">KITCHEN</button>
+              <button class="plan-room" type="button" data-room="suite" style="--x:52%;--y:51%;--w:38%;--h:36%">SUITE</button>
+              <button class="plan-room plan-outdoor" type="button" data-room="pool" style="--x:8%;--y:73%;--w:42%;--h:14%">POOL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stay-modes" id="experience">
+      <div class="mode-image" id="modeImage" aria-hidden="true"></div>
+      <div class="mode-shade" aria-hidden="true"></div>
+      <div class="mode-content reveal">
+        <p class="eyebrow">Make it your stay</p>
+        <h2 id="modeTitle">A weekend with nowhere else to be.</h2>
+        <p id="modeDescription">Slow mornings, private evenings, and enough room to let the day happen naturally.</p>
+        <div class="mode-pills" role="tablist" aria-label="Stay style">
+          <button class="mode-pill active" type="button" role="tab" aria-selected="true" data-mode="reset">Weekend reset</button>
+          <button class="mode-pill" type="button" role="tab" aria-selected="false" data-mode="friends">Friends gathering</button>
+          <button class="mode-pill" type="button" role="tab" aria-selected="false" data-mode="family">Family escape</button>
+          <button class="mode-pill" type="button" role="tab" aria-selected="false" data-mode="work">Work from here</button>
+        </div>
+        <div class="mode-benefits" id="modeBenefits">
+          <span>Private hot tub</span><span>Late morning coffee</span><span>Sunset dining</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="location" id="location">
+      <div class="location-map reveal" aria-label="Local travel times">
+        <div class="map-terrain"></div>
+        <div class="map-road road-one"></div>
+        <div class="map-road road-two"></div>
+        <button class="map-pin active" type="button" style="--x:52%;--y:48%" data-place="home"><span></span><b>The Threshold</b></button>
+        <button class="map-pin" type="button" style="--x:25%;--y:27%" data-place="park"><span></span><b>National Park · 14 min</b></button>
+        <button class="map-pin" type="button" style="--x:74%;--y:22%" data-place="dining"><span></span><b>Dining · 8 min</b></button>
+        <button class="map-pin" type="button" style="--x:72%;--y:73%" data-place="market"><span></span><b>Market · 6 min</b></button>
+        <div class="map-card" id="mapCard">
+          <small>Your private base</small>
+          <strong>Close to what you came for.</strong>
+        </div>
+      </div>
+      <div class="location-copy reveal">
+        <p class="eyebrow bronze">The location</p>
+        <h2>Close to what you came for. Far from what you did not.</h2>
+        <p>Desert trails, local tables, and everyday essentials are close enough to keep the stay effortless.</p>
+        <div class="travel-times">
+          <div><strong>06</strong><span>minutes to essentials</span></div>
+          <div><strong>14</strong><span>minutes to the park</span></div>
+          <div><strong>00</strong><span>shared property lines</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stories" id="stories">
+      <div class="stories-head reveal">
+        <p class="eyebrow bronze">Guest stories</p>
+        <h2>The kind of stay<br>people remember.</h2>
+        <div class="rating-lockup"><strong>4.96</strong><span>★★★★★<br>127 verified stays</span></div>
+      </div>
+      <div class="review-stage reveal">
+        <div class="quote-mark">“</div>
+        <blockquote id="reviewQuote">We booked for the view, but the layout is what made the weekend. Everyone had space, and we still spent most of the trip together.</blockquote>
+        <div class="review-meta"><strong id="reviewName">Maya R.</strong><span id="reviewType">Friends trip · August 2026</span></div>
+        <div class="review-controls">
+          <button id="prevReview" type="button" aria-label="Previous review">←</button>
+          <span id="reviewCount">01 / 03</span>
+          <button id="nextReview" type="button" aria-label="Next review">→</button>
+        </div>
+      </div>
+      <div class="trust-row reveal">
+        <div><span>01</span><strong>Professionally prepared</strong><p>The home is inspected and reset before every arrival.</p></div>
+        <div><span>02</span><strong>Secure self check in</strong><p>Private access details arrive before your stay.</p></div>
+        <div><span>03</span><strong>Real support</strong><p>A local host is available when you need help.</p></div>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="booking-backdrop" aria-hidden="true"></div>
+      <div class="booking-shell reveal">
+        <div class="booking-intro">
+          <p class="eyebrow bronze">Your dates</p>
+          <h2>Choose your stay.<br>The house is ready.</h2>
+          <p>See the complete price before you reserve. No surprise fees at the final step.</p>
+          <div class="booking-facts"><span>✓ Free cancellation for 48 hours</span><span>✓ Secure payment</span><span>✓ Immediate confirmation</span></div>
+        </div>
+        <form class="booking-form" id="bookingForm">
+          <div class="date-grid">
+            <label>Arrival<input type="date" id="arrivalDate" required></label>
+            <label>Departure<input type="date" id="departureDate" required></label>
+          </div>
+          <div class="guest-control">
+            <div><small>Guests</small><strong><span id="guestCount">2</span> guests</strong></div>
+            <div class="stepper"><button type="button" id="guestMinus" aria-label="Remove guest">−</button><button type="button" id="guestPlus" aria-label="Add guest">+</button></div>
+          </div>
+          <div class="price-lines" id="priceLines">
+            <div><span>$680 × <b id="nightCount">2</b> nights</span><strong id="nightSubtotal">$1,360</strong></div>
+            <div><span>Cleaning</span><strong>$180</strong></div>
+            <div><span>Occupancy taxes</span><strong id="taxTotal">$185</strong></div>
+          </div>
+          <div class="total-line"><span>Total</span><strong id="totalPrice">$1,725</strong></div>
+          <button class="button button-dark" type="submit">Reserve your stay</button>
+          <p class="form-note" id="formNote">Prototype booking. No payment will be processed.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="closing-shade"></div>
+      <div class="closing-copy reveal">
+        <p class="eyebrow">One last look</p>
+        <h2>The only thing missing<br>is your arrival.</h2>
+        <button class="button button-light js-book" type="button">Check your dates</button>
+        <a href="mailto:hello@example.com">Questions before booking? Message the host.</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><span class="brand-mark">T</span><strong>THE THRESHOLD</strong></div>
+    <p>Private desert stay · Joshua Tree, California</p>
+    <div><a href="#">House rules</a><a href="#">Accessibility</a><a href="#">Privacy</a></div>
+    <small>Concept experience created for portfolio demonstration. Property details and guest data are illustrative.</small>
+  </footer>
+
+  <div class="booking-rail" id="bookingRail">
+    <button class="rail-segment js-book" type="button"><small>Dates</small><strong id="railDates">Add dates</strong></button>
+    <button class="rail-segment js-book" type="button"><small>Guests</small><strong id="railGuests">2 guests</strong></button>
+    <div class="rail-price"><small>From</small><strong>$680 <span>/ night</span></strong></div>
+    <button class="rail-cta js-book" type="button">Check availability</button>
+  </div>
+
+  <dialog class="gallery-dialog" id="galleryDialog">
+    <button class="dialog-close" type="button" aria-label="Close gallery">×</button>
+    <div class="gallery-grid">
+      <img src="assets/living.jpg" alt="Living room">
+      <img src="assets/kitchen.jpg" alt="Kitchen">
+      <img src="assets/suite.jpg" alt="Primary suite">
+      <img src="assets/bath.jpg" alt="Bathroom">
+      <img src="assets/pool.jpg" alt="Pool and outdoor space">
+      <img src="assets/terrace.jpg" alt="Terrace">
+    </div>
+  </dialog>
+
+  <dialog class="story-dialog" id="storyDialog">
+    <button class="dialog-close" type="button" aria-label="Close story">×</button>
+    <div class="story-film">
+      <img src="assets/detail.jpg" alt="Warm architectural detail">
+      <div><span>THE THRESHOLD</span><strong>A slower pace begins here.</strong><p>Concept film placeholder · 00:45</p></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
