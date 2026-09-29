@@ -240,14 +240,12 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .ecom-preview{margin:0;border:1px solid var(--panel-border);border-radius:14px;overflow:hidden;background:radial-gradient(520px 220px at 50% 0%,rgba(255,61,166,.12),transparent 68%),#07090f;display:grid;grid-template-rows:340px 46px}.ecom-preview-link{display:block;height:100%;cursor:pointer}.ecom-preview-link:hover img{filter:brightness(1.08)}.ecom-preview img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;background:#080b12;transition:filter .2s ease}.ecom-preview figcaption{padding:12px 16px;font-size:.8rem;color:#ddd;display:flex;align-items:center}#starter-preview-image{object-fit:contain;object-position:top center;padding:10px;background:#f8f5f2}.ecom-status{font-size:.8rem;border-left:2px solid var(--magenta);padding-left:12px}.ecom-more{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
 .ecom-tier button:focus-visible,.ecom-tier a:focus-visible,.ops-view-btn:focus-visible,.route-node:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 
-/* ---- Conversion funnel showcase ---- */
+/* ---- Conversion funnel book ---- */
 #funnels .lead{max-width:760px;color:var(--muted);margin-bottom:26px}
-.funnel-feature{position:relative;display:grid;grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr);gap:0;border:1px solid var(--panel-border);border-radius:var(--radius);overflow:hidden;background:radial-gradient(760px 380px at 0% 0%,color-mix(in srgb,var(--magenta) 11%,transparent),transparent 62%),var(--glass);box-shadow:var(--shadow)}
-.funnel-feature-copy{padding:clamp(26px,4vw,48px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0}.funnel-feature-copy h3{font-size:clamp(2rem,4vw,3.6rem);line-height:1;margin:18px 0 16px}.funnel-feature-copy p{color:var(--muted);line-height:1.72;margin:0}.funnel-feature-copy .ecom-links{margin-top:28px}.funnel-feature-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.funnel-feature-meta span{font:600 .66rem var(--mono);letter-spacing:.08em;color:var(--txt);border:1px solid var(--panel-border);border-radius:99px;padding:7px 10px;background:rgba(255,255,255,.03)}
-.funnel-preview{position:relative;display:block;min-height:460px;overflow:hidden;border-left:1px solid var(--panel-border);background:#080b12}.funnel-preview::after{content:"OPEN EXPERIENCE  ↗";position:absolute;right:18px;bottom:18px;padding:10px 13px;border:1px solid rgba(255,255,255,.34);border-radius:99px;background:rgba(5,7,12,.74);backdrop-filter:blur(12px);font:600 .65rem var(--mono);letter-spacing:.11em;color:#fff;transition:transform .25s ease,background .25s ease}.funnel-preview img{display:block;width:100%;height:100%;min-height:460px;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .25s ease}.funnel-preview:hover img{transform:scale(1.025);filter:brightness(1.08)}.funnel-preview:hover::after{transform:translateY(-3px);background:rgba(5,7,12,.9)}.funnel-preview:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}
-@media(max-width:820px){.funnel-feature{grid-template-columns:1fr}.funnel-preview{min-height:340px;border-left:0;border-top:1px solid var(--panel-border)}.funnel-preview img{min-height:340px}.funnel-feature-copy{padding:28px}}
-@media(max-width:560px){.funnel-preview,.funnel-preview img{min-height:250px}.funnel-preview::after{right:12px;bottom:12px}.funnel-feature-copy .btn{width:100%}}
-.funnel-feature+.funnel-feature{margin-top:26px}.funnel-feature.lemon{background:radial-gradient(760px 380px at 0% 0%,rgba(217,255,89,.12),transparent 62%),var(--glass)}.funnel-feature.lemon .funnel-preview::after{border-color:rgba(217,255,89,.48);color:#efff99}
+.funnel-book{--book-accent:var(--magenta);position:relative;border:1px solid var(--panel-border);border-radius:24px;overflow:hidden;background:radial-gradient(900px 430px at 10% 0%,color-mix(in srgb,var(--book-accent) 11%,transparent),transparent 64%),color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:var(--shadow);isolation:isolate;perspective:1800px}.funnel-book::before{content:"";position:absolute;z-index:4;left:50%;top:48px;bottom:76px;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.2) 14%,rgba(0,0,0,.7) 50%,rgba(255,255,255,.16) 86%,transparent);box-shadow:-10px 0 24px rgba(0,0,0,.3),10px 0 24px rgba(0,0,0,.2);pointer-events:none}.book-topline{height:48px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--panel-border);font:600 .62rem var(--mono);letter-spacing:.13em;color:var(--muted)}.book-topline strong{color:var(--book-accent)}.book-viewport{position:relative;height:520px;transform-style:preserve-3d;overflow:hidden}.book-page{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;opacity:0;visibility:hidden;pointer-events:none;transform:rotateY(12deg) translateX(3%);transform-origin:center;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.72,.2,1);backface-visibility:hidden}.book-page.active{z-index:2;opacity:1;visibility:visible;pointer-events:auto;transform:none}.book-page.active.exit-next{opacity:0;transform:rotateY(-24deg) translateX(-4%)}.book-page.active.exit-prev{opacity:0;transform:rotateY(24deg) translateX(4%)}.book-page.enter-next{z-index:3;visibility:visible;transform:rotateY(24deg) translateX(4%)}.book-page.enter-prev{z-index:3;visibility:visible;transform:rotateY(-24deg) translateX(-4%)}.book-page.enter-next.active,.book-page.enter-prev.active{opacity:1;transform:none}.book-copy{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0}.book-step{font:600 .66rem var(--mono);letter-spacing:.18em;color:var(--book-accent);text-transform:uppercase}.book-copy h3{font-size:clamp(2.35rem,4.6vw,4.8rem);line-height:.96;margin:18px 0}.book-copy p{max-width:520px;color:var(--muted);line-height:1.7;margin:0}.book-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.book-tags span{font:600 .62rem var(--mono);letter-spacing:.07em;color:var(--txt);border:1px solid var(--panel-border);border-radius:99px;padding:7px 10px;background:rgba(255,255,255,.03)}.book-copy .ecom-links{margin-top:28px}.book-visual{position:relative;display:block;overflow:hidden;border-left:1px solid var(--panel-border);background:#07090f}.book-visual::after{content:"OPEN EXPERIENCE  ↗";position:absolute;right:18px;bottom:18px;padding:10px 13px;border:1px solid rgba(255,255,255,.34);border-radius:99px;background:rgba(5,7,12,.78);backdrop-filter:blur(12px);font:600 .62rem var(--mono);letter-spacing:.1em;color:#fff;transition:transform .25s ease,background .25s ease}.book-visual:hover::after{transform:translateY(-3px);background:rgba(5,7,12,.94)}.book-visual img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .25s}.book-visual:hover img{transform:scale(1.025);filter:brightness(1.08)}.book-visual:focus-visible,.book-control:focus-visible,.book-dot:focus-visible{outline:2px solid var(--lime);outline-offset:-4px}.book-choice{position:relative;border-left:1px solid var(--panel-border);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:center;background:radial-gradient(420px 220px at 50% 45%,color-mix(in srgb,var(--cyan) 10%,transparent),transparent),#080b12}.book-choice-card{position:relative;min-height:285px;overflow:hidden;border:1px solid var(--panel-border);border-radius:16px;background:#090b10}.book-choice-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:.56;transition:.4s}.book-choice-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(5,7,12,.94))}.book-choice-card span{position:absolute;z-index:2;left:17px;right:17px;bottom:16px}.book-choice-card small{display:block;color:var(--book-accent);font:600 .58rem var(--mono);letter-spacing:.12em}.book-choice-card strong{display:block;margin-top:6px;font-size:1rem}.book-choice-card:hover img{opacity:.78;transform:scale(1.04)}.book-controls{height:76px;padding:0 20px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-top:1px solid var(--panel-border);background:rgba(255,255,255,.018)}.book-control{display:inline-flex;align-items:center;gap:9px;width:max-content;border:1px solid var(--panel-border);border-radius:99px;background:rgba(255,255,255,.035);color:var(--txt);padding:10px 15px;font:600 .66rem var(--mono);letter-spacing:.06em;cursor:pointer;transition:.2s}.book-control:hover:not(:disabled){border-color:var(--book-accent);color:var(--book-accent)}.book-control:disabled{opacity:.3;cursor:not-allowed}.book-control.next{justify-self:end}.book-dots{display:flex;align-items:center;gap:9px}.book-dot{width:9px;height:9px;padding:0;border:1px solid var(--muted);border-radius:50%;background:transparent;cursor:pointer;transition:.3s}.book-dot.active{width:28px;border-radius:99px;border-color:var(--book-accent);background:var(--book-accent)}
+@media(max-width:780px){.funnel-book::before{display:none}.book-viewport{height:620px}.book-page{grid-template-columns:1fr;grid-template-rows:260px 1fr}.book-visual,.book-choice{order:-1;border-left:0;border-bottom:1px solid var(--panel-border)}.book-copy{justify-content:flex-start;padding:27px}.book-copy h3{font-size:clamp(2.3rem,11vw,3.6rem);margin:13px 0}.book-copy p{line-height:1.58}.book-tags{margin-top:16px}.book-copy .ecom-links{margin-top:20px}.book-choice{padding:16px;align-content:stretch}.book-choice-card{min-height:220px}.book-controls{height:72px;padding:0 14px}.book-control{min-height:44px}.book-topline{padding:0 16px}}
+@media(max-width:520px){.book-viewport{height:640px}.book-page{grid-template-rows:245px 1fr}.book-copy{padding:24px 20px}.book-copy h3{font-size:2.45rem}.book-copy p{font-size:.88rem}.book-tags span{font-size:.56rem}.book-choice{grid-template-columns:1fr 1fr;gap:8px;padding:10px}.book-choice-card{min-height:220px}.book-choice-card strong{font-size:.84rem}.book-control{font-size:0;width:46px;height:46px;justify-content:center;padding:0}.book-control span{font-size:1rem}.book-topline{font-size:.54rem}}
+@media(prefers-reduced-motion:reduce){.book-page{transition:none!important}}
 
 /* ---- Operations intelligence dashboards ---- */
 #ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
@@ -650,33 +648,56 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
   <section id="funnels" class="wrap">
     <div class="reveal">
       <span class="eyebrow">CONVERSION FUNNELS</span>
-      <h2 class="title">Funnels built to turn curiosity into action.</h2>
-      <p class="lead">Immersive product and booking journeys that make the next step feel natural.</p>
+      <h2 class="title">Two funnel experiences. One compact story.</h2>
+      <p class="lead">Turn the page to explore each journey without leaving the section.</p>
     </div>
-    <article class="funnel-feature reveal">
-      <div class="funnel-feature-copy">
-        <span class="craftee-badge">FEATURED · AIRBNB</span>
-        <h3>The Threshold</h3>
-        <p>A cinematic short term rental funnel with a scroll controlled entrance, interactive room discovery, guest proof, dynamic pricing, and a focused reservation flow.</p>
-        <div class="funnel-feature-meta" aria-label="Funnel features"><span>IMMERSIVE SCROLL</span><span>INTERACTIVE ROOMS</span><span>BOOKING UX</span></div>
-        <div class="ecom-links"><a class="btn primary" href="airbnb/" target="_blank" rel="noopener">View Airbnb Funnel ↗</a></div>
+    <div class="funnel-book reveal" id="funnel-book" data-page="0" aria-label="Conversion funnel showcase">
+      <div class="book-topline"><span>INTERACTIVE FUNNEL BOOK</span><strong id="book-page-count">01 / 03</strong></div>
+      <div class="book-viewport">
+        <article class="book-page active" data-book-page="0" aria-hidden="false">
+          <div class="book-copy">
+            <span class="book-step">STEP 01 · HOOK</span>
+            <h3>The Threshold</h3>
+            <p>A cinematic short term rental journey that turns property discovery into a clear path toward booking.</p>
+            <div class="book-tags"><span>IMMERSIVE SCROLL</span><span>INTERACTIVE ROOMS</span><span>BOOKING UX</span></div>
+            <div class="ecom-links"><a class="btn primary" href="airbnb/" target="_blank" rel="noopener">View Airbnb Funnel ↗</a></div>
+          </div>
+          <a class="book-visual" href="airbnb/" target="_blank" rel="noopener" aria-label="Open The Threshold Airbnb funnel">
+            <img src="airbnb-funnel-homepage.png" alt="The Threshold Airbnb funnel homepage preview" loading="lazy" width="1440" height="1000">
+          </a>
+        </article>
+        <article class="book-page" data-book-page="1" aria-hidden="true">
+          <div class="book-copy">
+            <span class="book-step">STEP 02 · OFFER</span>
+            <h3>Limone Sanctuary</h3>
+            <p>A sensory citrus journey that moves from product desire into flavor discovery and a six bottle crate.</p>
+            <div class="book-tags"><span>3D PRODUCT STAGE</span><span>FLAVOR LAB</span><span>CRATE BUILDER</span></div>
+            <div class="ecom-links"><a class="btn primary" href="lemonjuice/" target="_blank" rel="noopener">View Lemon Juice Funnel ↗</a></div>
+          </div>
+          <a class="book-visual" href="lemonjuice/" target="_blank" rel="noopener" aria-label="Open the Limone Sanctuary lemon juice funnel">
+            <img src="lemonjuice-funnel-homepage.png" alt="Limone Sanctuary lemon juice funnel homepage preview" loading="lazy" width="1440" height="1000">
+          </a>
+        </article>
+        <article class="book-page" data-book-page="2" aria-hidden="true">
+          <div class="book-copy">
+            <span class="book-step">STEP 03 · ACTION</span>
+            <h3>Choose the journey.</h3>
+            <p>Open either live experience, or connect with me to shape a conversion path around your own offer.</p>
+            <div class="book-tags"><span>DESIRE</span><span>DISCOVERY</span><span>DECISION</span></div>
+            <div class="ecom-links"><button class="btn primary" type="button" onclick="bkOpen()">Let's Connect!</button></div>
+          </div>
+          <div class="book-choice" aria-label="Choose a funnel experience">
+            <a class="book-choice-card" href="airbnb/" target="_blank" rel="noopener"><img src="airbnb-funnel-homepage.png" alt="Airbnb funnel preview" loading="lazy"><span><small>BOOKING JOURNEY</small><strong>Open The Threshold ↗</strong></span></a>
+            <a class="book-choice-card" href="lemonjuice/" target="_blank" rel="noopener"><img src="lemonjuice-funnel-homepage.png" alt="Lemon juice funnel preview" loading="lazy"><span><small>PRODUCT JOURNEY</small><strong>Open Limone Sanctuary ↗</strong></span></a>
+          </div>
+        </article>
       </div>
-      <a class="funnel-preview" href="airbnb/" target="_blank" rel="noopener" aria-label="Open The Threshold Airbnb funnel">
-        <img src="airbnb-funnel-homepage.png" alt="The Threshold Airbnb funnel homepage preview" loading="lazy" width="1440" height="1000">
-      </a>
-    </article>
-    <article class="funnel-feature lemon reveal">
-      <div class="funnel-feature-copy">
-        <span class="craftee-badge">FEATURED · WELLNESS DTC</span>
-        <h3>Limone Sanctuary</h3>
-        <p>A sensory citrus funnel with a responsive 3D product universe, interactive flavor profiles, harvest storytelling, purity proof, and a six bottle crate builder.</p>
-        <div class="funnel-feature-meta" aria-label="Funnel features"><span>3D PRODUCT STAGE</span><span>FLAVOR LAB</span><span>CRATE BUILDER</span></div>
-        <div class="ecom-links"><a class="btn primary" href="lemonjuice/" target="_blank" rel="noopener">View Lemon Juice Funnel ↗</a></div>
+      <div class="book-controls" aria-label="Funnel book navigation">
+        <button class="book-control previous" id="book-prev" type="button" disabled><span>←</span> Previous</button>
+        <div class="book-dots" role="tablist" aria-label="Book pages"><button class="book-dot active" type="button" data-book-go="0" aria-label="Open page 1" aria-selected="true"></button><button class="book-dot" type="button" data-book-go="1" aria-label="Open page 2" aria-selected="false"></button><button class="book-dot" type="button" data-book-go="2" aria-label="Open page 3" aria-selected="false"></button></div>
+        <button class="book-control next" id="book-next" type="button">Next <span>→</span></button>
       </div>
-      <a class="funnel-preview" href="lemonjuice/" target="_blank" rel="noopener" aria-label="Open the Limone Sanctuary lemon juice funnel">
-        <img src="lemonjuice-funnel-homepage.png" alt="Limone Sanctuary lemon juice funnel homepage preview" loading="lazy" width="1440" height="1000">
-      </a>
-    </article>
+    </div>
   </section>
 
   <section id="ecommerce-operations" class="wrap">
@@ -2501,10 +2522,46 @@ function setupGlitch(){$$(".title").forEach(el=>{
   io.observe(el);
 });}
 
+/* ===== compact conversion funnel book ===== */
+function setupFunnelBook(){
+  const book=$("#funnel-book"); if(!book) return;
+  const pages=$$("[data-book-page]",book),dots=$$("[data-book-go]",book);
+  const prev=$("#book-prev"),next=$("#book-next"),count=$("#book-page-count");
+  const accents=["var(--magenta)","var(--lime)","var(--cyan)"];
+  let index=0,turning=false;
+  function sync(){
+    book.dataset.page=String(index);book.style.setProperty("--book-accent",accents[index]);
+    count.textContent=String(index+1).padStart(2,"0")+" / "+String(pages.length).padStart(2,"0");
+    prev.disabled=index===0;next.disabled=index===pages.length-1;
+    dots.forEach((dot,i)=>{dot.classList.toggle("active",i===index);dot.setAttribute("aria-selected",String(i===index));});
+    pages.forEach((page,i)=>page.setAttribute("aria-hidden",String(i!==index)));
+  }
+  function go(target){
+    target=Math.max(0,Math.min(pages.length-1,target));
+    if(target===index||turning)return;
+    const old=pages[index],fresh=pages[target],forward=target>index;
+    turning=true;
+    fresh.classList.add(forward?"enter-next":"enter-prev");
+    fresh.getBoundingClientRect();
+    old.classList.add(forward?"exit-next":"exit-prev");
+    fresh.classList.add("active");
+    const previous=index;index=target;sync();
+    setTimeout(()=>{
+      pages[previous].classList.remove("active","exit-next","exit-prev");
+      fresh.classList.remove("enter-next","enter-prev");
+      turning=false;
+    },prefersReduced()?20:620);
+  }
+  prev.addEventListener("click",()=>go(index-1));next.addEventListener("click",()=>go(index+1));
+  dots.forEach(dot=>dot.addEventListener("click",()=>go(Number(dot.dataset.bookGo))));
+  book.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(index+1);}if(e.key==="ArrowLeft"){e.preventDefault();go(index-1);}});
+  sync();
+}
+
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();buildProjects();
-  setupTheme();setupROI();setupAvaChat();setupOperationsVisuals();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupAvaChat();setupOperationsVisuals();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupFunnelBook();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
