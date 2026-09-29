@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08140d">
+  <meta name="description" content="Limone Sanctuary, a cinematic citrus tasting experience.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='29' fill='%23f4da45'/%3E%3Cpath d='M32 8v48M8 32h48M15 15l34 34M49 15L15 49' stroke='%2308140d' stroke-width='3'/%3E%3C/svg%3E">
+  <title>Limone Sanctuary | Taste the First Light</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#flavors">Skip to flavors</a>
+  <canvas id="citrusCanvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-light" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="Limone Sanctuary home">
+      <span class="brand-fruit" aria-hidden="true"><i></i></span>
+      <span>LIMONE SANCTUARY</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#origin">Origin</a>
+      <a href="#flavors">Flavor lab</a>
+      <a href="#purity">Purity</a>
+      <a href="#crate">Build a crate</a>
+    </nav>
+    <button class="nav-cart js-open-crate" type="button"><span>Crate</span><b id="navCount">3</b></button>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#origin">Origin</a><a href="#flavors">Flavor lab</a><a href="#purity">Purity</a><a href="#crate">Build a crate</a>
+    <button class="button button-acid js-open-crate" type="button">Open your crate</button>
+  </div>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <div class="hero-aurora" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker"><span></span> Pressed at 05:42 · Val di Noto</p>
+          <h1>Taste the<br><em>first light.</em></h1>
+          <p class="hero-lead">Sicilian citrus pressed within four hours of harvest, bottled cold, and delivered as a six flavor morning ritual.</p>
+          <div class="hero-actions">
+            <a class="button button-acid" href="#crate">Build your tasting flight</a>
+            <a class="line-link" href="#flavors">Explore the flavor lab <span>↘</span></a>
+          </div>
+          <div class="hero-proof">
+            <div><strong>4.98</strong><span>Guest taste score</span></div>
+            <div><strong>34°F</strong><span>Cold chain delivery</span></div>
+            <div><strong>0g</strong><span>Added sugar</span></div>
+          </div>
+        </div>
+
+        <div class="product-universe" id="productUniverse" aria-label="Interactive Sicilian lemon juice presentation">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+          <div class="slice slice-one"><i></i></div><div class="slice slice-two"><i></i></div><div class="slice slice-three"><i></i></div>
+          <div class="leaf leaf-one"></div><div class="leaf leaf-two"></div>
+          <div class="product-stage" id="productStage">
+            <img src="assets/hero-product.jpg" alt="Sicilian lemon juice bottle surrounded by fresh lemon slices" width="512" height="286">
+            <div class="stage-sheen"></div>
+          </div>
+          <div class="telemetry telemetry-a"><small>PRESS BATCH</small><strong>#049</strong></div>
+          <div class="telemetry telemetry-b"><small>NATURAL VITAMIN C</small><strong>380mg</strong></div>
+          <div class="telemetry telemetry-c"><span></span> LIVE COLD CHAIN</div>
+          <p class="drag-note">Move to orbit the harvest</p>
+        </div>
+      </div>
+      <div class="hero-marquee" aria-hidden="true"><div>PRIMOFIORE · MORO BLOOD ORANGE · CUCUMBER MINT · LAVENDER THYME · PRIMOFIORE · MORO BLOOD ORANGE · CUCUMBER MINT · LAVENDER THYME ·</div></div>
+    </section>
+
+    <section class="origin" id="origin">
+      <div class="origin-sticky">
+        <div class="origin-visual reveal">
+          <div class="sun-disc"></div>
+          <div class="origin-bottle"><span>LIMONE</span><strong>FIRST PRESS</strong><small>500 ML</small></div>
+          <div class="origin-rings"><i></i><i></i><i></i></div>
+          <div class="origin-coordinates">36.8927° N<br>15.0682° E</div>
+        </div>
+        <div class="origin-copy reveal">
+          <p class="eyebrow">01 · THE ORIGIN</p>
+          <h2>Four hours from branch to bottle.</h2>
+          <p>Fruit is clipped before the grove warms, pressed without heat, and sealed while its aroma is still bright.</p>
+          <div class="process-list">
+            <button class="process-step active" type="button" data-step="0"><span>05:00</span><div><strong>Dawn harvest</strong><small>Hand selected at peak oil concentration</small></div></button>
+            <button class="process-step" type="button" data-step="1"><span>07:10</span><div><strong>Whole fruit press</strong><small>Cold pressure protects the living flavor</small></div></button>
+            <button class="process-step" type="button" data-step="2"><span>08:25</span><div><strong>Glass bottling</strong><small>No plastic contact and no thermal exposure</small></div></button>
+            <button class="process-step" type="button" data-step="3"><span>09:00</span><div><strong>Cold chain release</strong><small>Chilled from the cellar to your door</small></div></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flavors" id="flavors">
+      <div class="section-head reveal">
+        <p class="eyebrow">02 · FLAVOR LAB</p>
+        <h2>Choose your morning chemistry.</h2>
+        <p>Each blend changes the ritual, color, and sensory profile. Select a bottle to transform the lab.</p>
+      </div>
+
+      <div class="flavor-lab reveal" id="flavorLab">
+        <div class="flavor-scene">
+          <div class="flavor-aura" id="flavorAura"></div>
+          <img id="flavorImage" src="assets/flavor-trio.jpg" alt="Three premium citrus juice flavors on ice" width="512" height="286">
+          <div class="scene-scan"></div>
+          <div class="active-marker" id="activeMarker"><span>01</span></div>
+          <div class="scene-caption"><small>ACTIVE PRESS</small><strong id="sceneFlavor">Primofiore Classic</strong></div>
+        </div>
+        <div class="flavor-console">
+          <div class="flavor-tabs" role="tablist" aria-label="Select a flavor">
+            <button class="flavor-tab active" type="button" role="tab" aria-selected="true" data-flavor="0"><span style="--dot:#f4da45"></span>01</button>
+            <button class="flavor-tab" type="button" role="tab" aria-selected="false" data-flavor="1"><span style="--dot:#94d7b4"></span>02</button>
+            <button class="flavor-tab" type="button" role="tab" aria-selected="false" data-flavor="2"><span style="--dot:#ff7c4d"></span>03</button>
+            <button class="flavor-tab" type="button" role="tab" aria-selected="false" data-flavor="3"><span style="--dot:#c7afe8"></span>04</button>
+          </div>
+          <div class="flavor-copy">
+            <p class="eyebrow" id="flavorBatch">PRESS 01 · BATCH 049</p>
+            <h3 id="flavorTitle">Primofiore Classic</h3>
+            <p id="flavorDescription">Clean Sicilian lemon with bright peel oils, mineral spring water, and a dry finish.</p>
+          </div>
+          <div class="sensory-grid">
+            <div class="sensory-ring" id="sensoryRing"><div><strong id="brixValue">8.2°</strong><small>BRIX</small></div></div>
+            <div class="sensory-bars">
+              <div><span>Acidity <b id="acidityValue">94%</b></span><i><em id="acidityBar" style="width:94%"></em></i></div>
+              <div><span>Hydration <b id="hydrationValue">100%</b></span><i><em id="hydrationBar" style="width:100%"></em></i></div>
+              <div><span>Botanical lift <b id="botanicalValue">42%</b></span><i><em id="botanicalBar" style="width:42%"></em></i></div>
+            </div>
+          </div>
+          <div class="ritual-card"><small>RECOMMENDED RITUAL</small><p id="ritualText">Pour 120ml over one clear cube at sunrise. Finish with mineral water.</p></div>
+          <button class="button button-acid" id="addFlavor" type="button">Add Primofiore to crate</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="purity" id="purity">
+      <div class="purity-intro reveal">
+        <p class="eyebrow">03 · NOTHING HIDDEN</p>
+        <h2>Read the bottle<br>like a formula.</h2>
+        <p>Every claim is translated into something you can understand before a bottle reaches your crate.</p>
+      </div>
+      <div class="purity-stack">
+        <article class="purity-card reveal" data-tilt>
+          <span>01</span><div class="purity-icon press-icon"></div><h3>Pressed cold</h3><p>No boiling. No concentrate. No flavor restored after processing.</p><small>34°F extraction</small>
+        </article>
+        <article class="purity-card reveal" data-tilt>
+          <span>02</span><div class="purity-icon water-icon"></div><h3>Mineral spring water</h3><p>Filtered through volcanic stone beneath the eastern Sicilian groves.</p><small>Etna aquifer</small>
+        </article>
+        <article class="purity-card reveal" data-tilt>
+          <span>03</span><div class="purity-icon sugar-icon"></div><h3>Nothing added</h3><p>No refined sugar, synthetic citric acid, artificial color, or stabilizer.</p><small>100% fruit origin</small>
+        </article>
+        <article class="purity-card reveal" data-tilt>
+          <span>04</span><div class="purity-icon glass-icon"></div><h3>Only glass</h3><p>Heavy flint bottles protect flavor without plastic touching the juice.</p><small>Reusable vessel</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="crate" id="crate">
+      <div class="crate-copy reveal">
+        <p class="eyebrow">04 · YOUR SIX BOTTLE FLIGHT</p>
+        <h2>Build a crate around your rhythm.</h2>
+        <p>Choose six bottles. Mix bright mornings, cool resets, and slower evening pours.</p>
+        <div class="crate-benefits"><span>Cold delivery included at six</span><span>Save 20% on every full crate</span><span>Pause or change anytime</span></div>
+      </div>
+      <div class="crate-builder reveal">
+        <div class="crate-top"><div><small>YOUR TASTING FLIGHT</small><strong><span id="crateCount">3</span> of 6 bottles</strong></div><span id="crateStatus">Add 3 more for cold delivery</span></div>
+        <div class="bottle-slots" id="bottleSlots" aria-label="Crate bottle slots"></div>
+        <div class="crate-progress"><i id="crateProgress"></i></div>
+        <div class="crate-selector">
+          <label for="quickFlavor">Add another bottle</label>
+          <div><select id="quickFlavor"><option value="0">Primofiore Classic</option><option value="1">Cucumber Mint</option><option value="2">Moro Blood Orange</option><option value="3">Lavender Thyme</option></select><button id="quickAdd" type="button">Add to crate</button></div>
+        </div>
+        <div class="crate-total"><div><small>CRATE TOTAL</small><strong id="crateTotal">$36.00</strong></div><button class="button button-dark" id="checkoutButton" type="button">Complete your crate</button></div>
+        <p class="prototype-note">Interactive concept. No payment is processed.</p>
+      </div>
+    </section>
+
+    <section class="proof">
+      <div class="proof-quote reveal"><p>“</p><blockquote>It tastes like someone captured the first ten minutes of a Sicilian morning.</blockquote><div><strong>Amelia R.</strong><span>Verified tasting flight · New York</span></div></div>
+      <div class="proof-metrics reveal"><div><strong>32,400</strong><span>Morning rituals delivered</span></div><div><strong>4.98</strong><span>Average taste score</span></div><div><strong>18h</strong><span>Harvest to cold dispatch</span></div></div>
+    </section>
+
+    <section class="finale">
+      <div class="finale-sun"></div><div class="finale-slice slice"><i></i></div>
+      <div class="finale-copy reveal"><p class="eyebrow">THE NEXT PRESS LEAVES FRIDAY</p><h2>Make morning<br>taste alive.</h2><a class="button button-acid" href="#crate">Build your tasting flight</a></div>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand"><span class="brand-fruit"><i></i></span><strong>LIMONE SANCTUARY</strong></div><p>Val di Noto, Sicily · Cold pressed citrus rituals</p><div><a href="#origin">Origin</a><a href="#purity">Purity</a><a href="#">Delivery</a><a href="#">Journal</a></div><small>Concept experience created for portfolio demonstration. Product claims and customer data are illustrative.</small></footer>
+
+  <aside class="crate-dock" id="crateDock" aria-label="Current crate summary"><button class="dock-slots js-open-crate" id="dockSlots" type="button" aria-label="Open crate"></button><div><small>CUSTOM FLIGHT</small><strong><span id="dockCount">3</span> / 6 · <span id="dockTotal">$36</span></strong></div><button class="dock-button js-open-crate" type="button">View crate</button></aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
