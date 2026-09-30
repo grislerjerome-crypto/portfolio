@@ -20,14 +20,15 @@ with sync_playwright() as p:
     visuals = page.locator("#funnel-book .book-visual")
     images = page.locator("#funnel-book img")
     assert book.count() == 1
-    assert pages.count() == 3
+    assert pages.count() == 4
     assert page.locator("#funnel-book .book-page.active").count() == 1
-    assert page.locator("#book-page-count").inner_text() == "01 / 03"
+    assert page.locator("#book-page-count").inner_text() == "01 / 04"
     page.wait_for_function("() => [...document.querySelectorAll('#funnel-book img')].every(img => img.complete)", timeout=15000)
     assert images.evaluate_all("imgs => imgs.every(img => img.complete && img.naturalWidth > 0)")
     assert visuals.nth(0).get_attribute("href") == "airbnb/"
     assert visuals.nth(1).get_attribute("href") == "lemonjuice/"
     assert visuals.nth(2).get_attribute("href") == "solar/"
+    assert visuals.nth(3).get_attribute("href") == "villatala/"
     assert visuals.evaluate_all("els => els.every(el => el.target === '_blank')")
     duration = pages.nth(0).evaluate("el => getComputedStyle(el).transitionDuration")
     assert ".6s" in duration or "0.6s" in duration
@@ -46,7 +47,7 @@ with sync_playwright() as p:
 
     page.locator("#book-next").click()
     page.wait_for_timeout(700)
-    assert page.locator("#book-page-count").inner_text() == "02 / 03"
+    assert page.locator("#book-page-count").inner_text() == "02 / 04"
     assert "Limone Sanctuary" in page.locator("#funnel-book .book-page.active h3").inner_text()
     assert abs(book.bounding_box()["height"] - start_height) < 1
     with page.expect_popup() as popup_info:
@@ -63,9 +64,9 @@ with sync_playwright() as p:
 
     page.locator("#book-next").click()
     page.wait_for_timeout(700)
-    assert page.locator("#book-page-count").inner_text() == "03 / 03"
+    assert page.locator("#book-page-count").inner_text() == "03 / 04"
     assert "Lumen Grid" in page.locator("#funnel-book .book-page.active h3").inner_text()
-    assert page.locator("#book-next").is_disabled()
+    assert not page.locator("#book-next").is_disabled()
     assert abs(book.bounding_box()["height"] - start_height) < 1
     with page.expect_popup() as popup_info:
         visuals.nth(2).click()
@@ -80,14 +81,38 @@ with sync_playwright() as p:
     assert solar.locator("#billValue").inner_text() == "$500"
     report["routes"]["solar"] = solar.url
     solar.close()
+
+    page.locator("#book-next").click()
+    page.wait_for_timeout(700)
+    assert page.locator("#book-page-count").inner_text() == "04 / 04"
+    assert "Villa Tala" in page.locator("#funnel-book .book-page.active h3").inner_text()
+    assert page.locator("#book-next").is_disabled()
+    assert abs(book.bounding_box()["height"] - start_height) < 1
+    with page.expect_popup() as popup_info:
+        visuals.nth(3).click()
+    villa = popup_info.value
+    villa.on("pageerror", lambda error: report["pageErrors"].append(f"villatala: {error}"))
+    villa.wait_for_load_state("domcontentloaded")
+    assert "/villatala/" in villa.url
+    assert villa.title() == "Villa Tala | A Private Island Stay in El Nido"
+    villa.locator('[data-suite="cliff"]').click()
+    assert villa.locator("#suiteTitle").inner_text() == "Live between stone and sea."
+    villa.locator('[data-ritual="night"]').click()
+    assert villa.locator("#ritualTitle").inner_text() == "Move through living light."
+    villa.locator('[data-nights="14"]').click()
+    villa.locator("#cellar").check()
+    assert villa.locator("#totalPrice").inner_text() == "$50,060"
+    report["routes"]["villatala"] = villa.url
+    villa.close()
+
     page.locator("#book-prev").click()
     page.wait_for_timeout(700)
-    assert page.locator("#book-page-count").inner_text() == "02 / 03"
+    assert page.locator("#book-page-count").inner_text() == "03 / 04"
     page.locator('[data-book-go="0"]').click()
     page.wait_for_timeout(700)
-    assert page.locator("#book-page-count").inner_text() == "01 / 03"
+    assert page.locator("#book-page-count").inner_text() == "01 / 04"
     assert page.locator("#book-prev").is_disabled()
-    report["book"] = {"pages": 3, "next": "passed", "previous": "passed", "dots": "passed", "heightStable": True, "transition": duration}
+    report["book"] = {"pages": 4, "next": "passed", "previous": "passed", "dots": "passed", "heightStable": True, "transition": duration}
 
     for width, height, label in [(1440, 1000, "desktop"), (390, 844, "mobile")]:
         page.set_viewport_size({"width": width, "height": height})
@@ -99,7 +124,7 @@ with sync_playwright() as p:
             visual_box = page.locator("#funnel-book .book-page.active .book-visual").bounding_box()
             copy_box = page.locator("#funnel-book .book-page.active .book-copy").bounding_box()
             assert visual_box["y"] < copy_box["y"]
-            for index in (1, 2):
+            for index in (1, 2, 3):
                 page.locator(f'[data-book-go="{index}"]').click()
                 page.wait_for_timeout(700)
                 fits = page.locator("#funnel-book .book-page.active").evaluate("el => el.scrollHeight <= el.clientHeight + 2")
@@ -115,6 +140,11 @@ with sync_playwright() as p:
             solar_path = Path(tempfile.gettempdir()) / "portfolio-funnel-book-solar.png"
             page.locator("#funnels").screenshot(path=str(solar_path))
             entry["solarScreenshot"] = str(solar_path)
+            page.locator('[data-book-go="3"]').click()
+            page.wait_for_timeout(700)
+            villa_path = Path(tempfile.gettempdir()) / "portfolio-funnel-book-villa-tala.png"
+            page.locator("#funnels").screenshot(path=str(villa_path))
+            entry["villaTalaScreenshot"] = str(villa_path)
             page.locator('[data-book-go="0"]').click()
             page.wait_for_timeout(700)
         report["viewports"].append(entry)
