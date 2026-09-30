@@ -92,12 +92,12 @@
   $$('.ritual-nav button').forEach(button => button.addEventListener('click', () => selectRitual(button.dataset.ritual)));
 
   let currentNights = 7;
-  const rates = { 3: 4200, 7: 3570, 14: 3150 };
-  const money = value => `$${value.toLocaleString('en-US')}`;
+  const rates = { 3: 18500, 7: 16900, 14: 14500 };
+  const money = value => `₱${value.toLocaleString('en-PH')}`;
   const calculate = () => {
     const base = currentNights * rates[currentNights];
-    const extras = ($('#seaplane').checked ? 2400 : 0) + ($('#hilot').checked ? 1260 : 0) + ($('#cellar').checked ? 1850 : 0);
-    const total = base + extras + 450;
+    const extras = ($('#seaplane').checked ? 18000 : 0) + ($('#hilot').checked ? 6500 : 0) + ($('#cellar').checked ? 7500 : 0);
+    const total = base + extras + 2500;
     $('#nightLabel').textContent = `${currentNights} nights × ${money(rates[currentNights])}`;
     $('#nightCost').textContent = money(base);
     $('#seaplaneRow').hidden = !$('#seaplane').checked;

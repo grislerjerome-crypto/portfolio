@@ -24,6 +24,7 @@ with sync_playwright() as p:
     assert page.locator("#funnel-book .book-page.active").count() == 1
     assert page.locator("#book-page-count").inner_text() == "01 / 04"
     page.wait_for_function("() => [...document.querySelectorAll('#funnel-book img')].every(img => img.complete)", timeout=15000)
+    page.wait_for_function("() => !document.fonts || document.fonts.status === 'loaded'", timeout=15000)
     assert images.evaluate_all("imgs => imgs.every(img => img.complete && img.naturalWidth > 0)")
     assert visuals.nth(0).get_attribute("href") == "airbnb/"
     assert visuals.nth(1).get_attribute("href") == "lemonjuice/"
@@ -101,7 +102,7 @@ with sync_playwright() as p:
     assert villa.locator("#ritualTitle").inner_text() == "Move through living light."
     villa.locator('[data-nights="14"]').click()
     villa.locator("#cellar").check()
-    assert villa.locator("#totalPrice").inner_text() == "$50,060"
+    assert villa.locator("#totalPrice").inner_text() == "₱237,500"
     report["routes"]["villatala"] = villa.url
     villa.close()
 
