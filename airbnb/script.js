@@ -25,10 +25,6 @@ function updateScrollExperience() {
     root.style.setProperty('--hero-opacity', String(1 - clamp(progress / .34)));
     root.style.setProperty('--hero-y', `${progress * -55}px`);
     root.style.setProperty('--cue-opacity', String(1 - clamp(progress / .12)));
-    root.style.setProperty('--door-scale', String(.84 + progress * .72));
-    root.style.setProperty('--door-opacity', String(clamp(.66 + progress * .7)));
-    root.style.setProperty('--door-left', `${map(progress, .24, .66, 0, -104)}deg`);
-    root.style.setProperty('--door-right', `${map(progress, .24, .66, 0, 104)}deg`);
     root.style.setProperty('--interior-opacity', String(map(progress, .4, .72, 0, 1)));
     root.style.setProperty('--interior-scale', String(map(progress, .42, 1, 1.15, 1.01)));
     root.style.setProperty('--shade-opacity', String(map(progress, .38, .78, 1, .48)));

@@ -27,8 +27,8 @@ with sync_playwright() as p:
     assert images.evaluate_all("imgs => imgs.every(img => img.complete && img.naturalWidth > 0)")
     assert visuals.nth(0).get_attribute("href") == "airbnb/"
     assert visuals.nth(1).get_attribute("href") == "lemonjuice/"
-    assert visuals.nth(0).get_attribute("target") == "_blank"
-    assert visuals.nth(1).get_attribute("target") == "_blank"
+    assert visuals.nth(2).get_attribute("href") == "solar/"
+    assert visuals.evaluate_all("els => els.every(el => el.target === '_blank')")
     duration = pages.nth(0).evaluate("el => getComputedStyle(el).transitionDuration")
     assert ".6s" in duration or "0.6s" in duration
 
@@ -39,6 +39,8 @@ with sync_playwright() as p:
     airbnb.wait_for_load_state("domcontentloaded")
     assert "/airbnb/" in airbnb.url
     assert airbnb.title() == "The Threshold | Private stay in Joshua Tree"
+    assert airbnb.locator(".architectural-frame, .door-left, .door-right").count() == 0
+    assert airbnb.locator("#stay, #spaces, #booking").count() == 3
     report["routes"]["airbnb"] = airbnb.url
     airbnb.close()
 
@@ -62,7 +64,22 @@ with sync_playwright() as p:
     page.locator("#book-next").click()
     page.wait_for_timeout(700)
     assert page.locator("#book-page-count").inner_text() == "03 / 03"
+    assert "Lumen Grid" in page.locator("#funnel-book .book-page.active h3").inner_text()
     assert page.locator("#book-next").is_disabled()
+    assert abs(book.bounding_box()["height"] - start_height) < 1
+    with page.expect_popup() as popup_info:
+        visuals.nth(2).click()
+    solar = popup_info.value
+    solar.on("pageerror", lambda error: report["pageErrors"].append(f"solar: {error}"))
+    solar.wait_for_load_state("domcontentloaded")
+    assert "/solar/" in solar.url
+    assert solar.title() == "Lumen Grid | Own Your Energy"
+    solar.locator('[data-hardware="battery"]').first.click(force=True)
+    assert solar.locator("#hardwareTitle").inner_text() == "Night reserve"
+    solar.locator("#billSlider").evaluate("el => {el.value=500; el.dispatchEvent(new Event('input',{bubbles:true}))}")
+    assert solar.locator("#billValue").inner_text() == "$500"
+    report["routes"]["solar"] = solar.url
+    solar.close()
     page.locator("#book-prev").click()
     page.wait_for_timeout(700)
     assert page.locator("#book-page-count").inner_text() == "02 / 03"
@@ -91,7 +108,16 @@ with sync_playwright() as p:
             page.wait_for_timeout(700)
         path = Path(tempfile.gettempdir()) / f"portfolio-funnel-book-{label}.png"
         page.locator("#funnels").screenshot(path=str(path))
-        report["viewports"].append({"name": label, "overflow": overflow, "screenshot": str(path)})
+        entry = {"name": label, "overflow": overflow, "screenshot": str(path)}
+        if label == "desktop":
+            page.locator('[data-book-go="2"]').click()
+            page.wait_for_timeout(700)
+            solar_path = Path(tempfile.gettempdir()) / "portfolio-funnel-book-solar.png"
+            page.locator("#funnels").screenshot(path=str(solar_path))
+            entry["solarScreenshot"] = str(solar_path)
+            page.locator('[data-book-go="0"]').click()
+            page.wait_for_timeout(700)
+        report["viewports"].append(entry)
 
     assert not report["pageErrors"], report["pageErrors"]
     browser.close()
