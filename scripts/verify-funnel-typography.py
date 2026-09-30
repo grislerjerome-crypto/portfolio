@@ -1,9 +1,13 @@
 """Verify funnel typography, responsive fit, and Villa Tala PHP pricing."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from urllib.parse import urlsplit
 import json, sys, tempfile
 
-base = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8121/").rstrip("/")
+input_url = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8121/"
+parts = urlsplit(input_url)
+base = f"{parts.scheme}://{parts.netloc}{parts.path}".rstrip("/")
+query = f"?{parts.query}" if parts.query else ""
 out = Path(tempfile.gettempdir())
 funnels = {
     "airbnb": {"nav": ".desktop-nav", "display": "Gilda Display", "body": "DM Sans"},
@@ -15,10 +19,16 @@ report = {"base": base, "funnels": {}, "errors": []}
 
 with sync_playwright() as p:
     browser = p.chromium.launch(channel="msedge", headless=True)
+    context = browser.new_context(viewport={"width": 1440, "height": 1000}, device_scale_factor=1)
+    bootstrap = context.new_page()
+    bootstrap.goto(f"{base}/{query}", wait_until="domcontentloaded")
+    bootstrap.wait_for_timeout(12000)
+    bootstrap.close()
     for name, expected in funnels.items():
-        page = browser.new_page(viewport={"width": 1440, "height": 1000}, device_scale_factor=1)
+        page = context.new_page()
         page.on("pageerror", lambda error, n=name: report["errors"].append(f"{n}: {error}"))
-        page.goto(f"{base}/{name}/", wait_until="domcontentloaded")
+        page.goto(f"{base}/{name}/{query}", wait_until="domcontentloaded")
+        page.wait_for_selector("h1", timeout=20000)
         page.wait_for_function("() => !document.fonts || document.fonts.status === 'loaded'", timeout=15000)
         page.wait_for_timeout(350)
         metrics = page.evaluate("""navSel => {
@@ -96,6 +106,7 @@ with sync_playwright() as p:
             "screenshots": shots,
         }
         page.close()
+    context.close()
     browser.close()
 
 assert not report["errors"], report["errors"]
