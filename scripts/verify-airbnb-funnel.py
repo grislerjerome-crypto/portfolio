@@ -50,7 +50,8 @@ with sync_playwright() as p:
     page.wait_for_timeout(700)
     assert page.locator("#book-page-count").inner_text() == "02 / 04"
     assert "Limone Sanctuary" in page.locator("#funnel-book .book-page.active h3").inner_text()
-    assert abs(book.bounding_box()["height"] - start_height) < 1
+    second_height = book.bounding_box()["height"]
+    assert abs(second_height - start_height) < 1, (start_height, second_height)
     with page.expect_popup() as popup_info:
         visuals.nth(1).click()
     lemon = popup_info.value
