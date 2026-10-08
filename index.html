@@ -444,6 +444,90 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .ty-modal .ty-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
 
 </style>
+<style id="capability-and-light-theme">
+/* Capability Console v2. Scoped, portfolio-native system blueprints. */
+#capability-console{--cc-accent:var(--lime);--cc-secondary:var(--cyan);font-family:var(--font);color:var(--txt);padding-top:52px;padding-bottom:52px}
+#capability-console *{box-sizing:border-box}#capability-console button{font:inherit;color:inherit;cursor:pointer}#capability-console button:focus-visible,#capability-console summary:focus-visible{outline:2px solid var(--cc-accent);outline-offset:3px}#capability-console [hidden]{display:none!important}#capability-console .cc-intro{font-size:17px;color:var(--muted);max-width:780px;line-height:1.65;margin-bottom:24px}
+#capability-console .cc-shell{overflow:hidden;border:1px solid color-mix(in srgb,var(--cc-accent) 35%,var(--panel-border));border-radius:var(--radius);background:radial-gradient(600px 320px at 12% 0%,color-mix(in srgb,var(--magenta) 10%,transparent),transparent 60%),var(--glass);backdrop-filter:blur(18px) saturate(1.25);box-shadow:var(--shadow),0 0 36px color-mix(in srgb,var(--cc-accent) 6%,transparent);transition:border-color .4s,box-shadow .4s}
+#capability-console .cc-shell::before{content:'';height:2px;display:block;background:linear-gradient(90deg,var(--cc-accent),var(--cyan),var(--magenta));background-size:200% 100%;animation:cc-sheen 8s ease infinite}
+#capability-console .cc-top,#capability-console .cc-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;font:12px var(--mono);color:var(--muted)}#capability-console .cc-top{border-bottom:1px solid var(--panel-border)}#capability-console .cc-bottom{border-top:1px solid var(--panel-border);min-height:48px}#capability-console .cc-status{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.08em;color:var(--cc-accent)}#capability-console .cc-status::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--cc-accent);box-shadow:0 0 12px var(--cc-accent)}#capability-console .cc-motion{border:1px solid var(--panel-border);background:color-mix(in srgb,var(--bg) 30%,transparent);border-radius:6px;padding:7px 10px;font-size:12px;min-height:34px}#capability-console .cc-motion span{color:var(--cc-accent);margin-left:7px}
+#capability-console .cc-layout{display:grid;grid-template-columns:25% 75%;grid-template-rows:minmax(0,1fr);height:600px;min-height:0}#capability-console .cc-rail{min-height:0;min-width:0;padding:20px 14px;background:color-mix(in srgb,var(--bg) 40%,transparent);border-right:1px solid var(--panel-border)}#capability-console .cc-micro{font:12px var(--mono);color:var(--muted);letter-spacing:.09em}#capability-console .cc-rail>p{margin:0 10px 16px}#capability-console .cc-tabs{display:grid;gap:7px}#capability-console .cc-tab{width:100%;text-align:left;padding:13px 12px;border:1px solid transparent;border-radius:8px;background:transparent;position:relative}#capability-console .cc-tab:hover{background:color-mix(in srgb,var(--cc-accent) 5%,transparent)}#capability-console .cc-tab[aria-selected=true]{border-color:color-mix(in srgb,var(--cc-accent) 50%,transparent);background:linear-gradient(110deg,color-mix(in srgb,var(--cc-accent) 11%,transparent),transparent)}#capability-console .cc-tab[aria-selected=true]::before{content:'';position:absolute;left:-1px;top:14px;bottom:14px;width:3px;background:var(--cc-accent);border-radius:4px;box-shadow:0 0 12px var(--cc-accent)}#capability-console .cc-tabline{display:flex;align-items:center;gap:10px;margin-bottom:7px}#capability-console .cc-tabline .cc-micro{margin-left:auto}#capability-console .cc-tab strong{display:block;font-size:17px;line-height:1.3;font-weight:600;margin-bottom:5px}#capability-console .cc-tab small{font-size:14px;line-height:1.45;color:var(--muted);display:block}#capability-console .cc-logo{width:24px;height:24px;object-fit:contain;flex:none}
+#capability-console .cc-main{display:flex;flex-direction:column;min-height:0;min-width:0}#capability-console .cc-jumps{display:flex;gap:7px;padding:12px 18px;border-bottom:1px solid var(--panel-border);background:color-mix(in srgb,var(--bg) 40%,transparent);flex:none;min-width:0;overflow-x:auto}#capability-console .cc-jump{flex:1;white-space:nowrap;border:1px solid var(--panel-border);border-radius:6px;background:transparent;padding:8px 10px;font-size:14px;min-height:40px}#capability-console .cc-jump span{font:11px var(--mono);color:var(--cc-accent);margin-right:5px}#capability-console .cc-jump:hover{border-color:var(--cc-accent)}#capability-console .cc-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;padding:24px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#00e5ff #050713;outline-offset:-3px}#capability-console .cc-scroll::-webkit-scrollbar{width:8px}#capability-console .cc-scroll::-webkit-scrollbar-track{background:#050713}#capability-console .cc-scroll::-webkit-scrollbar-thumb{background:linear-gradient(#00e5ff,#cc00ff);border-radius:8px}#capability-console .cc-panel{animation:cc-enter .35s ease}
+#capability-console .cc-heading{display:flex;align-items:center;gap:12px;margin-bottom:9px}#capability-console .cc-heading img{width:30px;height:30px}#capability-console h3{font-size:clamp(24px,2.4vw,32px);letter-spacing:-.03em;line-height:1.15;font-weight:600}#capability-console .cc-overview>p{font-size:16px;line-height:1.6;color:var(--muted)}#capability-console .cc-tools{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;margin-bottom:25px}#capability-console .cc-tool{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;font-size:13px;border:1px solid var(--panel-border);border-radius:99px;background:color-mix(in srgb,var(--bg) 30%,transparent)}#capability-console .cc-tool img{width:17px;height:17px}#capability-console .cc-study{padding:24px 0 30px;border-top:1px solid var(--panel-border);scroll-margin-top:18px}#capability-console .cc-studyhead .cc-micro{color:var(--cc-accent);display:block;margin-bottom:10px}#capability-console h4{font-size:clamp(22px,2vw,26px);line-height:1.25;letter-spacing:-.025em;margin-bottom:10px}#capability-console .cc-studyhead>p{font-size:16px;line-height:1.65;color:var(--muted);margin-bottom:20px}
+#capability-console .cc-viewer{min-width:0;border:1px solid color-mix(in srgb,var(--cc-accent) 23%,var(--panel-border));border-radius:10px;overflow:hidden;background:color-mix(in srgb,var(--bg) 60%,transparent)}#capability-console .cc-mapbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;border-bottom:1px solid var(--panel-border);font:12px var(--mono);color:var(--cc-accent)}#capability-console .cc-mapbar em{font-family:var(--font);font-style:normal;font-size:13px;color:var(--muted)}#capability-console .cc-expand,#capability-console .cc-clear{border:1px solid var(--panel-border);background:transparent;border-radius:5px;padding:6px 9px;min-height:34px;font-size:13px;white-space:nowrap}#capability-console .cc-expand:hover,#capability-console .cc-clear:hover{border-color:var(--cc-accent)}#capability-console .cc-graphport{max-width:100%;overflow:auto;cursor:grab;scrollbar-width:thin;scrollbar-color:var(--cyan) var(--bg);background-image:radial-gradient(color-mix(in srgb,var(--cc-accent) 18%,transparent) 1px,transparent 1px);background-size:19px 19px;touch-action:pan-x pan-y;outline-offset:-3px}#capability-console .cc-dragging{cursor:grabbing;user-select:none}#capability-console .cc-board{position:relative;width:698px;min-width:698px;height:400px;margin:0 auto}#capability-console .cc-connections{position:absolute;width:698px;height:400px;inset:0;overflow:visible;pointer-events:none}#capability-console .cc-wire{fill:none;stroke:color-mix(in srgb,var(--cc-accent) 30%,transparent);stroke-width:1.3}#capability-console .cc-signal{fill:none;stroke:var(--cc-accent);stroke-width:1.4;stroke-dasharray:6 18;opacity:.35;animation:cc-flow 3s linear infinite}#capability-console .cc-packet{fill:var(--cc-accent);filter:drop-shadow(0 0 4px var(--cc-accent));animation:cc-packet 4.7s linear infinite;offset-distance:0%;opacity:.7}#capability-console .cc-edge text{font:11px var(--mono);fill:var(--muted);paint-order:stroke;stroke:var(--bg);stroke-width:5px;stroke-linejoin:round}#capability-console .cc-edge-focus .cc-wire{stroke:var(--cc-accent);stroke-width:1.8}#capability-console .cc-edge-focus .cc-signal,#capability-console .cc-edge-focus .cc-packet{opacity:1}#capability-console .cc-edge-dim{opacity:.15}#capability-console .cc-edge{transition:opacity .25s}
+#capability-console .cc-graphnode{position:absolute;width:142px;height:76px;display:flex;flex-direction:column;justify-content:center;gap:7px;text-align:left;padding:10px 11px;border:1px solid color-mix(in srgb,var(--cc-node-color) 40%,var(--panel-border));border-radius:8px;background:linear-gradient(135deg,color-mix(in srgb,var(--cc-node-color) 8%,var(--bg)),var(--bg));box-shadow:0 4px 14px #0002;transition:border-color .3s,box-shadow .3s,background .3s;z-index:1}#capability-console .cc-graphnode small{font:10px var(--mono);color:var(--cc-node-color);letter-spacing:.05em;display:flex;align-items:center;gap:5px}#capability-console .cc-graphnode small i{width:5px;height:5px;border-radius:50%;background:var(--cc-node-color)}#capability-console .cc-graphnode strong{font-size:15px;line-height:1.15;font-weight:500}#capability-console .cc-graphnode:hover,#capability-console .cc-node-active{border-color:var(--cc-node-color);box-shadow:0 0 0 1px color-mix(in srgb,var(--cc-node-color) 28%,transparent),0 0 23px color-mix(in srgb,var(--cc-node-color) 15%,transparent)}#capability-console .cc-graphnode[aria-pressed=true]::after{content:'●';position:absolute;right:8px;top:7px;font-size:8px;color:var(--cc-node-color)}#capability-console .cc-mapfoot{display:flex;justify-content:space-between;gap:10px;padding:10px 13px;font-size:11px;color:var(--muted);border-top:1px solid var(--panel-border)}#capability-console .cc-mapfoot>span:first-child{display:flex;align-items:center;gap:6px}#capability-console .cc-key{width:6px;height:6px;display:inline-block;border-radius:50%;background:var(--cyan)}#capability-console .cc-key-wait{background:#ffbd66;margin-left:5px}#capability-console .cc-key-end{background:var(--lime);margin-left:5px}
+#capability-console .cc-inspector{border-top:1px solid var(--panel-border);padding:16px 18px;min-height:155px;background:color-mix(in srgb,var(--cc-accent) 3%,transparent)}#capability-console .cc-inspectorhead{min-height:29px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:7px}#capability-console .cc-inspectkind{font:11px var(--mono);color:var(--cc-accent);letter-spacing:.07em}#capability-console .cc-inspecttitle{display:block;font-size:18px;line-height:1.3;margin-bottom:7px}#capability-console .cc-inspectbody{font-size:15px;line-height:1.65;color:var(--muted)}#capability-console .cc-connections-count{display:block;font:11px var(--mono);color:var(--muted);margin-top:10px}#capability-console .cc-conversation{padding:17px 18px;border-top:1px solid var(--panel-border);background:color-mix(in srgb,var(--magenta) 4%,transparent);min-height:146px}#capability-console .cc-conversation b{display:block;color:var(--cc-accent);font-size:15px;font-weight:500;margin:9px 0 5px}#capability-console .cc-conversation p{font-size:16px;color:var(--txt);line-height:1.6}
+#capability-console .cc-build-notes{padding-top:24px}#capability-console .cc-brief{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:24px}#capability-console .cc-label{font:12px var(--mono);letter-spacing:.08em;color:var(--cc-accent)}#capability-console .cc-brief p,#capability-console .cc-deliver p{font-size:16px;line-height:1.7;color:var(--muted);margin-top:9px}#capability-console .cc-method{border-top:1px solid var(--panel-border);padding:18px 0}#capability-console .cc-methodline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px;font-size:14px;line-height:1.5}#capability-console .cc-methodline b{font:12px var(--mono);color:var(--cc-accent);display:block;margin-bottom:5px}#capability-console details{border-top:1px solid var(--panel-border)}#capability-console summary{font-size:17px;padding:15px 0;list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer}#capability-console summary::-webkit-details-marker{display:none}#capability-console summary span{font:12px var(--mono);color:var(--cc-accent)}#capability-console details ul{padding:0 0 18px 19px;color:var(--muted);font-size:16px;line-height:1.7}#capability-console details li+li{margin-top:9px}#capability-console details li::marker{color:var(--cc-accent)}#capability-console .cc-deliver{border-top:1px solid var(--panel-border);padding:18px 0}#capability-console .cc-source{font-size:12px;line-height:1.6;color:var(--muted);padding-top:10px}#capability-console .cc-source a{color:var(--cc-accent)}#capability-console .cc-progress{width:44px;height:3px;background:var(--panel-border);display:inline-block;vertical-align:middle;margin-left:5px}#capability-console .cc-progress b{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--magenta))}#capability-console .cc-disclosure{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6}
+#capability-console .cc-dialog{position:fixed;inset:0;margin:auto;width:min(1100px,94vw);max-height:92dvh;padding:0;border:1px solid var(--cc-accent);border-radius:16px;background:var(--bg);color:var(--txt);overflow:hidden;box-shadow:0 30px 100px #0009}#capability-console .cc-dialog::backdrop{background:#03050ccc;backdrop-filter:blur(8px)}#capability-console .cc-dialoghead{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 24px;border-bottom:1px solid var(--panel-border)}#capability-console .cc-dialoghead h3{font-size:24px}#capability-console .cc-close{border:1px solid var(--panel-border);border-radius:6px;background:transparent;padding:10px 15px;font-size:14px;white-space:nowrap}#capability-console .cc-dialogbody{padding:20px;max-height:calc(92dvh - 90px);overflow:auto}#capability-console .cc-dialog .cc-expand{display:none}#capability-console .cc-dialog .cc-board{margin:0 auto}#capability-console .cc-dialog .cc-inspector{min-height:150px}#capability-console .cc-paused,#capability-console.cc-paused{--cc-motion-state:paused}#capability-console.cc-paused .cc-signal,#capability-console.cc-paused .cc-packet,#capability-console.cc-paused .cc-shell::before,#capability-console .cc-offscreen .cc-signal,#capability-console .cc-offscreen .cc-packet{animation-play-state:paused}
+/* Reading affordances for the automatically animated maps. */
+#capability-console .cc-edge-label-bg{fill:var(--bg);fill-opacity:.94;stroke:var(--panel-border);stroke-width:.5}#capability-console .cc-graphnode strong{font-size:16px}#capability-console .cc-graphnode small{font-size:11px}#capability-console .cc-mapfoot{font-size:12px}#capability-console .cc-graphport:focus-visible{outline:2px solid var(--cyan)}
+@keyframes cc-enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes cc-sheen{50%{background-position:100% 0}}@keyframes cc-flow{to{stroke-dashoffset:-96}}@keyframes cc-packet{to{offset-distance:100%}}
+@media(max-width:1000px){#capability-console .cc-tab strong{font-size:16px}#capability-console .cc-tab small{font-size:13px}#capability-console .cc-rail{padding:18px 10px}#capability-console .cc-scroll{padding:20px 18px}#capability-console .cc-jumps{padding:10px;gap:5px}#capability-console .cc-jump{font-size:13px;padding:8px}#capability-console .cc-jump span{display:none}#capability-console .cc-tabline{margin-bottom:5px}#capability-console .cc-tab{padding:12px 10px}}
+@media(max-width:650px){#capability-console .cc-layout{display:flex;flex-direction:column;height:590px}#capability-console .cc-rail{flex:none;border-right:0;border-bottom:1px solid var(--panel-border);padding:9px}#capability-console .cc-rail>p,#capability-console .cc-tab small,#capability-console .cc-tabline .cc-micro{display:none}#capability-console .cc-tabs{display:flex;overflow-x:auto;gap:7px;scrollbar-width:thin;padding-bottom:3px}#capability-console .cc-tab{flex:0 0 150px;padding:10px;min-height:78px;text-align:left}#capability-console .cc-tab strong{font-size:14px;margin:0}#capability-console .cc-tabline{margin-bottom:7px}#capability-console .cc-logo{width:22px;height:22px}#capability-console .cc-main{flex:1}#capability-console .cc-jumps{padding:8px;gap:6px}#capability-console .cc-jump{flex:0 0 auto;font-size:13px;min-height:39px;padding:7px 10px}#capability-console .cc-scroll{padding:20px 14px}#capability-console .cc-top,#capability-console .cc-bottom{font-size:11px;padding:10px 12px}#capability-console .cc-status{font-size:11px}#capability-console .cc-bottom>span:first-child{display:none}#capability-console .cc-bottom{justify-content:space-between;min-height:43px}#capability-console .cc-overview>p,#capability-console .cc-studyhead>p,#capability-console .cc-brief p,#capability-console .cc-deliver p,#capability-console details ul{font-size:16px}#capability-console .cc-tool{font-size:13px}#capability-console .cc-heading h3{font-size:25px}#capability-console .cc-studyhead h4{font-size:23px}#capability-console .cc-mapbar{font-size:11px;flex-wrap:wrap}#capability-console .cc-mapbar em{display:none}#capability-console .cc-mapfoot{font-size:11px;flex-direction:column;gap:7px}#capability-console .cc-brief{grid-template-columns:1fr;gap:20px}#capability-console .cc-methodline{grid-template-columns:repeat(2,1fr)}#capability-console .cc-inspector{padding:14px;min-height:190px}#capability-console .cc-inspectbody{font-size:15px}#capability-console .cc-inspectkind{font-size:10px}#capability-console .cc-clear{font-size:12px;padding:5px 7px}#capability-console .cc-dialoghead{padding:14px}#capability-console .cc-dialoghead h3{font-size:20px}#capability-console .cc-dialogbody{padding:10px}#capability-console .cc-close{font-size:13px;padding:8px}#capability-console .cc-disclosure{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#capability-console *,#capability-console *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}#capability-console .cc-packet{display:none}}
+
+/* Minimalist light theme. All overrides are scoped; dark mode retains its original effects. */
+html[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--bg-2:#ffffff;--panel:#ffffff;--panel-border:#dce2e8;--txt:#172330;--muted:#526170;--lime:#276749!important;--magenta:#8b386a!important;--cyan:#086c87;--grad:linear-gradient(120deg,#276749,#276749);--glow:none;--glass:#ffffff;--shadow:0 8px 28px #17233008;--nav-bg:#ffffff;--boot-bg:#f7f8fa;--edge:#dce2e8;scrollbar-color:#9aa7b3 #edf0f4}
+html[data-theme="light"] body{background:#f7f8fa}
+html[data-theme="light"] :is(#bg-canvas,.grid-bg,.bg-grad,.orb,.scanlines,#cur-dot,#cur-ring){display:none!important}
+html[data-theme="light"] :is(.nav,.svc,.cap,.graph-card,.step,.tcard,.proj-card,.roi-out,.craftee-hero,.ava-panel,.ava-visual,.ava-chat,.palette,.ty-modal,.bk-modal,.bk-left){background:#fff!important;border-color:var(--panel-border)!important;box-shadow:var(--shadow)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="light"] :is(.cta-band,.roi,.mode-banner,.funnel-book,.funnel-page,.ecom-plan,.ops-dashboard,.ops-panel){background:#fff!important;border-color:var(--panel-border)!important}
+html[data-theme="light"] :is(.svc,.cap,.graph-card,.step,.proj-card,.roi-out,.craftee-hero,.ava-chat,.ava-visual,.ava-orb,.cta-band)::before,
+html[data-theme="light"] :is(.svc,.cap,.graph-card,.step,.proj-card,.roi-out,.craftee-hero,.ava-visual,.ava-orb)::after{display:none!important}
+html[data-theme="light"] :is(.status-pill,.chip,.tool-chip,.ava-chip,.proj-filter-btn,.cmd-btn,.theme-toggle,.hud .stat.mode,.btn.ghost,.tnav button,.proj-nav button,.hub-hint,.hub-btn,.ava-msg.bot,.btn-ghost,.bk-close,.cal-day,.time-btn,#toTop){background:#fff!important;border-color:var(--panel-border)!important;color:var(--txt)!important;box-shadow:none!important}
+html[data-theme="light"] :is(.btn.primary,.btn-primary,.ava-form button,.cal-day.sel,.time-btn.sel){background:#276749!important;color:#fff!important;border-color:#276749!important;box-shadow:none!important}
+html[data-theme="light"] :is(.brand b,h1 span,.title span,.roi-big,.ty-modal h3 span,.bk-head h2 span){background:none!important;-webkit-text-fill-color:currentColor;color:#276749!important;text-shadow:none!important}
+html[data-theme="light"] :is(.proj-tags span,.exp-item .yr,.ops-status,.ecom-price){color:#276749}
+html[data-theme="light"] .proj-problem b{color:#ad3029;background:#fff2f0;border-color:#e9bab5}
+html[data-theme="light"] .proj-solution b{color:#086575;background:#edf8f9;border-color:#aed8dd}
+html[data-theme="light"] .proj-result b{color:#8a5200;background:#fff7e8;border-color:#e5cda1}
+html[data-theme="light"] :is(.proj-img,.ecom-preview,.funnel-preview){background:#edf0f4!important}
+html[data-theme="light"] :is(.ava-launch,.ava-close,.ava-face){background:#fff!important;border-color:var(--panel-border)!important;color:#276749!important;box-shadow:none!important}
+html[data-theme="light"] :is(.ava-launch i,.ava-orbit,.ava-ring,.ava-particle){display:none!important}
+html[data-theme="light"] :is(.ava-form input,.field input,.field select,.field textarea){background:#fff!important;border-color:#cbd4dd!important;color:var(--txt)!important}
+html[data-theme="light"] :is(.ava-msg.user,.proj-filter-btn.active,.palette .item.active){background:#eaf2ed!important;color:#203d2c!important;border-color:#b9d0c1!important}
+html[data-theme="light"] :is(#progress,.status-pill i,.hud .led,.proj-meta .dot,.ava-launch b,.nav-photo img){box-shadow:none!important;animation:none!important}
+html[data-theme="light"] :is(.tilt,.magnetic,.hero-grid){transform:none!important}
+html[data-theme="light"] .reveal{opacity:1;transform:none;transition:none}
+html[data-theme="light"] :is(.marquee-track,.marquee .track){animation:none!important;transform:none!important}
+html[data-theme="light"] .marquee{mask-image:none;-webkit-mask-image:none;overflow-x:auto}
+html[data-theme="light"] :is(.palette-wrap,.bk-overlay,.ty-overlay){background:#17233066;backdrop-filter:blur(3px)}
+html[data-theme="light"] #capability-console :is(.cc-shell,.cc-rail,.cc-jumps,.cc-viewer,.cc-graphnode,.cc-inspector,.cc-conversation,.cc-dialog){background:#fff;box-shadow:none;backdrop-filter:none;border-color:var(--panel-border)}
+html[data-theme="light"] #capability-console .cc-shell::before{background:#dce2e8;animation:none}
+html[data-theme="light"] #capability-console .cc-tab[aria-selected=true]{background:#eef4f0;border-color:#abc3b4}
+html[data-theme="light"] #capability-console .cc-tab[aria-selected=true]::before{box-shadow:none}
+html[data-theme="light"] #capability-console .cc-graphport{background:#fafbfc}
+html[data-theme="light"] #capability-console .cc-graphnode small{color:#526170}
+html[data-theme="light"] #capability-console .cc-node-active{border-color:var(--cc-accent);background:#f3f7f4}
+html[data-theme="light"] #capability-console .cc-status::before{box-shadow:none}
+html[data-theme="light"] #capability-console .cc-dialog::backdrop{background:#17233077;backdrop-filter:blur(3px)}
+html[data-theme="light"] #capability-console .cc-scroll{scrollbar-color:#9aa7b3 #edf0f4}
+html[data-theme="light"] ::-webkit-scrollbar-track{background:#edf0f4!important}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#9aa7b3!important}
+/* A quiet service directory replaces the decorative hero canvas in light mode only. */
+.light-hub{display:none}
+html[data-theme="light"] :is(#hub3d,.hub-controls,.hub-hud){display:none}
+html[data-theme="light"] .light-hub{display:flex;flex-direction:column;justify-content:center;min-height:370px;padding:32px;gap:12px}
+.light-hub .eyebrow{margin:0}.light-hub h2{font-size:28px;letter-spacing:-.04em;line-height:1.2;margin-bottom:8px}.light-hub p{font-size:15px;color:var(--muted);margin-bottom:10px}
+.light-hub a{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--panel-border);padding:12px 0;font-size:16px;font-weight:500}.light-hub a span{font:12px var(--mono);color:var(--muted)}.light-hub a:hover{color:#276749}
+/* Light-only contrast and quiet card surfaces. */
+html[data-theme="light"] .hero{padding-inline:22px}
+@media(max-width:760px){html[data-theme="light"] .hero{padding-inline:18px}}
+html[data-theme="light"] .svc[data-mode="automation"]{--sc1:#276749!important;--sc2:#276749!important}
+html[data-theme="light"] .svc[data-mode="web"]{--sc1:#086c87!important;--sc2:#086c87!important}
+html[data-theme="light"] .svc[data-mode="ecom"]{--sc1:#9a4a15!important;--sc2:#9a4a15!important}
+html[data-theme="light"] .svc[data-mode="logistics"]{--sc1:#6942a1!important;--sc2:#6942a1!important}
+html[data-theme="light"] :is(.ava-card,.ecom-tier,.ecom-premium,.commerce-stage,.logistics-stage,.dash-panel,.dash-kpi,.book-frame,.book-page){background:#fff!important;box-shadow:var(--shadow)!important;border-color:var(--panel-border)!important}
+html[data-theme="light"] .ava-card{display:flex;align-items:center;min-height:280px;padding:24px}
+html[data-theme="light"] .ava-card::before,html[data-theme="light"] .ava-card::after,html[data-theme="light"] .ava-orb{display:none}
+html[data-theme="light"] .ava-panel{position:static;border:0;padding:0;box-shadow:none!important}
+html[data-theme="light"] .ava-status span{animation:none;box-shadow:none}
+html[data-theme="light"] :is(#ecom-preview-image,.book-visual,.book-visual img){background:#edf0f4!important}
+@media(min-width:981px) and (max-width:1180px){.nav ul{display:none}.hud .clock{display:none}.menu-btn{display:block}}
+/* Keep the command control accessible on phones, without changing desktop navigation. */
+@media(max-width:620px){.cmd-btn{display:flex;padding:6px}.cmd-btn kbd{font-size:10px}.nav .hud{gap:6px}.light-hub{padding:24px!important}}
+
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -514,7 +598,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
       </div>
       <div class="hero-right reveal d2">
         <div class="graph-card">
-          <div class="hub-hud"><i></i><span>Business Command Hub</span></div>
+          <div class="light-hub"><span class="eyebrow">YOUR BUSINESS, SUPPORTED</span><h2>Less busywork.<br>More room to grow.</h2><p>Systems that connect your tools, people and daily operations.</p><a href="#services" onclick="setMode('automation')">AI Automation<span aria-hidden="true">↗</span></a><a href="#services" onclick="setMode('web')">Website Development<span aria-hidden="true">↗</span></a><a href="#services" onclick="setMode('ecom')">Ecommerce VA<span aria-hidden="true">↗</span></a><a href="#services" onclick="setMode('logistics')">Supply Chain and Logistics<span aria-hidden="true">↗</span></a></div>
+<div class="hub-hud"><i></i><span>Business Command Hub</span></div>
           <canvas id="hub3d" class="hub3d-canvas" role="img" aria-label="Interactive 3D model of services orbiting your business" tabindex="0"></canvas>
           <div class="hub-controls" aria-label="3D hub controls">
             <div class="hub-hint">Drag to rotate · click a node to jump</div>
@@ -579,7 +664,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
     </div>
   </section>
 
-  <section class="roi" id="roi">
+  <section class="wrap" id="capability-console" aria-label="Capability Console"></section>
+
+<section class="roi" id="roi">
     <div class="wrap">
       <div class="reveal">
         <span class="eyebrow">CALCULATE YOUR UPSIDE</span>
@@ -1867,6 +1954,214 @@ const AVA_KB = [
   },
   {
     "keys": [
+      "capability console",
+      "capability studies",
+      "system blueprints",
+      "automatic diagrams",
+      "expand diagram",
+      "pin node",
+      "hover node"
+    ],
+    "q": "What is the Capability Console?",
+    "a": "Explore https://agentrome.site/#capability-console. These are illustrative concept studies, not deployed client projects or measured client outcomes. The diagrams and sample agent conversations explain proposed designs. No accounts or agents are connected, and viewing or selecting a step does not send messages, change records, run agents, place orders or perform any real action. Choose a specialty and a study, then scroll inside the console to read its build plan. Diagrams advance automatically when visible and motion is enabled. Hover or focus a node to inspect it, click to pin it, and click it again or use Clear selection to unpin. Expand opens a larger diagram; close it or press Escape to return. On smaller screens scroll the diagram horizontally, or drag its empty background with a mouse. Motion can be paused and respects device reduced motion preferences."
+  },
+  {
+    "keys": [
+      "gohighlevel crm",
+      "ghl specialty",
+      "crm specialty"
+    ],
+    "q": "What does the GoHighLevel CRM specialty cover?",
+    "a": "Pipelines, routing and follow through. I start with the states, records and rules. Then I build the workflows around them. Supporting tools shown: GoHighLevel, Google Sheets, Zapier, Make, n8n. Studies: Ticket system, Lead routing, Recovery. These are concept designs, not deployed client outcomes. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a support desk built around the ticket",
+      "ticket system",
+      "support desk",
+      "ticket lifecycle"
+    ],
+    "q": "How would Rome build ticket system?",
+    "a": "Concept study, not a deployed client outcome. One pipeline for the work. Clear routes for new requests, repeat submissions and a customer who goes quiet. Problem: A contact can have several issues over time. Storing the latest issue on the contact loses context and creates duplicate work. Plan: I map the states first, then define the opportunity fields, owner rules and the workflow attached to each stage. Decisions: The opportunity owns the ticket details. The contact remains the customer record. Check for an open ticket before creating a new opportunity. A priority flag alerts the team without inventing another pipeline stage. Testing before handoff: Submit the same request twice. Only one open ticket should remain. Reply while awaiting information. The ticket must return to its owner. Change status before a timer expires. The stale reminder must not send. Handoff: Pipeline map, field dictionary, message templates, workflow build sheet and an exception checklist. Timing and reopening rules are illustrative configuration, not platform defaults. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "the build plan behind a booked call",
+      "lead routing",
+      "booked call",
+      "booking workflow"
+    ],
+    "q": "How would Rome build lead routing?",
+    "a": "Concept study, not a deployed client outcome. I separate lead capture from appointment confirmation so the customer receives the right message once. Problem: A form, calendar and follow up sequence can all act on the same contact and send conflicting messages. Plan: Define the source fields and consent rules, create the pipeline, then build qualification, assignment and appointment workflows separately. Decisions: Capture source and consent at entry. Appointment booked is its own event, not an assumption after form submission. Reply, booking and opt out are explicit stop conditions. Testing before handoff: A form submission alone must not send an appointment confirmation. A booked contact must leave the nurture path. A repeat webhook must not create a duplicate opportunity. Handoff: Trigger map, field and tag guide, booking workflow and a short ownership SOP. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a recovery path with a clear exit",
+      "recovery",
+      "recovery path",
+      "missed call",
+      "missed appointment",
+      "recovery workflow"
+    ],
+    "q": "How would Rome build recovery?",
+    "a": "Concept study, not a deployed client outcome. Missed calls and missed appointments get a useful next step, without turning into endless follow up. Problem: Recovery workflows often keep messaging after a customer has already replied or rescheduled. Plan: Choose the exact missed event, check permissions, then define recovery, rescheduling and owner review as distinct outcomes. Decisions: Use event specific entry rules rather than broad contact changes. Check the current state again after every wait. An unresolved case goes to a person, not another unbounded message loop. Testing before handoff: Reschedule during the wait. Recovery messages must stop. Respect opt out and local sending hours. No response should create an owner task at the agreed cutoff. Handoff: Recovery workflow, message set, stop conditions and escalation rules. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "hermes agent",
+      "hermes specialty"
+    ],
+    "q": "What does the Hermes Agent specialty cover?",
+    "a": "Agent teams, tools and recurring work. I define the goal and the boundaries. Agents handle focused work; evidence and human judgment guide the handoff. Supporting tools shown: Hermes Agent, n8n, Slack. Studies: Agent framework, Scheduled work, Memory and skills. These are concept designs, not deployed client outcomes. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "how i build with an agent team",
+      "agent framework",
+      "agent team",
+      "orchestrator",
+      "specialist agents"
+    ],
+    "q": "How would Rome build agent framework?",
+    "a": "Concept study, not a deployed client outcome. I own the brief and the decisions. An orchestrator coordinates focused agents for research, implementation and review. Problem: One long AI conversation mixes research, assumptions and implementation, making weak decisions harder to catch. Plan: Agree on acceptance criteria, assign bounded specialist tasks, collect evidence and review the result before anything is published. Decisions: Each specialist gets a focused brief and separate conversation context. Separate context is not a security sandbox. File access and permissions still need explicit boundaries. A reviewer checks actual output. The orchestrator does not treat a confident summary as proof. Testing before handoff: Check sources against the claims in the brief. Exercise the built page or workflow, including failure cases. Require approval before publishing or connecting production accounts. Handoff: Working preview, verified checks, source notes and a documented handoff. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "recurring work with a defined handoff",
+      "scheduled work",
+      "cron",
+      "recurring work",
+      "morning brief",
+      "weekly research"
+    ],
+    "q": "How would Rome build scheduled work?",
+    "a": "Concept study, not a deployed client outcome. The schedule is only the trigger. The real design is the task context, allowed actions, evidence and delivery. Problem: A recurring AI task is not useful if its scope is vague, failures are invisible or nobody receives the result. Plan: Specify the routine, timezone, required integrations and report format. Add delivery and a failure path before scheduling it. Decisions: Morning brief: 0 8 * * * in the configured timezone. Weekly research: 0 9 * * 1 with source linked findings. The host and scheduler must be running. An offline computer cannot execute the routine. Testing before handoff: Verify the timezone and next intended execution. Test missing data, a failed integration and an empty report. Confirm the report reaches the intended destination without exposing secrets. Handoff: Schedule specification, task instructions, delivery format and failure checklist. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a repeatable way to build, not a repeated prompt",
+      "memory and skills",
+      "reusable skills",
+      "durable memory"
+    ],
+    "q": "How would Rome build memory and skills?",
+    "a": "Concept study, not a deployed client outcome. Memory keeps durable context. Skills keep the procedure. Tools produce the artifact and checks prove it works. Problem: Repeating the same setup wastes time, but treating old context as unquestionable truth causes a different problem. Plan: Separate stable preferences from task instructions, load the relevant procedure, then verify against the current project. Decisions: Store durable preferences in memory, not every temporary detail. Keep reusable build and QA procedures in skills. Update a procedure when evidence shows it is wrong; do not treat it as perfect recall. Testing before handoff: Confirm the procedure matches the current tools and repository. Check the real artifact rather than claiming a successful build from file creation alone. Keep private context out of public handoffs. Handoff: Reusable procedure, current project notes, a tested artifact and clear limitations. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "shopify operations",
+      "shopify specialty"
+    ],
+    "q": "What does the Shopify Operations specialty cover?",
+    "a": "Orders, stock and exception handling. I map the normal order path and the things that interrupt it, then give every exception an owner. Supporting tools shown: Shopify, Google Sheets, Slack, Zapier. Studies: Order system, Stock control, Return workflow. These are concept designs, not deployed client outcomes. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "an order desk designed around exceptions",
+      "order system",
+      "order desk",
+      "order exceptions"
+    ],
+    "q": "How would Rome build order system?",
+    "a": "Concept study, not a deployed client outcome. Paid orders move toward fulfillment. Address, stock and payment issues branch into owned exception queues. Problem: The normal orders are easy. The failures get buried across inboxes, spreadsheets and shipping portals. Plan: Map the order states, source of truth and ownership first. Define which checks can run automatically and which need a person. Decisions: Shopify remains the order record. Trackers support it rather than becoming a conflicting copy. A hold needs a reason, owner and next action. Only confirm fulfillment when the required operational event has occurred. Testing before handoff: A repeated event must not create a second exception task. A held order must not enter the ready to pack queue. Tracking updates must belong to the correct order and shipment. Handoff: Order state map, exception tracker, owner rules and daily operations SOP. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "inventory signals that lead to a decision",
+      "stock control",
+      "inventory signals",
+      "reorder threshold"
+    ],
+    "q": "How would Rome build stock control?",
+    "a": "Concept study, not a deployed client outcome. Available stock, committed orders and supplier lead time belong in the same conversation. Problem: A low stock alert without context creates noise. An oversold item without an owner creates a customer problem. Plan: Define sellable stock and the reorder rule, connect commitments, then build an approval and exception path. Decisions: Distinguish on hand, committed and available stock. Use supplier lead time and demand context when recommending replenishment. Purchases and customer refunds stay behind the store’s approval rules. Testing before handoff: Review multi location stock before declaring an item unavailable. Deduplicate repeated threshold alerts. Verify the customer promise against a confirmed supplier date. Handoff: Inventory check routine, reorder review sheet and shortage response SOP. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "returns with policy and ownership built in",
+      "return workflow",
+      "returns policy",
+      "refund authorization"
+    ],
+    "q": "How would Rome build return workflow?",
+    "a": "Concept study, not a deployed client outcome. A request, return receipt and refund decision are different events. I keep them connected without skipping the checks. Problem: A loose email thread can promise a refund before eligibility, receipt or authority has been established. Plan: Start from the store’s policy, map the evidence needed at each step, and keep the final financial decision with an authorized person. Decisions: Match every request to the original order and item. Record return condition before deciding whether stock can be restored. Separate exchange fulfillment from refund authorization. Testing before handoff: Test a request outside the return window. Check a partial return and an item that cannot be restocked. Confirm no refund is implied before approval. Handoff: Return decision map, customer templates, inspection checklist and approval log. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "digital marketing",
+      "marketing specialty"
+    ],
+    "q": "What does the Digital Marketing specialty cover?",
+    "a": "Strategy, measurement and useful tests. I connect the business objective to the offer, customer journey and measurement before choosing tactics. Supporting tools shown: Meta, Google Analytics, Canva, Instagram, LinkedIn, GoHighLevel. Studies: Campaign plan, Measurement, Experiment plan. These are concept designs, not deployed client outcomes. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a campaign system before a content calendar",
+      "campaign plan",
+      "campaign system",
+      "marketing campaign"
+    ],
+    "q": "How would Rome build campaign plan?",
+    "a": "Concept study, not a deployed client outcome. I connect the audience, offer, channel and follow up before deciding what to post or where to spend. Problem: Activity is easy to measure. It is harder to tell whether the right people move from interest to a useful conversation. Plan: Define one business objective and audience, shape the offer, map the landing experience and agree on the qualified outcome. Decisions: Local service: specific problem, service area and a useful booking offer. Online store: a clear product use case, proof and transparent delivery terms. B2B service: a focused diagnostic for a named decision maker, not a broad pitch. Testing before handoff: The ad promise must match the destination page. Source tags and conversion events must reach the CRM. Check qualification and lead ownership before increasing spend. Handoff: Campaign brief, channel plan, landing page outline, content themes and measurement map. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a measurement plan that follows the customer",
+      "measurement",
+      "measurement plan",
+      "utm convention",
+      "tracking qa",
+      "qualified outcome"
+    ],
+    "q": "How would Rome build measurement?",
+    "a": "Concept study, not a deployed client outcome. The campaign click, captured enquiry and qualified outcome need to belong to the same measurement story. Problem: A dashboard can show more leads while the sales team receives fewer useful opportunities. Plan: Agree on event definitions, source naming and qualification rules. Check tracking quality before interpreting performance. Decisions: Use consistent campaign source, medium and content tags. Keep a primary outcome and a small set of guardrail metrics. Review consent requirements and attribution limitations before adding tracking. Testing before handoff: A form success event must not fire on a validation error. Repeated page loads must not become duplicate conversions. Compare platform reports with actual CRM outcomes. Handoff: Event dictionary, UTM convention, tracking QA sheet and reporting structure. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a test designed to teach us something",
+      "experiment plan",
+      "marketing experiment",
+      "control and variant",
+      "inadequate evidence"
+    ],
+    "q": "How would Rome build experiment plan?",
+    "a": "Concept study, not a deployed client outcome. A useful test starts with a hypothesis and a decision rule, not two random ads and a quick winner. Problem: Changing the audience, offer and creative together makes it difficult to understand what caused the result. Plan: Choose one meaningful variable, define the control and variant, and agree on the primary metric and review window. Decisions: Offer clarity: change the promise while keeping audience and destination stable. Creative angle: compare demonstration with the current creative using the same offer. Booking friction: reduce nonessential questions, then check lead quality as well as completion. Testing before handoff: Confirm both variants receive comparable treatment. Look at downstream quality, not just click through rate. Do not declare a winner from inadequate or inconsistent evidence. Handoff: Experiment brief, variant specification, measurement checklist and decision log. The diagram performs no real actions. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "how do you build",
+      "how does rome build",
+      "global build method",
+      "build process",
+      "plan decisions testing handoff"
+    ],
+    "q": "How does Rome plan, build, test and hand over a system?",
+    "a": "Rome maps the rules, builds the system, tests the edges and documents the handoff. Each study explains the problem, build plan, design decisions, planned checks and handoff materials. These describe his approach, not a claim that each proposed build has been implemented, tested in production or delivered to a client. Scope, permissions and approval are agreed before real implementation. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "command menu",
+      "command palette",
+      "ctrl+k",
+      "cmd+k",
+      "section navigation",
+      "all sections"
+    ],
+    "q": "How do I use the command menu?",
+    "a": "The command menu is a shortcut to every portfolio section. Open it with the command button, Ctrl+K, Cmd+K or / when not typing in a field. Search, use the arrow keys and Enter to select, or Escape to close. Section destinations: Home (https://agentrome.site/#home); Services (https://agentrome.site/#services); How I work (https://agentrome.site/#capabilities); Ava, AI Agent (https://agentrome.site/#ava); ROI Calculator (https://agentrome.site/#roi); Ecommerce showcase (https://agentrome.site/#craftee); Funnels (https://agentrome.site/#funnels); Ecommerce operations (https://agentrome.site/#ecommerce-operations); Supply chain and logistics (https://agentrome.site/#logistics-operations); Projects (https://agentrome.site/#projects); Contact (https://agentrome.site/#contact); Capability Console (https://agentrome.site/#capability-console). The menu also offers service modes, Toggle light / dark and Copy email. Navigation is informational and does not submit a lead or booking."
+  },
+  {
+    "keys": [
+      "light mode",
+      "dark mode",
+      "static background",
+      "cosmic background",
+      "theme control"
+    ],
+    "q": "How do light and dark modes differ?",
+    "a": "Light mode uses a clean static background for readability. Dark mode retains the cosmic background. Use the theme control or Toggle light / dark in the command menu. This background choice is separate from the Capability Console Motion control for explanatory diagrams; it does not connect or run any workflow."
+  },
+  {
+    "keys": [
       "private",
       "password",
       "credential",
@@ -2021,22 +2316,12 @@ function setupAvaChat(){
 /* ---- command palette ---- */
 function setupPalette(){
   const wrap=$("#palette"),input=$("#palette-input"),list=$("#palette-list");
-  const base=[
-    {ic:"↳",label:"Home",go:"#home"},
-    {ic:"◈",label:"Services",go:"#services"},
-    {ic:"⚙",label:"How I work",go:"#capabilities"},
-    {ic:"AI",label:"Ava, AI Agent",go:"#ava"},
-    {ic:"$",label:"ROI Calculator",go:"#roi"},
-    {ic:"▦",label:"Ecommerce showcase",go:"#craftee"},
-    {ic:"◎",label:"Ecommerce operations",go:"#ecommerce-operations"},
-    {ic:"◇",label:"Supply chain and logistics",go:"#logistics-operations"},
-    {ic:"◈",label:"Projects",go:"#projects"},
-    {ic:"✉",label:"Contact",go:"#contact"},
-    {ic:"◐",label:"Toggle light / dark",act:toggleTheme},
-    {ic:"⎘",label:"Copy email",act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)}
-  ];
-  const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:"Mode: "+s.name,act:()=>setMode(s.id)}));
-  const items=base.concat(modeItems);
+  const labels={home:'Home',services:'Services',capabilities:'How I work',ava:'Ava, AI Agent','capability-console':'Capability Console',roi:'ROI Calculator',craftee:'Ecommerce showcase',funnels:'Funnels','ecommerce-operations':'Ecommerce operations','logistics-operations':'Supply chain and logistics',projects:'Projects',contact:'Contact'};
+  const base=$$('section[id]').map(el=>({ic:'↳',label:labels[el.id]||el.querySelector('h2,h1')?.textContent.trim()||el.id,go:'#'+el.id}));
+  base.push({ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
+  const specialties=['GoHighLevel CRM','Hermes Agent','Shopify Operations','Digital Marketing'].map((label,i)=>({ic:'◎',label:'Blueprints: '+label,act:()=>{window.CapabilityConsole?.select(i);smartScroll('#capability-console');}}));
+  const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:'Mode: '+s.name,act:()=>setMode(s.id)}));
+  const items=base.concat(specialties,modeItems);
   let active=0,filtered=items,previousFocus=null;
   wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-label','Command menu');
   input.setAttribute('role','combobox');input.setAttribute('aria-label','Search commands');input.setAttribute('aria-controls','palette-list');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','false');
@@ -2082,11 +2367,12 @@ function toggleTheme(){
   if(cur==='light')document.documentElement.removeAttribute('data-theme');
   else document.documentElement.setAttribute('data-theme','light');
   try{localStorage.setItem('theme',document.documentElement.getAttribute('data-theme')||'dark');}catch(e){}
-  setCanvasColors();$("#theme-toggle").textContent=document.documentElement.getAttribute('data-theme')==='light'?'☾':'☀';
-  buildMarquee();buildExperience();
+  setCanvasColors();updateThemeControl();
+  buildMarquee();
   if(currentMode)setMode(currentMode); // re-apply mode colors after theme swap
 }
-function setupTheme(){$("#theme-toggle").onclick=toggleTheme;$("#theme-toggle").textContent=document.documentElement.getAttribute('data-theme')==='light'?'☾':'☀';setCanvasColors();}
+function updateThemeControl(){const light=document.documentElement.getAttribute('data-theme')==='light',b=$('#theme-toggle');b.textContent=light?'☾':'☀';b.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');b.setAttribute('aria-pressed',String(light));}
+function setupTheme(){$('#theme-toggle').onclick=toggleTheme;updateThemeControl();setCanvasColors();}
 
 /* ---- canvas (lined particle network + cursor-converging stars) ---- */
 function setupCanvas(){
@@ -2217,7 +2503,10 @@ function setupCanvas(){
       ctx.strokeStyle=g;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x-len,yy);ctx.lineTo(x,yy);ctx.stroke();
     }
   }
+  let themeFrame=0;
+  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')!=='light'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   function frame(){
+    if(document.documentElement.getAttribute('data-theme')==='light')return;
     t++;
     ctx.clearRect(0,0,innerWidth,innerHeight);
     drawNebula();drawGrid();drawRadar();drawWarp();
@@ -2258,7 +2547,7 @@ function setupCanvas(){
     }
     drawZod();
     if(pointer.x>0){const pg=ctx.createRadialGradient(pointer.x,pointer.y,0,pointer.x,pointer.y,90);pg.addColorStop(0,"rgba(34,211,238,0.07)");pg.addColorStop(1,"rgba(34,211,238,0)");ctx.fillStyle=pg;ctx.fillRect(pointer.x-90,pointer.y-90,180,180);}
-    requestAnimationFrame(frame);
+    if(!reduced)themeFrame=requestAnimationFrame(frame);
   }
   addEventListener("mousemove",e=>{pointer.x=e.clientX;pointer.y=e.clientY;},{passive:true});
   addEventListener("touchmove",e=>{const tp=e.touches[0];if(tp){pointer.x=tp.clientX;pointer.y=tp.clientY;}},{passive:true});
@@ -2388,7 +2677,10 @@ function setupHub3D(){
     ay=0.6;ax=0.5;velAy=0;velAx=0;px=-1;py=-1;setPaused(false);
     c.focus({preventScroll:true});
   }
+  let themeFrame=0;
+  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')!=='light'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   function frame(){
+    if(document.documentElement.getAttribute('data-theme')==='light')return;
     t+=0.016;
     if(!dragging&&!userPaused){ ay+=autoSpin+velAy; ax+=velAx; velAy*=0.94; velAx*=0.94; }
     ax=Math.max(-1.2,Math.min(1.2,ax));
@@ -2479,7 +2771,7 @@ function setupHub3D(){
     ctx.fillStyle="rgba(184,255,60,0.92)";
     ctx.fillText(userPaused?"PAUSED":"UP GROWING",cc[0],cc[1]+31);
     ctx.shadowBlur=0;
-    if(!reduced)requestAnimationFrame(frame);
+    if(!reduced)themeFrame=requestAnimationFrame(frame);
   }
   c.style.cursor="grab";
   function pos(e){const r=c.getBoundingClientRect();return [e.clientX-r.left, e.clientY-r.top];}
@@ -2850,5 +3142,152 @@ window.bkOpen=bkOpen; window.bkClose=bkClose; window.showThankYou=showThankYou; 
 
 
 
+<script>window.CC_LOGOS={"Shopify": "assets/brands/shopify.svg", "Google Sheets": "assets/brands/googlesheets.svg", "Zapier": "assets/brands/zapier.svg", "Make": "assets/brands/make.svg", "Meta": "assets/brands/meta.svg", "Google Analytics": "assets/brands/googleanalytics.svg", "Canva": "assets/brands/canva.svg", "Instagram": "assets/brands/instagram.svg", "LinkedIn": "assets/brands/linkedin.svg", "Hermes Agent": "assets/brands/hermes.svg", "Slack": "assets/brands/slack.svg", "n8n": "assets/brands/n8n.svg", "GoHighLevel": "assets/brands/highlevel-symbol.svg"};</script>
+<script>
+window.CC_STUDIES=[
+{spec:'ghl',id:'tickets',title:'A support desk built around the ticket',short:'Ticket system',summary:'One pipeline for the work. Clear routes for new requests, repeat submissions and a customer who goes quiet.',problem:'A contact can have several issues over time. Storing the latest issue on the contact loses context and creates duplicate work.',plan:'I map the states first, then define the opportunity fields, owner rules and the workflow attached to each stage.',decisions:['The opportunity owns the ticket details. The contact remains the customer record.','Check for an open ticket before creating a new opportunity.','A priority flag alerts the team without inventing another pipeline stage.'],checks:['Submit the same request twice. Only one open ticket should remain.','Reply while awaiting information. The ticket must return to its owner.','Change status before a timer expires. The stale reminder must not send.'],deliver:'Pipeline map, field dictionary, message templates, workflow build sheet and an exception checklist.',nodes:[
+['intake','Form submitted','TRIGGER',0,0,'Match the contact, capture the issue and look for an existing open opportunity.'],
+['new','New ticket','ACTION',1,0,'Create the ticket number, save issue fields on the opportunity and send the acknowledgement.'],
+['working','In progress','OWNER',2,0,'Assign responsibility and keep investigation notes on this ticket.'],
+['waiting','Awaiting reply','WAIT',3,0,'Ask for the missing information. Check status again before the day three reminder.'],
+['merge','Add to open ticket','DECISION',0,1,'Append the repeat submission to the open ticket. If it was waiting, return it to In progress.'],
+['urgent','Priority alert','EXCEPTION',1,2,'Notify the owner about urgent work. The alert is not a second ticket.'],
+['resolved','Resolved','OUTCOME',3,2,'Record the resolution and send the closing message. Example policy: reopen on a reply within seven days.'],
+['lost','Closed without fix','EXIT',0,2,'Close spam or invalid requests with a reason. Keep this separate from a successful resolution.']],
+edges:[['intake','new','new issue'],['new','working','assigned'],['working','waiting','needs info'],['intake','merge','open ticket'],['merge','working','context added'],['new','urgent','priority'],['working','resolved','fixed'],['waiting','resolved','5 days silent'],['waiting','working','reply'],['new','lost','invalid']],route:['intake','new','working','waiting','resolved'],source:'Ticket lifecycle adapted from Brewed Ops. Timing rules are illustrative configuration, not platform defaults.'},
+{spec:'ghl',id:'lead-routing',title:'The build plan behind a booked call',short:'Lead routing',summary:'I separate lead capture from appointment confirmation so the customer receives the right message once.',problem:'A form, calendar and follow up sequence can all act on the same contact and send conflicting messages.',plan:'Define the source fields and consent rules, create the pipeline, then build qualification, assignment and appointment workflows separately.',decisions:['Capture source and consent at entry.','Appointment booked is its own event, not an assumption after form submission.','Reply, booking and opt out are explicit stop conditions.'],checks:['A form submission alone must not send an appointment confirmation.','A booked contact must leave the nurture path.','A repeat webhook must not create a duplicate opportunity.'],deliver:'Trigger map, field and tag guide, booking workflow and a short ownership SOP.',nodes:[['capture','Lead captured','TRIGGER',0,0,'Save the enquiry, source and permission for the chosen communication channel.'],['qualify','Qualify and route','DECISION',1,0,'Use service, location and fit to decide the owner and next action.'],['owner','Assign owner','ACTION',2,0,'Create the opportunity and a task with a response expectation.'],['book','Appointment booked','EVENT',3,0,'Listen for the actual appointment event before confirming the booking.'],['nurture','Not ready yet','WAIT',1,2,'Deliver useful information only through allowed channels.'],['stop','Stop follow up','GUARD',2,2,'End the sequence on a reply, booking, opt out or manual intervention.'],['confirm','Confirm and remind','OUTCOME',3,2,'Send the correct time, calendar details and appointment reminders.']],edges:[['capture','qualify','source + consent'],['qualify','owner','qualified'],['owner','book','calendar'],['book','confirm','confirmed event'],['qualify','nurture','not ready'],['nurture','stop','reply / opt out'],['book','stop','booked']],route:['capture','qualify','owner','book','confirm']},
+{spec:'ghl',id:'recovery',title:'A recovery path with a clear exit',short:'Recovery',summary:'Missed calls and missed appointments get a useful next step, without turning into endless follow up.',problem:'Recovery workflows often keep messaging after a customer has already replied or rescheduled.',plan:'Choose the exact missed event, check permissions, then define recovery, rescheduling and owner review as distinct outcomes.',decisions:['Use event specific entry rules rather than broad contact changes.','Check the current state again after every wait.','An unresolved case goes to a person, not another unbounded message loop.'],checks:['Reschedule during the wait. Recovery messages must stop.','Respect opt out and local sending hours.','No response should create an owner task at the agreed cutoff.'],deliver:'Recovery workflow, message set, stop conditions and escalation rules.',nodes:[['missed','Missed event','TRIGGER',0,0,'A missed call or confirmed no show starts the matching recovery path.'],['permission','Check permission','GUARD',1,0,'Check contact status, channel consent and sending hours.'],['message','Useful check in','ACTION',2,0,'Offer help or a rescheduling link that matches the original event.'],['response','Response received?','DECISION',3,0,'Wait, then evaluate the latest conversation and booking state.'],['booked','Rescheduled','OUTCOME',3,2,'Stop recovery and allow the appointment workflow to manage reminders.'],['review','Owner review','EXCEPTION',1,2,'Create a personal follow up task when the recovery window ends.']],edges:[['missed','permission','event'],['permission','message','allowed'],['message','response','wait + recheck'],['response','booked','booked'],['response','review','no response'],['permission','review','restricted']],route:['missed','permission','message','response','booked']},
+{spec:'hermes',id:'agent-team',title:'How I build with an agent team',short:'Agent framework',summary:'I own the brief and the decisions. An orchestrator coordinates focused agents for research, implementation and review.',problem:'One long AI conversation mixes research, assumptions and implementation, making weak decisions harder to catch.',plan:'Agree on acceptance criteria, assign bounded specialist tasks, collect evidence and review the result before anything is published.',decisions:['Each specialist gets a focused brief and separate conversation context.','Separate context is not a security sandbox. File access and permissions still need explicit boundaries.','A reviewer checks actual output. The orchestrator does not treat a confident summary as proof.'],checks:['Check sources against the claims in the brief.','Exercise the built page or workflow, including failure cases.','Require approval before publishing or connecting production accounts.'],deliver:'Working preview, verified checks, source notes and a documented handoff.',nodes:[['brief','My brief','INPUT',0,1,'I define the goal, constraints, allowed tools and what a passing result looks like.'],['orchestrator','Orchestrator','COORDINATOR',1,1,'Break the task into clear assignments, collect results and resolve gaps.'],['researcher','Researcher','SPECIALIST',2,0,'Gather source material, identify assumptions and return a focused recommendation.'],['builder','Builder','SPECIALIST',2,1,'Implement against the approved brief with code, browser and integration tools.'],['reviewer','Reviewer','SPECIALIST',2,2,'Test the result and report reproducible issues, not a generic thumbs up.'],['approval','My review','GUARD',3,1,'Inspect the evidence and decide whether to revise, hand off or publish.']],edges:[['brief','orchestrator','scope'],['orchestrator','researcher','research'],['researcher','orchestrator','findings'],['orchestrator','builder','build plan'],['builder','reviewer','artifact'],['reviewer','builder','revisions'],['reviewer','approval','evidence']],route:['brief','orchestrator','researcher','orchestrator','builder','reviewer','approval'],messages:[['Orchestrator → Researcher','Check the audience, source material and constraints.'],['Researcher → Orchestrator','Findings ready. Two assumptions need a decision.'],['Orchestrator → Builder','Use the approved plan. Keep the work in a local preview.'],['Builder → Reviewer','The artifact is ready. Check behavior and failure paths.'],['Reviewer → Orchestrator','Checks documented. The result is ready for Rome’s review.'],['Orchestrator → Rome','Review the evidence before anything goes live.']]},
+{spec:'hermes',id:'cron',title:'Recurring work with a defined handoff',short:'Scheduled work',summary:'The schedule is only the trigger. The real design is the task context, allowed actions, evidence and delivery.',problem:'A recurring AI task is not useful if its scope is vague, failures are invisible or nobody receives the result.',plan:'Specify the routine, timezone, required integrations and report format. Add delivery and a failure path before scheduling it.',decisions:['Morning brief: 0 8 * * * in the configured timezone.','Weekly research: 0 9 * * 1 with source linked findings.','The host and scheduler must be running. An offline computer cannot execute the routine.'],checks:['Verify the timezone and next intended execution.','Test missing data, a failed integration and an empty report.','Confirm the report reaches the intended destination without exposing secrets.'],deliver:'Schedule specification, task instructions, delivery format and failure checklist.',nodes:[['schedule','Schedule','TRIGGER',0,0,'A defined cron expression starts the routine at the configured local time.'],['context','Load task context','INPUT',1,0,'Load the brief, relevant skills and allowed sources for a fresh task session.'],['work','Gather and process','ACTION',2,0,'Collect the required data and prepare the requested result.'],['verify','Check the output','GUARD',3,0,'Validate completeness and flag missing inputs instead of inventing values.'],['failure','Failure notice','EXCEPTION',1,2,'Report the blocked source or failed integration with a useful next action.'],['report','Deliver report','OUTCOME',3,2,'Send the structured result to the configured destination for review.']],edges:[['schedule','context','due'],['context','work','bounded task'],['work','verify','result'],['verify','report','validated'],['work','failure','blocked'],['verify','failure','incomplete']],route:['schedule','context','work','verify','report']},
+{spec:'hermes',id:'skills',title:'A repeatable way to build, not a repeated prompt',short:'Memory and skills',summary:'Memory keeps durable context. Skills keep the procedure. Tools produce the artifact and checks prove it works.',problem:'Repeating the same setup wastes time, but treating old context as unquestionable truth causes a different problem.',plan:'Separate stable preferences from task instructions, load the relevant procedure, then verify against the current project.',decisions:['Store durable preferences in memory, not every temporary detail.','Keep reusable build and QA procedures in skills.','Update a procedure when evidence shows it is wrong; do not treat it as perfect recall.'],checks:['Confirm the procedure matches the current tools and repository.','Check the real artifact rather than claiming a successful build from file creation alone.','Keep private context out of public handoffs.'],deliver:'Reusable procedure, current project notes, a tested artifact and clear limitations.',nodes:[['brief','Current brief','INPUT',0,0,'The current request sets the scope and overrides stale assumptions.'],['memory','Relevant memory','CONTEXT',1,0,'Bring in durable preferences that actually apply to this task.'],['skill','Load the method','PROCEDURE',2,0,'Use the documented build, research or testing workflow.'],['tools','Work with tools','ACTION',3,0,'Create and exercise the actual output.'],['review','Review evidence','GUARD',3,2,'Compare the result with acceptance criteria.'],['learn','Improve procedure','OUTCOME',1,2,'Save a useful correction to the method, not a claim that the model retrained itself.']],edges:[['brief','memory','context'],['memory','skill','relevant method'],['skill','tools','execute'],['tools','review','evidence'],['review','learn','lesson'],['learn','skill','next task']],route:['brief','memory','skill','tools','review','learn']},
+{spec:'shopify',id:'orders',title:'An order desk designed around exceptions',short:'Order system',summary:'Paid orders move toward fulfillment. Address, stock and payment issues branch into owned exception queues.',problem:'The normal orders are easy. The failures get buried across inboxes, spreadsheets and shipping portals.',plan:'Map the order states, source of truth and ownership first. Define which checks can run automatically and which need a person.',decisions:['Shopify remains the order record. Trackers support it rather than becoming a conflicting copy.','A hold needs a reason, owner and next action.','Only confirm fulfillment when the required operational event has occurred.'],checks:['A repeated event must not create a second exception task.','A held order must not enter the ready to pack queue.','Tracking updates must belong to the correct order and shipment.'],deliver:'Order state map, exception tracker, owner rules and daily operations SOP.',nodes:[['paid','Paid order','EVENT',0,0,'Read the order, line items, destination and fulfillment status.'],['check','Validate order','GUARD',1,0,'Check the address, payment signals and stock before releasing work.'],['pack','Ready to pack','ACTION',2,0,'Send eligible orders to the fulfillment queue with clear handling notes.'],['carrier','Carrier handoff','EVENT',3,0,'Confirm the shipment and tracking reference before marking the handoff.'],['hold','Exception queue','EXCEPTION',1,2,'Assign the blocker to an owner. Keep the order on hold until resolved.'],['notify','Customer update','OUTCOME',3,2,'Provide the correct status and tracking information through the configured channel.']],edges:[['paid','check','order data'],['check','pack','clear'],['pack','carrier','shipment'],['carrier','notify','tracking'],['check','hold','issue found'],['hold','pack','resolved']],route:['paid','check','pack','carrier','notify']},
+{spec:'shopify',id:'stock',title:'Inventory signals that lead to a decision',short:'Stock control',summary:'Available stock, committed orders and supplier lead time belong in the same conversation.',problem:'A low stock alert without context creates noise. An oversold item without an owner creates a customer problem.',plan:'Define sellable stock and the reorder rule, connect commitments, then build an approval and exception path.',decisions:['Distinguish on hand, committed and available stock.','Use supplier lead time and demand context when recommending replenishment.','Purchases and customer refunds stay behind the store’s approval rules.'],checks:['Review multi location stock before declaring an item unavailable.','Deduplicate repeated threshold alerts.','Verify the customer promise against a confirmed supplier date.'],deliver:'Inventory check routine, reorder review sheet and shortage response SOP.',nodes:[['signal','Stock change','EVENT',0,0,'An inventory update or scheduled review starts the check.'],['available','Check availability','GUARD',1,0,'Compare sellable units with open order commitments and locations.'],['risk','Reorder threshold','DECISION',2,0,'Check the agreed threshold against demand and supplier lead time.'],['supplier','Supplier review','OWNER',3,0,'Confirm availability and prepare a replenishment request.'],['shortage','Customer exception','EXCEPTION',1,2,'Identify affected orders and present approved alternatives.'],['approved','Approved next step','OUTCOME',3,2,'Record the replenishment decision and expected arrival.']],edges:[['signal','available','stock data'],['available','risk','sufficient now'],['risk','supplier','reorder needed'],['supplier','approved','approval'],['available','shortage','oversold'],['shortage','approved','agreed resolution']],route:['signal','available','risk','supplier','approved']},
+{spec:'shopify',id:'returns',title:'Returns with policy and ownership built in',short:'Return workflow',summary:'A request, return receipt and refund decision are different events. I keep them connected without skipping the checks.',problem:'A loose email thread can promise a refund before eligibility, receipt or authority has been established.',plan:'Start from the store’s policy, map the evidence needed at each step, and keep the final financial decision with an authorized person.',decisions:['Match every request to the original order and item.','Record return condition before deciding whether stock can be restored.','Separate exchange fulfillment from refund authorization.'],checks:['Test a request outside the return window.','Check a partial return and an item that cannot be restocked.','Confirm no refund is implied before approval.'],deliver:'Return decision map, customer templates, inspection checklist and approval log.',nodes:[['request','Return requested','TRIGGER',0,0,'Capture the item, order, reason and requested outcome.'],['policy','Policy check','GUARD',1,0,'Check eligibility and route exceptions to the owner.'],['receive','Receive and inspect','ACTION',2,0,'Confirm receipt and document the condition of the item.'],['decide','Authorized decision','OWNER',3,0,'Choose the approved exchange, refund or other resolution.'],['exception','Policy exception','EXCEPTION',1,2,'Ask for a human decision with the relevant evidence.'],['close','Update and close','OUTCOME',3,2,'Update the order record, stock decision and customer communication.']],edges:[['request','policy','order match'],['policy','receive','eligible'],['receive','decide','inspection'],['decide','close','approved'],['policy','exception','outside rules'],['exception','decide','owner decision']],route:['request','policy','receive','decide','close']},
+{spec:'marketing',id:'campaign',title:'A campaign system before a content calendar',short:'Campaign plan',summary:'I connect the audience, offer, channel and follow up before deciding what to post or where to spend.',problem:'Activity is easy to measure. It is harder to tell whether the right people move from interest to a useful conversation.',plan:'Define one business objective and audience, shape the offer, map the landing experience and agree on the qualified outcome.',decisions:['Local service: specific problem, service area and a useful booking offer.','Online store: a clear product use case, proof and transparent delivery terms.','B2B service: a focused diagnostic for a named decision maker, not a broad pitch.'],checks:['The ad promise must match the destination page.','Source tags and conversion events must reach the CRM.','Check qualification and lead ownership before increasing spend.'],deliver:'Campaign brief, channel plan, landing page outline, content themes and measurement map.',nodes:[['goal','Business objective','INPUT',0,0,'Name the result and the audience. Avoid treating impressions as the objective.'],['offer','Offer and message','PLAN',1,0,'Specify the problem, reason to believe and useful next step.'],['reach','Channel and creative','ACTION',2,0,'Choose channels around the audience and test a focused creative angle.'],['capture','Landing and capture','ACTION',3,0,'Match the message, reduce friction and preserve source context.'],['nurture','Follow up and qualify','OWNER',3,2,'Give each enquiry a next action and a responsible owner.'],['learn','Outcome review','FEEDBACK',1,2,'Compare qualified outcomes with the objective, then improve the plan.']],edges:[['goal','offer','audience'],['offer','reach','message'],['reach','capture','visit'],['capture','nurture','consented lead'],['nurture','learn','CRM outcome'],['learn','offer','learning']],route:['goal','offer','reach','capture','nurture','learn']},
+{spec:'marketing',id:'measurement',title:'A measurement plan that follows the customer',short:'Measurement',summary:'The campaign click, captured enquiry and qualified outcome need to belong to the same measurement story.',problem:'A dashboard can show more leads while the sales team receives fewer useful opportunities.',plan:'Agree on event definitions, source naming and qualification rules. Check tracking quality before interpreting performance.',decisions:['Use consistent campaign source, medium and content tags.','Keep a primary outcome and a small set of guardrail metrics.','Review consent requirements and attribution limitations before adding tracking.'],checks:['A form success event must not fire on a validation error.','Repeated page loads must not become duplicate conversions.','Compare platform reports with actual CRM outcomes.'],deliver:'Event dictionary, UTM convention, tracking QA sheet and reporting structure.',nodes:[['source','Campaign source','INPUT',0,0,'Define consistent source tags for each channel and creative.'],['visit','Visit and event','EVENT',1,0,'Capture the agreed events using the appropriate consent controls.'],['lead','Lead record','RECORD',2,0,'Carry the available source context into the CRM.'],['quality','Qualification','GUARD',3,0,'Separate a submitted form from a qualified opportunity.'],['audit','Tracking audit','EXCEPTION',1,2,'Flag missing sources, duplicates and broken conversion events.'],['report','Decision report','OUTCOME',3,2,'Report outcomes, uncertainty and the next question, not just a rising chart.']],edges:[['source','visit','tagged link'],['visit','lead','capture'],['lead','quality','CRM stage'],['quality','report','qualified outcome'],['visit','audit','missing event'],['audit','report','data caveat']],route:['source','visit','lead','quality','report']},
+{spec:'marketing',id:'experiments',title:'A test designed to teach us something',short:'Experiment plan',summary:'A useful test starts with a hypothesis and a decision rule, not two random ads and a quick winner.',problem:'Changing the audience, offer and creative together makes it difficult to understand what caused the result.',plan:'Choose one meaningful variable, define the control and variant, and agree on the primary metric and review window.',decisions:['Offer clarity: change the promise while keeping audience and destination stable.','Creative angle: compare demonstration with the current creative using the same offer.','Booking friction: reduce nonessential questions, then check lead quality as well as completion.'],checks:['Confirm both variants receive comparable treatment.','Look at downstream quality, not just click through rate.','Do not declare a winner from inadequate or inconsistent evidence.'],deliver:'Experiment brief, variant specification, measurement checklist and decision log.',nodes:[['hypothesis','Hypothesis','PLAN',0,0,'State the expected change and why it should help the customer.'],['variants','Control and variant','BUILD',1,0,'Change one major variable and document what stays constant.'],['tracking','Validate tracking','GUARD',2,0,'Check the primary metric and guardrail events before launch.'],['observe','Collect evidence','WAIT',3,0,'Allow an appropriate comparison period and adequate volume.'],['uncertain','Not enough evidence','EXCEPTION',1,2,'Keep the uncertainty visible. Extend or redesign rather than inventing a winner.'],['decision','Review and decide','OUTCOME',3,2,'Keep, revise or stop the change based on the business outcome.']],edges:[['hypothesis','variants','one variable'],['variants','tracking','instrument'],['tracking','observe','validated'],['observe','decision','adequate evidence'],['observe','uncertain','inconclusive'],['uncertain','hypothesis','reframe']],route:['hypothesis','variants','tracking','observe','decision']}
+];
+
+</script>
+<script>
+/* Orthogonal routing for the portfolio's inspectable architecture maps.
+   Routing and label placement only; no integrations or remote requests. */
+(()=>{'use strict';
+const W=142,H=76;
+const point=n=>({x:20+n[3]*172,y:28+n[4]*133});
+const box=n=>{const p=point(n);return {x:p.x,y:p.y,w:W,h:H};};
+const intersects=(a,b,pad=0)=>a.x<b.x+b.w+pad&&a.x+a.w>b.x-pad&&a.y<b.y+b.h+pad&&a.y+a.h>b.y-pad;
+function route(a,b,index,edges){
+ const p=point(a),q=point(b),ac={x:p.x+W/2,y:p.y+H/2},bc={x:q.x+W/2,y:q.y+H/2};
+ const paired=edges.findIndex(e=>e[0]===b[0]&&e[1]===a[0]);
+ const returning=paired>=0&&paired<index;
+ let ps;
+ if(a[4]===b[4]){
+  if(returning||Math.abs(a[3]-b[3])>1){
+   const y=p.y+H+23;
+   ps=[[ac.x,p.y+H],[ac.x,y],[bc.x,y],[bc.x,q.y+H]];
+  }else if(q.x>p.x)ps=[[p.x+W,ac.y],[q.x,bc.y]];
+  else ps=[[p.x,ac.y],[q.x+W,bc.y]];
+ }else if(a[3]===b[3]){
+  if(returning){const x=p.x+W+18;ps=[[p.x+W,ac.y],[x,ac.y],[x,bc.y],[q.x+W,bc.y]];}
+  else if(q.y>p.y)ps=[[ac.x,p.y+H],[bc.x,q.y]];
+  else ps=[[ac.x,p.y],[bc.x,q.y+H]];
+ }else if(q.y<p.y){
+  if(returning){const y=q.y+H+22;ps=[[ac.x,p.y],[ac.x,y],[bc.x,y],[bc.x,q.y+H]];}
+  else {const x=p.x+(q.x>p.x?W+15:-15),y=q.y+H+30;ps=[[p.x+(q.x>p.x?W:0),ac.y],[x,ac.y],[x,y],[bc.x,y],[bc.x,q.y+H]];}
+ }else{
+  if(returning){const y=p.y+H+20;ps=[[ac.x,p.y+H],[ac.x,y],[bc.x,y],[bc.x,q.y]];}
+  else {const y=q.y-24;ps=[[ac.x,p.y+H],[ac.x,y],[bc.x,y],[bc.x,q.y]];}
+ }
+ // Remove zero-length vertices, retaining square turns for clear branches.
+ ps=ps.filter((p,i)=>!i||p[0]!==ps[i-1][0]||p[1]!==ps[i-1][1]);
+ return ps;
+}
+function labelFor(points,text,nodes,placed,index){
+ const w=Math.min(150,text.length*6.6+12),h=20,candidates=[];
+ for(let i=1;i<points.length;i++){
+  const a=points[i-1],b=points[i],cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;
+  if(a[1]===b[1]){
+   candidates.push({x:cx-w/2,y:cy-25,w,h},{x:cx-w/2,y:cy+5,w,h});
+   if(Math.abs(a[0]-b[0])>w+30)candidates.push({x:Math.min(a[0],b[0])+12,y:cy-25,w,h});
+  }else{
+   candidates.push({x:cx+8,y:cy-h/2,w,h},{x:cx-w-8,y:cy-h/2,w,h});
+  }
+ }
+ // A short connection can use its own lane's header, not the same shared label slot.
+ const a=points[0],b=points.at(-1);
+ candidates.push({x:(a[0]+b[0])/2-w/2,y:Math.min(a[1],b[1])-62,w,h});
+ let best=null,score=Infinity;
+ for(const c of candidates){
+  let s=0;
+  if(c.x<6||c.x+c.w>692||c.y<2||c.y+c.h>398)s+=1000;
+  s+=nodes.filter(n=>intersects(c,box(n),3)).length*100;
+  s+=placed.filter(p=>intersects(c,p,3)).length*40;
+  if(s<score){score=s;best=c;}
+ }
+ if(score>0){
+  for(const offset of [-25,25,-45,45]){
+   for(const base of candidates){const c={...base,y:base.y+offset};
+    if(c.x>=6&&c.x+c.w<=692&&c.y>=2&&c.y+c.h<=398&&!nodes.some(n=>intersects(c,box(n),3))&&!placed.some(p=>intersects(c,p,3))){best=c;score=0;break;}}
+   if(!score)break;
+  }
+ }
+ placed.push(best);return {...best,conflict:score>0};
+}
+window.CCGraphLayout={point,build(s){const labels=[];return s.edges.map((e,i)=>{const a=s.nodes.find(n=>n[0]===e[0]),b=s.nodes.find(n=>n[0]===e[1]);const points=route(a,b,i,s.edges);const label=labelFor(points,e[2],s.nodes,labels,i);return {d:points.map((p,j)=>(j?'L ':'M ')+p.join(' ')).join(' '),points,label,lx:label.x+label.w/2,ly:label.y+14};});}};
+})();
+
+</script>
+<script>
+(()=>{'use strict';
+const root=document.querySelector('#capability-console');if(!root)return;
+const $=(s,e=root)=>e.querySelector(s),$$=(s,e=root)=>[...e.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const logo=n=>`<img src="${esc(window.CC_LOGOS[n])}" alt="${esc(n)} logo" class="cc-logo" width="24" height="24">`;
+const specs=[
+{id:'ghl',name:'GoHighLevel CRM',brand:'GoHighLevel',desc:'Pipelines, routing and follow through.',overview:'I start with the states, records and rules. Then I build the workflows around them.',tools:['GoHighLevel','Google Sheets','Zapier','Make','n8n'],accent:'var(--lime)'},
+{id:'hermes',name:'Hermes Agent',brand:'Hermes Agent',desc:'Agent teams, tools and recurring work.',overview:'I define the goal and the boundaries. Agents handle focused work; evidence and human judgment guide the handoff.',tools:['Hermes Agent','n8n','Slack'],accent:'var(--magenta)'},
+{id:'shopify',name:'Shopify Operations',brand:'Shopify',desc:'Orders, stock and exception handling.',overview:'I map the normal order path and the things that interrupt it, then give every exception an owner.',tools:['Shopify','Google Sheets','Slack','Zapier'],accent:'var(--cyan)'},
+{id:'marketing',name:'Digital Marketing',brand:'Meta',desc:'Strategy, measurement and useful tests.',overview:'I connect the business objective to the offer, customer journey and measurement before choosing tactics.',tools:['Meta','Google Analytics','Canva','Instagram','LinkedIn','GoHighLevel'],accent:'var(--lime)'}
+];
+const studies=window.CC_STUDIES;
+const RM=matchMedia('(prefers-reduced-motion:reduce)');let motion=!RM.matches,current=0;
+root.innerHTML=`<span class="eyebrow">CAPABILITY CONSOLE</span><h2 class="title">How I plan, build and connect systems</h2><p class="cc-intro">The thinking behind the work. Explore the architecture, inspect a step, then scroll through the build plan.</p><div class="cc-shell"><div class="cc-top"><span class="cc-status">SYSTEM BLUEPRINTS</span><button type="button" class="cc-motion" aria-pressed="${motion}">${motion?'Motion on':'Motion off'} <span aria-hidden="true">${motion?'Ⅱ':'▷'}</span></button></div><div class="cc-layout"><nav class="cc-rail" aria-label="Specialty index"><p class="cc-micro">SELECT A SPECIALTY</p><div class="cc-tabs" role="tablist" aria-label="Specialties" aria-orientation="vertical">${specs.map((s,i)=>`<button type="button" class="cc-tab" role="tab" id="cc-tab-${s.id}" aria-controls="cc-panel-${s.id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}"><span class="cc-tabline">${logo(s.brand)}<span class="cc-micro">0${i+1}</span></span><strong>${s.name}</strong><small>${s.desc}</small></button>`).join('')}</div></nav><div class="cc-main"><div class="cc-jumps" aria-label="Study index"></div><div class="cc-scroll" tabindex="0" aria-label="System blueprints and build plans">${specs.map((s,i)=>`<div class="cc-panel" role="tabpanel" id="cc-panel-${s.id}" aria-labelledby="cc-tab-${s.id}" ${i?'hidden':''}><header class="cc-overview"><div class="cc-heading">${logo(s.brand)}<h3>${s.name}</h3></div><p>${s.overview}</p><div class="cc-tools">${s.tools.map(t=>`<span class="cc-tool">${logo(t)}${t}</span>`).join('')}</div></header><div class="cc-studies"></div></div>`).join('')}</div></div></div><div class="cc-bottom"><span>Jerome Grisler · Build approach</span><span>Scroll inside to explore <i class="cc-progress"><b></b></i></span></div></div><p class="cc-disclosure">Illustrative system designs, not claims of deployed client projects. Flow animation explains the architecture; no accounts or agents are connected.</p><dialog class="cc-dialog" aria-labelledby="cc-dialog-title"><div class="cc-dialoghead"><h3 id="cc-dialog-title">System architecture</h3><button type="button" class="cc-close" aria-label="Close expanded diagram">Close ×</button></div><div class="cc-dialogbody"></div></dialog>`;
+const scroller=$('.cc-scroll'),dialog=$('.cc-dialog');let expanded=null,returnFocus=null;const controllers=[];
+function applyMotion(){$('.cc-motion').disabled=RM.matches;$('.cc-motion').title=RM.matches?'Reduced motion follows your device setting':'Pause or resume the automatic diagram animation';root.classList.toggle('cc-paused',!motion);$('.cc-motion').setAttribute('aria-pressed',motion);$('.cc-motion').innerHTML=`${motion?'Motion on':'Motion off'} <span aria-hidden="true">${motion?'Ⅱ':'▷'}</span>`;}
+$('.cc-motion').onclick=()=>{motion=!motion;applyMotion();};RM.addEventListener('change',()=>{motion=!RM.matches;applyMotion();});applyMotion();
+function select(i,focus=false){current=(i+4)%4;root.style.setProperty('--cc-accent',specs[current].accent);$$('.cc-tab').forEach((b,n)=>{b.setAttribute('aria-selected',n===current);b.tabIndex=n===current?0:-1;if(focus&&n===current)b.focus();});$$('.cc-panel').forEach((p,n)=>p.hidden=n!==current);$('.cc-jumps').innerHTML=studies.filter(s=>s.spec===specs[current].id).map((s,n)=>`<button class="cc-jump" data-study="${s.id}" type="button"><span>0${n+1}</span> ${s.short}</button>`).join('');scroller.scrollTo({top:0,behavior:'instant'});progress();}
+$$('.cc-tab').forEach((b,i)=>{b.onclick=()=>select(i);b.onkeydown=e=>{let n;if(['ArrowRight','ArrowDown'].includes(e.key))n=i+1;if(['ArrowLeft','ArrowUp'].includes(e.key))n=i-1;if(e.key==='Home')n=0;if(e.key==='End')n=3;if(n!==undefined){e.preventDefault();select(n,true);}};});
+$('.cc-jumps').onclick=e=>{const b=e.target.closest('[data-study]');if(!b)return;const t=$('#cc-study-'+b.dataset.study);scroller.scrollTo({top:t.getBoundingClientRect().top-scroller.getBoundingClientRect().top+scroller.scrollTop-18,behavior:RM.matches?'instant':'smooth'});};
+function progress(){const d=scroller.scrollHeight-scroller.clientHeight;$('.cc-progress b').style.width=(d>0?scroller.scrollTop/d*100:0)+'%';}scroller.addEventListener('scroll',progress,{passive:true});
+const colors={TRIGGER:'var(--cyan)',EVENT:'var(--cyan)',INPUT:'var(--cyan)',WAIT:'#ffbd66',DECISION:'#c799ff',EXCEPTION:'var(--magenta)',EXIT:'var(--magenta)',OUTCOME:'var(--lime)',GUARD:'#ffbd66',SPECIALIST:'var(--cyan)',COORDINATOR:'var(--magenta)',FEEDBACK:'#c799ff'};
+const nodeColor=n=>colors[n[2]]||'var(--cc-accent)';
+function point(n){return {x:20+n[3]*172,y:28+n[4]*133};}
+function addStudy(s,index){const article=document.createElement('article');article.className='cc-study';article.id='cc-study-'+s.id;
+ article.innerHTML=`<div class="cc-studyhead"><span class="cc-micro">BUILD STUDY / 0${index+1}</span><h4>${s.title}</h4><p>${s.summary}</p></div><div class="cc-viewer-slot"></div><div class="cc-build-notes"><div class="cc-brief"><div><span class="cc-label">THE PROBLEM</span><p>${s.problem}</p></div><div><span class="cc-label">MY BUILD PLAN</span><p>${s.plan}</p></div></div><div class="cc-method"><span class="cc-label">HOW I PUT IT TOGETHER</span><div class="cc-methodline"><span><b>01</b>Map the rules</span><span><b>02</b>Build the system</span><span><b>03</b>Test the edges</span><span><b>04</b>Document it</span></div></div><details open><summary>Design decisions <span>− / +</span></summary><ul>${s.decisions.map(t=>`<li>${t}</li>`).join('')}</ul></details><details><summary>What I test before handoff <span>− / +</span></summary><ul>${s.checks.map(t=>`<li>${t}</li>`).join('')}</ul></details><div class="cc-deliver"><span class="cc-label">WHAT I HAND OVER</span><p>${s.deliver}</p></div>${s.source?`<p class="cc-source">${s.source} <a href="https://brewedops.cloud/ticketingsystem/diagrams/ticket-lifecycle.html?theme=light" target="_blank" rel="noopener">Reference ↗</a></p>`:''}</div>`;
+ $(`#cc-panel-${s.spec} .cc-studies`).append(article);
+ const routes=window.CCGraphLayout.build(s);const viewer=document.createElement('div');viewer.className='cc-viewer';viewer.innerHTML=`<div class="cc-mapbar"><span>ARCHITECTURE <em>· inspect a node</em></span><button type="button" class="cc-expand" aria-label="Expand ${s.title}">Expand ↗</button></div><div class="cc-graphport" tabindex="0" role="group" aria-label="${esc(s.title)} architecture. Scroll horizontally or drag the background to explore."><div class="cc-board"><svg class="cc-connections" viewBox="0 0 698 400" aria-hidden="true"><defs><marker id="cc-arrow-${s.id}" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="var(--cc-accent)"/></marker></defs>${s.edges.map((e,i)=>{const a=s.nodes.find(n=>n[0]===e[0]),b=s.nodes.find(n=>n[0]===e[1]),g=routes[i];return `<g class="cc-edge" data-from="${e[0]}" data-to="${e[1]}"><path class="cc-wire" d="${g.d}" marker-end="url(#cc-arrow-${s.id})"/><path class="cc-signal" d="${g.d}" style="animation-delay:${-i*.37}s"/><circle class="cc-packet" r="3.2" style="offset-path:path('${g.d}');animation-delay:${-i*.57}s"/><rect class="cc-edge-label-bg" x="${g.label.x}" y="${g.label.y}" width="${g.label.w}" height="${g.label.h}" rx="4"/><text x="${g.lx}" y="${g.ly}" text-anchor="middle">${e[2]}</text></g>`;}).join('')}</svg>${s.nodes.map((n,i)=>{const p=point(n);return `<button type="button" class="cc-graphnode" data-node="${n[0]}" style="left:${p.x}px;top:${p.y}px;--cc-node-color:${nodeColor(n)}" aria-pressed="false"><small><i></i>${n[2]}</small><strong>${n[1]}</strong></button>`;}).join('')}</div></div><div class="cc-mapfoot"><span><i class="cc-key"></i> Trigger <i class="cc-key cc-key-wait"></i> Decision / check <i class="cc-key cc-key-end"></i> Outcome</span><span>Auto flow · Hover or click to inspect</span></div><div class="cc-inspector" aria-live="off"><div class="cc-inspectorhead"><span class="cc-inspectkind"></span><button type="button" class="cc-clear" hidden>Clear selection</button></div><strong class="cc-inspecttitle"></strong><p class="cc-inspectbody"></p><span class="cc-connections-count"></span></div>${s.messages?'<div class="cc-conversation"><span class="cc-label">AGENT HANDOFF</span><b></b><p></p></div>':''}`;
+ $('.cc-viewer-slot',article).append(viewer);
+ let pinned=null,hovered=null,step=0,message=0;const port=$('.cc-graphport',viewer);let drag=null;
+ function show(id,auto=false){const n=s.nodes.find(n=>n[0]===id);if(!n)return;viewer.dataset.activeNode=id;$$('.cc-graphnode',viewer).forEach(b=>{b.classList.toggle('cc-node-active',b.dataset.node===id);b.setAttribute('aria-pressed',b.dataset.node===pinned);});$$('.cc-edge',viewer).forEach(g=>{const connected=g.dataset.from===id||g.dataset.to===id;g.classList.toggle('cc-edge-focus',connected);g.classList.toggle('cc-edge-dim',!!(pinned||hovered)&&!connected);});$('.cc-inspectkind',viewer).textContent=n[2]+(pinned?' / SELECTED':' / SYSTEM STEP');$('.cc-inspecttitle',viewer).textContent=n[1];$('.cc-inspectbody',viewer).textContent=n[5];const upstream=s.edges.filter(e=>e[1]===id).length,downstream=s.edges.filter(e=>e[0]===id).length;$('.cc-connections-count',viewer).textContent=`${upstream} incoming · ${downstream} outgoing`;$('.cc-clear',viewer).hidden=!pinned;}
+ function conversation(){if(!s.messages)return;const m=s.messages[message%s.messages.length];$('.cc-conversation b',viewer).textContent=m[0];$('.cc-conversation p',viewer).textContent=m[1];viewer.dataset.messageIndex=message%s.messages.length;}
+ $$('.cc-graphnode',viewer).forEach(b=>{b.onclick=()=>{pinned=pinned===b.dataset.node?null:b.dataset.node;show(pinned||s.route[step%s.route.length]);};b.onpointerenter=e=>{if(e.pointerType==='touch'||pinned)return;hovered=b.dataset.node;show(hovered);};b.onpointerleave=()=>{hovered=null;if(!pinned)show(s.route[step%s.route.length]);};b.onfocus=()=>{hovered=b.dataset.node;show(pinned||hovered);};b.onblur=()=>{hovered=null;};});
+ $('.cc-clear',viewer).onclick=()=>{pinned=null;hovered=null;show(s.route[step%s.route.length]);};
+ // Native scrolling on touch; drag to pan with a mouse on empty canvas.
+ port.onpointerdown=e=>{if(e.pointerType==='touch'||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,sx:port.scrollLeft,sy:port.scrollTop};port.setPointerCapture(e.pointerId);port.classList.add('cc-dragging');};port.onpointermove=e=>{if(!drag)return;port.scrollLeft=drag.sx-(e.clientX-drag.x);port.scrollTop=drag.sy-(e.clientY-drag.y);};const endDrag=()=>{drag=null;port.classList.remove('cc-dragging');};port.onpointerup=endDrag;port.onpointercancel=endDrag;
+ $('.cc-expand',viewer).onclick=e=>{expanded={viewer,slot:$('.cc-viewer-slot',article)};returnFocus=e.currentTarget;$('#cc-dialog-title').textContent=s.title;$('.cc-dialogbody').append(viewer);dialog.showModal();$('.cc-close').focus();};
+ function visible(){if(document.hidden||(!dialog.open&&article.closest('.cc-panel').hidden))return false;if(dialog.open)return expanded?.viewer===viewer;const r=port.getBoundingClientRect(),v=scroller.getBoundingClientRect();return r.bottom>Math.max(v.top,0)+20&&r.top<Math.min(v.bottom,innerHeight)-20;}
+ const ctrl={id:s.id,viewer,article,visible,tick(){if(pinned||hovered)return;step=(step+1)%s.route.length;show(s.route[step],true);message++;conversation();}};controllers.push(ctrl);show(s.route[0]);conversation();
+}
+for(const spec of specs)studies.filter(s=>s.spec===spec.id).forEach(addStudy);
+function closeDiagram(){if(dialog.open)dialog.close();}
+$('.cc-close').onclick=closeDiagram;dialog.addEventListener('close',()=>{if(expanded){expanded.slot.append(expanded.viewer);expanded=null;}returnFocus?.focus();});dialog.addEventListener('click',e=>{if(e.target===dialog)closeDiagram();});
+setInterval(()=>{controllers.forEach(c=>{const visible=c.visible();c.viewer.classList.toggle('cc-offscreen',!visible);if(visible&&motion&&!RM.matches)c.tick();});},2400);
+const io=new IntersectionObserver(()=>controllers.forEach(c=>c.viewer.classList.toggle('cc-offscreen',!c.visible())),{threshold:[0,.1,.5]});controllers.forEach(c=>io.observe(c.viewer));
+const mq=matchMedia('(max-width:650px)');const orient=()=>$('.cc-tabs').setAttribute('aria-orientation',mq.matches?'horizontal':'vertical');mq.addEventListener('change',orient);orient();select(0);
+window.CapabilityConsole={select,get current(){return specs[current].id;},studyCount:studies.length,controllers};
+})();
+
+</script>
 </body>
 </html>
