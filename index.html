@@ -528,6 +528,47 @@ html[data-theme="light"] :is(#ecom-preview-image,.book-visual,.book-visual img){
 @media(max-width:620px){.cmd-btn{display:flex;padding:6px}.cmd-btn kbd{font-size:10px}.nav .hud{gap:6px}.light-hub{padding:24px!important}}
 
 </style>
+<style id="ava-avatar-styles">
+/* Ava uses the user's original ten-expression sticker artwork. */
+.ava-dock{position:fixed;right:18px;bottom:76px;width:132px;height:120px;z-index:90;isolation:isolate;--ava-x:0deg;--ava-y:0deg;--ava-lean:0deg}
+.ava-dock .ava-launch{z-index:1;position:relative;inset:auto;width:132px;height:120px;padding:0;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;overflow:visible;display:block;transform:none;perspective:650px}
+.ava-dock .ava-launch:hover{transform:none;border:0}
+.ava-avatar-float{display:block;width:100%;height:100%;animation:avaHeadFloat 5s ease-in-out infinite}
+.ava-avatar-turn{position:relative;display:block;width:100%;height:100%;transform:rotateX(var(--ava-x)) rotateY(var(--ava-y)) rotate(var(--ava-lean));transition:transform .35s ease;filter:drop-shadow(0 7px 12px #0008)}
+.ava-sprite{position:absolute;display:block;inset:0;width:100%;aspect-ratio:6/5;height:auto;background-image:url('assets/ava/ava-expressions.webp');background-repeat:no-repeat;background-size:500% 200%;background-position:0% 0%;pointer-events:none;transition:opacity 85ms ease;opacity:1}
+.ava-sprite.ava-sprite-next{opacity:0}
+.ava-dock .ava-name-tag{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font:600 11px var(--mono);letter-spacing:.12em;color:var(--txt);padding:2px 9px;background:var(--bg-2);border:1px solid var(--panel-border);border-radius:99px;line-height:1.6;box-shadow:0 3px 12px #0003}
+.ava-nudge-wrap{position:absolute;right:128px;bottom:83px;width:max-content;max-width:200px;display:flex;align-items:center;background:var(--bg-2);border:1px solid color-mix(in srgb,var(--cyan) 40%,var(--panel-border));border-radius:17px 17px 5px 17px;box-shadow:0 8px 28px #0004;transition:opacity .2s,transform .2s}
+.ava-nudge-wrap::after{content:'';position:absolute;right:-7px;bottom:9px;width:12px;height:12px;background:var(--bg-2);border-right:1px solid color-mix(in srgb,var(--cyan) 40%,var(--panel-border));border-top:1px solid color-mix(in srgb,var(--cyan) 40%,var(--panel-border));transform:rotate(45deg);z-index:-1}
+.ava-nudge{font:500 14px/1.4 var(--font);text-align:left;border:0;background:none;color:var(--txt);padding:13px 5px 13px 16px;cursor:pointer;max-width:167px;transition:opacity .18s}
+.ava-nudge-swap .ava-nudge{opacity:0}
+.ava-nudge-dismiss{align-self:flex-start;flex:none;width:26px;height:28px;margin:3px 3px 0 0;font:16px var(--font);border:0;background:none;color:var(--muted);cursor:pointer;border-radius:8px}
+.ava-nudge-dismiss:hover{color:var(--txt)}
+.ava-dock[data-open=true] .ava-nudge-wrap,.ava-nudge-wrap[hidden]{display:none}
+.ava-avatar-motion{position:absolute;left:0;bottom:1px;width:26px;height:26px;border:1px solid var(--panel-border);border-radius:50%;background:var(--bg-2);color:var(--muted);font-size:10px;cursor:pointer;z-index:2}
+.ava-dock[data-paused=true] .ava-avatar-float{animation:none}
+.ava-dock[data-paused=true] .ava-avatar-turn{transform:none!important}
+.ava-chat{bottom:212px;max-height:min(640px,calc(100dvh - 238px));z-index:91}
+.ava-chat .ava-head{gap:10px;padding:14px 16px}
+.ava-header-avatar{position:relative;flex:none;width:66px;height:55px}
+.ava-chat .ava-head h3{font-size:20px;letter-spacing:-.03em}
+.ava-chat .ava-head p{font-size:12px;line-height:1.4}
+.ava-chat .ava-close{flex:none}
+.ava-chat .ava-messages{min-height:140px;overscroll-behavior:contain;scrollbar-gutter:stable}
+.ava-chat .ava-msg{font-size:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.ava-chat .ava-form input{min-width:0;font-family:var(--font);font-size:16px}
+.ava-chat .ava-form button{font-family:var(--font)}
+.ava-chat .ava-chip{font:13px/1.3 var(--font);padding:8px 11px}
+html[data-theme=light] .ava-dock .ava-launch{background:transparent!important;border:0!important;box-shadow:none!important}
+html[data-theme=light] .ava-avatar-turn{filter:drop-shadow(0 5px 9px #17233024)}
+html[data-theme=light] .ava-nudge-wrap{background:#fff;border-color:#dce2e8;box-shadow:0 5px 20px #17233012}
+html[data-theme=light] .ava-nudge-wrap::after{background:#fff;border-color:#dce2e8}
+html[data-theme=light] .ava-dock .ava-name-tag{background:#fff;color:#276749;box-shadow:none}
+@keyframes avaHeadFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
+@media(max-width:620px){.ava-dock{right:10px;bottom:70px;width:104px;height:96px}.ava-dock .ava-launch{width:104px;height:96px}.ava-nudge-wrap{right:101px;bottom:60px;max-width:177px}.ava-nudge{font-size:13px;padding:11px 3px 11px 12px;max-width:147px}.ava-chat{right:12px;bottom:12px;width:calc(100vw - 24px);height:min(620px,calc(100dvh - 28px));max-height:calc(100dvh - 28px);z-index:92}.ava-dock[data-open=true]{visibility:hidden}.ava-chat .ava-head{padding:11px 12px}.ava-chat .ava-messages{min-height:80px}.ava-chat .ava-form{padding:12px}.ava-header-avatar{width:60px;height:50px}}
+@media(prefers-reduced-motion:reduce){.ava-dock *{animation:none!important;transition:none!important}.ava-avatar-turn{transform:none!important}}
+
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -925,17 +966,21 @@ html[data-theme="light"] :is(#ecom-preview-image,.book-visual,.book-visual img){
 
 <button id="toTop" aria-label="Back to top">↑</button>
 
-<button class="ava-launch" id="ava-launch" type="button" aria-label="Open Ava chat" aria-expanded="false"><span>AVA</span><i></i><b></b></button>
-<div class="ava-chat" id="ava-chat" aria-live="polite">
+<div class="ava-dock" id="ava-dock" data-open="false" data-paused="false" data-expression="0">
+  <div class="ava-nudge-wrap" id="ava-nudge-wrap"><button class="ava-nudge" id="ava-nudge" type="button" aria-controls="ava-chat"><span id="ava-nudge-text">Talk to me!</span></button><button class="ava-nudge-dismiss" id="ava-nudge-dismiss" type="button" aria-label="Dismiss Ava invitation">×</button></div>
+  <button class="ava-launch" id="ava-launch" type="button" aria-label="Talk to Ava, Rome's AI sidekick" aria-controls="ava-chat" aria-expanded="false"><span class="ava-avatar-float" aria-hidden="true"><span class="ava-avatar-turn"><span class="ava-sprite" data-ava-face="front"></span><span class="ava-sprite ava-sprite-next" data-ava-face="back"></span></span></span><span class="ava-name-tag" aria-hidden="true">AVA</span></button>
+  <button class="ava-avatar-motion" id="ava-avatar-motion" type="button" aria-label="Pause Ava animation" aria-pressed="true">Ⅱ</button>
+</div>
+<div class="ava-chat" id="ava-chat" role="dialog" aria-labelledby="ava-title">
   <div class="ava-head">
-    <div class="ava-face">A</div>
-    <div><h3>Ava</h3><p>Ask about Rome, his services, process, and pricing.</p></div>
+    <div class="ava-header-avatar" aria-hidden="true"><span class="ava-sprite" data-ava-face="front"></span><span class="ava-sprite ava-sprite-next" data-ava-face="back"></span></div>
+    <div><h3 id="ava-title">Ava</h3><p>AI sidekick · Here to chat ✨</p></div>
     <button class="ava-close" id="ava-close" type="button" aria-label="Close Ava chat">×</button>
   </div>
-  <div class="ava-messages" id="ava-messages"></div>
+  <div class="ava-messages" id="ava-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
   <div class="ava-suggest" id="ava-suggest"></div>
   <form class="ava-form" id="ava-form">
-    <input id="ava-input" autocomplete="off" placeholder="Ask Ava about Rome..." />
+    <input id="ava-input" autocomplete="off" placeholder="Say hi to Ava..." aria-label="Message Ava" />
     <button type="submit">Send</button>
   </form>
 </div>
@@ -2261,28 +2306,37 @@ function setupAvaChat(){
   const box=$("#ava-chat"),launch=$("#ava-launch"),close=$("#ava-close"),form=$("#ava-form"),input=$("#ava-input"),messages=$("#ava-messages"),suggest=$("#ava-suggest");
   if(!box||!launch||!form||!input||!messages||!suggest)return;
   function add(who,text){const d=document.createElement("div");d.className="ava-msg "+who;d.textContent=text;messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
-  function open(){box.classList.add("open");launch.setAttribute("aria-expanded","true");if(!messages.dataset.ready){add("bot","Hi, I'm Ava. I can answer questions about Rome's professional work, services, pricing, process, and how to contact him. I do not share personal or private information.");messages.dataset.ready="1";}setTimeout(()=>input.focus(),80);}
-  function shut(){box.classList.remove("open");launch.setAttribute("aria-expanded","false");}
+  function open(){box.classList.add("open");launch.setAttribute("aria-expanded","true");if(!messages.dataset.ready){add("bot","Hey, I'm Ava, Agent Rome's AI sidekick ✨ How's your day going?");messages.dataset.ready="1";}setTimeout(()=>input.focus(),80);}
+  function shut(){box.classList.remove("open");launch.setAttribute("aria-expanded","false");launch.focus({preventScroll:true});}
   // Live Ava uses Cloudflare Workers AI with the approved public knowledge base.
   // Network errors and offline backend responses use the local approved answers.
   const AVA_ENDPOINT = "https://ava-chat-worker.ava-chat-rome-grisler.workers.dev/api/ava"; // free Cloudflare Workers AI brain (no key)
   const AVA_QUESTIONS = [
-    "Tell me about Starter ecommerce",
-    "Tell me about Premium ecommerce",
-    "What operations dashboards can I explore?",
-    "Can Rome build automations?",
-    "How much does Rome charge?",
-    "How do I contact Rome?"
+    {label:'Just saying hi 👋',q:'Hey Ava, how are you?'},
+    {label:'Meet your boss',q:'Tell me about Rome and what he does'},
+    {label:'Show me his work',q:"Can I see Rome's work?"},
+    {label:'Explore the blueprints',q:'What is the Capability Console?'},
+    {label:'Website pricing',q:'Tell me about Premium ecommerce'},
+    {label:"Let's connect",q:'How do I contact Rome?'}
   ];
-  const avaHist = [];
+  const avaHist = [{role:'assistant',content:"Hey, I'm Ava, Agent Rome's AI sidekick ✨ How's your day going?"}];
   input.maxLength=2000;
   let avaBusy=false;
   function trimAvaHistory(){
     while(avaHist.length>19||new TextEncoder().encode(JSON.stringify({messages:avaHist})).length>28000)avaHist.shift();
     // Keep complete recent user/assistant turns where possible.
-    while(avaHist.length>1&&avaHist[0].role==='assistant')avaHist.shift();
+    while(avaHist.length>1&&avaHist[0].role==='assistant'&&!avaHist[0].content.startsWith("Hey, I'm Ava, Agent Rome's AI sidekick"))avaHist.shift();
   }
-  function fallbackAnswer(q){const t=q.toLowerCase();if(/password|credential|secret|family|home address|private income/.test(t))return AVA_KB[AVA_KB.length-1].a;let best=null,score=0;AVA_KB.forEach(item=>{let s=t===item.q.toLowerCase()?100:0;item.keys.forEach(k=>{if(t.includes(k))s+=k.length;});if(s>score){score=s;best=item;}});return best?best.a:"I do not want to guess on that. Ask about Rome's services, ecommerce tiers or the illustrative operations dashboards. Use Let's Connect! or the public contact links for an exact scope or quote.";}
+  function fallbackAnswer(q){
+    const t=q.toLowerCase();
+    if(/password|credential|secret|(?:rome.?s|his) family|home address|private income/.test(t))return "I can share Rome's work and public contact links, but his private details stay private 😊";
+    if(/rough day|bad day|sad|stressed|overwhelmed|exhausted|not (?:doing |feeling )?(?:good|great|okay)|lonely/.test(t))return "That sounds like a lot to carry. Want to talk about what's been weighing on you, or would a little distraction help?";
+    if(/^(hi|hey|hello|hiya|heya|good morning|good afternoon|good evening)\b|how are you|how's it going/.test(t))return "Hey you ✨ I'm here and ready for a chat. How's your day treating you?";
+    if(/good day|great day|doing (?:good|great|well)|feeling (?:good|great|happy)/.test(t))return "Aw, love that for you! What's been the best part?";
+    if(/thank you|thanks|you.re (?:sweet|cute|nice|lovely)/.test(t))return "You're sweet 😊 Happy to help. What else is on your mind?";
+    let best=null,score=0;AVA_KB.forEach(item=>{let s=t===item.q.toLowerCase()?100:0;item.keys.forEach(k=>{if(t.includes(k))s+=k.length;});if(s>score){score=s;best=item;}});
+    return best?best.a:"Hmm, I don't have a reliable answer for that just now. Want to explore Rome's work, or tell me a little about what you have in mind?";
+  }
   async function askAva(q){
     avaHist.push({role:"user",content:q});trimAvaHistory();
     let reply;
@@ -2296,16 +2350,16 @@ function setupAvaChat(){
   }
   function send(q){
     const q2=q.trim().slice(0,2000); if(!q2||avaBusy)return;
-    avaBusy=true;form.setAttribute('aria-busy','true');
+    avaBusy=true;form.setAttribute('aria-busy','true');window.AvaAvatar?.react('thinking');
     const submit=form.querySelector('button[type="submit"]');if(submit)submit.disabled=true;
     if(suggest)suggest.style.display="none";
     add("user",q2);
     const wait=document.createElement("div"); wait.className="ava-msg bot"; wait.textContent="…"; messages.appendChild(wait); messages.scrollTop=messages.scrollHeight;
-    askAva(q2).then(r=>{wait.textContent=r;}).catch(()=>{wait.textContent=fallbackAnswer(q2);}).finally(()=>{avaBusy=false;form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;});
+    askAva(q2).then(r=>{wait.textContent=r;window.AvaAvatar?.react(/sad|rough|stressed|lonely|grief|anxious|lost|died|private|password/i.test(q2)?'supportive':/hey|hello|hi\b/i.test(q2)?'hello':'smile');}).catch(()=>{wait.textContent=fallbackAnswer(q2);window.AvaAvatar?.react('supportive');}).finally(()=>{avaBusy=false;form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;});
   }
   if(suggest){
-    suggest.innerHTML=AVA_QUESTIONS.map(x=>`<button type="button" class="ava-chip">${x}</button>`).join("");
-    suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=btn.textContent;input.value="";send(q);});
+    suggest.innerHTML=AVA_QUESTIONS.map((x,i)=>`<button type="button" class="ava-chip" data-question-index="${i}">${x.label}</button>`).join("");
+    suggest.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const q=AVA_QUESTIONS[Number(btn.dataset.questionIndex)].q;input.value="";send(q);});
   }
   document.querySelectorAll("[data-ava-question]").forEach(btn=>btn.addEventListener("click",()=>{open();send(btn.dataset.avaQuestion);}));
   box.addEventListener("keydown",e=>{if(e.key==="Escape"){shut();launch.focus();}});
@@ -3286,6 +3340,34 @@ setInterval(()=>{controllers.forEach(c=>{const visible=c.visible();c.viewer.clas
 const io=new IntersectionObserver(()=>controllers.forEach(c=>c.viewer.classList.toggle('cc-offscreen',!c.visible())),{threshold:[0,.1,.5]});controllers.forEach(c=>io.observe(c.viewer));
 const mq=matchMedia('(max-width:650px)');const orient=()=>$('.cc-tabs').setAttribute('aria-orientation',mq.matches?'horizontal':'vertical');mq.addEventListener('change',orient);orient();select(0);
 window.CapabilityConsole={select,get current(){return specs[current].id;},studyCount:studies.length,controllers};
+})();
+
+</script>
+<script>
+(()=>{'use strict';
+const dock=document.getElementById('ava-dock'),launch=document.getElementById('ava-launch'),box=document.getElementById('ava-chat');if(!dock||!launch||!box)return;
+const reduced=matchMedia('(prefers-reduced-motion:reduce)'),control=document.getElementById('ava-avatar-motion'),bubble=document.getElementById('ava-nudge-wrap'),nudge=document.getElementById('ava-nudge'),text=document.getElementById('ava-nudge-text');
+const fronts=[...document.querySelectorAll('[data-ava-face="front"]')],backs=[...document.querySelectorAll('[data-ava-face="back"]')];
+let userPaused=false;try{userPaused=localStorage.getItem('ava-motion')==='off';}catch{}
+let paused=reduced.matches||userPaused,frame=0,transitionTimer=0,restoreTimer=0,blinkTimer=0,bubbleTimer=0,pointerFrame=0,open=false,state='idle',bubbleIndex=0;
+const prompts=['Talk to me!','Hire my boss Agent Rome?','Need my help?'];
+function position(i){return `${(i%5)*25}% ${i>=5?100:0}%`;}
+function pose(i){if(paused)i=0;if(i===frame)return;fronts.forEach(e=>{e.style.backgroundPosition=position(i);e.style.opacity='1';});backs.forEach(e=>e.style.opacity='0');frame=i;dock.dataset.expression=String(i);}
+function resting(){return state==='thinking'?4:state==='listening'?7:state==='supportive'?0:open?2:0;}
+function react(kind){clearTimeout(restoreTimer);state=kind;const expressions={thinking:4,listening:7,supportive:0,hello:1,happy:9,smile:2,curious:5,idle:0};pose(expressions[kind]??2);if(['hello','happy','smile','curious'].includes(kind))restoreTimer=setTimeout(()=>{state='idle';pose(resting());},1700);}
+function scheduleBlink(){clearTimeout(blinkTimer);blinkTimer=setTimeout(()=>{if(!paused&&!document.hidden&&state!=='thinking'&&state!=='supportive'){pose(3);setTimeout(()=>pose(resting()),165);}scheduleBlink();},4200+Math.random()*2600);}
+function syncMotion(){paused=reduced.matches||userPaused;dock.dataset.paused=String(paused);control.disabled=reduced.matches;control.setAttribute('aria-pressed',String(!paused));control.setAttribute('aria-label',paused?'Enable Ava animation':'Pause Ava animation');control.title=reduced.matches?'Ava follows your reduced motion setting':paused?'Enable animation':'Pause animation';control.textContent=paused?'▷':'Ⅱ';if(paused){pose(0);dock.style.setProperty('--ava-x','0deg');dock.style.setProperty('--ava-y','0deg');dock.style.setProperty('--ava-lean','0deg');}}
+control.addEventListener('click',()=>{userPaused=!userPaused;try{localStorage.setItem('ava-motion',userPaused?'off':'on');}catch{}syncMotion();});reduced.addEventListener('change',syncMotion);syncMotion();scheduleBlink();
+function nextBubble(){clearTimeout(bubbleTimer);bubbleTimer=setTimeout(()=>{if(!document.hidden&&!open&&!bubble.hidden&&!paused){bubbleIndex=(bubbleIndex+1)%prompts.length;bubble.classList.add('ava-nudge-swap');setTimeout(()=>{text.textContent=prompts[bubbleIndex];bubble.classList.remove('ava-nudge-swap');},180);if(bubbleIndex===1)react('hello');}nextBubble();},9000);}
+try{bubble.hidden=sessionStorage.getItem('ava-nudge-dismissed')==='yes';}catch{}
+nextBubble();nudge.addEventListener('click',()=>{if(!open)launch.click();});document.getElementById('ava-nudge-dismiss').addEventListener('click',()=>{bubble.hidden=true;try{sessionStorage.setItem('ava-nudge-dismissed','yes');}catch{}});
+new MutationObserver(()=>{open=box.classList.contains('open');dock.dataset.open=String(open);if(!open){state='idle';pose(0);}else react('hello');}).observe(box,{attributes:true,attributeFilter:['class']});
+launch.addEventListener('pointerenter',()=>{if(!open)react('hello');});
+let pointer={x:0,y:0};document.addEventListener('pointermove',e=>{if(paused||document.hidden||e.pointerType==='touch')return;pointer={x:e.clientX,y:e.clientY};if(pointerFrame)return;pointerFrame=requestAnimationFrame(()=>{pointerFrame=0;const r=launch.getBoundingClientRect(),dx=Math.max(-1,Math.min(1,(pointer.x-r.x-r.width/2)/500)),dy=Math.max(-1,Math.min(1,(pointer.y-r.y-r.height/2)/400));dock.style.setProperty('--ava-x',(-dy*5).toFixed(2)+'deg');dock.style.setProperty('--ava-y',(dx*7).toFixed(2)+'deg');dock.style.setProperty('--ava-lean',(dx*2).toFixed(2)+'deg');});},{passive:true});
+const input=document.getElementById('ava-input');input.addEventListener('focus',()=>{if(state!=='thinking')react('listening');});
+function overlays(){const obscured=!!document.querySelector('.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,dialog[open]');dock.style.visibility=obscured?'hidden':'';box.style.visibility=obscured?'hidden':'';}
+const layerObserver=new MutationObserver(overlays);document.querySelectorAll('.bk-overlay,.ty-overlay,.palette-wrap,dialog').forEach(e=>layerObserver.observe(e,{attributes:true,attributeFilter:['class','open']}));
+window.AvaAvatar={react,get expression(){return frame;},get paused(){return paused;},prompts:[...prompts]};
 })();
 
 </script>
