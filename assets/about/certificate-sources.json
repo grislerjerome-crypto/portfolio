@@ -11,15 +11,18 @@
   },
   {
     "name": "Shopify",
-    "path": "assets/about/badges/revised/shopify-solution-planning-fundamentals.png",
-    "kind": "badge",
-    "source": "https://images.credly.com/images/67c30645-ae66-4af1-9bc1-d6b486e82e5f/image.png",
-    "program": "Solution Planning Fundamentals: Verified Skill Badge",
-    "evidence_url": "https://www.credly.com/org/shopify/badge/solution-planning-fundamentals-verified-skill-badge",
-    "note": "Downloaded unchanged; generic artwork with no recipient details. Better business/implementation fit than Development Fundamentals. This is a pursued learning target, not an earned credential. Keep clearly within the Work in progress section.",
-    "art_type": "official_generic_verified_skill_badge",
+    "path": "assets/about/badges/custom/shopify-supplied.png",
+    "program": "Shopify Certified",
+    "kind": "user-supplied",
+    "source": "User supplied artwork: image_e84cb6.png",
+    "note": "Exterior background removed with edge-connected mask; interior artwork preserved. User supplied image, not independently authenticated as an issuer badge. Displayed within Work in progress goals, not an earned qualification.",
     "display_status": "Work in progress",
-    "earned": false
+    "earned": false,
+    "pixels_removed": 111544,
+    "size": [
+      443,
+      443
+    ]
   },
   {
     "name": "Zapier",
@@ -40,6 +43,21 @@
     "note": "Learning target — Under construction / Not yet earned. Genuine generic Make Academy learning-path badge issued by Make on Credly: https://www.credly.com/org/make/badge/make-basics. Official learning path: https://academy.make.com/bundles/make-basics. This represents a course-path completion credential, not a claim of professional partner status. Downloaded unchanged; PNG, 600 x 600.",
     "display_status": "Work in progress",
     "earned": false
+  },
+  {
+    "name": "HubSpot",
+    "path": "assets/about/badges/custom/hubspot-supplied.png",
+    "program": "HubSpot Certified Partner CMS Experts",
+    "kind": "user-supplied",
+    "source": "User supplied artwork: image_927432.png",
+    "note": "Exterior background removed with edge-connected mask; interior artwork preserved. User supplied image, not independently authenticated as an issuer badge. Displayed within Work in progress goals, not an earned qualification.",
+    "display_status": "Work in progress",
+    "earned": false,
+    "pixels_removed": 48158,
+    "size": [
+      403,
+      369
+    ]
   },
   {
     "name": "Zendesk",
