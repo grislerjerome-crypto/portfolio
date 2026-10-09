@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Email",
+    "path": "assets/about/social/email.svg",
+    "source": "https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/mail.svg"
+  },
+  {
+    "name": "LinkedIn",
+    "path": "assets/about/social/linkedin.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/linkedin.svg"
+  },
+  {
+    "name": "Upwork",
+    "path": "assets/about/social/upwork.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/upwork.svg"
+  },
+  {
+    "name": "OnlineJobs.ph",
+    "path": "assets/about/social/onlinejobs.png",
+    "source": "https://www.onlinejobs.ph/favicon.ico"
+  },
+  {
+    "name": "Facebook",
+    "path": "assets/about/tools/facebook.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/facebook.svg"
+  }
+]
