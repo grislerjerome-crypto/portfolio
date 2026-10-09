@@ -1,0 +1,58 @@
+[
+  {
+    "name": "GoHighLevel",
+    "path": "assets/about/badges/gohighlevel-certified-admin.png",
+    "kind": "badge",
+    "source": "https://directory.gohighlevel.com/objects/uploads/284cf43c-3358-4259-8aee-6e43855333a6",
+    "program": "HighLevel Certified Admin",
+    "note": "Learning target — Under construction / Not yet earned. Genuine standalone Certified Admin ribbon, downloaded unchanged from the official HighLevel directory. Verified against the generic certified-admin credential iconUrl in https://directory.gohighlevel.com/api/public/taxonomies and the official program at https://www.gohighlevel.com/certifications. No personal recipient details or credential claims. PNG, 256 x 256. Display the not-earned label visibly beside the ribbon."
+  },
+  {
+    "name": "Shopify",
+    "path": "assets/about/badges/shopify-development-fundamentals.png",
+    "kind": "badge",
+    "source": "https://images.credly.com/images/2609a3a2-d776-455c-95dc-490eca1ab1ab/image.png",
+    "program": "Shopify Development Fundamentals: Verified Skill Badge",
+    "note": "Learning target — Under construction / Not yet earned. Genuine generic Shopify-issued verified-skill badge, not a personalized certificate. Image verified on the issuer's public Credly program page: https://www.credly.com/org/shopify/badge/shopify-development-fundamentals-verified-skill-bad. Downloaded unchanged; PNG, 1200 x 1200. Do not imply the assessment has been passed."
+  },
+  {
+    "name": "Zapier",
+    "path": "assets/about/badges/zapier-academy-logo.png",
+    "kind": "logo",
+    "source": "https://s3.us-east-1.amazonaws.com/prod-media-parta-194859342013/static/a0fd142a15d6939e97593650b021bbf7__ZapA-logo-stack.png",
+    "program": "Zapier Academy learning target",
+    "note": "Learning target — Under construction / Not yet earned. Official Zapier Academy logo, NOT a certification badge. No verifiable public generic learner-certification badge was located; do not substitute a Certified Expert, partner, or agency designation. The exact image is embedded on https://learn.zapier.com/. Downloaded unchanged; PNG, 1720 x 776. Dark wordmark needs a light backing for contrast."
+  },
+  {
+    "name": "Make.com",
+    "path": "assets/about/badges/make-basics.png",
+    "kind": "badge",
+    "source": "https://images.credly.com/images/dba526ad-3a2f-49af-becf-65d5a66a75ae/image.png",
+    "program": "Make Academy — Make Basics",
+    "note": "Learning target — Under construction / Not yet earned. Genuine generic Make Academy learning-path badge issued by Make on Credly: https://www.credly.com/org/make/badge/make-basics. Official learning path: https://academy.make.com/bundles/make-basics. This represents a course-path completion credential, not a claim of professional partner status. Downloaded unchanged; PNG, 600 x 600."
+  },
+  {
+    "name": "n8n",
+    "path": "assets/about/badges/n8n-course-level-1.png",
+    "kind": "badge",
+    "source": "https://europe1.discourse-cdn.com/n8n/original/2X/4/4030779fd2c61a5108644ff302e263119bdf4ca3.png",
+    "program": "Completed n8n Course Level 1",
+    "note": "Learning target — Under construction / Not yet earned. Genuine official n8n community course-completion badge, not a professional certification. Verified in https://community.n8n.io/badges.json as badge ID 104, Completed n8n Course Level 1; public badge page: https://community.n8n.io/badges/104/completed-n8n-course-level-1. Course: https://docs.n8n.io/courses/level-one/. Downloaded unchanged; PNG, 320 x 320. The graphic is a medal marked 1 and intentionally has no n8n wordmark; its provenance is the official badge registry."
+  },
+  {
+    "name": "HubSpot",
+    "path": "assets/about/badges/hubspot-inbound.svg",
+    "kind": "badge",
+    "source": "https://hubspot-academy.s3.amazonaws.com/prod/tracks/icons/24-1720467929044.svg",
+    "program": "HubSpot Academy — Inbound Certification",
+    "note": "Learning target — Under construction / Not yet earned. Official generic Inbound certification-course emblem, not an awarded recipient badge or personalized certificate. Retrieved from the iconUrl field of HubSpot Academy's public course catalog for https://academy.hubspot.com/courses/inbound (track 9181866, certification true, deprecated false). Public catalog endpoint used by the official page: https://api.hubapi.com/chirp-frontend-external/v1/gateway/com.hubspot.academy.catalog.rpc.noauth.TrackPublicChirpService/getByLanguageAndPagePath with pagePath inbound and language EN. The emblem shows HubSpot's sprocket and inbound flywheel/magnet. Downloaded unchanged; valid SVG, viewBox 0 0 48 48, visually rendered and checked. Do not label the owner HubSpot Certified."
+  },
+  {
+    "name": "Zendesk",
+    "path": "assets/about/badges/zendesk-support-administrator-expert.png",
+    "kind": "badge",
+    "source": "https://images.credly.com/images/d9bacbfc-82a1-4650-b98f-98efb1be0de4/certified-expert-zendesk-support-I_2x.png",
+    "program": "Zendesk Support Administrator Expert I",
+    "note": "Learning target — Under construction / Not yet earned. Genuine generic Zendesk-issued certification badge verified on https://www.credly.com/org/zendesk/badge/zendesk-support-administrator-expert-i. Downloaded unchanged; PNG, 1200 x 1200. It contains Certified Expert I wording, so the not-earned label must remain clearly visible beside it. No personal name, recipient record, or earned-date claim is included."
+  }
+]

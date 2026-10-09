@@ -569,6 +569,77 @@ html[data-theme=light] .ava-dock .ava-name-tag{background:#fff;color:#276749;box
 @media(prefers-reduced-motion:reduce){.ava-dock *{animation:none!important;transition:none!important}.ava-avatar-turn{transform:none!important}}
 
 </style>
+<style id="about-styles">
+/* About profile: scoped to the native modal and its trigger. */
+button.nav-brand-group{font:inherit;color:inherit;background:none;border:0;text-align:left;cursor:pointer;position:relative;flex-shrink:0;padding:0}
+.about-nav-bubble{position:absolute;top:calc(100% + 12px);left:32px;white-space:nowrap;border:1px solid color-mix(in srgb,var(--cyan) 55%,var(--panel-border));background:var(--bg-2);color:var(--txt);border-radius:10px;padding:4px 12px;font:11px var(--mono);box-shadow:var(--shadow);animation:about-hint 4s ease-in-out infinite;z-index:2}
+.about-nav-bubble:before{content:'';position:absolute;top:-5px;left:15px;width:8px;height:8px;background:var(--bg-2);border-left:1px solid var(--cyan);border-top:1px solid var(--cyan);transform:rotate(45deg)}
+@keyframes about-hint{50%{transform:translateY(4px)}}
+#about-dialog{position:fixed;inset:0;margin:auto;width:min(1240px,calc(100% - 40px));max-width:none;max-height:calc(100dvh - 40px);padding:0;background:var(--bg);color:var(--txt);border:1px solid color-mix(in srgb,var(--cyan) 24%,var(--panel-border));border-radius:24px;box-shadow:0 30px 100px #0008;overflow:auto;overscroll-behavior:contain;font-family:var(--font)}
+#about-dialog::backdrop{background:rgba(3,5,12,.82);backdrop-filter:blur(12px)}
+#about-dialog[open]{animation:about-enter .24s ease-out}
+@keyframes about-enter{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:none}}
+.about-topline{position:sticky;top:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:14px 30px;border-bottom:1px solid var(--panel-border);background:var(--bg);border-radius:24px 24px 0 0}
+.about-topline>span{font:10px var(--mono);letter-spacing:.14em;color:var(--muted)}
+.about-close{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--panel-border);border-radius:50%;background:var(--panel);color:var(--txt);font-size:24px;cursor:pointer}
+.about-close:hover{border-color:var(--cyan)}
+.about-inner{padding:32px 38px 38px;background:radial-gradient(ellipse at 90% 20%,color-mix(in srgb,var(--cyan) 6%,transparent),transparent 55%)}
+.about-intro{display:grid;grid-template-columns:1.12fr 1fr;gap:38px;align-items:center;margin-bottom:28px}
+.about-eyebrow{font:10px var(--mono);letter-spacing:.16em;color:var(--cyan);text-transform:uppercase}
+.about-intro h2{font-size:clamp(38px,4.2vw,62px);line-height:1.07;letter-spacing:-.055em;margin:9px 0 0}
+.about-cert-wrap{min-width:0;position:relative;padding:12px 0 0}
+.about-construction{position:absolute;top:0;right:14px;z-index:2;background:var(--bg-2);border:1px solid color-mix(in srgb,var(--magenta) 50%,var(--panel-border));color:var(--txt);padding:4px 10px;border-radius:30px;font:10px var(--mono)}
+.about-cert-window{overflow:hidden;border:1px solid var(--panel-border);border-radius:18px;background:var(--panel);padding:20px 0 8px;position:relative;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.about-cert-track{display:flex;width:max-content;animation:about-marquee 32s linear infinite}
+.about-cert-set{display:flex;align-items:center;gap:18px;padding-right:18px}
+.about-cert-card{width:86px;flex:none;text-align:center}
+.about-cert-card img{height:60px;width:72px;object-fit:contain;display:block;margin:auto;filter:drop-shadow(0 3px 7px #0003)}
+.about-cert-card small{display:block;font:8px var(--mono);color:var(--cyan);margin-top:3px}.about-cert-card[data-kind="logo"] img{background:#fff;border-radius:8px;padding:8px}.about-cert-card span{font:9px var(--mono);color:var(--muted);display:block;margin-top:5px}
+.about-cert-caption{display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:10px;margin:6px 4px 0}
+.about-cert-pause{background:none;border:0;color:var(--muted);font:10px var(--mono);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:3px}
+.about-cert-window:hover .about-cert-track,.about-cert-track.is-paused{animation-play-state:paused}
+@keyframes about-marquee{to{transform:translateX(-50%)}}
+.about-main{display:grid;grid-template-columns:1.12fr 1fr;gap:38px;align-items:start}
+.about-copy{min-width:0}.about-copy h3{font-size:32px;line-height:1.2;letter-spacing:-.035em;margin:0 0 16px}
+.about-lead{font-size:18px;line-height:1.6;color:var(--txt);margin:0 0 18px;max-width:520px}
+.about-bio{font-size:14px;line-height:1.8;color:var(--muted)}
+.about-more{margin-top:12px}.about-more[hidden]{display:none}
+.about-more p{margin-bottom:14px}.about-more h4{color:var(--txt);font-size:13px;margin:18px 0 10px}
+.about-expertise{list-style:none;display:grid;gap:12px;margin-bottom:16px}
+.about-expertise li{border-left:2px solid var(--cyan);padding-left:12px;font-size:13px;color:var(--muted)}
+.about-expertise strong{display:block;color:var(--txt);font-weight:500}
+.about-expand{display:inline-flex;align-items:center;gap:10px;background:none;border:0;border-bottom:1px solid color-mix(in srgb,var(--cyan) 45%,transparent);padding:8px 0 6px;margin:8px 0 26px;color:var(--cyan);font:12px var(--mono);cursor:pointer}
+.about-tools{border-top:1px solid var(--panel-border);margin-top:6px}
+.about-tool-row{display:grid;grid-template-columns:220px 1fr;gap:16px;align-items:center;border-bottom:1px solid var(--panel-border);min-height:72px;padding:14px 0}
+.about-tool-row h4{font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.01em}
+.about-logo-stack{display:flex;align-items:center;isolation:isolate;padding-left:0;min-width:0}
+.about-tool{position:relative;display:grid;place-items:center;width:37px;height:39px;margin-left:-5px;border:1px solid #cfd5dc;border-radius:10px;background:#fff;flex:none;box-shadow:0 4px 8px #0002;transition:transform .18s;outline-offset:3px}
+.about-tool:first-child{margin-left:0}.about-tool img{width:23px;height:23px;object-fit:contain}
+.about-tool:hover,.about-tool:focus{transform:translateY(-6px);z-index:2}
+.about-tool:after{content:attr(data-tool);position:absolute;bottom:calc(100% + 10px);left:0;white-space:nowrap;padding:5px 8px;border-radius:6px;background:var(--bg-2);border:1px solid var(--panel-border);color:var(--txt);font:10px var(--mono);opacity:0;pointer-events:none}
+.about-tool:hover:after,.about-tool:focus:after{opacity:1}
+.about-portrait{position:sticky;top:90px;border:1px solid var(--panel-border);border-radius:20px;overflow:hidden;min-width:0;background:#111721;margin:0}
+.about-portrait img{display:block;width:100%;height:600px;object-fit:cover;object-position:50% 36%;filter:none}
+.about-portrait figcaption{position:absolute;inset:auto 0 0;padding:70px 26px 22px;background:linear-gradient(transparent,rgba(4,8,18,.94));color:#f4f8ff}
+.about-portrait figcaption strong{font-size:24px;letter-spacing:-.025em;display:block}
+.about-portrait figcaption span{color:#b5c0d3;font:10px var(--mono);display:block;margin-top:4px}
+.about-portrait-tag{display:inline-block!important;background:#15282ce6;border:1px solid #38bdf855;color:#d9f7ff!important;padding:5px 9px;border-radius:7px;width:fit-content;margin-bottom:10px}
+.about-resume{margin-top:38px;display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center;padding:30px;border:1px solid var(--panel-border);border-radius:20px;background:var(--glass);overflow:hidden}
+.about-resume-image{position:relative;max-width:260px;margin:0;transform:rotate(-3deg);padding:0;background:#fff;border-radius:7px;overflow:hidden;box-shadow:0 16px 36px #0003}
+.about-resume-image img{display:block;width:100%;height:auto;user-select:none;pointer-events:none}
+.about-resume-image figcaption{position:absolute;inset:0;display:grid;place-items:center;color:#0b1b2c;font:11px var(--mono);letter-spacing:.12em}
+.about-resume-image figcaption span{padding:10px 14px;border:1px solid #fff9;background:#ffffffcf;backdrop-filter:blur(8px);border-radius:6px;box-shadow:0 8px 24px #0002}
+.about-resume-copy h3{font-size:30px;letter-spacing:-.03em;line-height:1.2;margin:12px 0}
+.about-resume-copy p{color:var(--muted);font-size:14px;max-width:430px;margin-bottom:20px}
+.about-resume-copy .btn{font-size:12px}
+#about-dialog button:focus-visible,#about-dialog a:focus-visible,#about-dialog [tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+html[data-theme="light"] .about-inner{background:none}html[data-theme="light"] .about-resume{background:#fff}html[data-theme="light"] #about-dialog::backdrop{background:rgba(30,39,44,.48)}
+@media(min-width:981px) and (max-width:1200px){.nav-brand-group .brand{font-size:.83rem;letter-spacing:.1em}}
+@media(max-width:1050px){.about-inner{padding:26px}.about-main,.about-intro{gap:26px;grid-template-columns:1.15fr 1fr}.about-tool-row{grid-template-columns:1fr;gap:10px}.about-portrait img{height:650px}}
+@media(max-width:720px){#about-dialog{width:calc(100% - 16px);max-height:calc(100dvh - 16px);border-radius:18px}.about-topline{padding:10px 18px}.about-inner{padding:22px 18px}.about-intro,.about-main{grid-template-columns:1fr;gap:24px}.about-intro{margin-bottom:24px}.about-intro h2{font-size:44px}.about-portrait{position:relative;top:auto}.about-portrait img{height:400px;object-position:50% 32%}.about-copy h3{font-size:28px}.about-lead{font-size:16px}.about-tool-row{grid-template-columns:1fr 1fr;gap:14px}.about-tool{width:30px;height:34px;margin-left:-8px;border-radius:8px}.about-tool img{width:20px;height:20px}.about-tool-row h4{font-size:11px}.about-resume{grid-template-columns:1fr;gap:26px;padding:24px;margin-top:26px}.about-resume-image{max-width:210px;margin:auto}.about-resume-copy h3{font-size:27px}.about-nav-bubble{top:calc(100% + 8px);font-size:10px;left:24px}.about-cert-card img{height:52px}.about-cert-window{padding-top:18px}}
+@media(prefers-reduced-motion:reduce){.about-nav-bubble,#about-dialog[open],.about-cert-track{animation:none!important}}
+
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -591,10 +662,11 @@ html[data-theme=light] .ava-dock .ava-name-tag{background:#fff;color:#276749;box
 
 <nav class="nav">
   <div class="wrap">
-    <div class="nav-brand-group">
-      <div class="nav-photo"><img src="rome.jpg" alt="Jerome Grisler" /></div>
-      <div class="brand">YOUR<b>NAME</b></div>
-    </div>
+    <button type="button" class="nav-brand-group" id="about-open" aria-haspopup="dialog" aria-controls="about-dialog" aria-expanded="false" aria-label="About Jerome Grisler">
+      <span class="nav-photo"><img src="assets/about/rome-portrait.webp" alt="" /></span>
+      <span class="brand">Jerome <b>Grisler</b></span>
+      <span class="about-nav-bubble" aria-hidden="true">About me</span>
+    </button>
     <ul>
       <li><a href="#services">Services</a></li>
       <li><a href="#craftee">Web Dev</a></li>
@@ -613,6 +685,7 @@ html[data-theme=light] .ava-dock .ava-name-tag{background:#fff;color:#276749;box
     <button class="menu-btn" id="menu-open" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
+    <a href="#about-dialog" data-open-about>About me</a>
     <a href="#services">Services</a>
     <a href="#craftee">Web Dev</a>
     <a href="#ecommerce-operations">Ecommerce</a>
@@ -1591,7 +1664,7 @@ function applyStatic(){
   $("#cta-btn").textContent=CONFIG.cta.btn;$("#cta-btn").href=CONFIG.cta.link;
   $("#cta-email").textContent="Or email me";$("#cta-email").href="mailto:"+CONFIG.cta.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#footer-tag").textContent=CONFIG.role+", building the engine that runs while you sleep.";
-  $$(".brand").forEach(b=>b.innerHTML=CONFIG.name.replace(/(.+)\s(\S+)$/,'$1<b>$2</b>'));
+  $$(".brand").forEach(b=>b.innerHTML=CONFIG.name.replace(/(.+)\s(\S+)$/,'$1 <b>$2</b>'));
   $("#year").textContent=new Date().getFullYear();
   $("#foot-linkedin").href=CONFIG.social.linkedin;
   $("#foot-email").href="mailto:"+CONFIG.social.email+"?subject=Connect%20with%20Agent%20Rome";
@@ -1847,6 +1920,9 @@ function animateNum(el,target,prefix){
 
 /* ---- Ava static portfolio agent ---- */
 const AVA_KB = [
+  {"keys":["certificate","certification","certified","badge","credential"],"q":"Are those certifications earned?","a":"Those are learning goals, not earned certifications yet. The About popup marks the whole strip Under construction. Click Rome's photo or name in the navigation to take a look."},
+  {"keys":["resume","cv","curriculum"],"q":"Can I see Rome's resume?","a":"Open About me from Rome's photo or name in the navigation. You'll find a blurred resume preview and a Request my resume button to ask him for the full copy."},
+  {"keys":["about popup","about me","biography"],"q":"Where is About me?","a":"Click Rome's photo, name or the About me bubble in the navigation. You can read his story, explore his tools and request his resume there."},
   {
     "keys": [
       "starter"
@@ -2372,7 +2448,7 @@ function setupPalette(){
   const wrap=$("#palette"),input=$("#palette-input"),list=$("#palette-list");
   const labels={home:'Home',services:'Services',capabilities:'How I work',ava:'Ava, AI Agent','capability-console':'Capability Console',roi:'ROI Calculator',craftee:'Ecommerce showcase',funnels:'Funnels','ecommerce-operations':'Ecommerce operations','logistics-operations':'Supply chain and logistics',projects:'Projects',contact:'Contact'};
   const base=$$('section[id]').map(el=>({ic:'↳',label:labels[el.id]||el.querySelector('h2,h1')?.textContent.trim()||el.id,go:'#'+el.id}));
-  base.push({ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
+  base.push({ic:'◎',label:'About me, Jerome Grisler',act:()=>window.openAbout?.()},{ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
   const specialties=['GoHighLevel CRM','Hermes Agent','Shopify Operations','Digital Marketing'].map((label,i)=>({ic:'◎',label:'Blueprints: '+label,act:()=>{window.CapabilityConsole?.select(i);smartScroll('#capability-console');}}));
   const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:'Mode: '+s.name,act:()=>setMode(s.id)}));
   const items=base.concat(specialties,modeItems);
@@ -3368,6 +3444,73 @@ const input=document.getElementById('ava-input');input.addEventListener('focus',
 function overlays(){const obscured=!!document.querySelector('.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,dialog[open]');dock.style.visibility=obscured?'hidden':'';box.style.visibility=obscured?'hidden':'';}
 const layerObserver=new MutationObserver(overlays);document.querySelectorAll('.bk-overlay,.ty-overlay,.palette-wrap,dialog').forEach(e=>layerObserver.observe(e,{attributes:true,attributeFilter:['class','open']}));
 window.AvaAvatar={react,get expression(){return frame;},get paused(){return paused;},prompts:[...prompts]};
+})();
+
+</script>
+<dialog id="about-dialog" aria-labelledby="about-title">
+  <div class="about-topline"><span>AGENT ROME / A LITTLE ABOUT ME</span><button class="about-close" id="about-close" type="button" aria-label="Close About me" autofocus>×</button></div>
+  <div class="about-inner">
+    <header class="about-intro">
+      <div><span class="about-eyebrow">The person behind the systems</span><h2 id="about-title">About me.</h2></div>
+      <section class="about-cert-wrap" aria-label="Certification goals, not yet earned">
+        <span class="about-construction">◌ Under construction</span>
+        <div class="about-cert-window"><div class="about-cert-track" id="about-cert-track"><div class="about-cert-set"><div class="about-cert-card" data-kind="badge" title="HighLevel Certified Admin. Not yet earned."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. Not yet earned." width="72" height="60" /><span>GoHighLevel</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Shopify Development Fundamentals: Verified Skill Badge. Not yet earned."><img src="assets/about/badges/shopify-development-fundamentals.png" alt="Shopify Development Fundamentals: Verified Skill Badge. Not yet earned." width="72" height="60" /><span>Shopify</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="logo" title="Zapier Academy learning target. Learning target."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. Learning target." width="72" height="60" /><span>Zapier</span><small>Learning target</small></div><div class="about-cert-card" data-kind="badge" title="Make Academy — Make Basics. Not yet earned."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. Not yet earned." width="72" height="60" /><span>Make.com</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Completed n8n Course Level 1. Not yet earned."><img src="assets/about/badges/n8n-course-level-1.png" alt="Completed n8n Course Level 1. Not yet earned." width="72" height="60" /><span>n8n</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="HubSpot Academy — Inbound Certification. Not yet earned."><img src="assets/about/badges/hubspot-inbound.svg" alt="HubSpot Academy — Inbound Certification. Not yet earned." width="72" height="60" /><span>HubSpot</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Zendesk Support Administrator Expert I. Not yet earned."><img src="assets/about/badges/zendesk-support-administrator-expert.png" alt="Zendesk Support Administrator Expert I. Not yet earned." width="72" height="60" /><span>Zendesk</span><small>Not yet earned</small></div></div><div class="about-cert-set" aria-hidden="true"><div class="about-cert-card" data-kind="badge" title="HighLevel Certified Admin. Not yet earned."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. Not yet earned." width="72" height="60" /><span>GoHighLevel</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Shopify Development Fundamentals: Verified Skill Badge. Not yet earned."><img src="assets/about/badges/shopify-development-fundamentals.png" alt="Shopify Development Fundamentals: Verified Skill Badge. Not yet earned." width="72" height="60" /><span>Shopify</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="logo" title="Zapier Academy learning target. Learning target."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. Learning target." width="72" height="60" /><span>Zapier</span><small>Learning target</small></div><div class="about-cert-card" data-kind="badge" title="Make Academy — Make Basics. Not yet earned."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. Not yet earned." width="72" height="60" /><span>Make.com</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Completed n8n Course Level 1. Not yet earned."><img src="assets/about/badges/n8n-course-level-1.png" alt="Completed n8n Course Level 1. Not yet earned." width="72" height="60" /><span>n8n</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="HubSpot Academy — Inbound Certification. Not yet earned."><img src="assets/about/badges/hubspot-inbound.svg" alt="HubSpot Academy — Inbound Certification. Not yet earned." width="72" height="60" /><span>HubSpot</span><small>Not yet earned</small></div><div class="about-cert-card" data-kind="badge" title="Zendesk Support Administrator Expert I. Not yet earned."><img src="assets/about/badges/zendesk-support-administrator-expert.png" alt="Zendesk Support Administrator Expert I. Not yet earned." width="72" height="60" /><span>Zendesk</span><small>Not yet earned</small></div></div></div></div>
+        <div class="about-cert-caption"><span>Learning goals. Not yet earned.</span><button class="about-cert-pause" id="about-cert-pause" type="button" aria-pressed="false" aria-label="Pause certificate marquee">Pause</button></div>
+      </section>
+    </header>
+    <div class="about-main">
+      <div class="about-copy">
+        <h3>Hey, I’m Rome.</h3>
+        <p class="about-lead">I connect your CRM, automations, websites and daily operations, so your business runs smoothly and your team can focus on what’s next.</p>
+        <div class="about-bio">
+          <p>I’m an AI automation specialist, GoHighLevel expert, website developer, and ecommerce and logistics VA. I bring over five years of experience across customer support and operations, helping businesses manage orders, keep inventory accurate and spend less time on repetitive work.</p>
+          <div id="about-more" class="about-more" hidden>
+            <p>From Shopify orders and supplier coordination to billing questions and technical troubleshooting, I handle the details that keep customers and teams moving. I also build websites, funnels and automated follow up that connect the first enquiry to the next step.</p>
+            <h4>Where I can help</h4>
+            <ul class="about-expertise">
+              <li><strong>Ecommerce and operations</strong>Shopify order management, inventory monitoring, supplier coordination and logistics support.</li>
+              <li><strong>Customer support</strong>Email, chat and phone support, billing resolution and technical troubleshooting.</li>
+              <li><strong>Websites and systems</strong>Business websites, funnels and connected workflows with GoHighLevel, Zapier, Make.com and n8n.</li>
+              <li><strong>Virtual staff</strong>I can help you find skilled Filipino virtual staff who fit your business and the work you need covered.</li>
+            </ul>
+            <p>I’m open to opportunities in automation, website development, ecommerce operations, supply chain support and customer success. If you need someone who follows through and pays attention to the details, let’s talk.</p>
+          </div>
+        </div>
+        <button type="button" id="about-expand" class="about-expand" aria-expanded="false" aria-controls="about-more">See more <span aria-hidden="true">↗</span></button>
+        <div class="about-tools" aria-label="My toolkit"><div class="about-tool-row"><div class="about-logo-stack"><span class="about-tool" tabindex="0" data-tool="GoHighLevel" aria-label="GoHighLevel"><img src="assets/tool-logos/gohighlevel.png" alt="GoHighLevel logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Salesforce" aria-label="Salesforce"><img src="assets/about/tools/salesforce.svg" alt="Salesforce logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="HubSpot" aria-label="HubSpot"><img src="assets/tool-logos/hubspot.svg" alt="HubSpot logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Zendesk" aria-label="Zendesk"><img src="assets/tool-logos/zendesk.svg" alt="Zendesk logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Intercom" aria-label="Intercom"><img src="assets/about/tools/intercom.svg" alt="Intercom logo" width="23" height="23" /></span></div><h4>CRM and Operations</h4></div><div class="about-tool-row"><div class="about-logo-stack"><span class="about-tool" tabindex="0" data-tool="Hermes Agent" aria-label="Hermes Agent"><img src="assets/tool-logos/hermes-agent.png" alt="Hermes Agent logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Claude Code" aria-label="Claude Code"><img src="assets/tool-logos/claude-code.svg" alt="Claude Code logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="ChatGPT Codex" aria-label="ChatGPT Codex"><img src="assets/tool-logos/chatgpt-codex.svg" alt="ChatGPT Codex logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Google Sheets" aria-label="Google Sheets"><img src="assets/about/tools/googlesheets.svg" alt="Google Sheets logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Microsoft Excel" aria-label="Microsoft Excel"><img src="assets/about/tools/microsoftexcel.svg" alt="Microsoft Excel logo" width="23" height="23" /></span></div><h4>AI Structured Collaboration</h4></div><div class="about-tool-row"><div class="about-logo-stack"><span class="about-tool" tabindex="0" data-tool="GoHighLevel" aria-label="GoHighLevel"><img src="assets/tool-logos/gohighlevel.png" alt="GoHighLevel logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Zapier" aria-label="Zapier"><img src="assets/tool-logos/zapier.svg" alt="Zapier logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Make.com" aria-label="Make.com"><img src="assets/tool-logos/make-com.svg" alt="Make.com logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="n8n" aria-label="n8n"><img src="assets/tool-logos/n8n.svg" alt="n8n logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Facebook" aria-label="Facebook"><img src="assets/about/tools/facebook.svg" alt="Facebook logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Messenger" aria-label="Messenger"><img src="assets/about/tools/messenger.svg" alt="Messenger logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="WhatsApp" aria-label="WhatsApp"><img src="assets/about/tools/whatsapp.svg" alt="WhatsApp logo" width="23" height="23" /></span></div><h4>Automations and Integrations</h4></div><div class="about-tool-row"><div class="about-logo-stack"><span class="about-tool" tabindex="0" data-tool="Slack" aria-label="Slack"><img src="assets/tool-logos/slack.svg" alt="Slack logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Microsoft Teams" aria-label="Microsoft Teams"><img src="assets/about/tools/microsoftteams.svg" alt="Microsoft Teams logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Zoom" aria-label="Zoom"><img src="assets/about/tools/zoom.svg" alt="Zoom logo" width="23" height="23" /></span><span class="about-tool" tabindex="0" data-tool="Google Meet" aria-label="Google Meet"><img src="assets/about/tools/googlemeet.svg" alt="Google Meet logo" width="23" height="23" /></span></div><h4>Communications</h4></div></div>
+      </div>
+      <figure class="about-portrait">
+        <img src="assets/about/rome-portrait.webp" alt="Jerome Grisler, Agent Rome" width="1000" height="1000" decoding="async" />
+        <figcaption><span class="about-portrait-tag">Systems built. Details handled.</span><strong>Jerome Grisler</strong><span>AI AUTOMATION · WEBSITES · OPERATIONS</span></figcaption>
+      </figure>
+    </div>
+    <section class="about-resume" aria-labelledby="about-resume-title">
+      <figure class="about-resume-image"><img src="assets/about/resume-private-preview.webp" alt="Permanently blurred preview of Jerome’s resume. Text is intentionally unreadable." width="834" height="1180" decoding="async" /><figcaption><span>CONFIDENTIAL</span></figcaption></figure>
+      <div class="about-resume-copy"><span class="about-eyebrow">A closer look at my experience</span><h3 id="about-resume-title">My resume.<br>The details stay private.</h3><p>A glimpse of the work behind the skills. This preview is intentionally blurred. Get in touch if you’d like the full copy.</p><a class="btn primary" href="mailto:grislerjerome@gmail.com?subject=Request%20for%20Jerome%20Grisler%27s%20resume">Request my resume <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </div>
+</dialog>
+
+<script id="about-script">
+(()=>{'use strict';
+const dialog=document.getElementById('about-dialog'),trigger=document.getElementById('about-open'),close=document.getElementById('about-close'),more=document.getElementById('about-more'),expand=document.getElementById('about-expand'),track=document.getElementById('about-cert-track'),pause=document.getElementById('about-cert-pause');
+if(!dialog||!trigger)return;
+let previousFocus=null,oldOverflow='',paused=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+function openAbout(){if(dialog.open)return;previousFocus=document.activeElement;oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';document.getElementById('mobile-menu')?.classList.remove('open');const menu=document.getElementById('menu-open');if(menu){menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open menu');menu.textContent='☰';}dialog.showModal();dialog.scrollTop=0;trigger.setAttribute('aria-expanded','true');close.focus({preventScroll:true});}
+window.openAbout=openAbout;
+trigger.addEventListener('click',openAbout);
+document.querySelectorAll('[data-open-about]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();openAbout();},true));
+close.addEventListener('click',()=>dialog.close());
+dialog.addEventListener('close',()=>{document.body.style.overflow=oldOverflow;trigger.setAttribute('aria-expanded','false');if(previousFocus?.isConnected&&previousFocus!==document.body&&previousFocus.getClientRects().length)previousFocus.focus({preventScroll:true});else trigger.focus({preventScroll:true});});
+let backdropDown=false;
+dialog.addEventListener('pointerdown',e=>{const r=dialog.getBoundingClientRect();backdropDown=e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom);});
+dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(backdropDown&&e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))dialog.close();backdropDown=false;});
+dialog.addEventListener('keydown',e=>{if(e.key!=='Escape')e.stopPropagation();});
+expand.addEventListener('click',()=>{const opening=more.hidden;more.hidden=!opening;expand.setAttribute('aria-expanded',String(opening));expand.innerHTML=opening?'See less <span aria-hidden="true">↗</span>':'See more <span aria-hidden="true">↗</span>';if(!opening)expand.scrollIntoView({block:'nearest',behavior:'instant'});});
+function motion(){track.classList.toggle('is-paused',paused||reduced.matches);pause.textContent=reduced.matches?'Motion off':paused?'Play':'Pause';pause.setAttribute('aria-pressed',String(paused||reduced.matches));pause.setAttribute('aria-label',reduced.matches?'Marquee motion off, reduced motion enabled':paused?'Play certificate marquee':'Pause certificate marquee');pause.disabled=reduced.matches;}
+pause.addEventListener('click',()=>{paused=!paused;motion();});reduced.addEventListener('change',motion);motion();
+if(location.hash==='#about')openAbout();
+window.addEventListener('hashchange',()=>{if(location.hash==='#about')openAbout();});
 })();
 
 </script>

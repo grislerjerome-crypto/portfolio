@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Salesforce",
+    "path": "assets/about/tools/salesforce.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/salesforce.svg"
+  },
+  {
+    "name": "Intercom",
+    "path": "assets/about/tools/intercom.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/intercom.svg"
+  },
+  {
+    "name": "Google Sheets",
+    "path": "assets/about/tools/googlesheets.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/googlesheets.svg"
+  },
+  {
+    "name": "Microsoft Excel",
+    "path": "assets/about/tools/microsoftexcel.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/microsoftexcel.svg"
+  },
+  {
+    "name": "Facebook",
+    "path": "assets/about/tools/facebook.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/facebook.svg"
+  },
+  {
+    "name": "Messenger",
+    "path": "assets/about/tools/messenger.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/messenger.svg"
+  },
+  {
+    "name": "WhatsApp",
+    "path": "assets/about/tools/whatsapp.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/whatsapp.svg"
+  },
+  {
+    "name": "Microsoft Teams",
+    "path": "assets/about/tools/microsoftteams.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/microsoftteams.svg"
+  },
+  {
+    "name": "Zoom",
+    "path": "assets/about/tools/zoom.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/zoom.svg"
+  },
+  {
+    "name": "Google Meet",
+    "path": "assets/about/tools/googlemeet.svg",
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@11/icons/googlemeet.svg"
+  }
+]
