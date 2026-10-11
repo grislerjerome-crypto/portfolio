@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Northstar OS is an interactive single organization enterprise CRM demo with sales, email, automation, governance, and platform controls.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238bffb5'/%3E%3Cpath d='M18 46V18h7l14 18V18h7v28h-7L25 28v18z' fill='%2307110a'/%3E%3C/svg%3E">
+  <title>Northstar OS | Enterprise CRM Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" data-view="overview" aria-label="Northstar OS home"><span class="brand-mark">N</span><span><strong>NORTHSTAR</strong><small>ENTERPRISE CRM</small></span></a>
+      <div class="org-card"><span>ORGANIZATION</span><strong>Northstar Industries</strong><small>Enterprise workspace</small></div>
+      <nav class="main-nav" aria-label="Application navigation">
+        <p>COMMAND</p>
+        <button class="nav-item active" data-view="overview"><span>⌂</span>Executive Dashboard</button>
+        <p>OPERATIONS</p>
+        <button class="nav-item" data-view="contacts"><span>♙</span>Contacts <b id="contactNavCount"></b></button>
+        <button class="nav-item" data-view="pipelines"><span>⌁</span>Pipelines</button>
+        <button class="nav-item" data-view="inbox"><span>◫</span>Unified Inbox <b id="inboxBadge"></b></button>
+        <button class="nav-item" data-view="automations"><span>◇</span>Automations</button>
+        <p>PLATFORM</p>
+        <button class="nav-item" data-view="email"><span>✉</span>Email Connections</button>
+        <button class="nav-item" data-view="fields"><span>⊞</span>Custom Fields</button>
+        <button class="nav-item" data-view="team"><span>♟</span>Team &amp; RBAC</button>
+        <button class="nav-item" data-view="audit"><span>☷</span>Audit Log</button>
+        <button class="nav-item" data-view="integrations"><span>⌘</span>Integrations</button>
+        <button class="nav-item" data-view="guide"><span>◎</span>Platform Guide</button>
+      </nav>
+      <div class="sidebar-foot"><span class="live-dot"></span><div><strong>All systems operational</strong><small>US East · 42ms</small></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumbs"><span>Northstar Industries</span><b>/</b><strong id="pageCrumb">Executive Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search contacts, deals..." aria-label="Global search"><kbd>Ctrl K</kbd></label>
+          <button class="icon-button" id="notifyBtn" aria-label="View notifications">♢<i></i></button>
+          <button class="avatar-button" id="profileBtn" aria-label="Open profile menu">JR</button>
+        </div>
+        <div class="popover" id="notifyPopover"><strong>Notifications</strong><p>Lead recovery completed 12 runs.</p><p>2 new replies in the unified inbox.</p></div>
+        <div class="popover profile-pop" id="profilePopover"><strong>Jordan Rivera</strong><span>CRM Administrator</span><button id="profileClose">Close menu</button></div>
+      </header>
+
+      <div class="content">
+        <section class="view active" id="view-overview">
+          <div class="page-head"><div><span class="eyebrow">ENTERPRISE COMMAND CENTER</span><h1>Good morning, Jordan.</h1><p>Here is the operational pulse for Northstar Industries.</p></div><div class="head-actions"><button class="btn ghost" data-action="reset-demo">Reset demo data</button><button class="btn primary" data-go="pipelines">Open pipeline <span>↗</span></button></div></div>
+          <div class="hero-strip"><div><span>Business health</span><strong id="healthScore">94%</strong><small>↑ 3.2% this month</small></div><div class="pulse-chart" id="pulseChart" aria-label="Revenue trend chart"></div><div class="hero-summary"><b><i class="green-dot"></i>Live demo data</b><p>Metrics update as you manage contacts, deals, messages, and workflows.</p></div></div>
+          <div class="metric-grid" id="metricGrid"></div>
+          <div class="dashboard-grid"><article class="panel span-2"><div class="panel-head"><div><span class="panel-kicker">REVENUE INTELLIGENCE</span><h2>Pipeline performance</h2></div><select id="chartRange" aria-label="Chart date range"><option>Last 6 months</option><option>Last 90 days</option><option>This year</option></select></div><div class="revenue-chart" id="revenueChart"></div></article><article class="panel"><div class="panel-head"><div><span class="panel-kicker">BUSINESS HEALTH</span><h2>Operating signals</h2></div><button class="text-btn" data-go="audit">View audit log →</button></div><div id="accountHealth"></div></article><article class="panel span-2"><div class="panel-head"><div><span class="panel-kicker">RECENT SIGNALS</span><h2>Live activity</h2></div><span class="live-label"><i></i>LIVE</span></div><div class="activity-list" id="activityList"></div></article><article class="panel"><div class="panel-head"><div><span class="panel-kicker">CHANNEL MIX</span><h2>Conversation volume</h2></div></div><div id="channelMix"></div></article></div>
+        </section>
+
+        <section class="view" id="view-contacts">
+          <div class="page-head"><div><span class="eyebrow">CUSTOMER DATA</span><h1>Contacts</h1><p id="contactSubtitle"></p></div><button class="btn primary" id="newContactBtn">+ Add contact</button></div>
+          <div class="toolbar"><label class="search-box"><span>⌕</span><input id="contactSearch" type="search" placeholder="Search name, email, company"></label><select id="contactFilter" aria-label="Filter contacts"><option value="all">All contacts</option><option value="Lead">Leads</option><option value="Customer">Customers</option><option value="At Risk">At risk</option></select><button class="btn ghost" id="exportContacts">Export CSV</button></div>
+          <div class="table-shell"><table><thead><tr><th>Contact</th><th>Company</th><th>Status</th><th>Value</th><th>Last activity</th><th></th></tr></thead><tbody id="contactRows"></tbody></table><div class="empty-state" id="contactEmpty">No contacts match this view.</div></div>
+        </section>
+
+        <section class="view" id="view-pipelines">
+          <div class="page-head"><div><span class="eyebrow">SALES OPERATIONS</span><h1>Revenue Pipeline</h1><p>Move opportunities forward and watch totals update instantly.</p></div><button class="btn primary" id="newDealBtn">+ Add opportunity</button></div><div class="pipeline-stats" id="pipelineStats"></div><div class="kanban" id="kanban"></div>
+        </section>
+
+        <section class="view" id="view-inbox">
+          <div class="page-head compact"><div><span class="eyebrow">OMNICHANNEL SERVICE</span><h1>Unified Inbox</h1></div><div class="head-actions"><button class="btn ghost" id="composeEmailBtn">✉ Compose email</button><div class="channel-tabs" id="channelTabs"><button class="active" data-channel="All">All</button><button data-channel="Email">Email</button><button data-channel="SMS">SMS</button><button data-channel="Chat">Chat</button></div></div></div>
+          <div class="inbox-layout"><aside class="thread-list" id="threadList"></aside><article class="conversation" id="conversationPanel"><div class="conversation-empty">Select a conversation to view the thread.</div></article><aside class="contact-context" id="contactContext"></aside></div>
+        </section>
+
+        <section class="view" id="view-automations">
+          <div class="page-head"><div><span class="eyebrow">VISUAL ORCHESTRATION</span><h1>Automation Studio</h1><p>Build, connect, and simulate customer journeys without code.</p></div><div class="head-actions"><button class="btn ghost" id="toggleWorkflow">Pause workflow</button><button class="btn primary" id="runWorkflow">▶ Run simulation</button></div></div>
+          <div class="automation-connectors"><div class="section-intro"><span class="panel-kicker">AUTOMATION CONNECTORS</span><h2>Use the tools your operations team already knows</h2><p>Connect a simulated provider, then add its action directly to the workflow.</p></div><div class="connector-grid" id="automationConnectorGrid"></div></div>
+          <div class="workflow-meta"><div><span class="workflow-icon">◇</span><div><strong>Lead response accelerator</strong><small id="workflowStatusText">Active · Last run 8 minutes ago</small></div></div><div class="workflow-stats"><span><b id="nodeCount">0</b> nodes</span><span><b>87%</b> completion</span><span><b>1.4s</b> avg. run</span></div></div>
+          <div class="workflow-shell"><aside class="node-library"><span class="panel-kicker">ADD A STEP</span><button data-add-node="Email" data-icon="✉">✉ Send email</button><button data-add-node="Wait" data-icon="◷">◷ Wait timer</button><button data-add-node="Condition" data-icon="⑂">⑂ If / else</button><button data-add-node="SMS" data-icon="◈">◈ Send SMS</button><button data-add-node="Task" data-icon="✓">✓ Create task</button><p>Click any step to append it to the live workflow.</p></aside><div class="workflow-canvas" id="workflowCanvas"></div><aside class="run-console"><div class="panel-head"><h2>Run console</h2><span id="runIndicator">READY</span></div><div id="runLog"><p><time>09:42:10</time> Workflow loaded</p><p><time>09:42:11</time> 1,248 contacts eligible</p></div></aside></div>
+        </section>
+
+        <section class="view" id="view-email">
+          <div class="page-head"><div><span class="eyebrow">EMAIL ADAPTERS</span><h1>Email Connections</h1><p>Connect sending and mailbox providers through a production-ready adapter model.</p></div><span class="secure-chip">◈ Simulated UI only</span></div>
+          <div class="demo-notice"><strong>Portfolio demo</strong><p>These controls simulate connection, sync, and sending states. Production requires a secure backend, encrypted credentials, provider OAuth or API keys, token refresh, webhooks, and delivery event processing.</p></div>
+          <div class="email-grid" id="emailProviderGrid"></div>
+          <div class="email-control-panel"><article class="panel"><span class="panel-kicker">SENDING POLICY</span><h2>Default sending provider</h2><p>Outbound demo email uses the selected connected provider.</p><div class="inline-control"><select id="defaultEmailProvider" aria-label="Default sending provider"></select><button class="btn primary" id="saveDefaultProvider">Save default</button></div></article><article class="panel"><span class="panel-kicker">SYNC CONTROL</span><h2>Mailbox synchronization</h2><p>Simulate an incremental mailbox and delivery-event sync.</p><button class="btn ghost" id="syncEmailBtn">↻ Simulate sync</button><div id="syncStatus" class="sync-status">Ready to sync</div></article></div>
+        </section>
+
+        <section class="view" id="view-fields"><div class="page-head"><div><span class="eyebrow">SCHEMA CONTROL</span><h1>Custom Fields</h1><p>Extend customer records without database migrations.</p></div><button class="btn primary" id="newFieldBtn">+ Create field</button></div><div class="field-layout"><article class="panel"><div class="panel-head"><div><span class="panel-kicker">CONTACT OBJECT</span><h2>Dynamic field registry</h2></div><span id="fieldCount"></span></div><div class="field-list" id="fieldList"></div></article><article class="panel schema-preview"><span class="panel-kicker">LIVE SCHEMA PREVIEW</span><pre id="schemaPreview"></pre></article></div></section>
+
+        <section class="view" id="view-team"><div class="page-head"><div><span class="eyebrow">ACCESS GOVERNANCE</span><h1>Team &amp; RBAC</h1><p>Grant least-privilege access across the organization.</p></div><button class="btn primary" id="inviteBtn">+ Invite teammate</button></div><div class="team-layout"><article class="panel"><div class="panel-head"><h2>Team members</h2><span id="memberCount"></span></div><div id="teamList"></div></article><article class="panel"><div class="panel-head"><div><span class="panel-kicker">ROLE EDITOR</span><h2 id="roleEditorTitle">Sales Manager</h2></div><button class="btn small primary" id="saveRole">Save permissions</button></div><div class="permission-list" id="permissionList"></div></article></div></section>
+
+        <section class="view" id="view-audit"><div class="page-head"><div><span class="eyebrow">IMMUTABLE HISTORY</span><h1>Audit Log</h1><p>Trace every sensitive action across the platform.</p></div><button class="btn ghost" id="exportAudit">Export CSV</button></div><div class="toolbar"><label class="search-box"><span>⌕</span><input id="auditSearch" type="search" placeholder="Search actor or action"></label><select id="auditFilter"><option value="all">All events</option><option value="Security">Security</option><option value="Data">Data</option><option value="Automation">Automation</option><option value="Integration">Integration</option></select></div><div class="table-shell"><table><thead><tr><th>Timestamp</th><th>Actor</th><th>Event</th><th>Resource</th><th>IP address</th><th>Type</th></tr></thead><tbody id="auditRows"></tbody></table></div></section>
+
+        <section class="view" id="view-integrations"><div class="page-head"><div><span class="eyebrow">CONNECTED ECOSYSTEM</span><h1>Integrations</h1><p>Monitor core business and automation adapters from one workspace.</p></div><span class="secure-chip">◈ Secure adapter architecture</span></div><div class="integration-grid" id="integrationGrid"></div><div class="integration-callout"><div><span class="panel-kicker">SPECIALIZED CONNECTIONS</span><h2>Configure channels and workflows</h2></div><div><button class="btn ghost" data-go="email">Manage email</button><button class="btn primary" data-go="automations">Build automation</button></div></div></section>
+
+        <section class="view" id="view-guide">
+          <div class="guide-hero"><span class="eyebrow">PLATFORM BLUEPRINT</span><h1>One organization.<br><em>One operating system.</em></h1><p>This demo maps each interface to a scalable enterprise service boundary.</p><div><a class="btn primary" href="../index.html">← Portfolio overview</a><a class="btn ghost" href="../simple/index.html">View Simple CRM ↗</a></div></div>
+          <div class="architecture-map"><div class="arch-layer org-layer"><span>ORGANIZATION LAYER</span><strong>Northstar enterprise workspace</strong><p>Contacts · Pipelines · Conversations · Workflows · Governance</p></div><div class="arch-flow">↓ Authorized service calls</div><div class="arch-modules"><article><i>01</i><strong>CRM Core</strong><small>Contacts and revenue records</small></article><article><i>02</i><strong>Communication Hub</strong><small>Email and channel adapters</small></article><article><i>03</i><strong>Automation Engine</strong><small>Events, jobs, and connectors</small></article></div><div class="arch-flow">↓ Durable event bus</div><div class="service-row"><span>Queue workers</span><span>Email adapters</span><span>Audit service</span><span>Analytics engine</span></div></div>
+          <div class="guide-grid"><article><b>01</b><h2>Single organization architecture</h2><p>A shared business workspace unifies customer, revenue, communication, and workflow data under one organization boundary.</p></article><article><b>02</b><h2>Email adapter layer</h2><p>Gmail, Microsoft, SendGrid, and Mailgun implement a common sending and sync contract while secure backend services own tokens, keys, and webhooks.</p></article><article><b>03</b><h2>Automation connectors</h2><p>GoHighLevel, Zapier, Make, and n8n actions compile into normalized workflow nodes with provider-specific execution adapters.</p></article><article><b>04</b><h2>Durable workers</h2><p>Queued workers process triggers, delays, conditions, retries, sync jobs, and outbound actions independently from the interface.</p></article><article><b>05</b><h2>RBAC enforcement</h2><p>Roles define allowed actions and resources. Server-side policy checks protect every sensitive operation, not only the visible controls.</p></article><article><b>06</b><h2>Append-only audit logs</h2><p>Connection changes, sends, workflow runs, exports, and permission updates create durable events for accountability and review.</p></article></div>
+          <div class="guide-cta"><div><span>EXPLORE THE SYSTEM</span><h2>Try the workflows, email adapters, and governance controls.</h2></div><div><a href="#email" data-view="email">Email Connections <span>↗</span></a><a href="#automations" data-view="automations">Automation Studio <span>↗</span></a></div></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><span class="panel-kicker" id="modalKicker">CREATE RECORD</span><h2 id="modalTitle">Add contact</h2></div><button class="icon-button" id="modalClose" aria-label="Close dialog">×</button></div><form id="modalForm"><div id="modalFields"></div><div class="modal-actions"><button type="button" class="btn ghost" id="modalCancel">Cancel</button><button type="submit" class="btn primary" id="modalSubmit">Create</button></div></form></div></div>
+  <div class="drawer" id="contactDrawer" aria-hidden="true"><div class="drawer-head"><span>CONTACT 360</span><button class="icon-button" id="drawerClose" aria-label="Close contact detail">×</button></div><div id="drawerContent"></div></div>
+  <div class="toast-stack" id="toasts" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

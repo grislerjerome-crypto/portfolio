@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Northstar Simple CRM, a focused contact, company, task, and notes manager.">
+  <title>Northstar | Simple CRM Demo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236c5ce7'/%3E%3Cpath d='M18 46V18h7l14 17V18h7v28h-7L25 29v17z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" id="brandMark">N</div>
+        <div><strong id="brandName">Northstar</strong><span>Simple CRM</span></div>
+        <button class="icon-btn mobile-close" id="closeSidebar" aria-label="Close navigation">×</button>
+      </div>
+      <nav id="mainNav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="dashboard"><span>⌂</span>Dashboard</button>
+        <button class="nav-link" data-view="contacts"><span>♙</span>Contacts</button>
+        <button class="nav-link" data-view="companies"><span>▦</span>Companies</button>
+        <button class="nav-link" data-view="tasks"><span>✓</span>Tasks / Notes</button>
+        <button class="nav-link" data-view="reports"><span>↗</span>Reports</button>
+        <button class="nav-link" data-view="settings"><span>⚙</span>Settings</button>
+        <button class="nav-link" data-view="how"><span>?</span>How It Works</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="demo-status"><span class="status-dot"></span><div><strong>Interactive demo</strong><small>Saved in this browser</small></div></div>
+        <a href="../index.html">← Back to portfolio</a>
+        <a href="../complex/index.html">View complex CRM →</a>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="page-heading"><span class="eyebrow">Small business workspace</span><h1 id="pageTitle">Good morning</h1><p id="pageSubtitle">Your relationships and next steps, kept simple.</p></div>
+        <div class="topbar-actions">
+          <button class="btn secondary" id="quickContact">＋ Contact</button>
+          <button class="btn primary" id="quickTask">＋ Task / Note</button>
+        </div>
+      </header>
+      <div class="content" id="viewRoot"></div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><span class="eyebrow" id="modalEyebrow">Create</span><h2 id="modalTitle">New item</h2></div><button class="icon-btn" id="modalClose" aria-label="Close dialog">×</button></div>
+      <form id="modalForm"><div class="modal-body" id="modalBody"></div><div class="modal-actions"><button type="button" class="btn secondary" id="modalCancel">Cancel</button><button type="submit" class="btn primary" id="modalSubmit">Save</button></div></form>
+    </div>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <input id="logoUpload" type="file" accept="image/*" hidden>
+  <script src="app.js"></script>
+</body>
+</html>

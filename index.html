@@ -247,6 +247,12 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 @media(max-width:520px){.book-viewport{height:640px}.book-page{grid-template-rows:245px 1fr}.book-copy{padding:24px 20px}.book-copy h3{font-size:2.45rem}.book-copy p{font-size:.88rem}.book-tags span{font-size:.56rem}.book-choice{grid-template-columns:1fr 1fr;gap:8px;padding:10px}.book-choice-card{min-height:220px}.book-choice-card strong{font-size:.84rem}.book-control{font-size:0;width:46px;height:46px;justify-content:center;padding:0}.book-control span{font-size:1rem}.book-topline{font-size:.54rem}}
 @media(prefers-reduced-motion:reduce){.book-page{transition:none!important}}
 
+/* ---- Interactive CRM showcase ---- */
+#crm-systems .lead{max-width:760px;margin-bottom:26px}.crm-showcase{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,.58fr);border:1px solid var(--panel-border);border-radius:24px;overflow:hidden;background:radial-gradient(700px 400px at 0 0,color-mix(in srgb,var(--cyan) 11%,transparent),transparent 65%),color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:var(--shadow)}.crm-preview{position:relative;display:block;min-height:480px;overflow:hidden;border-right:1px solid var(--panel-border);background:#070a0f}.crm-preview::after{content:"OPEN LIVE CRM ↗";position:absolute;right:16px;bottom:16px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--cyan) 42%,transparent);border-radius:99px;background:rgba(5,8,13,.82);color:var(--cyan);font:700 .58rem var(--mono);letter-spacing:.1em;backdrop-filter:blur(10px);transition:transform .2s ease,background .2s ease}.crm-preview:hover::after{transform:translateY(-3px);background:rgba(5,8,13,.96)}.crm-preview img{width:100%;height:100%;min-height:480px;object-fit:cover;object-position:top center;display:block;transition:opacity .2s ease,transform .45s ease}.crm-preview:hover img{transform:scale(1.012)}.crm-panel{padding:clamp(24px,3.4vw,42px);display:flex;flex-direction:column;justify-content:center;min-width:0}.crm-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}.crm-tab{border:1px solid var(--panel-border);border-radius:99px;padding:8px 11px;background:transparent;color:var(--muted);font:650 .62rem var(--mono);letter-spacing:.04em;cursor:pointer}.crm-tab[aria-selected="true"]{color:#061017;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 22px color-mix(in srgb,var(--cyan) 24%,transparent)}.crm-kicker{font:700 .62rem var(--mono);letter-spacing:.12em;color:var(--lime);text-transform:uppercase}.crm-panel h3{font-size:clamp(1.75rem,3vw,2.65rem);line-height:1.02;margin:13px 0}.crm-panel>p{color:var(--muted);line-height:1.7;min-height:82px}.crm-points{display:grid;gap:9px;margin:24px 0 28px}.crm-point{display:flex;align-items:center;gap:10px;color:var(--txt);font-size:.86rem}.crm-point::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px color-mix(in srgb,var(--lime) 62%,transparent);flex:0 0 auto}.crm-actions{display:flex;flex-wrap:wrap;gap:9px}.crm-actions .btn{justify-content:center}.crm-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.crm-meta span{font:600 .56rem var(--mono);letter-spacing:.07em;color:var(--muted);border:1px solid var(--panel-border);border-radius:6px;padding:6px 8px}
+@media(max-width:900px){.crm-showcase{grid-template-columns:1fr}.crm-preview{min-height:380px;border-right:0;border-bottom:1px solid var(--panel-border)}.crm-preview img{min-height:380px}.crm-panel>p{min-height:0}}
+@media(max-width:560px){.crm-preview{min-height:280px}.crm-preview img{min-height:280px}.crm-panel{padding:24px 20px}.crm-tabs{margin-bottom:22px}.crm-actions{display:grid}.crm-actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.crm-preview img,.crm-preview::after{transition:none!important}}
+
 /* ---- Operations intelligence dashboards ---- */
 #ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
 .ops-sample-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 34%,transparent);border-radius:99px;padding:6px 10px;background:color-mix(in srgb,var(--lime) 6%,transparent)}.ops-sample-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
@@ -940,6 +946,40 @@ html:root #toTop{background:linear-gradient(135deg,var(--cyan),var(--magenta))!i
     </div>
   </section>
 
+  <section id="crm-systems" class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">CRM SYSTEMS</span>
+      <h2 class="title">Two working CRMs built for different stages of growth.</h2>
+      <p class="lead">Explore a focused client manager and a deeper operations platform with live tools, sample data, integrations and guided product views.</p>
+    </div>
+    <div class="crm-showcase reveal">
+      <a class="crm-preview" id="crm-preview-link" href="crm/" target="_blank" rel="noopener" aria-label="Open CRM Systems overview">
+        <img id="crm-preview-image" src="crm-portfolio-preview.png" alt="CRM Systems product overview" loading="lazy" width="1440" height="1000">
+      </a>
+      <div class="crm-panel">
+        <div class="crm-tabs" role="tablist" aria-label="Choose a CRM demo">
+          <button class="crm-tab" type="button" role="tab" data-crm-view="overview" aria-selected="true">Overview</button>
+          <button class="crm-tab" type="button" role="tab" data-crm-view="simple" aria-selected="false">Simple CRM</button>
+          <button class="crm-tab" type="button" role="tab" data-crm-view="enterprise" aria-selected="false">Enterprise CRM</button>
+        </div>
+        <span class="crm-kicker" id="crm-kicker">Product collection</span>
+        <h3 id="crm-title">CRM Systems</h3>
+        <p id="crm-description">Compare two interactive CRM products, understand the thinking behind each build and launch either experience from one clean product page.</p>
+        <div class="crm-points" id="crm-points">
+          <span class="crm-point">Separate simple and enterprise experiences</span>
+          <span class="crm-point">Working controls with realistic demo data</span>
+          <span class="crm-point">Portfolio ready product walkthroughs</span>
+        </div>
+        <div class="crm-actions">
+          <a class="btn primary" id="crm-primary-link" href="crm/" target="_blank" rel="noopener">Explore CRM Systems ↗</a>
+          <a class="btn" href="crm/simple/" target="_blank" rel="noopener">Open Simple CRM ↗</a>
+          <a class="btn" href="crm/complex/" target="_blank" rel="noopener">Open Enterprise CRM ↗</a>
+        </div>
+        <div class="crm-meta"><span>VANILLA JS</span><span>LOCAL DATA</span><span>RESPONSIVE</span><span>INTERACTIVE</span></div>
+      </div>
+    </div>
+  </section>
+
   <section id="ecommerce-operations" class="wrap">
     <div class="reveal">
       <span class="eyebrow">ECOMMERCE OPERATIONS</span>
@@ -1059,7 +1099,7 @@ html:root #toTop{background:linear-gradient(135deg,var(--cyan),var(--magenta))!i
       <p style="color:var(--muted);font-size:.85rem;margin-top:14px">Available worldwide · Remote</p>
     </div>
     <div class="col"><h4>SERVICES</h4><a href="#services" data-footer-mode="automation" onclick="setMode('automation');smartScroll(document.querySelector('.svc[data-mode=&quot;automation&quot;]')||'#services');return false">AI Automation</a><a href="#services" data-footer-mode="web" onclick="setMode('web');smartScroll(document.querySelector('.svc[data-mode=&quot;web&quot;]')||'#services');return false">Website Development</a><a href="#services" data-footer-mode="ecom" onclick="setMode('ecom');smartScroll(document.querySelector('.svc[data-mode=&quot;ecom&quot;]')||'#services');return false">E-commerce VA</a><a href="#services" data-footer-mode="logistics" onclick="setMode('logistics');smartScroll(document.querySelector('.svc[data-mode=&quot;logistics&quot;]')||'#services');return false">Logistics &amp; Supply Chain VA</a></div>
-    <div class="col"><h4>EXPLORE</h4><a href="#craftee">Ecom Websites</a><a href="#funnels">Funnels</a><a href="#projects">Automation Templates</a></div>
+    <div class="col"><h4>EXPLORE</h4><a href="#craftee">Ecom Websites</a><a href="#funnels">Funnels</a><a href="#crm-systems">CRM Systems</a><a href="#projects">Automation Templates</a></div>
     <div class="col"><h4>CONNECT</h4><a id="foot-email" href="mailto:grislerjerome@gmail.com">Email</a><a id="foot-facebook" href="https://www.facebook.com/jeromegrslr" target="_blank" rel="noopener">Facebook</a><a id="foot-linkedin" href="https://www.linkedin.com/in/jerome-grisler-7041ab3a7/" target="_blank" rel="noopener">LinkedIn</a><a id="foot-onlinejobs" href="https://v2.onlinejobs.ph/jobseekers/info/3208572" target="_blank" rel="noopener">OnlineJobs.ph</a><a id="foot-upwork" href="https://www.upwork.com/freelancers/~01f2abcdb404da586f" target="_blank" rel="noopener">Upwork</a></div>
   </div>
   <div class="bottom wrap" id="footer-bottom">© <span id="year"></span> Jerome Grisler. Built as a live console.</div>
@@ -2474,9 +2514,9 @@ function setupAvaChat(){
 /* ---- command palette ---- */
 function setupPalette(){
   const wrap=$("#palette"),input=$("#palette-input"),list=$("#palette-list");
-  const labels={home:'Home',services:'Services',capabilities:'How I work',ava:'Ava, AI Agent','capability-console':'Capability Console',roi:'ROI Calculator',craftee:'Ecommerce showcase',funnels:'Funnels','ecommerce-operations':'Ecommerce operations','logistics-operations':'Supply chain and logistics',projects:'Projects',contact:'Contact'};
+  const labels={home:'Home',services:'Services',capabilities:'How I work',ava:'Ava, AI Agent','capability-console':'Capability Console',roi:'ROI Calculator',craftee:'Ecommerce showcase',funnels:'Funnels','crm-systems':'CRM Systems','ecommerce-operations':'Ecommerce operations','logistics-operations':'Supply chain and logistics',projects:'Projects',contact:'Contact'};
   const base=$$('section[id]').map(el=>({ic:'↳',label:labels[el.id]||el.querySelector('h2,h1')?.textContent.trim()||el.id,go:'#'+el.id}));
-  base.push({ic:'◎',label:'About me, Jerome Grisler',act:()=>window.openAbout?.()},{ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
+  base.push({ic:'↗',label:'Open CRM live demo',act:()=>window.open('crm/','_blank','noopener')},{ic:'◎',label:'About me, Jerome Grisler',act:()=>window.openAbout?.()},{ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
   const specialties=['GoHighLevel CRM','Hermes Agent','Shopify Operations','Digital Marketing'].map((label,i)=>({ic:'◎',label:'Blueprints: '+label,act:()=>{window.CapabilityConsole?.select(i);smartScroll('#capability-console');}}));
   const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:'Mode: '+s.name,act:()=>setMode(s.id)}));
   const items=base.concat(specialties,modeItems);
@@ -3019,10 +3059,35 @@ function setupFunnelBook(){
   sync();
 }
 
+/* ===== interactive CRM showcase ===== */
+function setupCRMShowcase(){
+  const tabs=$$("[data-crm-view]"),image=$("#crm-preview-image"),preview=$("#crm-preview-link"),kicker=$("#crm-kicker"),title=$("#crm-title"),description=$("#crm-description"),points=$("#crm-points"),primary=$("#crm-primary-link");
+  if(!tabs.length||!image||!preview)return;
+  const views={
+    overview:{src:"crm-portfolio-preview.png",alt:"CRM Systems product overview",href:"crm/",label:"Open CRM Systems overview",kicker:"Product collection",title:"CRM Systems",description:"Compare two interactive CRM products, understand the thinking behind each build and launch either experience from one clean product page.",points:["Separate simple and enterprise experiences","Working controls with realistic demo data","Portfolio ready product walkthroughs"],cta:"Explore CRM Systems ↗"},
+    simple:{src:"crm-simple-preview.png",alt:"Simple CRM dashboard preview",href:"crm/simple/",label:"Open Simple CRM",kicker:"Focused client management",title:"Simple CRM",description:"A clean workspace for small teams that need contacts, companies, tasks and notes without the weight of a full sales platform.",points:["Contact and company management","Tasks, notes and practical CSV exports","Demo data, local persistence and branding"],cta:"Launch Simple CRM ↗"},
+    enterprise:{src:"crm-enterprise-preview.png",alt:"Enterprise CRM automation studio preview",href:"crm/complex/",label:"Open Enterprise CRM",kicker:"Operations and automation",title:"Enterprise CRM",description:"A deeper single organization workspace with pipelines, email connections, RBAC, audit history and a visual automation studio.",points:["Interactive pipelines and unified inbox","Gmail, Microsoft 365, SendGrid and Mailgun demos","HighLevel, Zapier, Make and n8n connectors"],cta:"Launch Enterprise CRM ↗"}
+  };
+  function apply(key){
+    const view=views[key];if(!view)return;
+    tabs.forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.crmView===key)));
+    image.style.opacity="0";
+    setTimeout(()=>{image.src=view.src;image.alt=view.alt;image.style.opacity="1";},prefersReduced()?0:130);
+    preview.href=view.href;preview.setAttribute("aria-label",view.label);
+    kicker.textContent=view.kicker;title.textContent=view.title;description.textContent=view.description;
+    points.innerHTML=view.points.map(point=>`<span class="crm-point">${point}</span>`).join("");
+    primary.href=view.href;primary.textContent=view.cta;
+  }
+  tabs.forEach((tab,index)=>{
+    tab.addEventListener("click",()=>apply(tab.dataset.crmView));
+    tab.addEventListener("keydown",event=>{if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;event.preventDefault();const next=(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].focus();apply(tabs[next].dataset.crmView);});
+  });
+}
+
 function boot(){
   applyStatic();
   buildServices();buildCaps();buildMarquee();buildProjects();
-  setupTheme();setupROI();setupAvaChat();setupOperationsVisuals();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupFunnelBook();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
+  setupTheme();setupROI();setupAvaChat();setupOperationsVisuals();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupFunnelBook();setupCRMShowcase();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
 document.addEventListener("DOMContentLoaded",boot);
