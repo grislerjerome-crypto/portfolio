@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="space">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<script>try{var __t=localStorage.getItem('theme');if(__t&&__t!=='dark')document.documentElement.setAttribute('data-theme',__t);}catch(e){}</script>
+<script>try{var __t=localStorage.getItem('portfolio-theme-v2');if(!['space','light','dark'].includes(__t))__t=localStorage.getItem('theme')==='light'?'light':'space';document.documentElement.setAttribute('data-theme',__t);}catch(e){document.documentElement.setAttribute('data-theme','space');}</script>
 <style>
 :root{
   --bg:#0a0b0f;--bg-2:#0e1016;--panel:rgba(255,255,255,.035);--panel-border:rgba(255,255,255,.09);
@@ -472,7 +472,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 @media(max-width:650px){#capability-console .cc-layout{display:flex;flex-direction:column;height:590px}#capability-console .cc-rail{flex:none;border-right:0;border-bottom:1px solid var(--panel-border);padding:9px}#capability-console .cc-rail>p,#capability-console .cc-tab small,#capability-console .cc-tabline .cc-micro{display:none}#capability-console .cc-tabs{display:flex;overflow-x:auto;gap:7px;scrollbar-width:thin;padding-bottom:3px}#capability-console .cc-tab{flex:0 0 150px;padding:10px;min-height:78px;text-align:left}#capability-console .cc-tab strong{font-size:14px;margin:0}#capability-console .cc-tabline{margin-bottom:7px}#capability-console .cc-logo{width:22px;height:22px}#capability-console .cc-main{flex:1}#capability-console .cc-jumps{padding:8px;gap:6px}#capability-console .cc-jump{flex:0 0 auto;font-size:13px;min-height:39px;padding:7px 10px}#capability-console .cc-scroll{padding:20px 14px}#capability-console .cc-top,#capability-console .cc-bottom{font-size:11px;padding:10px 12px}#capability-console .cc-status{font-size:11px}#capability-console .cc-bottom>span:first-child{display:none}#capability-console .cc-bottom{justify-content:space-between;min-height:43px}#capability-console .cc-overview>p,#capability-console .cc-studyhead>p,#capability-console .cc-brief p,#capability-console .cc-deliver p,#capability-console details ul{font-size:16px}#capability-console .cc-tool{font-size:13px}#capability-console .cc-heading h3{font-size:25px}#capability-console .cc-studyhead h4{font-size:23px}#capability-console .cc-mapbar{font-size:11px;flex-wrap:wrap}#capability-console .cc-mapbar em{display:none}#capability-console .cc-mapfoot{font-size:11px;flex-direction:column;gap:7px}#capability-console .cc-brief{grid-template-columns:1fr;gap:20px}#capability-console .cc-methodline{grid-template-columns:repeat(2,1fr)}#capability-console .cc-inspector{padding:14px;min-height:190px}#capability-console .cc-inspectbody{font-size:15px}#capability-console .cc-inspectkind{font-size:10px}#capability-console .cc-clear{font-size:12px;padding:5px 7px}#capability-console .cc-dialoghead{padding:14px}#capability-console .cc-dialoghead h3{font-size:20px}#capability-console .cc-dialogbody{padding:10px}#capability-console .cc-close{font-size:13px;padding:8px}#capability-console .cc-disclosure{font-size:12px}}
 @media(prefers-reduced-motion:reduce){#capability-console *,#capability-console *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}#capability-console .cc-packet{display:none}}
 
-/* Minimalist light theme. All overrides are scoped; dark mode retains its original effects. */
+/* Minimalist light theme. All overrides are scoped; AI Space retains its original effects. */
 html[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--bg-2:#ffffff;--panel:#ffffff;--panel-border:#dce2e8;--txt:#172330;--muted:#526170;--lime:#276749!important;--magenta:#8b386a!important;--cyan:#086c87;--grad:linear-gradient(120deg,#276749,#276749);--glow:none;--glass:#ffffff;--shadow:0 8px 28px #17233008;--nav-bg:#ffffff;--boot-bg:#f7f8fa;--edge:#dce2e8;scrollbar-color:#9aa7b3 #edf0f4}
 html[data-theme="light"] body{background:#f7f8fa}
 html[data-theme="light"] :is(#bg-canvas,.grid-bg,.bg-grad,.orb,.scanlines,#cur-dot,#cur-ring){display:none!important}
@@ -608,6 +608,7 @@ button.nav-brand-group{font:inherit;color:inherit;background:none;border:0;text-
 @keyframes about-marquee{to{transform:translateX(-50%)}}
 .about-main{display:grid;grid-template-columns:1.12fr 1fr;gap:38px;align-items:start}
 .about-copy{min-width:0}.about-copy h3{font-size:32px;line-height:1.2;letter-spacing:-.035em;margin:0 0 16px}
+.about-aspiration{display:inline-flex;align-items:center;padding:6px 12px;margin:0 0 18px;border:1px solid color-mix(in srgb,var(--cyan) 38%,var(--panel-border));border-radius:8px;color:var(--cyan);background:color-mix(in srgb,var(--cyan) 7%,var(--bg-2));font:500 13px var(--font);letter-spacing:.02em}
 .about-lead{font-size:18px;line-height:1.6;color:var(--txt);margin:0 0 18px;max-width:520px}
 .about-bio{font-size:14px;line-height:1.8;color:var(--muted)}
 .about-more{margin-top:12px}.about-more[hidden]{display:none}
@@ -674,6 +675,46 @@ html:root #toTop{background:linear-gradient(135deg,var(--cyan),var(--magenta))!i
 @media(max-width:720px){.about-socials{gap:7px}.about-socials a{font-size:11px;min-height:42px}}
 
 </style>
+<style id="three-mode-appearance">
+/* AI Space keeps the original palette and effects. Light overrides stay untouched. */
+html[data-theme="space"]{color-scheme:dark}
+.theme-switcher{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--panel-border);border-radius:14px;background:var(--bg-2);flex-shrink:0}
+.theme-choice{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:7px 10px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font:600 12px var(--font);white-space:nowrap;cursor:pointer;transition:background .2s,color .2s,border-color .2s,box-shadow .2s}
+.theme-choice>span[aria-hidden]{font-size:17px;line-height:1}
+.theme-choice:hover{color:var(--txt);background:var(--panel)}
+.theme-choice[aria-pressed="true"]{color:var(--txt);background:var(--panel);border-color:var(--panel-border)}
+.theme-choice.theme-space{color:#fff;background:linear-gradient(115deg,#076489,#6931ad 56%,#a52172);border-color:#75d8ff80;padding-inline:12px;box-shadow:0 0 12px #38bdf822}
+.theme-choice.theme-space:hover{background:linear-gradient(115deg,#08799f,#823ecc 56%,#bb2986);box-shadow:0 0 18px #38bdf848}
+.theme-choice.theme-space[aria-pressed="true"]{border-color:#95e6ff;box-shadow:0 0 0 1px #38bdf842,0 0 20px #8959ff55,inset 0 1px 0 #ffffff25}
+.theme-choice:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.nav .wrap{max-width:1580px}
+@media(max-width:1540px){.hud .clock{display:none}.cmd-btn span{display:none}.cmd-btn{padding:8px}}
+@media(max-width:1240px){.nav ul{display:none}.menu-btn{display:block}.hud{margin-left:auto}.mobile-menu{max-height:calc(100dvh - 92px);overflow-y:auto;overscroll-behavior:contain}.mobile-menu.open{display:flex!important}}
+@media(max-width:620px){.nav .wrap{flex-wrap:wrap;gap:10px;padding:10px 16px}.nav-brand-group{order:0}.menu-btn{order:1;margin-left:auto;min-width:40px;min-height:40px}.hud{order:2;flex-basis:100%;min-width:0;margin:0}.hud .cmd-btn{display:none}.theme-switcher{width:100%;min-width:0;gap:5px}.theme-choice{flex:1 1 0;min-width:0;min-height:40px;padding-inline:8px}.theme-choice.theme-space{flex:1.4 1 0;padding-inline:9px}.about-nav-bubble{display:none}.mobile-menu{max-height:calc(100dvh - 126px)}section{scroll-margin-top:140px}}
+html[data-theme="dark"]{color-scheme:dark;--bg:#0d0f12;--bg-2:#14171c;--panel:#181c22;--panel-border:#343b46;--txt:#edf0f5;--muted:#a5afbd;--lime:#9cc6f0!important;--magenta:#b4bfd0!important;--cyan:#8ec8fa;--grad:linear-gradient(120deg,#9cc6f0,#9cc6f0);--glow:none;--glass:#181c22;--shadow:0 10px 30px #0003;--nav-bg:#111419;--boot-bg:#0d0f12;--edge:#343b46}
+html[data-theme="dark"] body{background:#0d0f12}
+html[data-theme="dark"] :is(#bg-canvas,.grid-bg,.bg-grad,.orb,.scanlines,#cur-dot,#cur-ring){display:none!important}
+html[data-theme="dark"] :is(.nav,.svc,.cap,.graph-card,.step,.tcard,.proj-card,.roi-out,.craftee-hero,.ava-panel,.ava-visual,.ava-chat,.palette,.ty-modal,.bk-modal,.bk-left,.cta-band,.roi,.mode-banner,.funnel-book,.funnel-page,.ecom-plan,.ops-dashboard,.ops-panel,.ava-card,.ecom-tier,.ecom-premium,.commerce-stage,.logistics-stage,.dash-panel,.dash-kpi,.book-frame,.book-page){background:var(--panel)!important;border-color:var(--panel-border)!important;box-shadow:var(--shadow)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="dark"] :is(.svc,.cap,.graph-card,.step,.proj-card,.roi-out,.craftee-hero,.ava-visual,.ava-orb,.ava-card,.cta-band)::before,
+html[data-theme="dark"] :is(.svc,.cap,.graph-card,.step,.proj-card,.roi-out,.craftee-hero,.ava-visual,.ava-orb,.ava-card)::after{display:none!important}
+html[data-theme="dark"] :is(.brand b,h1 span,.title span,.roi-big,.ty-modal h3 span,.bk-head h2 span){background:none!important;-webkit-text-fill-color:currentColor;color:var(--lime)!important;text-shadow:none!important}
+html[data-theme="dark"] :is(.btn.primary,.btn-primary,.ava-form button,.cal-day.sel,.time-btn.sel){background:#9cc6f0!important;color:#101820!important;border-color:#9cc6f0!important;box-shadow:none!important}
+html[data-theme="dark"] :is(.ava-form input,.field input,.field select,.field textarea,.field select option){background:#111419!important;color:var(--txt)!important;border-color:#414b5a!important;color-scheme:dark}
+html[data-theme="dark"] :is(.ava-msg.bot,.hub-hint,.hub-btn,.time-btn,.cal-day,.cmd-btn,.btn.ghost){background:var(--bg-2);color:var(--txt);border-color:var(--panel-border)}
+html[data-theme="dark"] :is(.ava-msg.user,.proj-filter-btn.active,.palette .item.active){background:#25364b;color:#edf0f5;border-color:#58799b}
+html[data-theme="dark"] :is(.proj-img,.ecom-preview,.funnel-preview,.hub3d-canvas){background:#111419!important}
+html[data-theme="dark"] #capability-console :is(.cc-shell,.cc-rail,.cc-jumps,.cc-viewer,.cc-inspector,.cc-conversation,.cc-dialog){background:var(--panel);border-color:var(--panel-border);box-shadow:none;backdrop-filter:none}
+html[data-theme="dark"] #capability-console :is(.cc-graphport,.cc-graphnode){background:var(--bg-2)}
+html[data-theme="dark"] #capability-console .cc-shell::before{background:var(--panel-border);animation:none}
+html[data-theme="dark"] #capability-console .cc-graphnode small{color:var(--muted)}
+html[data-theme="dark"] :is(.about-inner,.about-resume){background:var(--panel)}
+html[data-theme="dark"] :is(.tilt,.magnetic,.hero-grid){transform:none!important}
+html[data-theme="dark"] :is(.about-nav-bubble,.nav-photo img,.status-pill .dot,.hud .led,.ava-status span,#progress){animation:none!important;box-shadow:none!important}
+html[data-theme="dark"] .about-nav-bubble{background:var(--bg-2);color:var(--txt);border-color:var(--panel-border)}
+html[data-theme="dark"] .reveal{opacity:1;transform:none}
+html[data-theme="dark"] ::selection{background:#315878;color:#fff}
+@media(prefers-reduced-motion:reduce){.theme-choice{transition:none}}
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -714,7 +755,11 @@ html:root #toTop{background:linear-gradient(135deg,var(--cyan),var(--magenta))!i
       <div class="stat clock" title="America/New_York time"><span class="led"></span><span class="clock-label">ET USA</span><span id="clock">--:--:--</span></div>
       <div class="stat mode" id="mode-ind" title="Click to reset"><span class="mlabel">MODE:</span> <b id="mode-name">OVERVIEW</b></div>
       <button class="cmd-btn" id="cmd-open"><span>⌘ Command</span><kbd>⌘K</kbd></button>
-      <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☀</button>
+      <div class="theme-switcher" role="group" aria-label="Choose appearance">
+        <button type="button" class="theme-choice" data-theme-choice="light" aria-label="Light mode" aria-pressed="false" title="Light mode"><span aria-hidden="true">☀</span><span>Light</span></button>
+        <button type="button" class="theme-choice" data-theme-choice="dark" aria-label="Dark mode" aria-pressed="false" title="Dark mode"><span aria-hidden="true">☾</span><span>Dark</span></button>
+        <button type="button" class="theme-choice theme-space" data-theme-choice="space" aria-label="AI Space Mode" aria-pressed="true" title="AI Space Mode: the original cosmic experience"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/><circle cx="20" cy="4" r="1.5" fill="currentColor"/></svg><span>AI Space</span></button>
+      </div>
     </div>
     <button class="menu-btn" id="menu-open" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
@@ -2347,7 +2392,7 @@ const AVA_KB = [
       "theme control"
     ],
     "q": "How do light and dark modes differ?",
-    "a": "Light mode uses a clean static background for readability. Dark mode retains the cosmic background. Use the theme control or Toggle light / dark in the command menu. This background choice is separate from the Capability Console Motion control for explanatory diagrams; it does not connect or run any workflow."
+    "a": "AI Space Mode is the default and retains the original cosmic background. Light mode keeps the clean light appearance. Dark mode uses a plain dark background without space effects. Choose any of the three modes in the navigation or command menu. This background choice is separate from the Capability Console Motion control for explanatory diagrams; it does not connect or run any workflow."
   },
   {
     "keys": [
@@ -2516,7 +2561,7 @@ function setupPalette(){
   const wrap=$("#palette"),input=$("#palette-input"),list=$("#palette-list");
   const labels={home:'Home',services:'Services',capabilities:'How I work',ava:'Ava, AI Agent','capability-console':'Capability Console',roi:'ROI Calculator',craftee:'Ecommerce showcase',funnels:'Funnels','crm-systems':'CRM Systems','ecommerce-operations':'Ecommerce operations','logistics-operations':'Supply chain and logistics',projects:'Projects',contact:'Contact'};
   const base=$$('section[id]').map(el=>({ic:'↳',label:labels[el.id]||el.querySelector('h2,h1')?.textContent.trim()||el.id,go:'#'+el.id}));
-  base.push({ic:'↗',label:'Open CRM live demo',act:()=>window.open('crm/','_blank','noopener')},{ic:'◎',label:'About me, Jerome Grisler',act:()=>window.openAbout?.()},{ic:'◐',label:'Toggle light / dark',act:toggleTheme},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
+  base.push({ic:'↗',label:'Open CRM live demo',act:()=>window.open('crm/','_blank','noopener')},{ic:'◎',label:'About me, Jerome Grisler',act:()=>window.openAbout?.()},{ic:'✦',label:'AI Space Mode',act:()=>setTheme('space')},{ic:'☀',label:'Light mode',act:()=>setTheme('light')},{ic:'☾',label:'Dark mode',act:()=>setTheme('dark')},{ic:'✉',label:"Let's Connect!",act:()=>window.bkOpen&&window.bkOpen()},{ic:'⎘',label:'Copy email',act:()=>navigator.clipboard&&navigator.clipboard.writeText(CONFIG.cta.email)});
   const specialties=['GoHighLevel CRM','Hermes Agent','Shopify Operations','Meta Ads','Google Ads','Digital Marketing'].map((label,i)=>({ic:'◎',label:'Blueprints: '+label,act:()=>{window.CapabilityConsole?.select(i);smartScroll('#capability-console');}}));
   const modeItems=CONFIG.services.map(s=>({ic:s.icon,label:'Mode: '+s.name,act:()=>setMode(s.id)}));
   const items=base.concat(specialties,modeItems);
@@ -2560,17 +2605,22 @@ function setCanvasColors(){
 }
 function hexRGB(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(x=>x+x).join('');const n=parseInt(h,16);return `${(n>>16)&255},${(n>>8)&255},${n&255}`;}
 function hexA(h,a){return `rgba(${hexRGB(h)},${a})`;}
-function toggleTheme(){
-  const cur=document.documentElement.getAttribute('data-theme');
-  if(cur==='light')document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme','light');
-  try{localStorage.setItem('theme',document.documentElement.getAttribute('data-theme')||'dark');}catch(e){}
+function setTheme(theme){
+  if(!['space','light','dark'].includes(theme))return;
+  document.documentElement.setAttribute('data-theme',theme);
+  try{localStorage.setItem('portfolio-theme-v2',theme);localStorage.setItem('theme',theme);}catch(e){}
   setCanvasColors();updateThemeControl();
   buildMarquee();
-  if(currentMode)setMode(currentMode); // re-apply mode colors after theme swap
+  if(currentMode)setMode(currentMode);
 }
-function updateThemeControl(){const light=document.documentElement.getAttribute('data-theme')==='light',b=$('#theme-toggle');b.textContent=light?'☾':'☀';b.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');b.setAttribute('aria-pressed',String(light));}
-function setupTheme(){$('#theme-toggle').onclick=toggleTheme;updateThemeControl();setCanvasColors();}
+function updateThemeControl(){
+  const theme=document.documentElement.getAttribute('data-theme')||'space';
+  $$('[data-theme-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.themeChoice===theme)));
+}
+function setupTheme(){
+  $$('[data-theme-choice]').forEach(button=>button.addEventListener('click',()=>setTheme(button.dataset.themeChoice)));
+  updateThemeControl();setCanvasColors();
+}
 
 /* ---- canvas (lined particle network + cursor-converging stars) ---- */
 function setupCanvas(){
@@ -2702,9 +2752,9 @@ function setupCanvas(){
     }
   }
   let themeFrame=0;
-  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')!=='light'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')==='space'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   function frame(){
-    if(document.documentElement.getAttribute('data-theme')==='light')return;
+    if(document.documentElement.getAttribute('data-theme')!=='space')return;
     t++;
     ctx.clearRect(0,0,innerWidth,innerHeight);
     drawNebula();drawGrid();drawRadar();drawWarp();
@@ -3561,6 +3611,7 @@ window.AvaAvatar={react,get expression(){return frame;},get paused(){return paus
     <div class="about-main">
       <div class="about-copy">
         <h3>Hey, I’m Rome.</h3>
+        <p class="about-aspiration">Aspiring AI Engineer</p>
         <p class="about-lead">I connect your CRM, automations, websites and daily operations, so your business runs smoothly and your team can focus on what’s next.</p>
         <div class="about-bio">
           <p>I’m an AI automation specialist, GoHighLevel expert, website developer, and ecommerce and logistics VA. I bring over five years of experience across customer support and operations, helping businesses manage orders, keep inventory accurate and spend less time on repetitive work.</p>
