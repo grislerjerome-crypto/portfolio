@@ -21,7 +21,8 @@ assert.equal(after.projects.length,44);
 const bookingStart=html.indexOf('<!-- Booking Popup -->');
 const bookingEnd=html.indexOf('<footer',bookingStart);
 if(bookingEnd>bookingStart)assert.equal(html.slice(bookingStart,bookingEnd),base.slice(base.indexOf('<!-- Booking Popup -->'),base.indexOf('<footer',base.indexOf('<!-- Booking Popup -->'))));
-assert.equal(html.slice(html.indexOf('function bkOpen()')),base.slice(base.indexOf('function bkOpen()')),'Booking functions unchanged');
+function bookingFunctions(source){const start=source.indexOf('function bkOpen()');assert(start>=0,'Booking functions exist');return source.slice(start,source.indexOf('</script>',start));}
+assert.equal(bookingFunctions(html),bookingFunctions(base),'Booking functions unchanged');
 
 for(const id of ['ecom-starter','ecom-premium','ecommerce-operations','logistics-operations'])assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id+' must be unique');
 assert.equal((html.match(/data-ecom-view=/g)||[]).length,3,'Three Premium preview tabs');
