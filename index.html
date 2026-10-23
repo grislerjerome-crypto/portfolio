@@ -252,8 +252,9 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 @media(max-width:900px){.crm-showcase{grid-template-columns:1fr}.crm-preview{min-height:380px;border-right:0;border-bottom:1px solid var(--panel-border)}.crm-preview img{min-height:380px}.crm-panel>p{min-height:0}}
 @media(max-width:560px){.crm-preview{min-height:280px}.crm-preview img{min-height:280px}.crm-panel{padding:24px 20px}.crm-tabs{margin-bottom:22px}.crm-actions{display:grid}.crm-actions .btn{width:100%}}
 /* Keep the overview hero compact without changing dashboard previews. */
-.crm-preview:has(img[src^="crm-portfolio-preview.png"]){align-self:center;min-height:0;aspect-ratio:1440/1100}
-.crm-preview:has(img[src^="crm-portfolio-preview.png"]) img{min-height:0}
+.crm-showcase:has(img[src^="crm-portfolio-preview.png"]){background:none;border-color:transparent;box-shadow:none;overflow:visible}
+.crm-preview:has(img[src^="crm-portfolio-preview.png"]){align-self:center;min-height:0;aspect-ratio:auto;border:0;border-radius:24px}
+.crm-preview:has(img[src^="crm-portfolio-preview.png"]) img{position:static;height:auto;min-height:0;padding:0}
 @media(prefers-reduced-motion:reduce){.crm-preview img,.crm-preview::after{transition:none!important}}
 
 /* ---- Operations intelligence dashboards ---- */
