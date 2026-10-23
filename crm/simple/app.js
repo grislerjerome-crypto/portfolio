@@ -8,7 +8,7 @@
   const initials = name => String(name || "?").trim().split(/\s+/).map(part => part[0]).join("").slice(0, 2).toUpperCase();
 
   const DEMO = {
-    settings: { brandName: "Northstar", accent: "#6c5ce7", logo: "", demoMode: true },
+    settings: { brandName: "DivineSpace", accent: "#6c5ce7", logo: "", demoMode: true },
     contacts: [
       { id: "c1", name: "Maya Reynolds", title: "Operations Director", companyId: "co1", email: "maya@brightpath.io", phone: "(415) 555-0142", city: "San Francisco, CA", status: "Customer" },
       { id: "c2", name: "Ethan Brooks", title: "Founder", companyId: "co2", email: "ethan@cedarlabs.com", phone: "(512) 555-0187", city: "Austin, TX", status: "Prospect" },
@@ -39,6 +39,8 @@
   try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || cloneDemo(); } catch { state = cloneDemo(); }
   ["contacts", "companies", "tasks"].forEach(key => { if (!Array.isArray(state[key])) state[key] = []; });
   state.settings = { ...DEMO.settings, ...(state.settings || {}) };
+  // Retain saved records and custom branding while upgrading the former demo name.
+  if (state.settings.brandName === "Northstar") state.settings.brandName = DEMO.settings.brandName;
 
   let activeView = "dashboard";
   let selectedContact = null;
@@ -309,7 +311,7 @@
   }
   function exportAll() {
     const sections = ["contacts", "companies", "tasks"].map(type => { const rows = state[type]; if (!rows.length) return `# ${type}\n`; const headers = [...new Set(rows.flatMap(Object.keys))]; return `# ${type}\n${headers.join(",")}\n${rows.map(row => headers.map(header => `"${String(row[header] ?? "").replace(/"/g, '""')}"`).join(",")).join("\n")}`; }).join("\n\n");
-    download("northstar-simple-crm-export.csv", sections, "text/csv"); toast("Workspace exported");
+    download("divinespace-simple-crm-export.csv", sections, "text/csv"); toast("Workspace exported");
   }
   function download(name, content, type) { const blob = new Blob([content], { type }); const url = URL.createObjectURL(blob); const anchor = document.createElement("a"); anchor.href = url; anchor.download = name; document.body.appendChild(anchor); anchor.click(); anchor.remove(); URL.revokeObjectURL(url); }
 

@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     defaultEmailProvider:'gmail',
     fields:[{id:1,label:'Preferred location',key:'preferred_location',type:'Dropdown'},{id:2,label:'Service interest',key:'service_interest',type:'Multi-select'},{id:3,label:'Lifetime value tier',key:'lifetime_value_tier',type:'Dropdown'},{id:4,label:'Consent date',key:'consent_date',type:'Date'}],
-    team:[{id:1,name:'Jordan Rivera',email:'jordan@northstar.demo',role:'Administrator'},{id:2,name:'Maya Chen',email:'maya@northstar.demo',role:'Sales Manager'},{id:3,name:'David Brooks',email:'david@northstar.demo',role:'Account Manager'},{id:4,name:'Elena Torres',email:'elena@northstar.demo',role:'Analyst'}],
+    team:[{id:1,name:'Jordan Rivera',email:'jordan@divinespace.demo',role:'Administrator'},{id:2,name:'Maya Chen',email:'maya@divinespace.demo',role:'Sales Manager'},{id:3,name:'David Brooks',email:'david@divinespace.demo',role:'Account Manager'},{id:4,name:'Elena Torres',email:'elena@divinespace.demo',role:'Analyst'}],
     permissions:{contacts:true,pipelines:true,inbox:true,automations:true,settings:false,billing:false},
     integrations:[{id:'stripe',name:'Stripe',mark:'S',desc:'Sync payments, invoices, subscriptions, and customer value.',connected:true},{id:'twilio',name:'Twilio',mark:'T',desc:'Power SMS and voice conversations from the unified inbox.',connected:true},{id:'google-business',name:'Google Business',mark:'G',desc:'Connect reviews, listings, and local customer interactions.',connected:false},{id:'slack',name:'Slack',mark:'#',desc:'Route real-time workflow alerts to team channels.',connected:true},{id:'quickbooks',name:'QuickBooks',mark:'Q',desc:'Sync customer records, invoices, and revenue reporting.',connected:false}],
     audit:[
@@ -69,6 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const clone = value => JSON.parse(JSON.stringify(value));
   let state;
   try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || clone(seed); } catch (e) { state = clone(seed); }
+  // Upgrade only the original demo team addresses, never custom records.
+  (state.team || []).forEach(member => {
+    const original = seed.team.find(item => item.id === member.id && item.name === member.name);
+    if (original && member.email === original.email.replace('@divinespace.demo', '@northstar.demo')) member.email = original.email;
+  });
   const $ = (s, root=document) => root.querySelector(s);
   const $$ = (s, root=document) => [...root.querySelectorAll(s)];
   const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
@@ -207,8 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
     contact:{k:'CREATE RECORD',title:'Add a new contact',submit:'Create contact',fields:[['name','Full name','text','e.g. Emily Carter'],['email','Email address','email','emily@example.com'],['company','Company','text','Company name'],['phone','Phone','tel','(512) 555-0100'],['status','Status','select',['Lead','Customer','At Risk']],['value','Customer value','number','5000']]},
     deal:{k:'NEW OPPORTUNITY',title:'Add an opportunity',submit:'Create opportunity',fields:[['name','Opportunity name','text','Annual service plan'],['company','Company','text','Company name'],['value','Value','number','7500'],['stage','Stage','select',['New Lead','Qualified','Proposal','Won']]]},
     field:{k:'EXTEND SCHEMA',title:'Create custom field',submit:'Create field',fields:[['label','Field label','text','Customer segment'],['type','Field type','select',['Text','Number','Date','Dropdown','Multi-select','Checkbox']]]},
-    invite:{k:'TEAM ACCESS',title:'Invite teammate',submit:'Send invitation',fields:[['name','Full name','text','Emily Carter'],['email','Work email','email','emily@northstar.demo'],['role','Role','select',['Sales Manager','Account Manager','Analyst']]]},
-    compose:{k:'DEMO EMAIL',title:'Compose an email',submit:'Send demo email',fields:[['contact','Recipient','select',state.contacts.map(c=>`${c.name} | ${c.email}`)],['subject','Subject','text','Your Northstar update'],['message','Message','textarea','Write your email message']]}
+    invite:{k:'TEAM ACCESS',title:'Invite teammate',submit:'Send invitation',fields:[['name','Full name','text','Emily Carter'],['email','Work email','email','emily@divinespace.demo'],['role','Role','select',['Sales Manager','Account Manager','Analyst']]]},
+    compose:{k:'DEMO EMAIL',title:'Compose an email',submit:'Send demo email',fields:[['contact','Recipient','select',state.contacts.map(c=>`${c.name} | ${c.email}`)],['subject','Subject','text','Your DivineSpace update'],['message','Message','textarea','Write your email message']]}
   };const c=configs[mode];$('#modalKicker').textContent=c.k;$('#modalTitle').textContent=c.title;$('#modalSubmit').textContent=c.submit;$('#modalFields').innerHTML=`<div class="form-grid">${c.fields.map(f=>`<div class="form-group ${f[0]==='message'?'full':''}"><label for="m-${f[0]}">${f[1]}</label>${f[2]==='select'?`<select id="m-${f[0]}" name="${f[0]}" required>${f[3].map(o=>`<option>${escapeHTML(o)}</option>`).join('')}</select>`:f[2]==='textarea'?`<textarea id="m-${f[0]}" name="${f[0]}" rows="5" placeholder="${f[3]}" required></textarea>`:`<input id="m-${f[0]}" name="${f[0]}" type="${f[2]}" placeholder="${f[3]}" required>`}</div>`).join('')}</div>`;$('#modalBackdrop').classList.add('open');$('#modalBackdrop').setAttribute('aria-hidden','false');setTimeout(()=>$('#modalFields input, #modalFields select, #modalFields textarea')?.focus(),30)}
   function closeModal(){ $('#modalBackdrop').classList.remove('open');$('#modalBackdrop').setAttribute('aria-hidden','true');$('#modalForm').reset() }
   function submitModal(e){
@@ -253,8 +258,8 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#modalClose').addEventListener('click',closeModal);$('#modalCancel').addEventListener('click',closeModal);$('#modalBackdrop').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});$('#modalForm').addEventListener('submit',submitModal);
   $('#drawerClose').addEventListener('click',()=>{$('#contactDrawer').classList.remove('open');$('#contactDrawer').setAttribute('aria-hidden','true')});
   $('#contactSearch').addEventListener('input',renderContacts);$('#contactFilter').addEventListener('change',renderContacts);$('#auditSearch').addEventListener('input',renderAudit);$('#auditFilter').addEventListener('change',renderAudit);
-  $('#exportContacts').addEventListener('click',()=>csvDownload('northstar-contacts.csv',[['Name','Email','Phone','Company','Status','Value'],...state.contacts.map(c=>[c.name,c.email,c.phone,c.company,c.status,c.value])]));
-  $('#exportAudit').addEventListener('click',()=>csvDownload('northstar-audit-log.csv',[['Timestamp','Actor','Event','Resource','IP','Type'],...state.audit.map(a=>[a.time,a.actor,a.event,a.resource,a.ip,a.type])]));
+  $('#exportContacts').addEventListener('click',()=>csvDownload('divinespace-contacts.csv',[['Name','Email','Phone','Company','Status','Value'],...state.contacts.map(c=>[c.name,c.email,c.phone,c.company,c.status,c.value])]));
+  $('#exportAudit').addEventListener('click',()=>csvDownload('divinespace-audit-log.csv',[['Timestamp','Actor','Event','Resource','IP','Type'],...state.audit.map(a=>[a.time,a.actor,a.event,a.resource,a.ip,a.type])]));
   $('#toggleWorkflow').addEventListener('click',()=>{state.workflow.active=!state.workflow.active;addAudit(state.workflow.active?'Activated workflow':'Paused workflow','Lead response accelerator','Automation');save();renderWorkflow();toast(state.workflow.active?'Workflow activated':'Workflow paused')});
   $('#runWorkflow').addEventListener('click',simulateWorkflow);
   $('#saveRole').addEventListener('click',()=>{$$('[data-permission]').forEach(x=>state.permissions[x.dataset.permission]=x.checked);addAudit('Updated role permissions','Sales Manager','Security');save();toast('Role permissions saved','Sales Manager policy updated')});

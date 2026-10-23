@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Northstar OS is an interactive single organization enterprise CRM demo with sales, email, automation, governance, and platform controls.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238bffb5'/%3E%3Cpath d='M18 46V18h7l14 18V18h7v28h-7L25 28v18z' fill='%2307110a'/%3E%3C/svg%3E">
-  <title>Northstar OS | Enterprise CRM Demo</title>
+  <meta name="description" content="DivineSpace OS is an interactive single organization enterprise CRM demo with sales, email, automation, governance, and platform controls.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%238bffb5'/%3E%3Cpath d='M18 18h12c21 0 21 28 0 28H18zm7 7v14h5c11 0 11-14 0-14z' fill='%2307110a'/%3E%3C/svg%3E">
+  <title>DivineSpace OS | Enterprise CRM Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
@@ -15,8 +15,8 @@
   <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#overview" data-view="overview" aria-label="Northstar OS home"><span class="brand-mark">N</span><span><strong>NORTHSTAR</strong><small>ENTERPRISE CRM</small></span></a>
-      <div class="org-card"><span>ORGANIZATION</span><strong>Northstar Industries</strong><small>Enterprise workspace</small></div>
+      <a class="brand" href="#overview" data-view="overview" aria-label="DivineSpace OS home"><span class="brand-mark">DS</span><span><strong>DivineSpace</strong><small>ENTERPRISE CRM</small></span></a>
+      <div class="org-card"><span>ORGANIZATION</span><strong>DivineSpace Industries</strong><small>Enterprise workspace</small></div>
       <nav class="main-nav" aria-label="Application navigation">
         <p>COMMAND</p>
         <button class="nav-item active" data-view="overview"><span>⌂</span>Executive Dashboard</button>
@@ -39,7 +39,7 @@
     <main class="main">
       <header class="topbar">
         <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
-        <div class="breadcrumbs"><span>Northstar Industries</span><b>/</b><strong id="pageCrumb">Executive Dashboard</strong></div>
+        <div class="breadcrumbs"><span>DivineSpace Industries</span><b>/</b><strong id="pageCrumb">Executive Dashboard</strong></div>
         <div class="top-actions">
           <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search contacts, deals..." aria-label="Global search"><kbd>Ctrl K</kbd></label>
           <button class="icon-button" id="notifyBtn" aria-label="View notifications">♢<i></i></button>
@@ -51,7 +51,7 @@
 
       <div class="content">
         <section class="view active" id="view-overview">
-          <div class="page-head"><div><span class="eyebrow">ENTERPRISE COMMAND CENTER</span><h1>Good morning, Jordan.</h1><p>Here is the operational pulse for Northstar Industries.</p></div><div class="head-actions"><button class="btn ghost" data-action="reset-demo">Reset demo data</button><button class="btn primary" data-go="pipelines">Open pipeline <span>↗</span></button></div></div>
+          <div class="page-head"><div><span class="eyebrow">ENTERPRISE COMMAND CENTER</span><h1>Good morning, Jordan.</h1><p>Here is the operational pulse for DivineSpace Industries.</p></div><div class="head-actions"><button class="btn ghost" data-action="reset-demo">Reset demo data</button><button class="btn primary" data-go="pipelines">Open pipeline <span>↗</span></button></div></div>
           <div class="hero-strip"><div><span>Business health</span><strong id="healthScore">94%</strong><small>↑ 3.2% this month</small></div><div class="pulse-chart" id="pulseChart" aria-label="Revenue trend chart"></div><div class="hero-summary"><b><i class="green-dot"></i>Live demo data</b><p>Metrics update as you manage contacts, deals, messages, and workflows.</p></div></div>
           <div class="metric-grid" id="metricGrid"></div>
           <div class="dashboard-grid"><article class="panel span-2"><div class="panel-head"><div><span class="panel-kicker">REVENUE INTELLIGENCE</span><h2>Pipeline performance</h2></div><select id="chartRange" aria-label="Chart date range"><option>Last 6 months</option><option>Last 90 days</option><option>This year</option></select></div><div class="revenue-chart" id="revenueChart"></div></article><article class="panel"><div class="panel-head"><div><span class="panel-kicker">BUSINESS HEALTH</span><h2>Operating signals</h2></div><button class="text-btn" data-go="audit">View audit log →</button></div><div id="accountHealth"></div></article><article class="panel span-2"><div class="panel-head"><div><span class="panel-kicker">RECENT SIGNALS</span><h2>Live activity</h2></div><span class="live-label"><i></i>LIVE</span></div><div class="activity-list" id="activityList"></div></article><article class="panel"><div class="panel-head"><div><span class="panel-kicker">CHANNEL MIX</span><h2>Conversation volume</h2></div></div><div id="channelMix"></div></article></div>
@@ -96,7 +96,7 @@
 
         <section class="view" id="view-guide">
           <div class="guide-hero"><span class="eyebrow">PLATFORM BLUEPRINT</span><h1>One organization.<br><em>One operating system.</em></h1><p>This demo maps each interface to a scalable enterprise service boundary.</p><div><a class="btn primary" href="../index.html">← Portfolio overview</a><a class="btn ghost" href="../simple/index.html">View Simple CRM ↗</a></div></div>
-          <div class="architecture-map"><div class="arch-layer org-layer"><span>ORGANIZATION LAYER</span><strong>Northstar enterprise workspace</strong><p>Contacts · Pipelines · Conversations · Workflows · Governance</p></div><div class="arch-flow">↓ Authorized service calls</div><div class="arch-modules"><article><i>01</i><strong>CRM Core</strong><small>Contacts and revenue records</small></article><article><i>02</i><strong>Communication Hub</strong><small>Email and channel adapters</small></article><article><i>03</i><strong>Automation Engine</strong><small>Events, jobs, and connectors</small></article></div><div class="arch-flow">↓ Durable event bus</div><div class="service-row"><span>Queue workers</span><span>Email adapters</span><span>Audit service</span><span>Analytics engine</span></div></div>
+          <div class="architecture-map"><div class="arch-layer org-layer"><span>ORGANIZATION LAYER</span><strong>DivineSpace enterprise workspace</strong><p>Contacts · Pipelines · Conversations · Workflows · Governance</p></div><div class="arch-flow">↓ Authorized service calls</div><div class="arch-modules"><article><i>01</i><strong>CRM Core</strong><small>Contacts and revenue records</small></article><article><i>02</i><strong>Communication Hub</strong><small>Email and channel adapters</small></article><article><i>03</i><strong>Automation Engine</strong><small>Events, jobs, and connectors</small></article></div><div class="arch-flow">↓ Durable event bus</div><div class="service-row"><span>Queue workers</span><span>Email adapters</span><span>Audit service</span><span>Analytics engine</span></div></div>
           <div class="guide-grid"><article><b>01</b><h2>Single organization architecture</h2><p>A shared business workspace unifies customer, revenue, communication, and workflow data under one organization boundary.</p></article><article><b>02</b><h2>Email adapter layer</h2><p>Gmail, Microsoft, SendGrid, and Mailgun implement a common sending and sync contract while secure backend services own tokens, keys, and webhooks.</p></article><article><b>03</b><h2>Automation connectors</h2><p>GoHighLevel, Zapier, Make, and n8n actions compile into normalized workflow nodes with provider-specific execution adapters.</p></article><article><b>04</b><h2>Durable workers</h2><p>Queued workers process triggers, delays, conditions, retries, sync jobs, and outbound actions independently from the interface.</p></article><article><b>05</b><h2>RBAC enforcement</h2><p>Roles define allowed actions and resources. Server-side policy checks protect every sensitive operation, not only the visible controls.</p></article><article><b>06</b><h2>Append-only audit logs</h2><p>Connection changes, sends, workflow runs, exports, and permission updates create durable events for accountability and review.</p></article></div>
           <div class="guide-cta"><div><span>EXPLORE THE SYSTEM</span><h2>Try the workflows, email adapters, and governance controls.</h2></div><div><a href="#email" data-view="email">Email Connections <span>↗</span></a><a href="#automations" data-view="automations">Automation Studio <span>↗</span></a></div></div>
         </section>
@@ -107,6 +107,6 @@
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><span class="panel-kicker" id="modalKicker">CREATE RECORD</span><h2 id="modalTitle">Add contact</h2></div><button class="icon-button" id="modalClose" aria-label="Close dialog">×</button></div><form id="modalForm"><div id="modalFields"></div><div class="modal-actions"><button type="button" class="btn ghost" id="modalCancel">Cancel</button><button type="submit" class="btn primary" id="modalSubmit">Create</button></div></form></div></div>
   <div class="drawer" id="contactDrawer" aria-hidden="true"><div class="drawer-head"><span>CONTACT 360</span><button class="icon-button" id="drawerClose" aria-label="Close contact detail">×</button></div><div id="drawerContent"></div></div>
   <div class="toast-stack" id="toasts" aria-live="polite"></div>
-  <script src="app.js"></script>
+  <script src="app.js?v=divinespace-1"></script>
 </body>
 </html>

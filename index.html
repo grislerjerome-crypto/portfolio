@@ -165,7 +165,7 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 
 .marquee{overflow:hidden;position:relative;padding:26px 0;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marquee .track{display:flex;gap:16px;width:max-content;animation:scrollx 30s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
+.marquee:hover .track,.marquee:focus-within .track{animation-play-state:paused}
 @keyframes scrollx{to{transform:translateX(-50%)}}
 .tool-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.84rem;color:var(--txt);background:var(--panel);border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:8px 15px;white-space:nowrap;transition:border-color .2s,transform .2s}
 .tool-chip:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--lime) 40%,transparent)}
@@ -248,12 +248,20 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 @media(prefers-reduced-motion:reduce){.book-page{transition:none!important}}
 
 /* ---- Interactive CRM showcase ---- */
-#crm-systems .lead{max-width:760px;margin-bottom:26px}.crm-showcase{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,.58fr);border:1px solid var(--panel-border);border-radius:24px;overflow:hidden;background:radial-gradient(700px 400px at 0 0,color-mix(in srgb,var(--cyan) 11%,transparent),transparent 65%),color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:var(--shadow)}.crm-preview{position:relative;display:block;min-height:480px;overflow:hidden;border-right:1px solid var(--panel-border);background:#070a0f}.crm-preview::after{content:"OPEN LIVE CRM ↗";position:absolute;right:16px;bottom:16px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--cyan) 42%,transparent);border-radius:99px;background:rgba(5,8,13,.82);color:var(--cyan);font:700 .58rem var(--mono);letter-spacing:.1em;backdrop-filter:blur(10px);transition:transform .2s ease,background .2s ease}.crm-preview:hover::after{transform:translateY(-3px);background:rgba(5,8,13,.96)}.crm-preview img{width:100%;height:100%;min-height:480px;object-fit:cover;object-position:top center;display:block;transition:opacity .2s ease,transform .45s ease}.crm-preview:hover img{transform:scale(1.012)}.crm-panel{padding:clamp(24px,3.4vw,42px);display:flex;flex-direction:column;justify-content:center;min-width:0}.crm-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}.crm-tab{border:1px solid var(--panel-border);border-radius:99px;padding:8px 11px;background:transparent;color:var(--muted);font:650 .62rem var(--mono);letter-spacing:.04em;cursor:pointer}.crm-tab[aria-selected="true"]{color:#061017;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 22px color-mix(in srgb,var(--cyan) 24%,transparent)}.crm-kicker{font:700 .62rem var(--mono);letter-spacing:.12em;color:var(--lime);text-transform:uppercase}.crm-panel h3{font-size:clamp(1.75rem,3vw,2.65rem);line-height:1.02;margin:13px 0}.crm-panel>p{color:var(--muted);line-height:1.7;min-height:82px}.crm-points{display:grid;gap:9px;margin:24px 0 28px}.crm-point{display:flex;align-items:center;gap:10px;color:var(--txt);font-size:.86rem}.crm-point::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px color-mix(in srgb,var(--lime) 62%,transparent);flex:0 0 auto}.crm-actions{display:flex;flex-wrap:wrap;gap:9px}.crm-actions .btn{justify-content:center}.crm-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.crm-meta span{font:600 .56rem var(--mono);letter-spacing:.07em;color:var(--muted);border:1px solid var(--panel-border);border-radius:6px;padding:6px 8px}
+#crm-systems .lead{max-width:760px;margin-bottom:26px}.crm-showcase{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,.58fr);border:1px solid var(--panel-border);border-radius:24px;overflow:hidden;background:radial-gradient(700px 400px at 0 0,color-mix(in srgb,var(--cyan) 11%,transparent),transparent 65%),color-mix(in srgb,var(--bg) 88%,transparent);box-shadow:var(--shadow)}.crm-preview{position:relative;display:block;min-height:480px;overflow:hidden;border-right:1px solid var(--panel-border);background:#070a0f}.crm-preview::after{content:"OPEN LIVE CRM ↗";position:absolute;right:16px;bottom:16px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--cyan) 42%,transparent);border-radius:99px;background:rgba(5,8,13,.82);color:var(--cyan);font:700 .58rem var(--mono);letter-spacing:.1em;backdrop-filter:blur(10px);transition:transform .2s ease,background .2s ease}.crm-preview:hover::after{transform:translateY(-3px);background:rgba(5,8,13,.96)}.crm-preview img{position:absolute;inset:0;width:100%;height:100%;min-height:0;object-fit:contain;object-position:center;display:block;padding:12px 12px 56px;transition:opacity .2s ease}.crm-panel{padding:clamp(24px,3.4vw,42px);display:flex;flex-direction:column;justify-content:center;min-width:0}.crm-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px}.crm-tab{border:1px solid var(--panel-border);border-radius:99px;padding:8px 11px;background:transparent;color:var(--muted);font:650 .62rem var(--mono);letter-spacing:.04em;cursor:pointer}.crm-tab[aria-selected="true"]{color:#061017;background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 22px color-mix(in srgb,var(--cyan) 24%,transparent)}.crm-kicker{font:700 .62rem var(--mono);letter-spacing:.12em;color:var(--lime);text-transform:uppercase}.crm-panel h3{font-size:clamp(1.75rem,3vw,2.65rem);line-height:1.02;margin:13px 0}.crm-panel>p{color:var(--muted);line-height:1.7;min-height:82px}.crm-points{display:grid;gap:9px;margin:24px 0 28px}.crm-point{display:flex;align-items:center;gap:10px;color:var(--txt);font-size:.86rem}.crm-point::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px color-mix(in srgb,var(--lime) 62%,transparent);flex:0 0 auto}.crm-actions{display:flex;flex-wrap:wrap;gap:9px}.crm-actions .btn{justify-content:center}.crm-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.crm-meta span{font:600 .56rem var(--mono);letter-spacing:.07em;color:var(--muted);border:1px solid var(--panel-border);border-radius:6px;padding:6px 8px}
 @media(max-width:900px){.crm-showcase{grid-template-columns:1fr}.crm-preview{min-height:380px;border-right:0;border-bottom:1px solid var(--panel-border)}.crm-preview img{min-height:380px}.crm-panel>p{min-height:0}}
 @media(max-width:560px){.crm-preview{min-height:280px}.crm-preview img{min-height:280px}.crm-panel{padding:24px 20px}.crm-tabs{margin-bottom:22px}.crm-actions{display:grid}.crm-actions .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){.crm-preview img,.crm-preview::after{transition:none!important}}
 
 /* ---- Operations intelligence dashboards ---- */
+.ops-support{margin:0 0 22px;border:1px solid var(--panel-border);border-radius:14px;background:var(--panel);color:var(--txt)}
+.ops-support summary{padding:16px 20px;cursor:pointer;font-weight:650;line-height:1.5}
+.ops-support summary:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:14px}
+.ops-support[open] summary{border-bottom:1px solid var(--panel-border)}
+.ops-support-body{padding:18px 20px;display:grid;gap:16px}
+.ops-support-body p{margin:5px 0 0;color:var(--muted);line-height:1.65}
+.ops-support-body strong{color:var(--txt)}
+@media(min-width:900px){.ops-support-body{grid-template-columns:repeat(3,minmax(0,1fr))}.ops-support-body>p{grid-column:1/-1}}
 #ecommerce-operations,#logistics-operations{margin-top:52px;margin-bottom:52px}#ecommerce-operations .lead,#logistics-operations .lead{max-width:760px;margin-bottom:24px}
 .ops-sample-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid color-mix(in srgb,var(--lime) 34%,transparent);border-radius:99px;padding:6px 10px;background:color-mix(in srgb,var(--lime) 6%,transparent)}.ops-sample-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime)}
 .ops-story{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;margin-bottom:18px}.ops-story-copy{color:var(--muted);max-width:780px}.ops-story-copy b{color:var(--txt)}.ops-controls{display:flex;flex-wrap:wrap;gap:7px}.ops-view-btn{font:600 .68rem var(--mono);letter-spacing:.04em;color:var(--muted);border:1px solid var(--panel-border);border-radius:8px;padding:8px 11px;background:color-mix(in srgb,var(--bg) 78%,transparent);cursor:pointer}.ops-view-btn[aria-pressed="true"]{color:#08110a;background:var(--lime);border-color:var(--lime);box-shadow:0 0 20px color-mix(in srgb,var(--lime) 26%,transparent)}
@@ -495,8 +503,7 @@ html[data-theme="light"] :is(.ava-msg.user,.proj-filter-btn.active,.palette .ite
 html[data-theme="light"] :is(#progress,.status-pill i,.hud .led,.proj-meta .dot,.ava-launch b,.nav-photo img){box-shadow:none!important;animation:none!important}
 html[data-theme="light"] :is(.tilt,.magnetic,.hero-grid){transform:none!important}
 html[data-theme="light"] .reveal{opacity:1;transform:none;transition:none}
-html[data-theme="light"] :is(.marquee-track,.marquee .track){animation:none!important;transform:none!important}
-html[data-theme="light"] .marquee{mask-image:none;-webkit-mask-image:none;overflow-x:auto}
+html[data-theme="light"] .marquee{mask-image:none;-webkit-mask-image:none}
 html[data-theme="light"] :is(.palette-wrap,.bk-overlay,.ty-overlay){background:#17233066;backdrop-filter:blur(3px)}
 html[data-theme="light"] #capability-console :is(.cc-shell,.cc-rail,.cc-jumps,.cc-viewer,.cc-graphnode,.cc-inspector,.cc-conversation,.cc-dialog){background:#fff;box-shadow:none;backdrop-filter:none;border-color:var(--panel-border)}
 html[data-theme="light"] #capability-console .cc-shell::before{background:#dce2e8;animation:none}
@@ -1010,7 +1017,7 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
     </div>
     <div class="crm-showcase reveal">
       <a class="crm-preview" id="crm-preview-link" href="crm/" target="_blank" rel="noopener" aria-label="Open CRM Systems overview">
-        <img id="crm-preview-image" src="crm-portfolio-preview.png" alt="CRM Systems product overview" loading="lazy" width="1440" height="1000">
+        <img id="crm-preview-image" src="crm-portfolio-preview.png?v=divinespace-1" alt="DivineSpace CRM complete website overview" loading="lazy" width="1440" height="4362">
       </a>
       <div class="crm-panel">
         <div class="crm-tabs" role="tablist" aria-label="Choose a CRM demo">
@@ -1019,7 +1026,7 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
           <button class="crm-tab" type="button" role="tab" data-crm-view="enterprise" aria-selected="false">Enterprise CRM</button>
         </div>
         <span class="crm-kicker" id="crm-kicker">Product collection</span>
-        <h3 id="crm-title">CRM Systems</h3>
+        <h3 id="crm-title">DivineSpace CRM</h3>
         <p id="crm-description">Compare two interactive CRM products, understand the thinking behind each build and launch either experience from one clean product page.</p>
         <div class="crm-points" id="crm-points">
           <span class="crm-point">Separate simple and enterprise experiences</span>
@@ -1050,6 +1057,15 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
         <button class="ops-view-btn" type="button" data-commerce-view="quarter" aria-pressed="false">90 days</button>
       </div>
     </div>
+    <details class="ops-support">
+      <summary>How I support your ecommerce operations</summary>
+      <div class="ops-support-body">
+        <div><strong>Orders need attention</strong><p>Payment holds, address issues and returns can stall fulfillment. I review exceptions, coordinate with your team and track each case to its next action.</p></div>
+        <div><strong>Stock gets out of sync</strong><p>I check inventory records, flag low stock and listing mismatches, and prepare reorder updates for your approval so you can plan before items run out.</p></div>
+        <div><strong>Customers keep chasing updates</strong><p>I organize support tickets, follow up on delivery issues and use your approved replies so customers know what happens next.</p></div>
+        <p><strong>What you receive:</strong> A prioritized daily queue, clear owners and a concise weekly summary of unresolved orders, stock risks and decisions needed. Refunds and purchasing stay within your approval rules.</p>
+      </div>
+    </details>
     <div class="commerce-stage reveal" aria-label="Illustrative ecommerce management dashboard">
       <div class="command-bar"><span>COMMERCE COMMAND / SAMPLE DATABASE</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live" id="commerce-simulation-status">SIMULATION PAUSED</span><button class="ops-view-btn" type="button" id="commerce-simulation-toggle" aria-pressed="false" aria-describedby="commerce-simulation-status">Play simulation</button></div>
       <div class="commerce-kpis">
@@ -1096,6 +1112,15 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
         <button class="ops-view-btn" type="button" data-log-filter="road" aria-pressed="false">Road</button>
       </div>
     </div>
+    <details class="ops-support">
+      <summary>How I support your supply chain and logistics</summary>
+      <div class="ops-support-body">
+        <div><strong>Shipment updates arrive late</strong><p>I reconcile carrier tracking and supplier replies, maintain ETAs and flag missed milestones so your team can act on delays sooner.</p></div>
+        <div><strong>Handoffs lose important details</strong><p>I check purchase orders, shipment documents and receiving records, follow up on missing information and keep the next owner clear.</p></div>
+        <div><strong>Exceptions have no clear owner</strong><p>I log shortages, delivery issues and document gaps, coordinate follow ups with suppliers and carriers, and escalate urgent risks to your decision maker.</p></div>
+        <p><strong>What you receive:</strong> A current shipment tracker, an exception queue with owners and next checks, and a concise status report. Carrier changes, claims and purchasing decisions stay with your authorized team.</p>
+      </div>
+    </details>
     <div class="logistics-stage reveal" aria-label="Illustrative supply chain management database">
       <div class="command-bar"><span>SUPPLY CONTROL / SAMPLE RECORDS</span><span class="ops-sample-label">Illustrative sample data</span><span class="console-live">18 LANES TRACKED</span></div>
       <div class="logistics-kpis">
@@ -3125,9 +3150,9 @@ function setupCRMShowcase(){
   const tabs=$$("[data-crm-view]"),image=$("#crm-preview-image"),preview=$("#crm-preview-link"),kicker=$("#crm-kicker"),title=$("#crm-title"),description=$("#crm-description"),points=$("#crm-points"),primary=$("#crm-primary-link");
   if(!tabs.length||!image||!preview)return;
   const views={
-    overview:{src:"crm-portfolio-preview.png",alt:"CRM Systems product overview",href:"crm/",label:"Open CRM Systems overview",kicker:"Product collection",title:"CRM Systems",description:"Compare two interactive CRM products, understand the thinking behind each build and launch either experience from one clean product page.",points:["Separate simple and enterprise experiences","Working controls with realistic demo data","Portfolio ready product walkthroughs"],cta:"Explore CRM Systems ↗"},
-    simple:{src:"crm-simple-preview.png",alt:"Simple CRM dashboard preview",href:"crm/simple/",label:"Open Simple CRM",kicker:"Focused client management",title:"Simple CRM",description:"A clean workspace for small teams that need contacts, companies, tasks and notes without the weight of a full sales platform.",points:["Contact and company management","Tasks, notes and practical CSV exports","Demo data, local persistence and branding"],cta:"Launch Simple CRM ↗"},
-    enterprise:{src:"crm-enterprise-preview.png",alt:"Enterprise CRM automation studio preview",href:"crm/complex/",label:"Open Enterprise CRM",kicker:"Operations and automation",title:"Enterprise CRM",description:"A deeper single organization workspace with pipelines, email connections, RBAC, audit history and a visual automation studio.",points:["Interactive pipelines and unified inbox","Gmail, Microsoft 365, SendGrid and Mailgun demos","HighLevel, Zapier, Make and n8n connectors"],cta:"Launch Enterprise CRM ↗"}
+    overview:{src:"crm-portfolio-preview.png?v=divinespace-1",alt:"DivineSpace CRM complete website overview",href:"crm/",label:"Open CRM Systems overview",kicker:"Product collection",title:"DivineSpace CRM",description:"Compare two interactive CRM products, understand the thinking behind each build and launch either experience from one clean product page.",points:["Separate simple and enterprise experiences","Working controls with realistic demo data","Portfolio ready product walkthroughs"],cta:"Explore CRM Systems ↗"},
+    simple:{src:"crm-simple-preview.png?v=divinespace-1",alt:"DivineSpace Simple CRM dashboard preview",href:"crm/simple/",label:"Open Simple CRM",kicker:"Focused client management",title:"DivineSpace Simple CRM",description:"A clean workspace for small teams that need contacts, companies, tasks and notes without the weight of a full sales platform.",points:["Contact and company management","Tasks, notes and practical CSV exports","Demo data, local persistence and branding"],cta:"Launch Simple CRM ↗"},
+    enterprise:{src:"crm-enterprise-preview.png?v=divinespace-1",alt:"DivineSpace Enterprise CRM automation studio preview",href:"crm/complex/",label:"Open Enterprise CRM",kicker:"Operations and automation",title:"DivineSpace Enterprise CRM",description:"A deeper single organization workspace with pipelines, email connections, RBAC, audit history and a visual automation studio.",points:["Interactive pipelines and unified inbox","Gmail, Microsoft 365, SendGrid and Mailgun demos","HighLevel, Zapier, Make and n8n connectors"],cta:"Launch Enterprise CRM ↗"}
   };
   function apply(key){
     const view=views[key];if(!view)return;
