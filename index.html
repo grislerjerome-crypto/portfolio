@@ -312,6 +312,7 @@ h2.title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.12;mar
 .ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-bottom:9px}
 .ctrl label b{color:var(--txt)}
 input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:99px;background:rgba(255,255,255,.08);outline:none}
+html[data-theme="light"] #roi input[type=range]{background:var(--panel-border)}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--grad);cursor:pointer;box-shadow:var(--glow)}
 input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--lime);cursor:pointer}
 .roi-out{background:#0f121a;border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
@@ -2073,7 +2074,7 @@ function animateNum(el,target,prefix){
 
 /* ---- Ava static portfolio agent ---- */
 const AVA_KB = [
-  {"keys":["certificate","certification","certified","badge","credential"],"q":"Are those certifications earned?","a":"Those are learning goals, not earned certifications yet. The About popup marks the whole strip Work in progress. Click Rome's photo or name in the navigation to take a look."},
+  {"keys":["certificate","certification","certified","badge","credential"],"q":"Are those certifications earned?","a":"Those are learning goals, not earned certifications yet. The About popup marks the whole strip In progress. Click Rome's photo or name in the navigation to take a look."},
   {"keys":["resume","cv","curriculum"],"q":"Can I see Rome's resume?","a":"Open About me from Rome's photo or name in the navigation. You'll find a blurred resume preview and a Request my resume button to ask him for the full copy."},
   {"keys":["about popup","about me","biography"],"q":"Where is About me?","a":"Click Rome's photo, name or the About me bubble in the navigation. You can read his story, explore his tools and request his resume there."},
   {
@@ -2791,10 +2792,19 @@ function setupCanvas(){
       ctx.strokeStyle=g;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x-len,yy);ctx.lineTo(x,yy);ctx.stroke();
     }
   }
-  let themeFrame=0;
-  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')==='space'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  let themeFrame=0,resizeFrame=0;
+  function syncSpace(){
+    cancelAnimationFrame(themeFrame);themeFrame=0;
+    if(!document.hidden&&document.documentElement.getAttribute('data-theme')==='space'){
+      if(c.width!==Math.floor(innerWidth*Math.min(devicePixelRatio||1,2))||c.height!==Math.floor(innerHeight*Math.min(devicePixelRatio||1,2)))resize();
+      frame();
+    }
+  }
+  new MutationObserver(()=>{if(document.documentElement.getAttribute('data-theme')==='space')resize();syncSpace();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  document.addEventListener('visibilitychange',()=>{held=false;syncSpace();});
   function frame(){
-    if(document.documentElement.getAttribute('data-theme')!=='space')return;
+    themeFrame=0;
+    if(document.hidden||document.documentElement.getAttribute('data-theme')!=='space')return;
     t++;
     ctx.clearRect(0,0,innerWidth,innerHeight);
     drawNebula();drawGrid();drawRadar();drawWarp();
@@ -2844,7 +2854,7 @@ function setupCanvas(){
   addEventListener("touchstart",e=>{const tp=e.touches[0];if(tp){held=true;pointer.x=tp.clientX;pointer.y=tp.clientY;}},{passive:true});
   addEventListener("touchend",()=>{held=false;});
   addEventListener("mouseleave",()=>{pointer.x=-1e3;pointer.y=-1e3;held=false;});
-  addEventListener("resize",resize);
+  addEventListener("resize",()=>{if(!resizeFrame)resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;resize();});});
   resize();
   if(reduced){
     ctx.clearRect(0,0,innerWidth,innerHeight);drawNebula();drawZod();
@@ -2857,9 +2867,21 @@ function setupCanvas(){
 /* ---- cursor ---- */
 function setupCursor(){
   if(prefersReduced()||matchMedia("(pointer: coarse)").matches)return;
-  const dot=$("#cur-dot"),ring=$("#cur-ring");let rx=0,ry=0,mx=0,my=0;
-  addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+"px";dot.style.top=my+"px";});
-  (function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(loop);})();
+  const dot=$("#cur-dot"),ring=$("#cur-ring");let rx=0,ry=0,mx=0,my=0,cursorFrame=0;
+  const cursorActive=()=>!document.hidden&&document.documentElement.getAttribute('data-theme')==='space';
+  function loop(){
+    cursorFrame=0;if(!cursorActive())return;
+    rx+=(mx-rx)*.18;ry+=(my-ry)*.18;
+    dot.style.left=mx+"px";dot.style.top=my+"px";
+    ring.style.left=rx+"px";ring.style.top=ry+"px";
+    if(Math.abs(mx-rx)>.001||Math.abs(my-ry)>.001)cursorFrame=requestAnimationFrame(loop);
+  }
+  function wakeCursor(){if(cursorActive()&&!cursorFrame)cursorFrame=requestAnimationFrame(loop);}
+  function syncCursor(){cancelAnimationFrame(cursorFrame);cursorFrame=0;wakeCursor();}
+  addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;wakeCursor();},{passive:true});
+  new MutationObserver(syncCursor).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  document.addEventListener('visibilitychange',syncCursor);
+  wakeCursor();
   $$("a,button,.proj,.cap,.svc,.tool-chip,.chip-cmd").forEach(el=>el.addEventListener("mouseenter",()=>ring.classList.add("hot")));
   $$("a,button,.proj,.cap,.svc,.tool-chip,.chip-cmd").forEach(el=>el.addEventListener("mouseleave",()=>ring.classList.remove("hot")));
 }
@@ -2929,12 +2951,15 @@ function setupHub3D(){
   function fontF(){return "Inter, system-ui, sans-serif";}
   function fontM(){return "'JetBrains Mono', ui-monospace, monospace";}
   function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  const labelWidths=new Map();let coreGlow=null;
+  function textWidth(text){const key=ctx.font+'|'+text;if(!labelWidths.has(key))labelWidths.set(key,ctx.measureText(text).width);return labelWidths.get(key);}
+  if(document.fonts)document.fonts.addEventListener('loadingdone',()=>labelWidths.clear());
   function labelBlock(x,y,main,sub,col,hot){
     ctx.textAlign="center";
     ctx.font=(hot?"700 ":"650 ")+(hot?13:12)+"px "+fontF();
-    const mainW=ctx.measureText(main).width;
+    const mainW=textWidth(main);
     ctx.font="600 8px "+fontM();
-    const subW=ctx.measureText(sub).width;
+    const subW=textWidth(sub);
     const bw=Math.max(mainW,subW)+24,bh=34,bx=x-bw/2,by=y-18;
     roundRect(bx,by,bw,bh,9);
     ctx.fillStyle=hot?"rgba(7,10,16,0.88)":"rgba(7,10,16,0.70)";
@@ -2955,7 +2980,7 @@ function setupHub3D(){
     const r=c.getBoundingClientRect();
     if(r.width<2||r.height<2)return;
     w=r.width;h=r.height;c.width=Math.round(w*DPR);c.height=Math.round(h*DPR);
-    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.setTransform(DPR,0,0,DPR,0,0);coreGlow=null;
   }
   function setPaused(next){
     userPaused=!!next;
@@ -2965,10 +2990,19 @@ function setupHub3D(){
     ay=0.6;ax=0.5;velAy=0;velAx=0;px=-1;py=-1;setPaused(false);
     c.focus({preventScroll:true});
   }
-  let themeFrame=0;
-  new MutationObserver(()=>{cancelAnimationFrame(themeFrame);themeFrame=0;if(document.documentElement.getAttribute('data-theme')!=='light'){resize();frame();}}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  // Keep a single loop, and do no canvas work while the hub cannot be seen.
+  let themeFrame=0,hubVisible=false;
+  const hubActive=()=>hubVisible&&!document.hidden&&document.documentElement.getAttribute('data-theme')!=='light';
+  function syncHub(){
+    cancelAnimationFrame(themeFrame);themeFrame=0;
+    if(hubActive()){resize();frame();}
+  }
+  new IntersectionObserver(entries=>{hubVisible=entries[0].isIntersecting;syncHub();},{threshold:0}).observe(c);
+  new MutationObserver(syncHub).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  document.addEventListener('visibilitychange',syncHub);
   function frame(){
-    if(document.documentElement.getAttribute('data-theme')==='light')return;
+    themeFrame=0;
+    if(!hubActive())return;
     t+=0.016;
     if(!dragging&&!userPaused){ ay+=autoSpin+velAy; ax+=velAx; velAy*=0.94; velAx*=0.94; }
     ax=Math.max(-1.2,Math.min(1.2,ax));
@@ -3041,11 +3075,13 @@ function setupHub3D(){
       const ly=Math.max(28,Math.min(h-34,N[1]+(N[1]-cy)*0.08+14));
       labelBlock(lx,ly,SER[k].label,SER[k].sub,SER[k].col,hot);
     });
-    const g=ctx.createRadialGradient(cc[0],cc[1],2,cc[0],cc[1],sc*1.0);
-    g.addColorStop(0,"rgba(184,255,60,0.22)");
-    g.addColorStop(0.5,"rgba(255,61,166,0.12)");
-    g.addColorStop(1,"rgba(0,0,0,0)");
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cc[0],cc[1],sc*1.0,0,7);ctx.fill();
+    if(!coreGlow){
+      coreGlow=ctx.createRadialGradient(cc[0],cc[1],2,cc[0],cc[1],sc*1.0);
+      coreGlow.addColorStop(0,"rgba(184,255,60,0.22)");
+      coreGlow.addColorStop(0.5,"rgba(255,61,166,0.12)");
+      coreGlow.addColorStop(1,"rgba(0,0,0,0)");
+    }
+    ctx.fillStyle=coreGlow;ctx.beginPath();ctx.arc(cc[0],cc[1],sc*1.0,0,7);ctx.fill();
     roundRect(cc[0]-55,cc[1]-30,110,72,14);
     ctx.fillStyle="rgba(7,10,16,0.78)";ctx.fill();
     ctx.strokeStyle="rgba(184,255,60,0.42)";ctx.lineWidth=1.2;ctx.stroke();
@@ -3078,7 +3114,8 @@ function setupHub3D(){
   });
   if(pauseBtn)pauseBtn.onclick=()=>setPaused(!userPaused);
   if(resetBtn)resetBtn.onclick=resetHub;
-  window.addEventListener("resize",resize);
+  let hubResizeFrame=0;
+  window.addEventListener("resize",()=>{if(!hubResizeFrame)hubResizeFrame=requestAnimationFrame(()=>{hubResizeFrame=0;resize();});});
   setPaused(userPaused);
   resize();frame();
 }
@@ -3654,8 +3691,8 @@ window.AvaAvatar={react,get expression(){return frame;},get paused(){return paus
     <header class="about-intro">
       <div><span class="about-eyebrow">The person behind the systems</span><h2 id="about-title">About me.</h2></div>
       <section class="about-cert-wrap" aria-label="Certification goals in progress">
-        <span class="about-construction">◌ Work in progress</span>
-        <div class="about-cert-window" tabindex="0" role="group" aria-label="Certification goals in progress. Hover or focus to pause scrolling."><div class="about-cert-track" id="about-cert-track"><div class="about-cert-set"><div class="about-cert-card" data-kind="badge" data-backing="none" title="HighLevel Certified Admin. Work in progress."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. Work in progress." width="76" height="64" /><span>GoHighLevel</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="Shopify Certified. Work in progress."><img src="assets/about/badges/custom/shopify-supplied.png" alt="Shopify Certified. Work in progress." width="76" height="64" /><span>Shopify</span></div><div class="about-cert-card" data-kind="logo" data-backing="light" title="Zapier Academy learning target. Work in progress."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. Work in progress." width="76" height="64" /><span>Zapier</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Make Academy — Make Basics. Work in progress."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. Work in progress." width="76" height="64" /><span>Make.com</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="HubSpot Certified Partner CMS Experts. Work in progress."><img src="assets/about/badges/custom/hubspot-supplied.png" alt="HubSpot Certified Partner CMS Experts. Work in progress." width="76" height="64" /><span>HubSpot</span></div><div class="about-cert-card" data-kind="badge" data-backing="light" title="Zendesk Support Administrator Expert. Work in progress."><img src="assets/about/badges/revised/zendesk-support-administrator-official.png" alt="Zendesk Support Administrator Expert. Work in progress." width="76" height="64" /><span>Zendesk</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Salesforce Certified Platform Administrator. Work in progress."><img src="assets/about/badges/revised/salesforce-platform-administrator.png" alt="Salesforce Certified Platform Administrator. Work in progress." width="76" height="64" /><span>Salesforce</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. Work in progress."><img src="assets/about/badges/revised/microsoft-certified-associate.svg" alt="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. Work in progress." width="76" height="64" /><span>Dynamics 365</span></div></div><div class="about-cert-set" aria-hidden="true"><div class="about-cert-card" data-kind="badge" data-backing="none" title="HighLevel Certified Admin. Work in progress."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. Work in progress." width="76" height="64" /><span>GoHighLevel</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="Shopify Certified. Work in progress."><img src="assets/about/badges/custom/shopify-supplied.png" alt="Shopify Certified. Work in progress." width="76" height="64" /><span>Shopify</span></div><div class="about-cert-card" data-kind="logo" data-backing="light" title="Zapier Academy learning target. Work in progress."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. Work in progress." width="76" height="64" /><span>Zapier</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Make Academy — Make Basics. Work in progress."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. Work in progress." width="76" height="64" /><span>Make.com</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="HubSpot Certified Partner CMS Experts. Work in progress."><img src="assets/about/badges/custom/hubspot-supplied.png" alt="HubSpot Certified Partner CMS Experts. Work in progress." width="76" height="64" /><span>HubSpot</span></div><div class="about-cert-card" data-kind="badge" data-backing="light" title="Zendesk Support Administrator Expert. Work in progress."><img src="assets/about/badges/revised/zendesk-support-administrator-official.png" alt="Zendesk Support Administrator Expert. Work in progress." width="76" height="64" /><span>Zendesk</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Salesforce Certified Platform Administrator. Work in progress."><img src="assets/about/badges/revised/salesforce-platform-administrator.png" alt="Salesforce Certified Platform Administrator. Work in progress." width="76" height="64" /><span>Salesforce</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. Work in progress."><img src="assets/about/badges/revised/microsoft-certified-associate.svg" alt="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. Work in progress." width="76" height="64" /><span>Dynamics 365</span></div></div></div></div>
+        <span class="about-construction">◌ In progress</span>
+        <div class="about-cert-window" tabindex="0" role="group" aria-label="Certification goals in progress. Hover or focus to pause scrolling."><div class="about-cert-track" id="about-cert-track"><div class="about-cert-set"><div class="about-cert-card" data-kind="badge" data-backing="none" title="HighLevel Certified Admin. In progress."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. In progress." width="76" height="64" /><span>GoHighLevel</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="Shopify Certified. In progress."><img src="assets/about/badges/custom/shopify-supplied.png" alt="Shopify Certified. In progress." width="76" height="64" /><span>Shopify</span></div><div class="about-cert-card" data-kind="logo" data-backing="light" title="Zapier Academy learning target. In progress."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. In progress." width="76" height="64" /><span>Zapier</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Make Academy — Make Basics. In progress."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. In progress." width="76" height="64" /><span>Make.com</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="HubSpot Certified Partner CMS Experts. In progress."><img src="assets/about/badges/custom/hubspot-supplied.png" alt="HubSpot Certified Partner CMS Experts. In progress." width="76" height="64" /><span>HubSpot</span></div><div class="about-cert-card" data-kind="badge" data-backing="light" title="Zendesk Support Administrator Expert. In progress."><img src="assets/about/badges/revised/zendesk-support-administrator-official.png" alt="Zendesk Support Administrator Expert. In progress." width="76" height="64" /><span>Zendesk</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Salesforce Certified Platform Administrator. In progress."><img src="assets/about/badges/revised/salesforce-platform-administrator.png" alt="Salesforce Certified Platform Administrator. In progress." width="76" height="64" /><span>Salesforce</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. In progress."><img src="assets/about/badges/revised/microsoft-certified-associate.svg" alt="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. In progress." width="76" height="64" /><span>Dynamics 365</span></div></div><div class="about-cert-set" aria-hidden="true"><div class="about-cert-card" data-kind="badge" data-backing="none" title="HighLevel Certified Admin. In progress."><img src="assets/about/badges/gohighlevel-certified-admin.png" alt="HighLevel Certified Admin. In progress." width="76" height="64" /><span>GoHighLevel</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="Shopify Certified. In progress."><img src="assets/about/badges/custom/shopify-supplied.png" alt="Shopify Certified. In progress." width="76" height="64" /><span>Shopify</span></div><div class="about-cert-card" data-kind="logo" data-backing="light" title="Zapier Academy learning target. In progress."><img src="assets/about/badges/zapier-academy-logo.png" alt="Zapier Academy learning target. In progress." width="76" height="64" /><span>Zapier</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Make Academy — Make Basics. In progress."><img src="assets/about/badges/make-basics.png" alt="Make Academy — Make Basics. In progress." width="76" height="64" /><span>Make.com</span></div><div class="about-cert-card" data-kind="user-supplied" data-backing="none" title="HubSpot Certified Partner CMS Experts. In progress."><img src="assets/about/badges/custom/hubspot-supplied.png" alt="HubSpot Certified Partner CMS Experts. In progress." width="76" height="64" /><span>HubSpot</span></div><div class="about-cert-card" data-kind="badge" data-backing="light" title="Zendesk Support Administrator Expert. In progress."><img src="assets/about/badges/revised/zendesk-support-administrator-official.png" alt="Zendesk Support Administrator Expert. In progress." width="76" height="64" /><span>Zendesk</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Salesforce Certified Platform Administrator. In progress."><img src="assets/about/badges/revised/salesforce-platform-administrator.png" alt="Salesforce Certified Platform Administrator. In progress." width="76" height="64" /><span>Salesforce</span></div><div class="about-cert-card" data-kind="badge" data-backing="none" title="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. In progress."><img src="assets/about/badges/revised/microsoft-certified-associate.svg" alt="Microsoft Certified: Dynamics 365 Customer Service Functional Consultant Associate. In progress." width="76" height="64" /><span>Dynamics 365</span></div></div></div></div>
       </section>
     </header>
     <div class="about-main">
