@@ -531,9 +531,9 @@ html[data-theme="light"] .light-hub{display:flex;flex-direction:column;justify-c
 /* Light-only contrast and quiet card surfaces. */
 html[data-theme="light"] .hero{padding-inline:22px}
 @media(max-width:760px){html[data-theme="light"] .hero{padding-inline:18px}}
-html[data-theme="light"] .svc[data-mode="automation"]{--sc1:#276749!important;--sc2:#276749!important}
+html[data-theme="light"] .svc[data-mode="automation"]{--sc1:#9a4a15!important;--sc2:#9a4a15!important}
 html[data-theme="light"] .svc[data-mode="web"]{--sc1:#086c87!important;--sc2:#086c87!important}
-html[data-theme="light"] .svc[data-mode="ecom"]{--sc1:#9a4a15!important;--sc2:#9a4a15!important}
+html[data-theme="light"] .svc[data-mode="ecom"]{--sc1:#276749!important;--sc2:#276749!important}
 html[data-theme="light"] .svc[data-mode="logistics"]{--sc1:#6942a1!important;--sc2:#6942a1!important}
 html[data-theme="light"] :is(.ava-card,.ecom-tier,.ecom-premium,.commerce-stage,.logistics-stage,.dash-panel,.dash-kpi,.book-frame,.book-page){background:#fff!important;box-shadow:var(--shadow)!important;border-color:var(--panel-border)!important}
 html[data-theme="light"] .ava-card{display:flex;align-items:center;min-height:280px;padding:24px}
@@ -1243,7 +1243,7 @@ const CONFIG = {
     {
       id:"ecom", name:"E-commerce VA", icon:"🛒",
       tagline:"Daily store ops so you can focus on growth",
-      c1:"#ff8a3d", c2:"#ff3da6",
+      c1:"#b8ff3c", c2:"#ff3da6",
       do:["Product listing & optimization","Order processing & fulfillment checks","Customer support & returns","Review requests & inventory tracking"],
       help:["Store runs daily without you","Better ratings, fewer errors","Clear SOPs your team can follow"],
       support:["Daily ops coverage","Monthly performance report","Tool & SOP setup (Shopify / Woo)"],
@@ -1261,7 +1261,7 @@ const CONFIG = {
     {
       id:"automation", name:"AI Automation", icon:"⚡",
       tagline:"Self-running systems that work while you sleep",
-      c1:"#b8ff3c", c2:"#ff3da6",
+      c1:"#ff8a3d", c2:"#ff3da6",
       do:["Lead routing & qualification with AI","Document processing & data extraction","Ops alerts + monitoring (Slack/email)","Multi-step outreach across channels"],
       help:["Cut 50 to 70% of manual hours","Fewer dropped leads & messy handoffs","Your team focuses on revenue, not busywork"],
       support:["Monitoring with self-healing retries","Slack alerts the moment something breaks","Runbooks + a monthly optimization pass"],
@@ -2938,9 +2938,9 @@ function setupHub3D(){
   const faceSet=new Set(); const F=[];
   for(let i=0;i<baseV.length;i++)for(const j of adj[i]){ if(j<=i)continue; for(const k of adj[j]){ if(k<=j)continue; if(adj[i].has(k)){ const key=[i,j,k].sort(function(a,b){return a-b;}).join(','); if(!faceSet.has(key)){faceSet.add(key);F.push([i,j,k]);} } } }
   const SER=[
-    {label:"[AUTOMATION]",sub:"AI WORKFLOWS",col:"#b8ff3c",mode:"automation"},
+    {label:"[AUTOMATION]",sub:"AI WORKFLOWS",col:"#ff8a3d",mode:"automation"},
     {label:"[WEB DEV]",sub:"SITES & LANDING",col:"#38bdf8",mode:"web"},
-    {label:"[E-COM]",sub:"STORE OPS VA",col:"#ff8a3d",mode:"ecom"},
+    {label:"[E-COM]",sub:"STORE OPS VA",col:"#b8ff3c",mode:"ecom"},
     {label:"[LOGISTICS]",sub:"SUPPLY CHAIN VA",col:"#a78bfa",mode:"logistics"}
   ];
   const SPARK=["#b8ff3c","#38bdf8","#ff8a3d","#a78bfa","#5b8cff","#ff5db4"];
