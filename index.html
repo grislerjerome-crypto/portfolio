@@ -1241,13 +1241,13 @@ const CONFIG = {
   /* ---- the four service modes ---- */
   services: [
     {
-      id:"automation", name:"AI Automation", icon:"⚡",
-      tagline:"Self-running systems that work while you sleep",
-      c1:"#b8ff3c", c2:"#ff3da6",
-      do:["Lead routing & qualification with AI","Document processing & data extraction","Ops alerts + monitoring (Slack/email)","Multi-step outreach across channels"],
-      help:["Cut 50 to 70% of manual hours","Fewer dropped leads & messy handoffs","Your team focuses on revenue, not busywork"],
-      support:["Monitoring with self-healing retries","Slack alerts the moment something breaks","Runbooks + a monthly optimization pass"],
-      tools:["GoHighLevel","n8n","Zapier","Make.com","OpenAI","Google Gemini","Airtable"]
+      id:"ecom", name:"E-commerce VA", icon:"🛒",
+      tagline:"Daily store ops so you can focus on growth",
+      c1:"#ff8a3d", c2:"#ff3da6",
+      do:["Product listing & optimization","Order processing & fulfillment checks","Customer support & returns","Review requests & inventory tracking"],
+      help:["Store runs daily without you","Better ratings, fewer errors","Clear SOPs your team can follow"],
+      support:["Daily ops coverage","Monthly performance report","Tool & SOP setup (Shopify / Woo)"],
+      tools:["Shopify","WooCommerce","Zendesk","Canva","Google Sheets","Oberlo"]
     },
     {
       id:"web", name:"Website Development", icon:"🌐",
@@ -1259,13 +1259,13 @@ const CONFIG = {
       tools:["WordPress","Webflow","HTML/CSS/JS","Figma","GSAP","Cloudflare"]
     },
     {
-      id:"ecom", name:"E-commerce VA", icon:"🛒",
-      tagline:"Daily store ops so you can focus on growth",
-      c1:"#ff8a3d", c2:"#ff3da6",
-      do:["Product listing & optimization","Order processing & fulfillment checks","Customer support & returns","Review requests & inventory tracking"],
-      help:["Store runs daily without you","Better ratings, fewer errors","Clear SOPs your team can follow"],
-      support:["Daily ops coverage","Monthly performance report","Tool & SOP setup (Shopify / Woo)"],
-      tools:["Shopify","WooCommerce","Zendesk","Canva","Google Sheets","Oberlo"]
+      id:"automation", name:"AI Automation", icon:"⚡",
+      tagline:"Self-running systems that work while you sleep",
+      c1:"#b8ff3c", c2:"#ff3da6",
+      do:["Lead routing & qualification with AI","Document processing & data extraction","Ops alerts + monitoring (Slack/email)","Multi-step outreach across channels"],
+      help:["Cut 50 to 70% of manual hours","Fewer dropped leads & messy handoffs","Your team focuses on revenue, not busywork"],
+      support:["Monitoring with self-healing retries","Slack alerts the moment something breaks","Runbooks + a monthly optimization pass"],
+      tools:["GoHighLevel","n8n","Zapier","Make.com","OpenAI","Google Gemini","Airtable"]
     },
     {
       id:"logistics", name:"Logistics & Supply Chain VA", icon:"📦",
@@ -3213,7 +3213,7 @@ function setupCRMShowcase(){
 
 function boot(){
   applyStatic();
-  buildServices();buildCaps();buildMarquee();buildProjects();
+  buildServices();setMode('ecom');buildMarquee();buildProjects();
   setupTheme();setupROI();setupAvaChat();setupOperationsVisuals();setupFooterLinks();setupPalette();setupCanvas();setupHub3D();setupParallax();setupGlitch();setupFunnelBook();setupCRMShowcase();setupReveal();setupCursor();setupMagnetic();setupTilt();setupRipple();setupMenu();setupScroll();setupClock();
   setTimeout(()=>$("#boot").classList.add("hide"),1700);
 }
@@ -3699,11 +3699,11 @@ window.AvaAvatar={react,get expression(){return frame;},get paused(){return paus
       <div class="about-copy">
         <h3>Hey, I’m Rome.</h3>
         <p class="about-aspiration">Aspiring AI Engineer</p>
-        <p class="about-lead">I connect your CRM, automations, websites and daily operations, so your business runs smoothly and your team can focus on what’s next.</p>
+        <p class="about-lead">I help ecommerce businesses keep their Shopify stores running smoothly, from orders and inventory to customer support and daily operations, so owners can focus on growth.</p>
         <div class="about-bio">
-          <p>I’m an AI automation specialist, GoHighLevel expert, website developer, and ecommerce and logistics VA. I bring over five years of experience across customer support and operations, helping businesses manage orders, keep inventory accurate and spend less time on repetitive work.</p>
+          <p>I’m an ecommerce store management specialist and Shopify VA with over five years of experience across customer support and operations. I help businesses manage product listings, process orders, keep inventory accurate and support their customers. I also bring skills in AI automation, GoHighLevel, website development and logistics.</p>
           <div id="about-more" class="about-more" hidden>
-            <p>From Shopify orders and supplier coordination to billing questions and technical troubleshooting, I handle the details that keep customers and teams moving. I also build websites, funnels and automated follow up that connect the first enquiry to the next step.</p>
+            <p>From Shopify store updates and fulfillment checks to returns, supplier coordination and billing questions, I handle the details that keep your store and customers moving. I also build websites, funnels and automated follow up that connect your store, CRM and daily workflows, so your team spends less time on repetitive work.</p>
             <h4>Where I can help</h4>
             <ul class="about-expertise">
               <li><strong>Ecommerce and operations</strong>Shopify order management, inventory monitoring, supplier coordination and logistics support.</li>
@@ -3711,7 +3711,7 @@ window.AvaAvatar={react,get expression(){return frame;},get paused(){return paus
               <li><strong>Websites and systems</strong>Business websites, funnels and connected workflows with GoHighLevel, Zapier, Make.com and n8n.</li>
               <li><strong>Virtual staff</strong>I can help you find skilled Filipino virtual staff who fit your business and the work you need covered.</li>
             </ul>
-            <p>I’m open to opportunities in automation, website development, ecommerce operations, supply chain support and customer success. If you need someone who follows through and pays attention to the details, let’s talk.</p>
+            <p>I’m open to opportunities in Shopify store management, ecommerce operations, customer success, supply chain support, automation and website development. If you need someone who follows through and pays attention to the details, let’s talk.</p>
           </div>
         </div>
         <button type="button" id="about-expand" class="about-expand" aria-expanded="false" aria-controls="about-more">See more <span aria-hidden="true">↗</span></button>
