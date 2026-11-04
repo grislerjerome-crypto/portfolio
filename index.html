@@ -749,7 +749,7 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
     <span id="boot-name">Agent Rome</span>
   </div>
   <div class="bar"><i></i></div>
-  <div class="status" id="boot-status">AI AUTOMATIONS, SYSTEMS & OPERATIONS...</div>
+  <div class="status" id="boot-status">ECOMMERCE, AUTOMATIONS, SYSTEMS & OPERATIONS...</div>
 </div>
 
 <canvas id="bg-canvas"></canvas>
@@ -1824,7 +1824,7 @@ function applyStatic(){
   $("#foot-email").href="mailto:"+CONFIG.social.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#foot-facebook").href=CONFIG.social.facebook;
   $("#boot-name").textContent=CONFIG.bootName;
-  $("#boot-status").textContent="AI AUTOMATIONS, "+CONFIG.role.toUpperCase()+"...";
+  $("#boot-status").textContent="ECOMMERCE, AUTOMATIONS, SYSTEMS & OPERATIONS...";
   $("#chips").innerHTML=CONFIG.chips.map((c,i)=>`<span class="chip-cmd" data-i="${i}">${c}</span>`).join('');
   $("#chips").querySelectorAll('.chip-cmd').forEach(el=>el.onclick=()=>{
     [()=>smartScroll('#services'),()=>smartScroll('#roi'),()=>smartScroll('#craftee'),()=>location.href='mailto:'+CONFIG.cta.email][+el.dataset.i]();
