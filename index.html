@@ -2074,9 +2074,235 @@ function animateNum(el,target,prefix){
 
 /* ---- Ava static portfolio agent ---- */
 const AVA_KB = [
-  {"keys":["certificate","certification","certified","badge","credential"],"q":"Are those certifications earned?","a":"Those are learning goals, not earned certifications yet. The About popup marks the whole strip In progress. Click Rome's photo or name in the navigation to take a look."},
-  {"keys":["resume","cv","curriculum"],"q":"Can I see Rome's resume?","a":"Open About me from Rome's photo or name in the navigation. You'll find a blurred resume preview and a Request my resume button to ask him for the full copy."},
-  {"keys":["about popup","about me","biography"],"q":"Where is About me?","a":"Click Rome's photo, name or the About me bubble in the navigation. You can read his story, explore his tools and request his resume there."},
+  {
+    "keys": [
+      "project samples",
+      "project-samples",
+      "work examples",
+      "shopify examples",
+      "shopify samples",
+      "work samples"
+    ],
+    "q": "What is on the project samples page?",
+    "a": "Explore https://agentrome.site/project-samples/: 10 Shopify/ecommerce role samples, 3 logistics scenarios, 7 website/build showcases and 44 existing automation diagrams. Shopify concepts and operations records are illustrative, not client builds or measured results; the website demos and existing diagrams are labeled separately. It is public and shareable, but intentionally not a homepage navigation item."
+  },
+  {
+    "keys": [
+      "shopify web design",
+      "form & field",
+      "shopify screenshots",
+      "client builds"
+    ],
+    "q": "Are the Shopify designs client builds?",
+    "a": "The Form & Field storefront, collection and product detail images at https://agentrome.site/project-samples/ are original placeholder concepts, not Shopify screenshots or completed client builds. No real screenshots have been supplied for this sample."
+  },
+  {
+    "keys": [
+      "divinespace",
+      "simple crm",
+      "enterprise crm",
+      "crm demos",
+      "crm systems"
+    ],
+    "q": "What is DivineSpace CRM?",
+    "a": "Explore https://agentrome.site/crm/ for two interactive demos: Simple CRM at https://agentrome.site/crm/simple/ covers contacts, companies, tasks, notes and CSV exports; Enterprise CRM at https://agentrome.site/crm/complex/ adds pipelines, inbox, roles, audit history and an automation studio. Integration screens use demo data, not connected accounts or proven production security."
+  },
+  {
+    "keys": [
+      "email marketing",
+      "email lifecycle",
+      "welcome series",
+      "abandoned checkout",
+      "post purchase",
+      "post-purchase"
+    ],
+    "q": "What email marketing flows are shown?",
+    "a": "Email Marketing in https://agentrome.site/#capability-console has Welcome Series, Abandoned Checkout and Post-Purchase. These are proposed flows with consent and suppression checks, waits, purchase exits and delivery aware follow up, not active campaigns or measured client results."
+  },
+  {
+    "keys": [
+      "eight specialties",
+      "specialty tabs",
+      "specialties",
+      "console tabs"
+    ],
+    "q": "What are the eight specialties?",
+    "a": "Explore https://agentrome.site/#capability-console for eight specialties: GoHighLevel CRM, Hermes Agent, Shopify Operations, Meta Ads, Google Ads, Digital Marketing, SEO Specialist and Email Marketing. Each has three proposed concept studies, not deployed client work or active campaigns. Inspect, pin or expand nodes and pause diagram motion without running any real workflow."
+  },
+  {
+    "keys": [
+      "theme",
+      "ai space",
+      "dark mode",
+      "light mode",
+      "appearance",
+      "zero lag"
+    ],
+    "q": "What appearance modes can I choose?",
+    "a": "Choose Light, Dark or AI Space in the navigation or Command menu. Dark is the plain charcoal default on every reload; Light is clean and static; AI Space is the optional cosmic theme. Diagram motion has a separate control, and performance depends on the device, not a zero lag guarantee."
+  },
+  {
+    "keys": [
+      "aspiring ai engineer",
+      "engineering credential",
+      "engineer"
+    ],
+    "q": "Is Rome an AI engineer?",
+    "a": "The About popup says Aspiring AI Engineer, an aspirational title rather than an earned engineering credential. Certification goals are marked In progress, not earned qualifications. His over five years of experience refers to customer support and operations."
+  },
+  {
+    "keys": [
+      "shopify",
+      "ecommerce support",
+      "support dropdown"
+    ],
+    "q": "What Shopify support can Rome offer?",
+    "a": "Rome supports listings, orders, inventory, fulfillment, returns and customer support. Open How I support your ecommerce operations at https://agentrome.site/#ecommerce-operations for proposed daily queues and weekly summaries, or https://agentrome.site/project-samples/ for illustrative role samples. Refunds and purchasing require approval, and response times are agreed rather than guaranteed."
+  },
+  {
+    "keys": [
+      "website samples",
+      "website demos",
+      "funnel examples",
+      "seven websites"
+    ],
+    "q": "Which website demos can I explore?",
+    "a": "The seven showcases at https://agentrome.site/project-samples/ are THREADLAB, APPAREL LAB, The Threshold, Limone Sanctuary, Lumen Grid, Villa Tala and DivineSpace CRM. They link to the existing demos, not verified real purchases or reservations."
+  },
+  {
+    "keys": [
+      "zero minute",
+      "response time",
+      "support guarantee"
+    ],
+    "q": "Does Rome guarantee instant support?",
+    "a": "No zero minute response or instant support guarantee is offered. Support channels, coverage and response expectations are agreed with Rome; the sample call, email and chat replies are demonstrations, not a connected helpdesk."
+  },
+  {
+    "keys": [
+      "welcome series",
+      "welcome series"
+    ],
+    "q": "How would Rome build welcome series?",
+    "a": "Proposed Email Marketing study, not a live campaign or client result. Turn a permitted signup into a helpful introduction, with purchase and opt out exits built in. Plan: Map the signup source, consent and profile fields. Build a short introduction and product education sequence, then recheck eligibility before each send. Planned checks: Repeat the signup event: only one eligible sequence should start. Unsubscribe or purchase during a wait: the next welcome promotion must not send. Check sender authentication, mobile rendering, merge field fallbacks, links and the unsubscribe path. Proposed handoff: Entry and exit map, segment rules, message brief, proposed wait schedule and prelaunch QA checklist. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "abandoned checkout",
+      "abandoned checkout"
+    ],
+    "q": "How would Rome build abandoned checkout?",
+    "a": "Proposed Email Marketing study, not a live campaign or client result. Follow up on an unfinished checkout only while the customer is eligible and the purchase is still incomplete. Plan: Use the store checkout event, wait for the agreed inactivity window and check the latest order state. Build a bounded reminder path with purchase, consent and availability checks. Planned checks: Complete payment during the delay: the reminder must stop. Replay a checkout webhook or open several checkouts: apply the agreed deduplication and reentry rules. Test expired links, unavailable items, opt out and the final cutoff with no purchase. Proposed handoff: Event mapping, recovery rules, message briefs, approved timing and incentive policy, plus exception and QA logs. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "post-purchase",
+      "post-purchase"
+    ],
+    "q": "How would Rome build post-purchase?",
+    "a": "Proposed Email Marketing study, not a live campaign or client result. Connect order events to useful guidance and a delivery-aware review request, without duplicating store receipts. Plan: Map the store and carrier events, separate service messages from marketing, and build a delivery-aware customer journey with exception holds. Planned checks: Replay the paid order event: do not create a duplicate journey. Delay delivery or open a return: hold the review request and route the issue to the owner. Test partial shipments, missing delivery events, opt outs and a refunded order before enabling sends. Proposed handoff: Order and delivery event map, message ownership guide, eligibility rules, exception handling SOP and handoff tests. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "make the right pages discoverable",
+      "technical audit"
+    ],
+    "q": "How would Rome build technical audit?",
+    "a": "Proposed SEO Specialist study, not a live campaign or client result. Check crawling, indexing and page experience before investing in more content. Plan: Establish a Search Console baseline, crawl the site and prioritize technical fixes by business impact. Verify the important URLs after changes. Planned checks: Inspect important URLs for status codes, indexability and canonical selection. Check navigation and essential content in the rendered page, not only the source. Retest redirects, sitemap entries and structured data after deployment. Proposed handoff: Prioritized audit, URL issue log, implementation checklist and validation report. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "build pages that answer the search",
+      "content and intent"
+    ],
+    "q": "How would Rome build content and intent?",
+    "a": "Proposed SEO Specialist study, not a live campaign or client result. Connect each useful search intent to a clear page, original information and a relevant next step. Plan: Research customer questions and search results, map topics to existing pages and create focused briefs for genuine content gaps. Planned checks: Confirm the page answers the main question and offers original, accurate information. Review titles, descriptions, image alternatives and internal links on desktop and mobile. Check any schema against the visible content and supported search features; rich results are not guaranteed. Proposed handoff: Intent map, content briefs, page optimization checklist and internal linking plan. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "turn organic search data into useful decisions",
+      "measure and improve"
+    ],
+    "q": "How would Rome build measure and improve?",
+    "a": "Proposed SEO Specialist study, not a live campaign or client result. Track discovery, engagement and qualified outcomes without promising a ranking position. Plan: Define the conversion goal, record a baseline and review Search Console, analytics and CRM outcomes together. Keep a change log for meaningful comparisons. Planned checks: Verify consent and conversion tracking before judging business impact. Compare equivalent date ranges and record which pages changed. Investigate traffic drops for technical or measurement problems before rewriting content. Proposed handoff: Organic performance report, change log, prioritized improvement backlog and next review plan. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "a meta campaign built around the right outcome",
+      "campaign setup"
+    ],
+    "q": "How would Rome build campaign setup?",
+    "a": "Proposed Meta Ads study, not a live campaign or client result. Start with the customer, offer and conversion goal. Build Facebook and Instagram ads around a destination that keeps the promise. Plan: Define the audience and acceptable acquisition cost, choose the matching campaign objective, prepare creative angles and approve the budget before launch. Planned checks: Test the mobile page, form, checkout and confirmation. Check location, schedule, exclusions and approved spend limits. Assign every lead an owner and a response expectation. Proposed handoff: Campaign brief, audience plan, creative matrix, budget approval and launch checklist. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "conversion signals that reflect real actions",
+      "conversion tracking"
+    ],
+    "q": "How would Rome build conversion tracking?",
+    "a": "Proposed Meta Ads study, not a live campaign or client result. Connect browser events, server events and CRM outcomes without counting the same purchase twice. Plan: Document the event map, consent requirements and source tags. Validate Pixel and Conversions API events where appropriate before using them for optimization. Planned checks: Verify test events and inspect diagnostics for duplicates or missing parameters. A failed payment or invalid form must not count as a successful conversion. Compare attributed results with store and CRM records; attribution windows and consent create differences. Proposed handoff: Event specification, source naming, consent checklist and tracking QA log. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "improve the message before increasing spend",
+      "creative testing"
+    ],
+    "q": "How would Rome build creative testing?",
+    "a": "Proposed Meta Ads study, not a live campaign or client result. Test a clear hypothesis, review lead quality and scale only within agreed business limits. Plan: Compare one meaningful creative variable at a time, allow a useful observation window and review cost alongside qualified outcomes. Planned checks: Confirm tracking remains healthy before changing budgets. Account for reporting delay and conversion volume before judging a test. Pause or revise against agreed loss limits; do not promise a fixed return. Proposed handoff: Creative test backlog, decision log, reporting view and budget change rules. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "meet search intent with a relevant offer",
+      "search setup"
+    ],
+    "q": "How would Rome build search setup?",
+    "a": "Proposed Google Ads study, not a live campaign or client result. Connect useful search terms to focused ads and a landing page that answers the same need. Plan: Research intent, group related keywords, define negatives and location settings, then write responsive search ads around the actual service or product. Planned checks: Review location presence settings, language, schedule and final URLs. Check negative keywords do not block valuable searches. Verify mobile usability, policy compliance and the offer in every ad. Proposed handoff: Keyword and negative lists, campaign structure, ad copy, assets and launch checklist. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "optimize for valuable actions, not every click",
+      "lead measurement"
+    ],
+    "q": "How would Rome build lead measurement?",
+    "a": "Proposed Google Ads study, not a live campaign or client result. Define primary conversions clearly and connect eligible lead outcomes back to their source. Plan: Audit Google Ads and GA4 conversion actions, test consent behavior and preserve eligible attribution data through the CRM. Planned checks: Test one successful action, a validation failure and a repeated confirmation visit. Verify transaction identifiers, values and currency where applicable. Check CRM qualification and imported results rather than assuming every submitted lead is valuable. Proposed handoff: Conversion action audit, event map, CRM field guide and measurement QA checklist. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "make budget decisions from intent and value",
+      "optimization"
+    ],
+    "q": "How would Rome build optimization?",
+    "a": "Proposed Google Ads study, not a live campaign or client result. Review query quality, conversion economics and landing page friction before expanding reach. Plan: Review search terms and qualified outcomes, diagnose the weakest step and test one improvement with clear budget guardrails. Planned checks: Check reporting delay before reacting to a short performance drop. Review lost visibility from budget separately from ad rank and relevance. Confirm negative keywords, landing page changes and bidding updates do not conflict. Proposed handoff: Search term review, optimization backlog, performance report and approved scaling rules. Explore https://agentrome.site/#capability-console."
+  },
+  {
+    "keys": [
+      "certificate",
+      "certification",
+      "certified",
+      "badge",
+      "credential"
+    ],
+    "q": "Are those certifications earned?",
+    "a": "Those are learning goals, not earned certifications yet. The About popup marks the whole strip In progress. Click Rome's photo or name in the navigation to take a look."
+  },
+  {
+    "keys": [
+      "resume",
+      "cv",
+      "curriculum"
+    ],
+    "q": "Can I see Rome's resume?",
+    "a": "Open About me from Rome's photo or name in the navigation. You'll find a blurred resume preview and a Request my resume button to ask him for the full copy."
+  },
+  {
+    "keys": [
+      "about popup",
+      "about me",
+      "biography"
+    ],
+    "q": "Where is About me?",
+    "a": "Click Rome's photo, name or the About me bubble in the navigation. You can read his story, explore his tools and request his resume there."
+  },
   {
     "keys": [
       "starter"
@@ -2091,7 +2317,7 @@ const AVA_KB = [
       "admin dashboard"
     ],
     "q": "Tell me about Premium ecommerce",
-    "a": "APPAREL LAB is the existing Premium ecommerce build with a storefront, customer dashboard and admin dashboard. Preview it at https://apparel.agentrome.site/ and https://apparel.agentrome.site/admin-login. Hostinger hosting linkage is still in progress. Production readiness and payment integration are not confirmed. The supplied admin link is currently unavailable while hosting is being connected."
+    "a": "APPAREL LAB has storefront, customer and admin demo areas at https://apparel.agentrome.site/, https://apparel.agentrome.site/customer-login and https://apparel.agentrome.site/admin-login. The public Premium card says Up to $799 + $15/mo care. Demo access is not proof of real payment integration or production readiness; Rome confirms your scope and quote."
   },
   {
     "keys": [
@@ -2102,7 +2328,7 @@ const AVA_KB = [
       "launch"
     ],
     "q": "Is Premium ready for launch?",
-    "a": "Hostinger hosting linkage for APPAREL LAB is still in progress. Production readiness and payment integration are not confirmed. Rome will agree on payments, shipping, integrations and launch requirements with you before delivery."
+    "a": "APPAREL LAB is a demo, not confirmation of production readiness or real payment integration. Rome will agree on payments, shipping, integrations and launch requirements with you before delivery."
   },
   {
     "keys": [
@@ -2112,7 +2338,7 @@ const AVA_KB = [
       "admin access"
     ],
     "q": "Do I get an ecommerce website or source code?",
-    "a": "Rome sells complete ecommerce websites with admin access, not source code packages. Starter and Premium scope and pricing are agreed directly with Rome. The THREADLAB Starter sample is visible in the ecommerce showcase, and APPAREL LAB shows the Premium storefront, customer dashboard and admin dashboard previews."
+    "a": "Rome offers complete ecommerce websites, not source code packages. Starter is a showcase without checkout, payments or an admin dashboard; Premium or custom builds can include those features. Scope is agreed with Rome."
   },
   {
     "keys": [
@@ -2146,7 +2372,7 @@ const AVA_KB = [
       "delivery"
     ],
     "q": "Can Rome help with logistics?",
-    "a": "Rome can track shipment exceptions, coordinate supplier and carrier follow up, organize delivery records and keep the next owner visible. Explore the interactive Supply Chain and Logistics route control. Its shipment status and throughput are illustrative sample data, not client results or a connected system."
+    "a": "Rome can track shipments, coordinate suppliers and carriers, maintain documents and own exception follow ups. Open the support details at https://agentrome.site/#logistics-operations or explore 3 synthetic scenarios at https://agentrome.site/project-samples/. These examples are not client results or connected carrier systems."
   },
   {
     "keys": [
@@ -2175,7 +2401,7 @@ const AVA_KB = [
       "make.com"
     ],
     "q": "Can Rome build automations?",
-    "a": "Rome builds lead routing, CRM updates, inquiry handling, reporting and follow up workflows. Explore the 44 AI automation projects across GoHighLevel, Make.com, Zapier and n8n in the Projects carousel."
+    "a": "Rome builds lead routing, CRM updates, inquiry handling, reporting and follow up workflows. Explore 44 existing diagrams at https://agentrome.site/#projects or https://agentrome.site/project-samples/: GHL 20, Make.com 6, Zapier 7 and n8n 11. Diagrams do not independently verify client outcomes."
   },
   {
     "keys": [
@@ -2215,7 +2441,7 @@ const AVA_KB = [
       "appointment"
     ],
     "q": "How do I contact Rome?",
-    "a": "Use the existing Let's Connect! button to open the booking popup, or use the email and social links in Contact. Booking times use America/New_York. I can help organize your brief, but I do not book calls or send this chat to Rome."
+    "a": "Email grislerjerome@gmail.com or visit https://agentrome.site/#contact and use Let's Connect! for the booking popup. Booking times use America/New_York. I can help organize your brief, but I do not book calls, send emails or forward this chat."
   },
   {
     "keys": [
@@ -2225,7 +2451,7 @@ const AVA_KB = [
       "projects"
     ],
     "q": "Can I see Rome's work?",
-    "a": "Explore 44 AI automation projects in the Projects carousel, THREADLAB Starter and APPAREL LAB Premium in the ecommerce showcase, plus separate Ecommerce Operations and Supply Chain and Logistics interactive sections. Operations figures are illustrative sample data."
+    "a": "Explore https://agentrome.site/project-samples/: 10 Shopify/ecommerce role samples, 3 logistics scenarios, 7 website/build showcases and 44 existing automation diagrams. Shopify concepts and operations records are illustrative, not client builds or measured results; the website demos and existing diagrams are labeled separately."
   },
   {
     "keys": [
@@ -2238,7 +2464,7 @@ const AVA_KB = [
       "hover node"
     ],
     "q": "What is the Capability Console?",
-    "a": "Explore https://agentrome.site/#capability-console. These are illustrative concept studies, not deployed client projects or measured client outcomes. The diagrams and sample agent conversations explain proposed designs. No accounts or agents are connected, and viewing or selecting a step does not send messages, change records, run agents, place orders or perform any real action. Choose a specialty and a study, then scroll inside the console to read its build plan. Diagrams advance automatically when visible and motion is enabled. Hover or focus a node to inspect it, click to pin it, and click it again or use Clear selection to unpin. Expand opens a larger diagram; close it or press Escape to return. On smaller screens scroll the diagram horizontally, or drag its empty background with a mouse. Motion can be paused and respects device reduced motion preferences."
+    "a": "Explore https://agentrome.site/#capability-console for eight specialties: GoHighLevel CRM, Hermes Agent, Shopify Operations, Meta Ads, Google Ads, Digital Marketing, SEO Specialist and Email Marketing. Each has three proposed concept studies, not deployed client work or active campaigns. Inspect, pin or expand nodes and pause diagram motion without running any real workflow."
   },
   {
     "keys": [
@@ -2422,7 +2648,7 @@ const AVA_KB = [
       "all sections"
     ],
     "q": "How do I use the command menu?",
-    "a": "The command menu is a shortcut to every portfolio section. Open it with the command button, Ctrl+K, Cmd+K or / when not typing in a field. Search, use the arrow keys and Enter to select, or Escape to close. Section destinations: Home (https://agentrome.site/#home); Services (https://agentrome.site/#services); How I work (https://agentrome.site/#capabilities); Ava, AI Agent (https://agentrome.site/#ava); ROI Calculator (https://agentrome.site/#roi); Ecommerce showcase (https://agentrome.site/#craftee); Funnels (https://agentrome.site/#funnels); Ecommerce operations (https://agentrome.site/#ecommerce-operations); Supply chain and logistics (https://agentrome.site/#logistics-operations); Projects (https://agentrome.site/#projects); Contact (https://agentrome.site/#contact); Capability Console (https://agentrome.site/#capability-console). The menu also offers service modes, Toggle light / dark and Copy email. Navigation is informational and does not submit a lead or booking."
+    "a": "Choose Light, Dark or AI Space in the navigation or Command menu. Dark is the plain charcoal default on every reload; Light is clean and static; AI Space is the optional cosmic theme. Diagram motion has a separate control, and performance depends on the device, not a zero lag guarantee."
   },
   {
     "keys": [
@@ -2433,7 +2659,7 @@ const AVA_KB = [
       "theme control"
     ],
     "q": "How do light and dark modes differ?",
-    "a": "AI Space Mode is the default and retains the original cosmic background. Light mode keeps the clean light appearance. Dark mode uses a plain dark background without space effects. Choose any of the three modes in the navigation or command menu. This background choice is separate from the Capability Console Motion control for explanatory diagrams; it does not connect or run any workflow."
+    "a": "Dark is the default on every reload, with a plain charcoal background and no space effects. Light is clean and static; AI Space is the optional cosmic appearance. Choose a mode in the navigation or Command menu. Diagram motion has its own control and does not run real workflows; performance depends on the device."
   },
   {
     "keys": [
@@ -2544,9 +2770,9 @@ function setupAvaChat(){
   const AVA_QUESTIONS = [
     {label:'Just saying hi 👋',q:'Hey Ava, how are you?'},
     {label:'Meet your boss',q:'Tell me about Rome and what he does'},
-    {label:'Show me his work',q:"Can I see Rome's work?"},
+    {label:'Explore work samples',q:'What is on the project samples page?'},
     {label:'Explore the blueprints',q:'What is the Capability Console?'},
-    {label:'Website pricing',q:'Tell me about Premium ecommerce'},
+    {label:'Email flow concepts',q:'What email marketing flows are shown?'},
     {label:"Let's connect",q:'How do I contact Rome?'}
   ];
   const avaHist = [{role:'assistant',content:"Hey, I'm Ava, Agent Rome's AI sidekick ✨ How's your day going?"}];
