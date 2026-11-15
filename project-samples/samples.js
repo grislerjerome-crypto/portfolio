@@ -1,4 +1,36 @@
 'use strict';
+/* Native portfolio title reveal: same glyph alphabet, 18 frames and 38ms cadence.
+   Wrappers preserve line breaks, gradient styling and a stable accessible name. */
+const GLY="ABCDEF0123456789@#%&*<>/\\";
+const prefersReduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+function glitchReveal(el){
+  const text=el.textContent; const reduced=prefersReduced();
+  if(reduced){el.classList.add("glitch");return;}
+  el.classList.add("glitch");
+  let frame=0;const total=18;
+  const iv=setInterval(()=>{
+    frame++;
+    if(frame>=total||prefersReduced()){el.textContent=text;clearInterval(iv);return;}
+    const keep=Math.floor(text.length*frame/total);
+    let out="";for(let i=0;i<text.length;i++){out+= i<keep ? text[i] : (text[i]===" "?" ":GLY[(Math.random()*GLY.length)|0]);}
+    el.textContent=out;
+  },38);
+}
+async function setupSampleTitles(){
+  await document.fonts.ready;
+  document.querySelectorAll('h2:not(#dialog-title)').forEach(el=>el.dataset.scramble='');
+  const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting){glitchReveal(entry.target.querySelector('.scramble-ink'));io.unobserve(entry.target);}
+  }),{threshold:.4});
+  document.querySelectorAll('[data-scramble]').forEach(el=>{
+    const text=el.textContent;
+    if(!el.hasAttribute('aria-hidden'))el.setAttribute('aria-label',text);
+    el.classList.add('scramble-shell');
+    el.innerHTML='<span class="scramble-reserve" aria-hidden="true">'+esc(text)+'</span><span class="scramble-ink" aria-hidden="true">'+esc(text)+'</span>';
+    io.observe(el);
+  });
+}
+setupSampleTitles();
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ROLES=[
@@ -30,7 +62,7 @@ function closeDetail(){dialog.close();}
 dialog.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const focusable=[...dialog.querySelectorAll('button:not([disabled]),a[href],select,input,summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});
 $('#dialog-close').addEventListener('click',closeDetail);dialog.addEventListener('close',()=>{document.body.classList.remove('modal-open');if(opener&&opener.isConnected)opener.focus();});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDetail();}});
 const stepsHTML=steps=>'<ol class="steps">'+steps.map(s=>'<li><strong>'+esc(s[0])+'</strong>'+esc(s[1])+'</li>').join('')+'</ol>';
-$('#role-grid').innerHTML=ROLES.map((r,i)=>'<article class="role-card" data-role="'+esc(r.title)+'"><div class="role-top"><span>'+String(i+2).padStart(2,'0')+' / '+esc(r.tag)+'</span>'+(r.logo!=='mailchimp.svg'?'<img src="../assets/tool-logos/'+r.logo+'" alt="'+(r.logo==='zendesk.svg'?'Zendesk':r.logo==='canva.svg'?'Canva':'Shopify')+' logo" width="22" height="22" loading="lazy">':'<span>EMAIL</span>')+'</div><div class="role-body"><span class="badge">Sample data</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.intro)+'</p><div class="role-artifact">'+r.rows.map(row=>'<div class="artifact-row"><span>'+esc(row[0])+'</span><b>'+esc(row[1])+'</b></div>').join('')+'</div><button class="text-link role-open" type="button" data-index="'+i+'">'+(r.extra==='support'?'Try the response demo':'Inspect the sample')+' ↗</button></div></article>').join('');
+$('#role-grid').innerHTML=ROLES.map((r,i)=>'<article class="role-card" data-role="'+esc(r.title)+'"><div class="role-top"><span>'+String(i+2).padStart(2,'0')+' / '+esc(r.tag)+'</span>'+(r.logo!=='mailchimp.svg'?'<img src="../assets/tool-logos/'+r.logo+'" alt="'+(r.logo==='zendesk.svg'?'Zendesk':r.logo==='canva.svg'?'Canva':'Shopify')+' logo" width="22" height="22" loading="lazy">':'<span>EMAIL</span>')+'</div><div class="role-body"><span class="badge">Sample data</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.intro)+'</p><ul class="role-route" aria-label="Key checkpoints">'+r.steps.slice(0,3).map(s=>'<li>'+esc(s[0])+'</li>').join('')+'</ul><div class="role-artifact">'+r.rows.map(row=>'<div class="artifact-row"><span>'+esc(row[0])+'</span><b>'+esc(row[1])+'</b></div>').join('')+'</div><button class="text-link role-open" type="button" data-index="'+i+'">'+(r.extra==='support'?'Try the response demo':'Inspect the sample')+' ↗</button></div></article>').join('');
 const SUPPORT={email:'Subject: An update on your order\n\nHi there,\n\nThanks for reaching out. I understand you would like an update on your delivery. Once your order is verified, I will check the latest carrier information and explain the next step. If the scan history needs investigation, I will raise it with our fulfillment team and agree a follow-up time with you.\n\nThank you for your patience.',chat:'Hi! I can help check your delivery. Please use our secure order-verification process first. I will review the latest tracking update and explain what is confirmed. If we need the carrier to investigate, I will keep the ticket open and confirm the next update with you.',call:'Opening: Thanks for calling. I understand you are checking on a delivery.\nVerify: Follow the approved identity-check process.\nInvestigate: Ask permission to review the order and tracking.\nExplain: Share only confirmed information, not an unverified ETA.\nClose: Summarize the next action, owner and agreed follow-up window.'};
 function openRole(index){const r=ROLES[index];let extra='';if(r.extra==='support')extra='<label for="support-channel">Choose a support channel</label><select id="support-channel"><option value="email">Email response</option><option value="chat">Live chat response</option><option value="call">Call guide</option></select><div class="support-reply" id="support-reply" aria-live="polite"></div>';if(r.extra==='ads')extra='<div class="deliverable"><strong>Proposed creative A / Product-led still</strong><p>Headline: Make room for your everyday.<br>Body: A simple carryall for your daily essentials. Explore the Form & Field collection.<br>CTA: Shop now.<br>Visual: original tote illustration with a clean product crop. Fictional brand, not a live ad.</p><img class="expanded-image" src="assets/ad-concept.svg" alt="Original proposed Form and Field tote ad creative, concept only"></div>';if(r.extra==='analytics')extra='<label for="report-dataset">Inspect a synthetic reporting period</label><select id="report-dataset"><option value="0">Sample A: 3,000 sessions / 120 orders</option><option value="1">Sample B: 2,500 sessions / 85 orders</option></select><div class="support-reply" id="report-result" aria-live="polite"></div>';openDetail('<span class="badge">Sample data</span><h2 id="dialog-title">'+esc(r.title)+'</h2><p>'+esc(r.intro)+'</p>'+extra+stepsHTML(r.steps)+'<div class="deliverable"><strong>Deliverable & boundary</strong><p>'+esc(r.deliverable)+'</p></div>');if(r.extra==='support'){const update=()=>$('#support-reply').textContent=SUPPORT[$('#support-channel').value];$('#support-channel').addEventListener('change',update);update();}if(r.extra==='analytics'){const update=()=>{const d=$('#report-dataset').value==='0'?[120,3000]:[85,2500];$('#report-result').textContent=d[0]+' orders ÷ '+d[1].toLocaleString()+' sessions × 100 = '+(d[0]/d[1]*100).toFixed(2)+'% order/session ratio. Synthetic data, not a measured client result.';};$('#report-dataset').addEventListener('change',update);update();}}
 document.querySelectorAll('.role-open').forEach(b=>b.addEventListener('click',()=>openRole(Number(b.dataset.index))));
