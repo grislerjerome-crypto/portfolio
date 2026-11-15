@@ -59,3 +59,20 @@ h3,.feature-copy h3,.role-body h3,.website-copy h3,.automation-copy h3,.business
 @media(max-width:620px){.brand{font-size:.8rem;letter-spacing:.1em}}
 @media(max-width:700px){.hero{padding:38px 0 28px}.hero .eyebrow{max-width:100%}.business-outcomes li{padding:22px}.business-outcomes{gap:12px}.journey{gap:6px}.feature-copy{padding:22px}}
 @media(prefers-reduced-motion:reduce){.role-card{transition:none}.role-card:hover,.role-card:focus-within{transform:none}}
+
+/* Media fitting: retain complete artwork, let frames follow intrinsic ratios. */
+.design-stage{padding:6px;align-self:center;width:100%;background:var(--panel)}
+.design-stage>img{width:100%;height:auto;object-fit:contain}
+.website-card{min-width:0}
+.website-card img{width:100%;height:auto;max-height:none;object-fit:contain}
+.automation-card{align-items:start}
+.automation-image{min-width:0;min-height:0;width:100%;padding:8px;gap:8px;align-self:start}
+.automation-image img{width:100%;height:auto;max-height:640px;object-fit:contain}
+.automation-image span{position:static;justify-self:center}
+.role-artifact{margin-left:-10px;margin-right:-10px;padding:10px;min-width:0}
+.artifact-row>*{min-width:0;overflow-wrap:anywhere}
+.logistics-shell{padding:18px}
+.shipment-layout{gap:20px;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+.shipment-summary{padding:14px;min-width:0}
+.shipment-summary dd{overflow-wrap:anywhere}
+@media(max-width:700px){.automation-image img{max-height:560px}.shipment-layout{grid-template-columns:minmax(0,1fr)}.logistics-shell{padding:14px}.shipment-summary{padding:12px}}
