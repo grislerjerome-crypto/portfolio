@@ -370,7 +370,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .proj-img img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important;display:block;opacity:.92;transition:opacity .4s,transform .4s}
 .proj-card:hover .proj-img img{opacity:1;transform:scale(1.02)}
 .proj-img .img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,14,22,.05),rgba(12,14,22,.18));pointer-events:none}
-.proj-content{padding:22px 24px;display:flex;flex-direction:column;min-height:0;height:440px;overflow:hidden;justify-content:flex-start}
+.proj-content{padding:22px 24px;display:flex;flex-direction:column;min-height:0;height:440px;overflow:auto;justify-content:flex-start}
+.proj-content>*{flex-shrink:0}
 @media(max-width:760px){.proj-card,.carousel,.proj-track{height:auto !important;min-height:auto !important;max-height:none !important;grid-template-columns:1fr}.proj-img{min-height:240px !important;height:240px !important;max-height:240px !important}.proj-content{height:auto;overflow:visible}}
 .proj-content h3{font-size:1.4rem;margin:0 0 4px;line-height:1.2}
 .proj-meta{font-size:.66rem;color:var(--muted);font-family:var(--mono);margin-bottom:10px;text-transform:uppercase;letter-spacing:.1em}
@@ -462,6 +463,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .ty-modal .ty-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;display:grid;place-items:center;transition:all .2s}
 .ty-modal .ty-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
 
+
+.showcase-play{display:block;width:auto!important;height:auto!important;margin:12px auto 0;padding:6px 12px;border:1px solid var(--panel-border);border-radius:99px;background:var(--bg-2);color:var(--txt);font:500 .68rem/1.6 var(--mono);cursor:pointer}.showcase-play:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}.book-controls{position:relative}.book-controls .book-dots{transform:translateY(-10px)}.book-controls .showcase-play{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);margin:0;padding:1px 8px;font-size:.55rem}
 </style>
 <style id="capability-and-light-theme">
 /* Capability Console v2. Scoped, portfolio-native system blueprints. */
@@ -1923,6 +1926,7 @@ $("#mb-reset").onclick=()=>setMode(null);
         card.classList.remove('active');
       }
     });
+    $$('.proj-filter-btn').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filterKey)));
     buildDots();
   }
 
@@ -1930,8 +1934,8 @@ $("#mb-reset").onclick=()=>setMode(null);
     var track=$("#proj-track"); if(!track)return;
     var html=CONFIG.projects.map(function(p,i){
       return '<div class="proj-card' + (i === 0 ? ' active' : ' hide') + '" data-proj="'+i+'">'
-        +'<div class="proj-img" onclick="openProjectImage(event, this)"><img src="'+p.img+'" alt="'+p.title+' workflow"></div>'
-        +'<div class="proj-content">'
+        +'<div class="proj-img" role="button" tabindex="0" aria-label="Expand workflow diagram" onclick="openProjectImage(event, this)"><img src="'+p.img+'" alt="'+p.title+' workflow"></div>'
+        + '<div class="proj-content" tabindex="0" aria-label="Case study details">'
         +'<h3>'+p.title+'<a class="proj-ext" href="#" aria-label="External link">↗</a></h3>'
         +'<p class="proj-desc">'+p.desc+'</p>'
         +'<div class="proj-problem"><b>Problem:</b> <span class="proj-body">'+p.problem+'</span></div>'
@@ -1944,6 +1948,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     // Add click handlers for lightbox on all project images
     $$("#proj-track .proj-img").forEach(function(el) {
       el.onclick = function(e) { openProjectImage(e, this); };
+      el.onkeydown = function(e) { if(e.key==="Enter"||e.key===" "){e.preventDefault();openProjectImage(e,this);} };
     });
     projCards=[...$$("#proj-track .proj-card")];
     projIdx=0;
@@ -1957,21 +1962,16 @@ $("#mb-reset").onclick=()=>setMode(null);
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=prevProject;
     if(next) next.onclick=nextProject;
+    setupShowcaseAutoplay($("#projects"),nextProject,$("#projects"),"project rotation");
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
       if (e.target.closest('.proj-card')) return;
-      if (e.target.closest('#proj-carousel')) {
+      if (e.target.closest('#projects')) {
         if (e.key === 'ArrowLeft') { e.preventDefault(); prevProject(); }
         if (e.key === 'ArrowRight') { e.preventDefault(); nextProject(); }
       }
     });
-    // Also allow global arrow key nav when focus is on arrow buttons or dots
-    [prev, next].forEach(function(btn) {
-      if (btn) btn.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); prevProject(); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); nextProject(); }
-      });
-    });
+
   }
   function cycleProject() {
     if (!projCards || projCards.length === 0) return;
@@ -1999,9 +1999,10 @@ $("#mb-reset").onclick=()=>setMode(null);
     var visibleCount = projCards.filter(function(c){ return c.dataset.visible === 'true'; }).length;
     dots.innerHTML = '';
     for (var i = 0; i < visibleCount; i++) {
-      dots.innerHTML += '<i class="' + (i === projIdx ? 'on' : '') + '" data-i="' + i + '"></i>';
+      dots.innerHTML += '<i class="' + (i === projIdx ? 'on' : '') + '" role="button" tabindex="0" aria-label="Show project ' + (i+1) + '" data-i="' + i + '"></i>';
     }
     $$('#proj-dots i').forEach(function (d) {
+      d.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();d.click();}};
       d.onclick = function () {
         var idx = +d.dataset.i;
         if (idx !== projIdx) { projIdx = idx; cycleProject(); }
@@ -2009,7 +2010,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     });
   }
   function updateDots() {
-    $$('#proj-dots i').forEach(function (d, i) { d.classList.toggle('on', i === projIdx); });
+    $$('#proj-dots i').forEach(function (d, i) { d.classList.toggle('on', i === projIdx);d.setAttribute('aria-pressed',String(i===projIdx)); });
   }
 function setupFooterLinks(){
   $$('a[data-footer-mode]').forEach(a=>a.addEventListener('click',e=>{
@@ -3377,21 +3378,58 @@ function setupGlitch(){$$(".title").forEach(el=>{
 });}
 
 /* ===== compact conversion funnel book ===== */
+/* Four-second, event-driven rotation. One pending timeout per visible showcase. */
+function setupShowcaseAutoplay(root, advance, mount, label){
+  if(!root || root.showcaseAutoplay)return root && root.showcaseAutoplay;
+  const media=matchMedia('(prefers-reduced-motion: reduce)');
+  let paused=media.matches, visible=false, hovering=false, timer=null;
+  const button=document.createElement('button');
+  button.type='button';button.className='showcase-play';
+  button.setAttribute('aria-label','Pause automatic '+label);
+  mount.appendChild(button);
+  const blocked=()=>document.hidden || !visible || hovering || root.contains(document.activeElement) || root.closest('[hidden]') || !!document.querySelector('dialog[open],#proj-lightbox,.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,.ava-chat.open');
+  function stop(){if(timer!==null){clearTimeout(timer);timer=null;}}
+  function sync(){
+    stop();
+    button.textContent=paused?'▶ Play':'Ⅱ Pause';
+    button.setAttribute('aria-label',(paused?'Play':'Pause')+' automatic '+label);
+    button.setAttribute('aria-pressed',String(!paused));
+    if(!paused&&!blocked())timer=setTimeout(()=>{timer=null;if(!blocked()&&!paused)advance();sync();},4000);
+  }
+  button.addEventListener('click',()=>{paused=!paused;sync();});
+  root.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovering=true;sync();}});
+  root.addEventListener('pointerleave',()=>{hovering=false;sync();});
+  root.addEventListener('focusin',sync);
+  root.addEventListener('focusout',()=>queueMicrotask(sync));
+  root.addEventListener('click',sync);
+  root.addEventListener('keydown',sync);
+  document.addEventListener('visibilitychange',sync);
+  media.addEventListener('change',()=>{if(media.matches)paused=true;sync();});
+  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});io.observe(root);
+  // Observe only modal state and ancestor visibility, never animated subtrees.
+  const mo=new MutationObserver(sync);
+  document.querySelectorAll('dialog,.bk-overlay,.ty-overlay,.palette-wrap,.ava-chat').forEach(el=>mo.observe(el,{attributes:true,attributeFilter:['open','class']}));
+  mo.observe(document.body,{childList:true});
+  for(let el=root;el&&el!==document.body;el=el.parentElement)mo.observe(el,{attributes:true,attributeFilter:['hidden']});
+  root.showcaseAutoplay={reset:sync,get paused(){return paused;},get scheduled(){return timer!==null;}};
+  sync();return root.showcaseAutoplay;
+}
+
 function setupFunnelBook(){
   const book=$("#funnel-book"); if(!book) return;
   const pages=$$("[data-book-page]",book),dots=$$("[data-book-go]",book);
   const prev=$("#book-prev"),next=$("#book-next"),count=$("#book-page-count");
-  const accents=["var(--magenta)","var(--lime)","var(--cyan)"];
+  const accents=["var(--magenta)","var(--lime)","var(--cyan)","var(--magenta)"];
   let index=0,turning=false;
   function sync(){
     book.dataset.page=String(index);book.style.setProperty("--book-accent",accents[index]);
     count.textContent=String(index+1).padStart(2,"0")+" / "+String(pages.length).padStart(2,"0");
-    prev.disabled=index===0;next.disabled=index===pages.length-1;
+    prev.disabled=false;next.disabled=false;
     dots.forEach((dot,i)=>{dot.classList.toggle("active",i===index);dot.setAttribute("aria-selected",String(i===index));});
     pages.forEach((page,i)=>page.setAttribute("aria-hidden",String(i!==index)));
   }
   function go(target){
-    target=Math.max(0,Math.min(pages.length-1,target));
+    target=(target+pages.length)%pages.length;
     if(target===index||turning)return;
     const old=pages[index],fresh=pages[target],forward=target>index;
     turning=true;
@@ -3410,6 +3448,7 @@ function setupFunnelBook(){
   dots.forEach(dot=>dot.addEventListener("click",()=>go(Number(dot.dataset.bookGo))));
   book.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(index+1);}if(e.key==="ArrowLeft"){e.preventDefault();go(index-1);}});
   sync();
+  setupShowcaseAutoplay(book,()=>go(index+1),book.querySelector(".book-controls")||book,"funnel rotation");
 }
 
 /* ===== interactive CRM showcase ===== */
@@ -3421,11 +3460,14 @@ function setupCRMShowcase(){
     simple:{src:"crm-simple-preview.png?v=divinespace-1",alt:"DivineSpace Simple CRM dashboard preview",href:"crm/simple/",label:"Open Simple CRM",kicker:"Focused client management",title:"DivineSpace Simple CRM",description:"A clean workspace for small teams that need contacts, companies, tasks and notes without the weight of a full sales platform.",points:["Contact and company management","Tasks, notes and practical CSV exports","Demo data, local persistence and branding"],cta:"Launch Simple CRM ↗"},
     enterprise:{src:"crm-enterprise-preview.png?v=divinespace-1",alt:"DivineSpace Enterprise CRM automation studio preview",href:"crm/complex/",label:"Open Enterprise CRM",kicker:"Operations and automation",title:"DivineSpace Enterprise CRM",description:"A deeper single organization workspace with pipelines, email connections, RBAC, audit history and a visual automation studio.",points:["Interactive pipelines and unified inbox","Gmail, Microsoft 365, SendGrid and Mailgun demos","HighLevel, Zapier, Make and n8n connectors"],cta:"Launch Enterprise CRM ↗"}
   };
+  let current="overview", imageTimer;
   function apply(key){
     const view=views[key];if(!view)return;
+    current=key;clearTimeout(imageTimer);
     tabs.forEach(tab=>tab.setAttribute("aria-selected",String(tab.dataset.crmView===key)));
     image.style.opacity="0";
-    setTimeout(()=>{image.src=view.src;image.alt=view.alt;image.style.opacity="1";},prefersReduced()?0:130);
+    image.src=view.src;image.alt=view.alt;
+    imageTimer=setTimeout(()=>{image.style.opacity="1";},prefersReduced()?0:130);
     preview.href=view.href;preview.setAttribute("aria-label",view.label);
     kicker.textContent=view.kicker;title.textContent=view.title;description.textContent=view.description;
     points.innerHTML=view.points.map(point=>`<span class="crm-point">${point}</span>`).join("");
@@ -3435,6 +3477,7 @@ function setupCRMShowcase(){
     tab.addEventListener("click",()=>apply(tab.dataset.crmView));
     tab.addEventListener("keydown",event=>{if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;event.preventDefault();const next=(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].focus();apply(tabs[next].dataset.crmView);});
   });
+  setupShowcaseAutoplay($("#crm-systems"),()=>{const keys=Object.keys(views);apply(keys[(keys.indexOf(current)+1)%keys.length]);},$(".crm-panel"),"CRM rotation");
 }
 
 function boot(){
@@ -3450,7 +3493,7 @@ addEventListener("resize",()=>{});
 
 <style>
 /* Lightbox */
-#proj-lightbox{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(6,8,15,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:32px;animation:lbIn .2s ease}
+#proj-lightbox{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;color:var(--txt);position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(6,8,15,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:32px;animation:lbIn .2s ease}
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
 #proj-lightbox img{max-width:min(92vw,1100px);max-height:86vh;width:auto;height:auto;display:block;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08);background:#0e1016}
 #proj-lightbox .lb-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;font-size:1.35rem;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}
@@ -3530,28 +3573,17 @@ addEventListener("resize",()=>{});
 <script>
 // Project image lightbox. works for all current + future project cards
 function openProjectImage(e, el){
-  if(e) e.preventDefault();
-  var img = el && el.querySelector ? el.querySelector('img') : null;
-  if(!img || !img.src) return;
-  var src = img.src;
-  var alt = img.alt || 'Project image';
-  // prevent duplicate
-  if(document.getElementById('proj-lightbox')) return;
-  var lb = document.createElement('div');
-  lb.id = 'proj-lightbox';
-  lb.setAttribute('role','dialog');
-  lb.setAttribute('aria-modal','true');
-  lb.innerHTML = '<button class="lb-close" aria-label="Close">\u00d7</button><img src="'+src.replace(/"/g,'&quot;')+'" alt="'+alt.replace(/"/g,'&quot;')+'"><div class="lb-cap">'+alt+'</div>';
-  lb.addEventListener('click', function(ev){
-    if(ev.target===lb) lb.remove();
-  });
-  lb.querySelector('.lb-close').onclick = function(){ lb.remove(); };
-  var onEsc = function(ev){ if(ev.key==='Escape'){ lb.remove(); document.removeEventListener('keydown', onEsc); } };
-  document.addEventListener('keydown', onEsc);
-  // also remove listener when lb removed
-  var obs = new MutationObserver(function(){ if(!document.body.contains(lb)) document.removeEventListener('keydown', onEsc); });
-  obs.observe(document.body, {childList:true});
-  document.body.appendChild(lb);
+  if(e)e.preventDefault();
+  const img=el&&el.querySelector('img');if(!img||document.getElementById('proj-lightbox'))return;
+  const opener=document.activeElement,lb=document.createElement('dialog');
+  lb.id='proj-lightbox';lb.setAttribute('aria-label',img.alt||'Workflow diagram');
+  const close=document.createElement('button');close.className='lb-close';close.type='button';close.setAttribute('aria-label','Close diagram');close.textContent='×';
+  const full=document.createElement('img');full.src=img.src;full.alt=img.alt;
+  const caption=document.createElement('div');caption.className='lb-cap';caption.textContent=img.alt;
+  lb.append(close,full,caption);document.body.append(lb);
+  lb.addEventListener('close',()=>{lb.remove();if(opener&&opener.isConnected)opener.focus({preventScroll:true});},{once:true});
+  close.onclick=()=>lb.close();lb.addEventListener('click',ev=>{if(ev.target===lb)lb.close();});
+  lb.showModal();close.focus();
 }
 </script>
 
