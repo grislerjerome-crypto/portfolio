@@ -1,43 +1,41 @@
 (()=>{
 const root=document.getElementById("sample-projects");
 const $=s=>root.matches(s)?root:root.querySelector(s), $$=s=>[...root.querySelectorAll(s)];
-/* Four-second, event-driven rotation. One pending timeout per visible showcase. */
-function setupShowcaseAutoplay(root, advance, mount, label){
-  if(!root || root.showcaseAutoplay)return root && root.showcaseAutoplay;
+/* Four-second rotation: hover the card, not the surrounding section. */
+function setupShowcaseAutoplay(root, advance, hoverTarget){
+  if(!root || !hoverTarget || root.showcaseAutoplay)return root && root.showcaseAutoplay;
   const media=matchMedia('(prefers-reduced-motion: reduce)');
-  let paused=media.matches, visible=false, hovering=false, timer=null;
-  const button=document.createElement('button');
-  button.type='button';button.className='showcase-play';
-  button.setAttribute('aria-label','Pause automatic '+label);
-  mount.appendChild(button);
-  const blocked=()=>document.hidden || !visible || hovering || root.contains(document.activeElement) || root.closest('[hidden]') || !!document.querySelector('dialog[open],#proj-lightbox,.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,.ava-chat.open');
+  let visible=false, hovering=hoverTarget.matches(':hover'), keyboard=true, timer=null;
+  const blocked=()=>media.matches || document.hidden || !visible || hovering ||
+    (keyboard && root.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) ||
+    root.closest('[hidden]') || !!document.querySelector('dialog[open],#proj-lightbox,.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,.ava-chat.open');
   function stop(){if(timer!==null){clearTimeout(timer);timer=null;}}
   function sync(){
     stop();
-    button.textContent=paused?'▶ Play':'Ⅱ Pause';
-    button.setAttribute('aria-label',(paused?'Play':'Pause')+' automatic '+label);
-    button.setAttribute('aria-pressed',String(!paused));
-    if(!paused&&!blocked())timer=setTimeout(()=>{timer=null;if(!blocked()&&!paused)advance();sync();},4000);
+    if(!blocked())timer=setTimeout(()=>{timer=null;if(!blocked())advance();sync();},4000);
   }
-  button.addEventListener('click',()=>{paused=!paused;sync();});
-  root.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovering=true;sync();}});
-  root.addEventListener('pointerleave',()=>{hovering=false;sync();});
+  hoverTarget.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovering=true;sync();}});
+  hoverTarget.addEventListener('pointerleave',()=>{hovering=false;sync();});
+  hoverTarget.addEventListener('pointercancel',()=>{hovering=false;sync();});
+  // Mouse clicks may retain focus, but only keyboard focus pauses rotation.
+  // Never blur the user's control or move focus as part of automatic navigation.
+  document.addEventListener('pointerdown',()=>{keyboard=false;sync();},true);
+  document.addEventListener('keydown',()=>{keyboard=true;sync();},true);
   root.addEventListener('focusin',sync);
   root.addEventListener('focusout',()=>queueMicrotask(sync));
   root.addEventListener('click',sync);
   root.addEventListener('keydown',sync);
   document.addEventListener('visibilitychange',sync);
-  media.addEventListener('change',()=>{if(media.matches)paused=true;sync();});
-  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});io.observe(root);
+  media.addEventListener('change',sync);
+  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});io.observe(hoverTarget);
   // Observe only modal state and ancestor visibility, never animated subtrees.
   const mo=new MutationObserver(sync);
   document.querySelectorAll('dialog,.bk-overlay,.ty-overlay,.palette-wrap,.ava-chat').forEach(el=>mo.observe(el,{attributes:true,attributeFilter:['open','class']}));
   mo.observe(document.body,{childList:true});
   for(let el=root;el&&el!==document.body;el=el.parentElement)mo.observe(el,{attributes:true,attributeFilter:['hidden']});
-  root.showcaseAutoplay={reset:sync,get paused(){return paused;},get scheduled(){return timer!==null;}};
+  root.showcaseAutoplay={reset:sync,get scheduled(){return timer!==null;}};
   sync();return root.showcaseAutoplay;
 }
-
 function openSampleProjectImage(e, el){
   if(e)e.preventDefault();
   const img=el&&el.querySelector('img');if(!img||document.getElementById('proj-lightbox'))return;
@@ -138,7 +136,7 @@ function openSampleProjectImage(e, el){
     var prev=$("#sample-proj-prev"), next=$("#sample-proj-next");
     if(prev) prev.onclick=prevProject;
     if(next) next.onclick=nextProject;
-    setupShowcaseAutoplay($("#sample-projects"),nextProject,$("#sample-projects"),"project rotation");
+    setupShowcaseAutoplay($("#sample-projects"),nextProject,$("#sample-proj-track"));
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
       if (e.target.closest('.proj-card')) return;

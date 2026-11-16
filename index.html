@@ -464,7 +464,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .ty-modal .ty-close:hover{background:var(--grad);color:#06080f;border-color:transparent;transform:rotate(90deg)}
 
 
-.showcase-play{display:block;width:auto!important;height:auto!important;margin:12px auto 0;padding:6px 12px;border:1px solid var(--panel-border);border-radius:99px;background:var(--bg-2);color:var(--txt);font:500 .68rem/1.6 var(--mono);cursor:pointer}.showcase-play:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}.book-controls{position:relative}.book-controls .book-dots{transform:translateY(-10px)}.book-controls .showcase-play{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);margin:0;padding:1px 8px;font-size:.55rem}
+
 </style>
 <style id="capability-and-light-theme">
 /* Capability Console v2. Scoped, portfolio-native system blueprints. */
@@ -1962,7 +1962,7 @@ $("#mb-reset").onclick=()=>setMode(null);
     var prev=$("#proj-prev"), next=$("#proj-next");
     if(prev) prev.onclick=prevProject;
     if(next) next.onclick=nextProject;
-    setupShowcaseAutoplay($("#projects"),nextProject,$("#projects"),"project rotation");
+    setupShowcaseAutoplay($("#projects"),nextProject,$("#proj-track"));
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
       if (e.target.closest('.proj-card')) return;
@@ -2720,7 +2720,20 @@ function setupOperationsVisuals(){
   root.dataset.operationsReady='true';
   const ecomPreview={store:{src:'apparel-lab-storefront.png',alt:'APPAREL LAB storefront preview',caption:'Storefront preview: customer shopping experience.',href:'https://apparel.agentrome.site/',label:'Open APPAREL LAB storefront'},customer:{src:'apparel-lab-customer.png',alt:'APPAREL LAB customer dashboard preview',caption:'Customer Dashboard preview: orders, saved pieces and account status.',href:'https://apparel.agentrome.site/customer-login',label:'Open APPAREL LAB customer dashboard'},admin:{src:'apparel-lab-admin.png',alt:'APPAREL LAB admin dashboard preview',caption:'Admin Dashboard preview: store management view.',href:'https://apparel.agentrome.site/admin-login',label:'Open APPAREL LAB admin dashboard'}};
   const ecomImage=document.getElementById('ecom-preview-image'),ecomCaption=document.getElementById('ecom-preview-caption'),ecomLink=document.getElementById('ecom-preview-link');
-  document.querySelectorAll('[data-ecom-view]').forEach(btn=>btn.addEventListener('click',()=>{const data=ecomPreview[btn.dataset.ecomView];if(!data||!ecomImage)return;document.querySelectorAll('[data-ecom-view]').forEach(item=>item.setAttribute('aria-pressed',String(item===btn)));ecomImage.src=data.src;ecomImage.alt=data.alt;if(ecomCaption)ecomCaption.textContent=data.caption;if(ecomLink){ecomLink.href=data.href;ecomLink.setAttribute('aria-label',data.label);}}));
+  const ecomTabs=[...document.querySelectorAll('[data-ecom-view]')];
+  let ecomCurrent='store';
+  function applyEcomPreview(key){
+    const data=ecomPreview[key];if(!data||!ecomImage)return;
+    ecomCurrent=key;
+    ecomTabs.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.ecomView===key)));
+    ecomImage.src=data.src;ecomImage.alt=data.alt;
+    if(ecomCaption)ecomCaption.textContent=data.caption;
+    if(ecomLink){ecomLink.href=data.href;ecomLink.setAttribute('aria-label',data.label);}
+  }
+  ecomTabs.forEach(btn=>btn.addEventListener('click',()=>applyEcomPreview(btn.dataset.ecomView)));
+  setupShowcaseAutoplay(document.getElementById('ecom-premium'),()=>{
+    const keys=Object.keys(ecomPreview);applyEcomPreview(keys[(keys.indexOf(ecomCurrent)+1)%keys.length]);
+  },document.getElementById('ecom-premium'));
   const commerce={week:{values:['$48.6K','1,284','$74.20','14'],notes:['+12.4% vs prior','92% fulfilled','+$5.80','5 high priority'],title:'SALES TREND / 7 DAYS',readout:'$48.6K SAMPLE NET SALES',total:'1,284 TOTAL',mix:[52,27,12,9],points:'0,175 80,150 160,161 240,112 320,126 400,74 480,92 560,42 640,58'},month:{values:['$186K','4,932','$76.10','31'],notes:['+8.7% vs prior','94% fulfilled','+$3.20','9 high priority'],title:'SALES TREND / 30 DAYS',readout:'$186K SAMPLE NET SALES',total:'4,932 TOTAL',mix:[58,24,10,8],points:'0,184 80,164 160,132 240,145 320,94 400,108 480,62 560,79 640,31'},quarter:{values:['$542K','14,806','$78.40','47'],notes:['+16.2% vs prior','95% fulfilled','+$6.70','12 high priority'],title:'SALES TREND / 90 DAYS',readout:'$542K SAMPLE NET SALES',total:'14,806 TOTAL',mix:[63,21,9,7],points:'0,191 80,172 160,148 240,119 320,135 400,88 480,69 560,47 640,24'}};
   const commerceButtons=[...document.querySelectorAll('[data-commerce-view]')];
   let commerceKey='week';
@@ -3378,43 +3391,41 @@ function setupGlitch(){$$(".title").forEach(el=>{
 });}
 
 /* ===== compact conversion funnel book ===== */
-/* Four-second, event-driven rotation. One pending timeout per visible showcase. */
-function setupShowcaseAutoplay(root, advance, mount, label){
-  if(!root || root.showcaseAutoplay)return root && root.showcaseAutoplay;
+/* Four-second rotation: hover the card, not the surrounding section. */
+function setupShowcaseAutoplay(root, advance, hoverTarget){
+  if(!root || !hoverTarget || root.showcaseAutoplay)return root && root.showcaseAutoplay;
   const media=matchMedia('(prefers-reduced-motion: reduce)');
-  let paused=media.matches, visible=false, hovering=false, timer=null;
-  const button=document.createElement('button');
-  button.type='button';button.className='showcase-play';
-  button.setAttribute('aria-label','Pause automatic '+label);
-  mount.appendChild(button);
-  const blocked=()=>document.hidden || !visible || hovering || root.contains(document.activeElement) || root.closest('[hidden]') || !!document.querySelector('dialog[open],#proj-lightbox,.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,.ava-chat.open');
+  let visible=false, hovering=hoverTarget.matches(':hover'), keyboard=true, timer=null;
+  const blocked=()=>media.matches || document.hidden || !visible || hovering ||
+    (keyboard && root.contains(document.activeElement) && document.activeElement.matches(':focus-visible')) ||
+    root.closest('[hidden]') || !!document.querySelector('dialog[open],#proj-lightbox,.bk-overlay.open,.ty-overlay.open,.palette-wrap.open,.ava-chat.open');
   function stop(){if(timer!==null){clearTimeout(timer);timer=null;}}
   function sync(){
     stop();
-    button.textContent=paused?'▶ Play':'Ⅱ Pause';
-    button.setAttribute('aria-label',(paused?'Play':'Pause')+' automatic '+label);
-    button.setAttribute('aria-pressed',String(!paused));
-    if(!paused&&!blocked())timer=setTimeout(()=>{timer=null;if(!blocked()&&!paused)advance();sync();},4000);
+    if(!blocked())timer=setTimeout(()=>{timer=null;if(!blocked())advance();sync();},4000);
   }
-  button.addEventListener('click',()=>{paused=!paused;sync();});
-  root.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovering=true;sync();}});
-  root.addEventListener('pointerleave',()=>{hovering=false;sync();});
+  hoverTarget.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovering=true;sync();}});
+  hoverTarget.addEventListener('pointerleave',()=>{hovering=false;sync();});
+  hoverTarget.addEventListener('pointercancel',()=>{hovering=false;sync();});
+  // Mouse clicks may retain focus, but only keyboard focus pauses rotation.
+  // Never blur the user's control or move focus as part of automatic navigation.
+  document.addEventListener('pointerdown',()=>{keyboard=false;sync();},true);
+  document.addEventListener('keydown',()=>{keyboard=true;sync();},true);
   root.addEventListener('focusin',sync);
   root.addEventListener('focusout',()=>queueMicrotask(sync));
   root.addEventListener('click',sync);
   root.addEventListener('keydown',sync);
   document.addEventListener('visibilitychange',sync);
-  media.addEventListener('change',()=>{if(media.matches)paused=true;sync();});
-  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});io.observe(root);
+  media.addEventListener('change',sync);
+  const io=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});io.observe(hoverTarget);
   // Observe only modal state and ancestor visibility, never animated subtrees.
   const mo=new MutationObserver(sync);
   document.querySelectorAll('dialog,.bk-overlay,.ty-overlay,.palette-wrap,.ava-chat').forEach(el=>mo.observe(el,{attributes:true,attributeFilter:['open','class']}));
   mo.observe(document.body,{childList:true});
   for(let el=root;el&&el!==document.body;el=el.parentElement)mo.observe(el,{attributes:true,attributeFilter:['hidden']});
-  root.showcaseAutoplay={reset:sync,get paused(){return paused;},get scheduled(){return timer!==null;}};
+  root.showcaseAutoplay={reset:sync,get scheduled(){return timer!==null;}};
   sync();return root.showcaseAutoplay;
 }
-
 function setupFunnelBook(){
   const book=$("#funnel-book"); if(!book) return;
   const pages=$$("[data-book-page]",book),dots=$$("[data-book-go]",book);
@@ -3448,7 +3459,7 @@ function setupFunnelBook(){
   dots.forEach(dot=>dot.addEventListener("click",()=>go(Number(dot.dataset.bookGo))));
   book.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(index+1);}if(e.key==="ArrowLeft"){e.preventDefault();go(index-1);}});
   sync();
-  setupShowcaseAutoplay(book,()=>go(index+1),book.querySelector(".book-controls")||book,"funnel rotation");
+  setupShowcaseAutoplay(book,()=>go(index+1),book.querySelector(".book-viewport"));
 }
 
 /* ===== interactive CRM showcase ===== */
@@ -3477,7 +3488,7 @@ function setupCRMShowcase(){
     tab.addEventListener("click",()=>apply(tab.dataset.crmView));
     tab.addEventListener("keydown",event=>{if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;event.preventDefault();const next=(index+(event.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;tabs[next].focus();apply(tabs[next].dataset.crmView);});
   });
-  setupShowcaseAutoplay($("#crm-systems"),()=>{const keys=Object.keys(views);apply(keys[(keys.indexOf(current)+1)%keys.length]);},$(".crm-panel"),"CRM rotation");
+  setupShowcaseAutoplay($("#crm-systems"),()=>{const keys=Object.keys(views);apply(keys[(keys.indexOf(current)+1)%keys.length]);},$(".crm-showcase"));
 }
 
 function boot(){
