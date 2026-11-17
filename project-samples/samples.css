@@ -229,5 +229,16 @@ h3,.feature-copy h3,.role-body h3,.website-copy h3{font-size:1.12rem;font-weight
 @media (max-width:700px){
 .logistics-shell{padding:14px}
 .shipment-summary{padding:12px}}
+.sample-placeholder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:28px 0 38px}
+.sample-placeholder{min-width:0;margin:0;border:1px solid var(--panel-border);border-radius:12px;overflow:hidden;background:var(--panel)}
+.sample-placeholder-frame{aspect-ratio:16/9;display:grid;place-items:center;background:radial-gradient(ellipse at center,#8ec8fa0a,transparent 70%),var(--bg-2);border-bottom:1px solid var(--panel-border);padding:22px}
+.sample-placeholder-frame svg{width:32px;height:32px;fill:none;stroke:var(--muted);stroke-width:1.2;opacity:.65}
+.sample-placeholder-frame img{width:100%;height:100%;object-fit:contain;min-height:0}
+.sample-placeholder-copy{padding:18px 20px}
+.sample-placeholder-copy h2{font-size:1.12rem;line-height:1.3;margin:0 0 8px;overflow-wrap:anywhere}
+.sample-placeholder-copy p{font-size:.8rem;margin:0}
+.filters button{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:1000px){.sample-placeholder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.sample-placeholder-grid{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:24px}}
 .shipment-summary details{margin-top:18px}
 .shipment-summary details .steps{margin-top:20px}
