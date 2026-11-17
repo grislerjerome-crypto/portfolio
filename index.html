@@ -395,7 +395,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:0;border-radiu
 .footer .col h4{font-family:var(--mono);font-size:.76rem;letter-spacing:.2em;color:var(--muted);margin-bottom:12px}
 .footer .col a{display:block;color:var(--muted);font-size:.9rem;margin-bottom:8px;transition:color .2s}
 .footer .col a:hover{color:var(--txt)}
-.footer .bottom{margin-top:32px;color:var(--muted);font-size:.82rem;text-align:center;border-top:1px solid var(--panel-border);padding-top:22px}
+
 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(10,11,15,.8);backdrop-filter:blur(8px);color:var(--txt);cursor:pointer;font-size:1.2rem;z-index:60;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s,background .2s}
 #toTop.show{opacity:1;transform:none}#toTop:hover{background:var(--grad);color:#06080f;border-color:transparent}
 
@@ -1191,7 +1191,7 @@ html[data-theme="dark"] ::selection{background:#315878;color:#fff}
     <div class="col"><h4>EXPLORE</h4><a href="#craftee">Ecom Websites</a><a href="#funnels">Funnels</a><a href="#crm-systems">CRM Systems</a><a href="#projects">Automation Templates</a></div>
     <div class="col"><h4>CONNECT</h4><a id="foot-email" href="mailto:grislerjerome@gmail.com">Email</a><a id="foot-facebook" href="https://www.facebook.com/jeromegrslr" target="_blank" rel="noopener">Facebook</a><a id="foot-linkedin" href="https://www.linkedin.com/in/jerome-grisler-7041ab3a7/" target="_blank" rel="noopener">LinkedIn</a><a id="foot-onlinejobs" href="https://v2.onlinejobs.ph/jobseekers/info/3208572" target="_blank" rel="noopener">OnlineJobs.ph</a><a id="foot-upwork" href="https://www.upwork.com/freelancers/~01f2abcdb404da586f" target="_blank" rel="noopener">Upwork</a></div>
   </div>
-  <div class="bottom wrap" id="footer-bottom">© <span id="year"></span> Jerome Grisler. Built as a live console.</div>
+
 </footer>
 
 <button id="toTop" aria-label="Back to top">↑</button>
@@ -1822,7 +1822,7 @@ function applyStatic(){
   $("#cta-email").textContent="Or email me";$("#cta-email").href="mailto:"+CONFIG.cta.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#footer-tag").textContent=CONFIG.role+", building the engine that runs while you sleep.";
   $$(".brand").forEach(b=>b.innerHTML=CONFIG.name.replace(/(.+)\s(\S+)$/,'$1 <b>$2</b>'));
-  $("#year").textContent=new Date().getFullYear();
+
   $("#foot-linkedin").href=CONFIG.social.linkedin;
   $("#foot-email").href="mailto:"+CONFIG.social.email+"?subject=Connect%20with%20Agent%20Rome";
   $("#foot-facebook").href=CONFIG.social.facebook;
