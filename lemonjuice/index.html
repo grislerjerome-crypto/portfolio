@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260930-typography">
+  <link rel="stylesheet" href="styles.css?v=lemon-refresh-1">
 </head>
 <body>
   <a class="skip-link" href="#flavors">Skip to flavors</a>
@@ -43,21 +43,21 @@
       <div class="hero-aurora" aria-hidden="true"></div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="kicker"><span></span> Pressed at 05:42 · Val di Noto</p>
+          <p class="kicker"><span></span> A Sicilian citrus concept</p>
           <h1>Taste the<br><em>first light.</em></h1>
-          <p class="hero-lead">Sicilian citrus pressed within four hours of harvest, bottled cold, and delivered as a six flavor morning ritual.</p>
+          <p class="hero-lead">A little Sicily in your morning. Explore four citrus blends and mix a six bottle flight of your own.</p>
           <div class="hero-actions">
-            <a class="button button-acid" href="#crate">Build your tasting flight</a>
+            <a class="button button-acid" href="#crate">Build your crate <span aria-hidden="true">↗</span></a>
             <a class="line-link" href="#flavors">Explore the flavor lab <span>↘</span></a>
           </div>
           <div class="hero-proof">
-            <div><strong>4.98</strong><span>Guest taste score</span></div>
-            <div><strong>34°F</strong><span>Cold chain delivery</span></div>
-            <div><strong>0g</strong><span>Added sugar</span></div>
+            <div><strong>04</strong><span>Citrus blends</span></div>
+            <div><strong>06</strong><span>Bottles, your way</span></div>
+            <div><strong>$12</strong><span>Per bottle · demo</span></div>
           </div>
         </div>
 
-        <div class="product-universe" id="productUniverse" aria-label="Interactive Sicilian lemon juice presentation">
+        <div class="product-universe" id="productUniverse" aria-label="Sicilian lemon juice presentation">
           <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
           <div class="slice slice-one"><i></i></div><div class="slice slice-two"><i></i></div><div class="slice slice-three"><i></i></div>
           <div class="leaf leaf-one"></div><div class="leaf leaf-two"></div>
@@ -65,10 +65,8 @@
             <img src="assets/hero-product.jpg" alt="Sicilian lemon juice bottle surrounded by fresh lemon slices" width="512" height="286">
             <div class="stage-sheen"></div>
           </div>
-          <div class="telemetry telemetry-a"><small>PRESS BATCH</small><strong>#049</strong></div>
-          <div class="telemetry telemetry-b"><small>NATURAL VITAMIN C</small><strong>380mg</strong></div>
-          <div class="telemetry telemetry-c"><span></span> LIVE COLD CHAIN</div>
-          <p class="drag-note">Move to orbit the harvest</p>
+          <div class="telemetry telemetry-a"><small>THE SIGNATURE BLEND</small><strong>Primofiore</strong></div>
+          <p class="drag-note">Lemon peel · mineral water · first light</p>
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true"><div>PRIMOFIORE · MORO BLOOD ORANGE · CUCUMBER MINT · LAVENDER THYME · PRIMOFIORE · MORO BLOOD ORANGE · CUCUMBER MINT · LAVENDER THYME ·</div></div>
@@ -83,7 +81,7 @@
           <div class="origin-coordinates">36.8927° N<br>15.0682° E</div>
         </div>
         <div class="origin-copy reveal">
-          <p class="eyebrow">01 · THE ORIGIN</p>
+          <p class="eyebrow">01 · THE ORIGIN CONCEPT</p>
           <h2>Four hours from branch to bottle.</h2>
           <p>Fruit is clipped before the grove warms, pressed without heat, and sealed while its aroma is still bright.</p>
           <div class="process-list">
@@ -99,14 +97,14 @@
     <section class="flavors" id="flavors">
       <div class="section-head reveal">
         <p class="eyebrow">02 · FLAVOR LAB</p>
-        <h2>Choose your morning chemistry.</h2>
-        <p>Each blend changes the ritual, color, and sensory profile. Select a bottle to transform the lab.</p>
+        <h2>Find your kind of bright.</h2>
+        <p>Sharp citrus, cool mint or a softer botanical finish. Choose a blend and get to know your next pour.</p>
       </div>
 
       <div class="flavor-lab reveal" id="flavorLab">
         <div class="flavor-scene">
           <div class="flavor-aura" id="flavorAura"></div>
-          <img id="flavorImage" src="assets/flavor-trio.jpg" alt="Three premium citrus juice flavors on ice" width="512" height="286">
+          <img id="flavorImage" src="assets/flavor-trio.jpg" alt="Concept citrus collection with cucumber, lemon and blood orange bottles" width="512" height="286" loading="lazy" decoding="async">
           <div class="scene-scan"></div>
           <div class="active-marker" id="activeMarker"><span>01</span></div>
           <div class="scene-caption"><small>ACTIVE PRESS</small><strong id="sceneFlavor">Primofiore Classic</strong></div>
@@ -118,11 +116,12 @@
             <button class="flavor-tab" type="button" role="tab" aria-selected="false" data-flavor="2"><span style="--dot:#ff7c4d"></span>03</button>
             <button class="flavor-tab" type="button" role="tab" aria-selected="false" data-flavor="3"><span style="--dot:#c7afe8"></span>04</button>
           </div>
-          <div class="flavor-copy">
+          <div class="flavor-copy" id="flavorPanel" role="tabpanel" aria-labelledby="flavorTab0">
             <p class="eyebrow" id="flavorBatch">PRESS 01 · BATCH 049</p>
             <h3 id="flavorTitle">Primofiore Classic</h3>
             <p id="flavorDescription">Clean Sicilian lemon with bright peel oils, mineral spring water, and a dry finish.</p>
           </div>
+          <p class="profile-note">Illustrative tasting profile, not nutritional data.</p>
           <div class="sensory-grid">
             <div class="sensory-ring" id="sensoryRing"><div><strong id="brixValue">8.2°</strong><small>BRIX</small></div></div>
             <div class="sensory-bars">
@@ -141,7 +140,7 @@
       <div class="purity-intro reveal">
         <p class="eyebrow">03 · NOTHING HIDDEN</p>
         <h2>Read the bottle<br>like a formula.</h2>
-        <p>Every claim is translated into something you can understand before a bottle reaches your crate.</p>
+        <p>The imagined ingredients and process behind the collection. Product details are illustrative, not verified claims.</p>
       </div>
       <div class="purity-stack">
         <article class="purity-card reveal" data-tilt>
@@ -164,10 +163,11 @@
         <p class="eyebrow">04 · YOUR SIX BOTTLE FLIGHT</p>
         <h2>Build a crate around your rhythm.</h2>
         <p>Choose six bottles. Mix bright mornings, cool resets, and slower evening pours.</p>
-        <div class="crate-benefits"><span>Cold delivery included at six</span><span>Save 20% on every full crate</span><span>Pause or change anytime</span></div>
+        <div class="crate-benefits"><span>Four blends. Any combination.</span><span>$12 per bottle. $72 for six.</span><span>Try the builder. No order or payment.</span></div>
       </div>
       <div class="crate-builder reveal">
-        <div class="crate-top"><div><small>YOUR TASTING FLIGHT</small><strong><span id="crateCount">3</span> of 6 bottles</strong></div><span id="crateStatus">Add 3 more for cold delivery</span></div>
+        <div class="crate-top"><div><small>YOUR TASTING FLIGHT</small><strong><span id="crateCount">3</span> of 6 bottles</strong></div><button id="resetCrate" class="reset-crate" type="button">Clear crate</button></div>
+        <p id="crateStatus" role="status" aria-live="polite">3 spaces left. Make them yours.</p>
         <div class="bottle-slots" id="bottleSlots" aria-label="Crate bottle slots"></div>
         <div class="crate-progress"><i id="crateProgress"></i></div>
         <div class="crate-selector">
@@ -175,25 +175,23 @@
           <div><select id="quickFlavor"><option value="0">Primofiore Classic</option><option value="1">Cucumber Mint</option><option value="2">Moro Blood Orange</option><option value="3">Lavender Thyme</option></select><button id="quickAdd" type="button">Add to crate</button></div>
         </div>
         <div class="crate-total"><div><small>CRATE TOTAL</small><strong id="crateTotal">$36.00</strong></div><button class="button button-dark" id="checkoutButton" type="button">Complete your crate</button></div>
-        <p class="prototype-note">Interactive concept. No payment is processed.</p>
+        <p class="prototype-note">Demo prices only. No order is placed or payment processed.</p>
+        <div id="crateReview" class="crate-review" hidden tabindex="-1"></div>
       </div>
     </section>
 
-    <section class="proof">
-      <div class="proof-quote reveal"><p>“</p><blockquote>It tastes like someone captured the first ten minutes of a Sicilian morning.</blockquote><div><strong>Amelia R.</strong><span>Verified tasting flight · New York</span></div></div>
-      <div class="proof-metrics reveal"><div><strong>32,400</strong><span>Morning rituals delivered</span></div><div><strong>4.98</strong><span>Average taste score</span></div><div><strong>18h</strong><span>Harvest to cold dispatch</span></div></div>
-    </section>
 
     <section class="finale">
       <div class="finale-sun"></div><div class="finale-slice slice"><i></i></div>
-      <div class="finale-copy reveal"><p class="eyebrow">THE NEXT PRESS LEAVES FRIDAY</p><h2>Make morning<br>taste alive.</h2><a class="button button-acid" href="#crate">Build your tasting flight</a></div>
+      <div class="finale-copy reveal"><p class="eyebrow">A SMALL RITUAL. ALL YOUR OWN.</p><h2>Make morning<br>taste alive.</h2><a class="button button-acid" href="#crate">Mix your six</a></div>
     </section>
   </main>
 
-  <footer><div class="footer-brand"><span class="brand-fruit"><i></i></span><strong>LIMONE SANCTUARY</strong></div><p>Val di Noto, Sicily · Cold pressed citrus rituals</p><div><a href="#origin">Origin</a><a href="#purity">Purity</a><a href="#">Delivery</a><a href="#">Journal</a></div><small>Concept experience created for portfolio demonstration. Product claims and customer data are illustrative.</small></footer>
+  <footer><div class="footer-brand"><span class="brand-fruit"><i></i></span><strong>LIMONE SANCTUARY</strong></div><p>Inspired by Sicily. Made for slow mornings.</p><div><a href="#origin">Origin</a><a href="#flavors">The blends</a><a href="#crate">Your crate</a></div><small>Portfolio concept. Product imagery, prices and product claims are illustrative. Nothing is sold here.</small></footer>
 
   <aside class="crate-dock" id="crateDock" aria-label="Current crate summary"><button class="dock-slots js-open-crate" id="dockSlots" type="button" aria-label="Open crate"></button><div><small>CUSTOM FLIGHT</small><strong><span id="dockCount">3</span> / 6 · <span id="dockTotal">$36</span></strong></div><button class="dock-button js-open-crate" type="button">View crate</button></aside>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=20260930-typography"></script>
+  <noscript><p class="no-script">This is a product concept. Enable JavaScript to explore the four blends and build a demo crate. No purchases are available.</p></noscript>
+  <script src="script.js?v=lemon-refresh-1"></script>
 </body>
 </html>
