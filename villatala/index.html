@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260930-typography">
+  <link rel="stylesheet" href="styles.css?v=20261122-editorial">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -18,8 +18,8 @@
   <header class="site-header" id="siteHeader">
     <a class="brand" href="#top" aria-label="Villa Tala home"><span class="brand-mark">VT</span><span><b>VILLA TALA</b><small>EL NIDO · PALAWAN</small></span></a>
     <nav aria-label="Primary navigation"><a href="#sanctuary">Sanctuary</a><a href="#rituals">Island rituals</a><a href="#reserve">Private stay</a></nav>
-    <button class="header-cta js-reserve" type="button">Check your dates</button>
-    <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false"><i></i><i></i></button>
+    <a class="header-cta" href="#reserve">Build your stay</a>
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation" aria-controls="mobileMenu" aria-expanded="false"><i></i><i></i></button>
   </header>
   <div class="mobile-menu" id="mobileMenu"><a href="#sanctuary">Sanctuary</a><a href="#rituals">Island rituals</a><a href="#stewardship">Place</a><a href="#reserve">Private stay</a></div>
 
@@ -30,13 +30,13 @@
         <div class="hero-overline"><span>11.1956° N · 119.4124° E</span><span>PRIVATE ISLAND STAY CONCEPT</span></div>
         <div class="hero-copy">
           <p class="eyebrow">BACUIT BAY · EL NIDO</p>
-          <h1>An island that keeps the outside world outside.</h1>
+          <h1>An island.<br><em>Entirely yours.</em></h1>
           <p>Five ocean pavilions, one private lagoon, and a stay shaped around the people you brought with you.</p>
-          <div class="hero-actions"><button class="button button-light js-reserve" type="button">Shape your private stay</button><a href="#sanctuary" class="quiet-link">Enter the sanctuary <span>↓</span></a></div>
+          <div class="hero-actions"><a class="button button-light" href="#reserve">Shape your private stay</a><a href="#sanctuary" class="quiet-link">Enter the sanctuary <span>↓</span></a></div>
         </div>
         <div class="hero-signals"><div><small>SETTING</small><strong>Karst and lagoon</strong></div><div><small>ESTATE</small><strong>5 pavilions</strong></div><div><small>PACE</small><strong>Entirely yours</strong></div></div>
       </div>
-      <div class="tide-card" aria-label="Illustrative island conditions"><div><span>ISLAND CONDITIONS</span><i>CALM</i></div><strong>29°</strong><p>Warm air · soft tide · clear passage</p><div class="tide-wave"><i></i><i></i><i></i></div></div>
+      <div class="tide-card" aria-label="Illustrative island conditions"><div><span>ILLUSTRATIVE CONDITIONS</span><i>CALM</i></div><strong>29°</strong><p>Warm air · soft tide · clear passage</p><div class="tide-wave"><i></i><i></i><i></i></div></div>
       <div class="scroll-note">SCROLL INTO BACUIT BAY<i></i></div>
     </section>
 
@@ -45,7 +45,7 @@
     <section class="sanctuary section" id="sanctuary">
       <div class="section-intro reveal"><p class="eyebrow">01 · THE SANCTUARY</p><h2>Architecture that lets the island speak first.</h2><p>Timber, woven fiber, stone and open air frame the lagoon without competing with it.</p></div>
       <div class="suite-shell reveal">
-        <div class="suite-stage"><img id="suiteImage" src="assets/suite.jpg" alt="Ocean pavilion bedroom overlooking El Nido limestone cliffs"><div class="suite-shade"></div><div class="suite-index"><span id="suiteNumber">01</span> / 03</div><button class="suite-hotspot" id="suiteHotspot" type="button" aria-label="Show pavilion detail"><i></i><span>OPEN AIR VIEW</span></button><div class="suite-fact" id="suiteFact"><small>DESIGN DETAIL</small><p>Full height glass disappears into the wall so the pavilion opens directly to the bay.</p></div></div>
+        <div class="suite-stage"><img loading="lazy" decoding="async" id="suiteImage" src="assets/suite.jpg" alt="Ocean pavilion bedroom overlooking El Nido limestone cliffs"><div class="suite-shade"></div><div class="suite-index"><span id="suiteNumber">01</span> / 03</div><button class="suite-hotspot" id="suiteHotspot" type="button" aria-label="Show pavilion detail"><i></i><span>OPEN AIR VIEW</span></button><div class="suite-fact" id="suiteFact"><small>DESIGN DETAIL</small><p>Full height glass disappears into the wall so the pavilion opens directly to the bay.</p></div></div>
         <aside class="suite-copy" aria-live="polite"><p class="eyebrow" id="suiteKicker">MASTER PAVILION</p><h3 id="suiteTitle">Wake up inside the horizon.</h3><p id="suiteDescription">A quiet canopy room with uninterrupted water views, natural textures and a private deck for first light.</p><dl><div><dt>Sleep</dt><dd id="suiteSleep">2 guests</dd></div><div><dt>View</dt><dd id="suiteView">Bacuit sunrise</dd></div><div><dt>Ritual</dt><dd id="suiteRitual">Morning soak</dd></div></dl><div class="suite-tabs"><button class="active" type="button" data-suite="master">Master</button><button type="button" data-suite="cliff">Cliff</button><button type="button" data-suite="lagoon">Lagoon</button></div></aside>
       </div>
     </section>
@@ -53,15 +53,15 @@
     <section class="rituals section" id="rituals">
       <div class="ritual-head reveal"><div><p class="eyebrow">02 · A DAY AT VILLA TALA</p><h2>The itinerary follows the light.</h2></div><p>Choose a moment and watch the island shift around you.</p></div>
       <div class="ritual-stage reveal">
-        <img id="ritualImage" src="assets/catamaran.jpg" alt="Private catamaran in a quiet El Nido lagoon">
+        <img loading="lazy" decoding="async" id="ritualImage" src="assets/catamaran.jpg" alt="Private catamaran in a quiet El Nido lagoon">
         <div class="ritual-overlay"></div>
         <div class="ritual-copy"><span id="ritualTime">06:10</span><p class="eyebrow" id="ritualKicker">FIRST LIGHT</p><h3 id="ritualTitle">Sail before the bay wakes.</h3><p id="ritualDescription">Leave the private pier while the water is still glass and the public routes are still quiet.</p><div class="ritual-meta"><span id="ritualLength">4 hours</span><span id="ritualSetting">Private crew</span></div></div>
-        <div class="ritual-nav" role="tablist" aria-label="Choose an island ritual"><button class="active" type="button" data-ritual="dawn"><span>06</span>Dawn sail</button><button type="button" data-ritual="noon"><span>12</span>Hilot</button><button type="button" data-ritual="sunset"><span>18</span>Kamayan</button><button type="button" data-ritual="night"><span>22</span>Night water</button></div>
+        <div class="ritual-nav" role="group" aria-label="Choose an island ritual"><button class="active" type="button" data-ritual="dawn"><span>06</span>Dawn sail</button><button type="button" data-ritual="noon"><span>12</span>Hilot</button><button type="button" data-ritual="sunset"><span>18</span>Kamayan</button><button type="button" data-ritual="night"><span>22</span>Night water</button></div>
       </div>
     </section>
 
     <section class="stewardship section" id="stewardship">
-      <div class="map-panel reveal"><img src="assets/map.jpg" alt="Map of El Nido and Bacuit Bay"><div class="map-wash"></div><div class="map-pin"><i></i><span><small>VILLA TALA</small>Quiet channel concept</span></div><div class="route-line"><i></i></div></div>
+      <div class="map-panel reveal"><img loading="lazy" decoding="async" src="assets/map.jpg" alt="Map of El Nido and Bacuit Bay"><div class="map-wash"></div><div class="map-pin"><i></i><span><small>VILLA TALA</small>Quiet channel concept</span></div><div class="route-line"><i></i></div></div>
       <div class="place-copy reveal"><p class="eyebrow">03 · THE PLACE</p><h2>Close enough to reach. Far enough to disappear.</h2><p>The journey begins at Lio and moves across Bacuit Bay into a private channel framed by limestone towers.</p><div class="route-options"><div><span>01</span><p><strong>From Lio</strong><small>Private tender across the bay</small></p></div><div><span>02</span><p><strong>From Manila</strong><small>Air connection, then island transfer</small></p></div></div><p class="concept-note">Route and timings are illustrative for this portfolio concept.</p></div>
     </section>
 
@@ -70,17 +70,19 @@
       <div class="reserve-shell reveal">
         <form class="stay-builder" id="stayBuilder">
           <fieldset><legend>01 · Choose your stay</legend><div class="night-options"><button type="button" data-nights="3"><b>3 nights</b><small>Island pause</small></button><button class="active" type="button" data-nights="7"><i>Most immersive</i><b>7 nights</b><small>Full rhythm</small></button><button type="button" data-nights="14"><b>14 nights</b><small>Live slowly</small></button></div></fieldset>
-          <fieldset><legend>02 · Shape the arrival</legend><label class="addon"><input id="seaplane" type="checkbox" checked><span><b>Private island transfer</b><small>Round trip boat transfer from El Nido</small></span><strong>+₱18,000</strong></label><label class="addon"><input id="hilot" type="checkbox" checked><span><b>Hilot wellness ritual</b><small>Two private sessions for your stay</small></span><strong>+₱6,500</strong></label><label class="addon"><input id="cellar" type="checkbox"><span><b>Island cellar pairing</b><small>Curated wine and local spirits</small></span><strong>+₱7,500</strong></label></fieldset>
+          <fieldset><legend>02 · Add to your stay</legend><label class="addon"><input id="seaplane" type="checkbox" checked><span><b>Private island transfer</b><small>Round trip boat transfer from El Nido</small></span><strong>+₱18,000</strong></label><label class="addon"><input id="hilot" type="checkbox" checked><span><b>Hilot wellness ritual</b><small>Two private sessions for your stay</small></span><strong>+₱6,500</strong></label><label class="addon"><input id="cellar" type="checkbox"><span><b>Island cellar pairing</b><small>Curated wine and local spirits</small></span><strong>+₱7,500</strong></label></fieldset>
         </form>
-        <aside class="stay-summary"><div class="summary-top"><span>YOUR VILLA TALA CONCEPT</span><i>AVAILABLE TO EXPLORE</i></div><h3>Private estate<br>buyout</h3><div class="summary-lines"><div><span id="nightLabel">7 nights × ₱16,900</span><strong id="nightCost">₱118,300</strong></div><div id="seaplaneRow"><span>Private island transfer</span><strong>₱18,000</strong></div><div id="hilotRow"><span>Hilot wellness ritual</span><strong>₱6,500</strong></div><div id="cellarRow" hidden><span>Island cellar pairing</span><strong>₱7,500</strong></div><div><span>Marine stewardship contribution</span><strong>₱2,500</strong></div></div><div class="stay-total"><small>ILLUSTRATIVE TOTAL</small><strong id="totalPrice">₱145,300</strong></div><button class="button button-gold" id="holdButton" type="button">Place a concept hold</button><p>No payment or personal information is collected.</p></aside>
+        <aside class="stay-summary"><div class="summary-top"><span>YOUR VILLA TALA CONCEPT</span><i>SAMPLE PRICING</i></div><h3>Private estate<br>buyout</h3><div class="summary-lines"><div><span id="nightLabel">7 nights × ₱16,900</span><strong id="nightCost">₱118,300</strong></div><div id="seaplaneRow"><span>Private island transfer</span><strong>₱18,000</strong></div><div id="hilotRow"><span>Hilot wellness ritual</span><strong>₱6,500</strong></div><div id="cellarRow" hidden><span>Island cellar pairing</span><strong>₱7,500</strong></div><div><span>Marine stewardship contribution</span><strong>₱2,500</strong></div></div><div class="stay-total" aria-live="polite" aria-atomic="true"><small>ILLUSTRATIVE TOTAL</small><strong id="totalPrice">₱145,300</strong></div><button class="button button-gold" id="holdButton" type="button">Review your stay</button><p>No payment or personal information is collected.</p></aside>
       </div>
     </section>
   </main>
 
   <footer><a class="brand" href="#top"><span class="brand-mark">VT</span><span><b>VILLA TALA</b><small>EL NIDO · PALAWAN</small></span></a><p>A private island stay concept shaped by place, pace and quiet.</p><div><a href="#sanctuary">Sanctuary</a><a href="#rituals">Rituals</a><a href="#reserve">Stay builder</a></div><small>Interactive portfolio concept · 2026</small></footer>
 
-  <div class="modal" id="holdModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button><span>CONCEPT HOLD READY</span><h2 id="modalTitle">Your island stay has taken shape.</h2><p>The selected experience is saved only in this browser session. This portfolio concept does not transmit information or process payment.</p><div><small>ILLUSTRATIVE TOTAL</small><strong id="modalTotal">₱145,300</strong></div><button class="button button-gold" id="modalDone" type="button">Return to the island</button></div></div>
+  <div class="modal" id="holdModal" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button><span>YOUR STAY SUMMARY</span><h2 id="modalTitle">Your island stay has taken shape.</h2><p>This is a preview, not a reservation. Selections last until you reload. No personal information or payment is collected.</p><div><small>ILLUSTRATIVE TOTAL</small><strong id="modalTotal">₱145,300</strong></div><button class="button button-gold" id="modalDone" type="button">Return to the island</button></div></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=20260930-typography"></script>
+  <div class="stay-rail" id="stayRail" hidden><div><small>ILLUSTRATIVE STAY</small><strong id="railTotal">₱145,300</strong></div><a class="button button-gold" href="#reserve">Build your stay <span aria-hidden="true">↗</span></a></div>
+  <noscript><style>.menu-button,.suite-tabs,.suite-hotspot,.ritual-nav,.stay-builder,#holdButton{display:none!important}.mobile-menu{position:static;display:flex;flex-direction:row;flex-wrap:wrap;padding:100px 20px 20px;gap:18px;font:14px var(--sans)}.mobile-menu a{padding:8px}.hero-content{padding-top:40px}</style><p class="no-script-note">JavaScript is off. Explore the island below; the stay summary shows a sample seven-night stay. Enable JavaScript to change selections.</p></noscript>
+  <script src="script.js?v=20261122-editorial"></script>
 </body>
 </html>

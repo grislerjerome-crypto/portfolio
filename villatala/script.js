@@ -1,7 +1,9 @@
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  let reducedMotion = motionPreference.matches;
+  motionPreference.addEventListener('change', event => { reducedMotion = event.matches; });
 
   const header = $('#siteHeader');
   const menuButton = $('#menuButton');
@@ -15,13 +17,11 @@
   $$('#mobileMenu a').forEach(link => link.addEventListener('click', () => setMenu(false)));
   addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 35), { passive: true });
 
-  $$('.js-reserve').forEach(button => button.addEventListener('click', () => {
-    $('#reserve').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
-  }));
 
   const hero = $('.hero');
   if (!reducedMotion) {
     hero.addEventListener('pointermove', event => {
+      if (reducedMotion || event.pointerType === 'touch') return;
       const rect = hero.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width - .5) * -14;
       const y = ((event.clientY - rect.top) / rect.height - .5) * -8;
@@ -51,11 +51,13 @@
       sleep: '2 guests', view: 'Private lagoon', ritual: 'Dawn launch', fact: 'The pavilion faces the protected water so every departure feels like part of the room.', alt: 'Private catamaran in a sheltered El Nido lagoon'
     }
   };
+  let suiteTimer;
   const selectSuite = key => {
     const data = suiteData[key];
     const image = $('#suiteImage');
     image.style.opacity = '0';
-    setTimeout(() => { image.src = data.image; image.alt = data.alt; image.style.opacity = '1'; }, reducedMotion ? 0 : 220);
+    clearTimeout(suiteTimer);
+    suiteTimer = setTimeout(() => { image.src = data.image; image.alt = data.alt; image.style.opacity = '1'; }, reducedMotion ? 0 : 220);
     $('#suiteKicker').textContent = data.kicker;
     $('#suiteTitle').textContent = data.title;
     $('#suiteDescription').textContent = data.description;
@@ -76,11 +78,13 @@
     sunset: { image: 'assets/kamayan.jpg', alt: 'Filipino Kamayan feast beside the sea', time: '18:12', kicker: 'GOLDEN TABLE', title: 'Gather with your hands.', description: 'A generous Kamayan table built around the catch, the fire and the people staying with you.', length: 'At your pace', setting: 'Private chef' },
     night: { image: 'assets/bioluminescent.jpg', alt: 'Night kayaks moving through glowing bioluminescent water', time: '22:08', kicker: 'NEW MOON WATER', title: 'Move through living light.', description: 'Paddle into the dark channel as the water glows around every stroke beneath the karst.', length: '1.5 hours', setting: 'Private guide' }
   };
+  let ritualTimer;
   const selectRitual = key => {
     const data = ritualData[key];
     const image = $('#ritualImage');
     image.style.opacity = '0';
-    setTimeout(() => { image.src = data.image; image.alt = data.alt; image.style.opacity = '1'; }, reducedMotion ? 0 : 220);
+    clearTimeout(ritualTimer);
+    ritualTimer = setTimeout(() => { image.src = data.image; image.alt = data.alt; image.style.opacity = '1'; }, reducedMotion ? 0 : 220);
     $('#ritualTime').textContent = data.time;
     $('#ritualKicker').textContent = data.kicker;
     $('#ritualTitle').textContent = data.title;
@@ -105,6 +109,7 @@
     $('#cellarRow').hidden = !$('#cellar').checked;
     $('#totalPrice').textContent = money(total);
     $('#modalTotal').textContent = money(total);
+    $('#railTotal').textContent = money(total);
   };
   $$('[data-nights]').forEach(button => button.addEventListener('click', () => {
     currentNights = Number(button.dataset.nights);
@@ -115,13 +120,70 @@
   calculate();
 
   const modal = $('#holdModal');
-  const closeModal = () => { modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); $('#holdButton').focus(); };
+  const rail = $('#stayRail');
+  const railBlockers = [hero, $('#reserve'), $('footer')];
+  const visibleBlockers = new Set(railBlockers);
+  const syncRail = () => {
+    rail.hidden = innerWidth > 980 || visibleBlockers.size > 0 || mobileMenu.classList.contains('open') || modal.classList.contains('show');
+  };
+  const railObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.isIntersecting ? visibleBlockers.add(entry.target) : visibleBlockers.delete(entry.target));
+    syncRail();
+  }, {rootMargin:'0px 0px 100px 0px'});
+  railBlockers.forEach(element => railObserver.observe(element));
+  addEventListener('resize', syncRail);
+  const closeModal = () => { modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); syncOverlays(); $('#holdButton').focus(); };
   $('#holdButton').addEventListener('click', () => { modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false'); $('#modalClose').focus(); });
   $('#modalClose').addEventListener('click', closeModal);
   $('#modalDone').addEventListener('click', closeModal);
   modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
   addEventListener('keydown', event => { if (event.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
 
+  // Keep visible selection, keyboard operation and assistive state in sync.
+  const syncPressed = () => $$('[data-suite], [data-ritual], [data-nights]').forEach(button => button.setAttribute('aria-pressed', String(button.classList.contains('active'))));
+  syncPressed();
+  $$('.suite-tabs, .ritual-nav, .night-options').forEach(group => {
+    group.addEventListener('click', syncPressed);
+    group.addEventListener('keydown', event => {
+      const buttons = $$('button', group);
+      const index = buttons.indexOf(document.activeElement);
+      if (index < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+      buttons[next].focus(); buttons[next].click();
+    });
+  });
+  $('#suiteHotspot').setAttribute('aria-controls', 'suiteFact');
+  const syncFact = () => {
+    const open = $('#suiteFact').classList.contains('show');
+    $('#suiteHotspot').setAttribute('aria-expanded', String(open));
+    $('#suiteFact').setAttribute('aria-hidden', String(!open));
+  };
+  syncFact();
+  $('#suiteHotspot').addEventListener('click', syncFact);
+  $$('.suite-tabs button').forEach(button => button.addEventListener('click', syncFact));
+  const syncOverlays = () => {
+    const menuOpen = mobileMenu.classList.contains('open');
+    const modalOpen = modal.classList.contains('show');
+    $('#main').inert = menuOpen || modalOpen;
+    $('footer').inert = menuOpen || modalOpen;
+    header.inert = modalOpen;
+    document.body.style.overflow = menuOpen || modalOpen ? 'hidden' : '';
+    menuButton.setAttribute('aria-label', menuOpen ? 'Close navigation' : 'Open navigation');
+    syncRail();
+  };
+  new MutationObserver(syncOverlays).observe(mobileMenu, {attributes:true, attributeFilter:['class']});
+  new MutationObserver(syncOverlays).observe(modal, {attributes:true, attributeFilter:['class']});
+  addEventListener('resize', () => { if (innerWidth > 980) setMenu(false); });
+  addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mobileMenu.classList.contains('open')) { setMenu(false); menuButton.focus(); }
+    if (event.key !== 'Tab') return;
+    const controls = modal.classList.contains('show') ? $$('button', modal) : mobileMenu.classList.contains('open') ? [menuButton, ...$$('a', mobileMenu)] : [];
+    if (!controls.length) return;
+    const first = controls[0], last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
   }), { threshold: .12 });
