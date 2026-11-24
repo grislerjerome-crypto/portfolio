@@ -8,7 +8,7 @@ MODEL=LIVE or "--model" in sys.argv
 ENDPOINT="https://ava-chat-worker.ava-chat-rome-grisler.workers.dev/api/ava"
 CASES=[
  ("Hey Ava, how are you?", "casual"),
- ("Can I see Rome's work samples?", "samples"),
+ ("What is on the project samples page?", "samples"),
  ("Can Rome build automations?", "automation"),
  ("How many automation diagrams are there exactly?", "counts"),
  ("Does Rome have ecommerce experience?", "experience"),
