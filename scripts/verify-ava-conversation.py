@@ -20,11 +20,11 @@ def check(text, kind):
  assert text.strip(), kind
  assert text.count("?")<=1,(kind,text)
  assert not re.search(r"no permanent|currently freelance|private experience notes say",text,re.I),(kind,text)
- if kind not in ("counts","truth"):
+ if kind != "truth":
   assert not re.search(r"(?:44|20|10|7|8|3|24)|illustrative records|measured results|homepage navigation|not client builds",text,re.I),(kind,text)
   clean=re.sub(r"https://\S+","LINK",text)
   assert len(re.findall(r"[.!?](?:\s|$)",clean))<=3,(kind,text)
- if kind=="counts": assert "44" in text,(kind,text)
+ if kind=="counts": assert "https://agentrome.site/project-samples/" in text,(kind,text)
  if kind=="experience": assert re.search(r"almost five|nearly five|almost 5|nearly 5",text,re.I) and "ecommerce" in text.lower(),text
  if kind=="samples": assert "https://agentrome.site/project-samples/" in text,text
  if kind=="problem": assert "?" in text and re.search(r"order|queue|customer|backlog",text,re.I),text

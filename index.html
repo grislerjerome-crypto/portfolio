@@ -2449,7 +2449,7 @@ const AVA_KB = [
       "make.com"
     ],
     "q": "Can Rome build automations?",
-    "a": "Rome builds lead routing, CRM updates, inquiry handling, reporting and follow up workflows. Explore 44 existing diagrams at https://agentrome.site/#projects or https://agentrome.site/project-samples/: GHL 20, Make.com 6, Zapier 7 and n8n 11. Diagrams do not independently verify client outcomes.",
+    "a": "Rome builds lead routing, CRM updates, inquiry handling, reporting and follow up workflows. [View my work samples](https://agentrome.site/project-samples/). What would you like to automate?",
     "brief": "Yes, Rome builds automations that reduce repetitive work and keep followups moving. [View my work samples](https://agentrome.site/project-samples/). What task would you most like to take off your plate?"
   },
   {
@@ -2894,7 +2894,7 @@ function setupAvaChat(){
     if(/good day|great day|doing (?:good|great|well)|feeling (?:good|great|happy)/.test(t))return "Aw, love that for you! What's been the best part?";
     if(/thank you|thanks|you.re (?:sweet|cute|nice|lovely)/.test(t))return "You're sweet 😊 Happy to help. What else is on your mind?";
     if(/employment|employer|permanent|freelance|private notes/.test(t))return "Rome can discuss availability and work arrangements directly with you through https://agentrome.site/#contact.";
-    if(/how many|number of|exact.*count/.test(t)&&/automation|project|diagram/.test(t))return "There are 44 automation diagrams: 20 GoHighLevel, 6 Make.com, 7 Zapier and 11 n8n.";
+    if(/how many|number of|exact.*count/.test(t)&&/automation|project|diagram/.test(t))return "Rome has a range of automation and project examples you can explore. [View my work samples](https://agentrome.site/project-samples/). What kind of solution are you looking for?";
     if(/book|appointment|hire|ready to start/.test(t))return "Use Let's Connect! at https://agentrome.site/#contact to arrange a conversation with Rome. What would you like his help with?";
     if(/orders|messages|backlog/.test(t)&&/piling|overload|backlog|too many|struggling/.test(t))return "Rome can help organize your order queue and customer followups so fewer things slip through. Where does the backlog usually start?";
     let best=null,score=0;AVA_KB.forEach(item=>{let s=t===item.q.toLowerCase()?100:0;item.keys.forEach(k=>{if(t.includes(k))s+=k.length;});if(s>score){score=s;best=item;}});
