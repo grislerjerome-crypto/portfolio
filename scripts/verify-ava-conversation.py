@@ -1,7 +1,7 @@
 """Exercise fallback separately from genuine hosted model and safe link rendering."""
 from playwright.sync_api import sync_playwright
 from pathlib import Path
-import sys, json, re, hashlib
+import sys, json, re, hashlib, subprocess
 URL=sys.argv[1] if len(sys.argv)>1 else "http://127.0.0.1:8099/"
 LIVE="--live" in sys.argv
 MODEL=LIVE or "--model" in sys.argv
@@ -38,7 +38,7 @@ with sync_playwright() as p:
  page.wait_for_function("typeof renderAvaReply === 'function' && document.querySelectorAll('.proj-card').length===44")
  if LIVE:
   body=page.request.get(URL).body()
-  assert body==Path("index.html").read_bytes(),"Live HTML differs from local release bytes"
+  assert body==subprocess.check_output(["git","show","HEAD:index.html"]),"Live HTML differs from local release bytes"
   print("LIVE_HTML_SHA256",hashlib.sha256(body).hexdigest())
  page.route(ENDPOINT,lambda route:route.abort())
  page.locator("#ava-launch").click()
